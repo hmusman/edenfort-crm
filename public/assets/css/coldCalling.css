@@ -1,0 +1,155 @@
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #1976D2 !important;
+    border-color: #ddd #ddd #fff;
+    
+}
+.py-3 {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    font-size: 14px;
+    font-weight: 500;
+    border: none !important;
+    border-radius: 15px 0px 15px 0px !important;
+}
+.nav-tabs .nav-item {
+    margin-bottom: -2px;
+    
+}
+.nav-tabs {
+    border-bottom: 2px dashed #ddd !important;
+    background-color: #fff;
+    padding: 10px 5px;
+}
+.access_select{
+    background-color:#1976D2;
+    color:#fff;
+    border-radius:20px;
+}
+#demo-input-search2 {
+    background-color: #ddd !important;
+    padding: 8px 5px;
+    border-radius: 5px;
+    margin: 8px 0;
+    min-height: 31px;
+    background-image: linear-gradient(#ddd, #ddd), linear-gradient(#ddd, #ddd);
+}
+/* The container */
+.ccontainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin:20px 12px;
+  font-size:16px;
+  font-weight:500;
+}
+
+/* Hide the browser's default checkbox */
+.ccontainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+/* On mouse-over, add a grey background color */
+.ccontainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.ccontainer input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.ccontainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.ccontainer .checkmark:after {
+  left: 8px;
+  top: 2px;
+  width: 7px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.toggleable_row{
+    display:none!important;
+}
+.present_row {
+    cursor:pointer;
+}
+.tgl_row{
+    display:table-row !important;
+}
+/*filter content*/
+
+.dropdown_content,.dropdown_content2,.dropdown_content3,.dropdown_content4 {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  /*min-width: 395px;*/
+  height:312px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 10;
+  padding:5px 10px;
+  border-radius:5px;
+}
+.dropdown_content a,.dropdown_content2 a,.dropdown_content3 a,.dropdown_content4 a {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom:1px solid #ddd;
+  font-size:14px;
+}
+.dropdown_content a:hover,.dropdown_content2 a:hover,.dropdown_content3 a:hover,.dropdown_content3 a:hover{
+    background-color:#eee;
+}
+.dropdown_wrapper button{
+    background-color:#1976D2 !important;
+    border-color:#1976D2 !important;
+    color:#fff;
+}
+.rotate_icon{
+    /*transition:0.5s;*/
+    transform: rotate(90deg);
+}
+
+
+
+

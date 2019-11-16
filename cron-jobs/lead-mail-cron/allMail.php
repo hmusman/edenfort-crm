@@ -1,0 +1,10 @@
+<?php
+include_once'bayout.php';
+include_once'bayoutcallmiss.php';
+include_once'bayutmails.php';
+include_once'dubizelphonelead.php';
+include_once'dubizzlesomeoneinterested.php';
+include_once'index.php';
+include_once'propertyfinder.php';
+include_once'propertyfindermails.php';
+?>

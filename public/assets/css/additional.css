@@ -1,0 +1,159 @@
+.footable > thead > tr > th > span.footable-sort-indicator{
+
+    display: none !important;
+
+}
+
+.container-fluid{
+
+    max-width: 1350px !important;
+
+}
+
+.owner_main_row{
+
+    padding-top: 0px;
+
+}
+
+.table td, .table th{
+
+    vertical-align: middle;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+}
+
+.alert{
+
+    margin-bottom: 7px;
+
+        font-size: 12px;
+
+    font-weight: 500;
+
+    padding: 15px 15px;
+
+}
+
+/*.table thead th{
+
+    text-align: center !important;
+
+}
+*/
+.error{
+
+    color: #C13C27 !important;
+
+    display: block !important;
+
+    font-size: 12px !important;
+
+    font-weight: 400 !important;
+
+}
+
+.form-horizontal label{
+
+    font-size: 12px !important;
+
+}
+
+textarea{
+
+    font-size: 12px !important;
+
+}
+
+table thead tr th{
+
+    font-size: 12px !important;
+
+}
+
+input{
+
+    font-size: 12px !important;
+
+}
+
+.btn{
+
+    font-size: 12px !important;
+
+}
+
+.actions{
+
+    margin:1% 0px;
+
+}
+
+.apply:hover,.apply:focus,.submit:hover,.submit:focus{
+
+    border:none;
+
+    box-shadow:none; 
+
+}
+
+.apply,.submit{
+
+    padding: 10px 12px;
+
+    background: #1976D2 !important;
+
+    border:none;box-shadow:none;
+
+}
+
+.action_select{
+
+    width: 150px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+.edit_supervision,.edit_supervision:hover{
+
+    text-decoration: underline;
+
+}
+
+thead{
+
+    background: #1976d2;
+
+    color: white;
+
+}
+
+.attachments{
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    background: aliceblue;
+
+    padding: 5px;
+
+    text-decoration: underline;
+
+}
+
+.fa-window-close{
+
+    position: relative;
+
+    left: -7px;
+
+        top: -14px;
+
+}

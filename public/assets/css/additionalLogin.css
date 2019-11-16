@@ -1,0 +1,45 @@
+    .left-sidebar{
+        display: none;
+    }
+    .text-right{
+        padding: 0px !important;
+        text-align: start !important;;
+    }
+    form{
+        font-size: 14px !important;;
+        color: black !important;
+    }
+    input{
+        font-size: 13px !important;;
+    }
+    .btn,.btn:hover,.btn:focus{
+        font-size: 14px;
+        background: #1976D2 !important;
+        border:none;box-shadow:none;
+    }
+    h3{
+        width: 100%;
+        display: block;
+        margin:auto;
+        text-align: center;
+        padding-bottom: 3%;
+        font-weight: 900;
+        font-size: 25px;
+    }
+    .alert{
+    margin-bottom: 7px;
+        font-size: 12px;
+    font-weight: 500;
+}
+.error{
+    color: #C13C27 !important;
+    display: block !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+.alert{
+    font-size: 12px;
+    font-weight: 500;
+    position: relative;
+    right: 20px;
+}

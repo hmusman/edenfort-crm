@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+
+<!-- Mirrored from www.edenforthomes.com/agents by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2019 08:07:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Eden Fort Real Estate </title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<link rel="shortcut icon" type='image/x-icon' href="assets/images/fav.jpg">
+	<meta name="viewport" content="initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-3.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/packeges/magicsuggest/magicsuggest-min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/customed986.css?1524033873">
+</head>
+<body>
+	
+	<!-- ====== BEGIN HEADER ====== -->
+	<div id="callModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myCallModalLabel">
+  <div class="modal-dialog contact_modals">
+
+    <!-- Modal content-->
+    <div class="modal-content"  style="border-radius: 0px;border-top: 4px solid #0071bc;">
+      	<div>
+      		<button type="button" class="close" data-dismiss="modal" style="opacity: 1; font-size: 30px;  color: #F7931E; padding: 3px 6px;">&times;</button>
+      	</div>
+	      	<div class="modal-body" style="margin-top:30px; padding: 0 30px;">
+		        <div class="row">
+		        	<div class="col-md-12 text-center">
+		        		<h2>Contact Detail</h2>
+		        		<p class="company_name ucfirst">Core Real Estate</p>
+		        	</div>
+		        	<div class="col-md-12">
+		        		<ul class="mt10">
+		        			<li><label class="left">Phone</label><a href="tel:+971-12345678" class="sec_phone">+971-12345678</a></li>
+		        			<li><label class="left">Mobile</label><a href="tel:+971-55-12345678" class="phone">+971-55-12345678</a></li>
+		        			<li><label class="left">Fax</label></li>
+		        			<li><label class="left">Agent</label><span class="right agent_company ucfirst">Jon Deo - Core Real Estate</span></li>
+		        			<li class="ref-info">Please quote property reference<span class="bold block refer_no">Core -  317-Ha-R-2942</span>when calling us.</li>
+		        		</ul>
+					</div>
+		        </div>
+		       
+			</div>
+      
+    </div>
+
+  </div>
+</div>
+<div id="emailModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myEmailModalLabel">
+  <div class="modal-dialog contact_modals">
+
+    <!-- Modal content-->
+    <div class="modal-content"  style="border-radius: 0px;border-top: 4px solid #0071bc;">
+      	<div>
+      		<button type="button" class="close" data-dismiss="modal" style="opacity: 1; font-size: 30px;  color: #F7931E; padding: 3px 6px;">&times;</button>
+      	</div>
+	      	<div class="modal-body" style="margin-top:30px; padding: 0 30px;">
+		        <div class="row">
+		        	<input type="hidden" id="prop" value="">
+		        	<input type="hidden" id="refer_no" value="">
+		        	<div class="col-md-12 text-center">
+		        		<div class="alert alert-success text-center lead_success" style="display:none;">
+				            Email Sended Successfully!
+				        </div>
+				        <div class="alert alert-danger text-center lead_fail" style="display:none;">
+				            Sorry! Please try again.
+				        </div>
+				        <div class="alert alert-danger text-center lead_dublicate" style="display:none;">
+				            <strong>Alert!</strong> Email already sended to agent for this property.
+				        </div>
+		        		<h2>Contact Agent</h2>
+		        		<p class="company_name ucfirst">Core Real Estate</p>
+		        		<p class="refer_no">Core - 317-Ha-R-2942</p>
+		        	</div>
+
+		        	<div class="col-md-12">
+		        		<div class="form-group">
+		        			<input type="text" name="name" id="name" placeholder="Name" class="form-control" />
+		        		</div>
+		        		<div class="form-group">
+		        			<input type="Email" name="email" id="email" placeholder="Email" class="form-control" />
+		        		</div>
+		        		<div class="form-group">
+		        			<input type="tel" name="phone" id="urphone" class="form-control" placeholder="Phone*"  >
+		        		</div>
+		        		<div class="form-group">
+		        			<select class="form-control" name="type" id="type" >
+		        				<option value="tenant">Tenant</option>
+		        				<option value="agent">Agent</option>
+		        				<option value="Other">Other</option>
+		        			</select>
+		        		</div>
+		        		<div class="form-group">
+		        			<textarea name="message" id="message" placeholder="Message" class="form-control"></textarea>
+		        		</div>
+		        		<div class="form-group">
+		        			<input type="checkbox" id="robot" name="robot">
+		        			<label class="chkbox_label">I am not a robot &nbsp;<span class="robot-error text-danger"></span></label>
+		        		</div>
+		        		<div class="form-group">
+		        			<button class="btn btn-success btn-submit" id="send" > <i class="fa fa-refresh fa-spin" style="display:none;"></i>&nbsp; Send Email</button>
+		        		</div>
+		        		<div class="form-group">
+		        			<input type="checkbox" name="sendnotification" checked="checked" >
+		        			<label class="chkbox_label">Keep me Informed about similar properties</label>
+		        		</div>
+		        		<div class="form-group text-center">
+		        			<p>By sending an enquiry, you agree to our Terms of use.</p>
+		        		</div>
+
+		        	</div>
+		        </div>
+		       
+			</div>
+      
+    </div>
+
+  </div>
+</div>
+<header id="header2">
+
+
+		<!-- Main Menu Header -->
+		<nav class="navbar">
+			<div class="container">
+				<!-- Navbar Brand -->
+				<div class="navbar-header">
+					<a href="index-2.html" id="navbar-brand" class="navbar-brand"><img src="assets/images/logo.png" alt="Eden Fort Real Estate"></a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" style=" z-index:2;">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="login-box">
+					<ul>
+												<li class="left link-l-dd login-dd m0 user_top_extras">
+					        <!-- <a href="https://www.bayut.com/login.html" class="login" title="Login">Login</a>-->
+			                
+			                <div class="login">Login</div>
+							<div class="right dropdown dd-hide form" style="display: none;">
+								<div class="login-section">
+																			<a href="#" onclick="window.open('https://www.facebook.com/v2.6/dialog/oauth?client_id=113307665950447&amp;state=e6eb8d595c3bb0a652025a516227ad62&amp;response_type=code&amp;sdk=php-sdk-5.0.0&amp;redirect_uri=http%3A%2F%2Fwww.edenforthomes.com%2Fuser_authentication&amp;scope=email', 'facebook', 'width=640,height=480');"><button class="primary-btn fb" id="fb-login-button">Sign in with Facebook</button></a>
+																		
+									<form method="post" class="pos-rel" id="login-frm" novalidate="novalidate">
+										<div class="ajax-loader dis-none"></div>
+										<div id="login_msg" class="alert alert-danger text-center" style="padding:5px; margin:0; display:none;"></div>
+										<div id="login_succesmsg" class="alert alert-success text-center" style="padding:5px; margin:0;display:none;"></div>
+										<input id="email_add" name="email_add" placeholder="Email*" class="form-control" type="text">
+										<input id="user_password" name="user_password" placeholder="Password*" class="form-control" type="password">
+										
+										<button type="submit" class="primary-btn loginbtn form-btn"><i class="fa fa-refresh fa-spin" style="display:none;"></i> Login</button>
+										<input id="remember" type="checkbox">
+										<label class="chkbox_label" for="remember">Remember Me</label>
+										<div class="forgot right" id="forgot_pass">Forgot Password?</div>
+										<div class="mt30 new">Become a free member</div>
+									</form>
+			                         <a class="ghost-btn" href="register.html" title="Become A Free Member" rel="">Register Now</a>
+								</div>
+								<div class="forget-section displayNone">
+									<form method="post" id="forgot-frm">
+										<div id="reset_msg" class="alert alert-danger text-center" style="padding:5px; margin:0; display:none;"></div>
+										<div id="reset_succesmsg" class="alert alert-success text-center" style="padding:5px; margin:0;display:none;"></div>
+										<p style="color:red; display:none" id="email_empty">Please enter correct email address</p>							
+										<input id="user_email" name="user_email" placeholder="Email*" class="form-control" type="text" required>
+										<button type="submit" data-role="popup" data-width="300" class="primary-btn forgotbtn" id="resetbtn"><i class="fa fa-refresh fa-spin" style="display:none;"></i> Submit</button>
+										<div class="forgot right" id="go_login">Back to Login</div>
+									</form>
+								</div>
+							</div>
+							
+			            </li>
+			            					</ul>
+				</div>
+				<!-- Navbar Menu -->
+				<nav id="navbar" class="navbar navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Residential</a>
+				          <ul class="dropdown-menu">
+				            <li><a href="searchb396.html?for=sale&amp;type=residential-">Buy</a></li>
+				            <li><a href="search86b2.html?for=rent&amp;type=residential-">Rent</a></li>
+				           </ul>
+				        </li>
+				        <li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Commercial</a>
+				          <ul class="dropdown-menu">
+				            <li><a href="searche73d.html?for=sale&amp;type=Commercial-">Buy</a></li>
+				            <li><a href="searchf47e.html?for=rent&amp;type=Commercial-">Rent</a></li>
+				           </ul>
+				        </li>
+						<!-- <li class="">
+	                    	<a href="#">Buy</a>
+                		</li>
+                        <li class="">
+                    		<a href="#">Rent</a>
+                		</li>
+                        <li class="">
+                    		<a href="#">Commercial</a>
+                		</li> -->
+            			<li class="">
+                    		<a href="agents.html">Find agent</a>
+                		</li>
+            			<li class="">
+                    		<a href="projects.html">New projects</a>
+                		</li>
+					</ul>
+					<!-- <ul class="nav navbar-nav navbar-right">
+						<li class="">
+	                    	<a href="#">Login</a>
+                		</li>
+                        
+                        
+					</ul> -->
+				</nav>
+
+			</div>
+		</nav>
+</header>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110654029-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110654029-1');
+</script>	<!-- ====== END HEADER ====== -->
+
+	<!-- ====== MAIN SEARCH WITH PROPERTY BACKGROUND ====== -->
+<section  class="page-section" style="background-image: url(assets/images/main_search_bg.jpg); background-position: center center; background-size: cover; padding: 50px 0px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<!-- Tabmenu Container / Default Bootstrap Structure -->
+				<div class="switch6" style="border:1px solid #ffffff; margin-bottom: 30px">
+					<label class="switch6-light" >
+							<input name="switch"  onclick="toggle_switch()" type="checkbox" value="1">
+							<span>
+								<span>Agents</span>
+								<span>Companies</span>
+							</span>
+							<a class="btn btn-success"></a>
+					</label>
+				</div>
+				<div class="search-tabmenu">
+					
+					<!-- Tabmenu Body / Content -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active">
+							<form action="http://www.edenforthomes.com/agents" id="search_form" method="GET">
+								<div class="form-body" style="padding-bottom:10px;">
+									<div class="row">
+										<div class="col-md-9 col-sm-9 form-group" style="">
+																						<input type="hidden" name="name" class="searchagent" value="">
+											<input type="text" class="agent_suggest form-control" value="" placeholder="Search Agent">
+										</div>
+										<div class="col-md-3 col-sm-3 form-group hidden-xs" style="">
+											<button class="btn btn-success pull-right btn-submit" type="submit" style="height:40px;"><i class="fa fa-search"></i> Search</button>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 form-group">
+																						<select name="language" class="form-control" data-translate-empty-option="Languages">
+												<option value="" class="empty" data-gtm-label="Languages">Languages</option>
+												<option value="afrikaans" >Afrikaans</option>
+												<option value="arabic" >Arabic</option>
+												<option value="azerbaijani" >Azerbaijani</option>
+												<option value="bahasa Melayu" >Bahasa Melayu</option>
+												<option value="bengali" >Bengali</option>
+												<option value="bulgarian" >Bulgarian</option>
+												<option value="cantonese" >Cantonese</option>
+												<option value="croatian" >Croatian</option>
+												<option value="danish" >Danish</option>
+												<option value="dutch" >Dutch</option>
+												<option value="english" >English</option>
+												<option value="french" >French</option>
+												<option value="german" >German</option>
+												<option value="greek" >Greek</option>
+												<option value="gujarati" >Gujarati</option>
+												<option value="hindi" >Hindi</option>
+												<option value="hungarian" >Hungarian</option>
+												<option value="italian" >Italian</option>
+												<option value="kazakh" >Kazakh</option>
+												<option value="kyrgyz" >Kyrgyz</option>
+												<option value="malayalam" >Malayalam</option>
+												<option value="mandarin" >Mandarin</option>
+												<option value="memon" >Memon</option>
+												<option value="norwegian" >Norwegian</option>
+												<option value="persian/farsi" >Persian/Farsi</option>
+												<option value="polish" >Polish</option>
+												<option value="portuguese" >Portuguese</option>
+												<option value="punjabi" >Punjabi</option>
+												<option value="romanian" >Romanian</option>
+												<option value="russian" >Russian</option>
+												<option value="serbian" >Serbian</option>
+												<option value="spanish" >Spanish</option>
+												<option value="swedish" >Swedish</option>
+												<option value="tagalog" >Tagalog</option>
+												<option value="tamil" >Tamil</option>
+												<option value="turkish" >Turkish</option>
+												<option value="ukranian" >Ukranian</option>
+												<option value="urdu" >Urdu</option>
+												<option value="uzbek" >Uzbek</option>
+											</select>
+										</div>
+										<div class="col-md-6 col-sm-6 form-group">
+																						<select name="nationality" class="form-control">
+												<option value="">Nationality</option>
+												<option value="afghanistan" >Afghanistan</option>
+												<option value="albania" >Albania</option>
+												<option value="algeria" >Algeria</option>
+												<option value="argentina" >Argentina</option>
+												<option value="armenia" >Armenia</option>
+												<option value="australia" >Australia</option>
+												<option value="austria" >Austria</option>
+												<option value="azerbaijan" >Azerbaijan</option>
+												<option value="bangladesh" >Bangladesh</option>
+												<option value="belarus" >Belarus</option>
+												<option value="belgium" >Belgium</option>
+												<option value="brazil" >Brazil</option>
+												<option value="bulgaria" >Bulgaria</option>
+												<option value="cameroon" >Cameroon</option>
+												<option value="canada" >Canada</option>
+												<option value="china" >China</option>
+												<option value="colombia" >Colombia</option>
+												<option value="croatia" >Croatia</option>
+												<option value="cuba" >Cuba</option>
+												<option value="czech republic" >Czech Republic</option>
+												<option value="denmark" >Denmark</option>
+												<option value="egypt" >Egypt</option>
+												<option value="estonia" >Estonia</option>
+												<option value="ethiopia" >Ethiopia</option>
+												<option value="finland" >Finland</option>
+												<option value="france" >France</option>
+												<option value="georgia" >Georgia</option>
+												<option value="germany" >Germany</option>
+												<option value="ghana" >Ghana</option>
+												<option value="hungary" >Hungary</option>
+												<option value="india" >India</option>
+												<option value="iran" >Iran</option>
+												<option value="iraq" >Iraq</option>
+												<option value="ireland" >Ireland</option>
+												<option value="italy" >Italy</option>
+												<option value="jordan" >Jordan</option>
+												<option value="kazakhstan" >Kazakhstan</option>
+												<option value="kenya" >Kenya</option>
+												<option value="south korea" >South Korea</option>
+												<option value="kyrgyzstan" >Kyrgyzstan</option>
+												<option value="latvia" >Latvia</option>
+												<option value="lebanon" >Lebanon</option>
+												<option value="lithuania" >Lithuania</option>
+												<option value="macedonia, republic of" >Macedonia, Republic of</option>
+												<option value="mexico" >Mexico</option>
+												<option value="moldova" >Moldova</option>
+												<option value="montenegro" >Montenegro</option>
+												<option value="morocco" >Morocco</option>
+												<option value="nepal" >Nepal</option>
+												<option value="netherlands" >Netherlands</option>
+												<option value="new zealand" >New Zealand</option>
+												<option value="nigeria" >Nigeria</option>
+												<option value="norway" >Norway</option>
+												<option value="oman" >Oman</option>
+												<option value="pakistan" >Pakistan</option>
+												<option value="palestine" >Palestine</option>
+												<option value="philippines" >Philippines</option>
+												<option value="poland" >Poland</option>
+												<option value="portugal" >Portugal</option>
+												<option value="romania" >Romania</option>
+												<option value="russian federation" >Russian Federation</option>
+												<option value="saudi arabia" >Saudi Arabia</option>
+												<option value="senegal" >Senegal</option>
+												<option value="serbia" >Serbia</option>
+												<option value="singapore" >Singapore</option>
+												<option value="slovakia" >Slovakia</option>
+												<option value="slovenia" >Slovenia</option>
+												<option value="south africa" >South Africa</option>
+												<option value="spain" >Spain</option>
+												<option value="sri lanka" >Sri Lanka</option>
+												<option value="sweden" >Sweden</option>
+												<option value="switzerland" >Switzerland</option>
+												<option value="syria" >Syria</option>
+												<option value="taiwan, republic of china" >Taiwan, Republic of China</option>
+												<option value="tajikistan" >Tajikistan</option>
+												<option value="tanzania" >Tanzania</option>
+												<option value="thailand" >Thailand</option>
+												<option value="tunisia" >Tunisia</option>
+												<option value="turkey" >Turkey</option>
+												<option value="turkmenistan" >Turkmenistan</option>
+												<option value="ukraine" >Ukraine</option>
+												<option value="united arab emirates" >United Arab Emirates</option>
+												<option value="united kingdom" >United Kingdom</option>
+												<option value="united states of america" >United States of America</option>
+												<option value="uruguay" >Uruguay</option>
+												<option value="uzbekistan" >Uzbekistan</option>
+												<option value="vietnam" >Vietnam</option>
+												<option value="yemen" >Yemen</option>
+												<option value="zimbabwe" >Zimbabwe</option>
+											</select>
+										</div>
+										<div class="col-xs-12 form-group hidden-lg hidden-md hidden-sm">
+											<button class="btn btn-success pull-right btn-submit" type="submit" style="height:40px;"><i class="fa fa-search"></i> Search</button>
+										</div>
+									</div>
+								</div>
+								<!-- Property for Sale Submit Button -->
+							</form>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+</section>
+
+
+<!-- ====== OUR AGENT SECTION ====== -->
+<section class="page-section" style="padding-top: 10px">
+	<div class="container">
+		<div style="padding: 10px 0; border-bottom: 1px solid #ccc; margin-bottom: 30px">
+			<div class="row">
+	        	<div class="col-md-8">
+	        		<h4 class="ucfirst">176 agents found</h4>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<section class="main hidden">
+						<div class="wrapper-demo">
+							<strong>Sort By:</strong>
+							<div id="dd" class="wrapper-dropdown-3" tabindex="1">
+								<span>Newest</span>
+								<ul class="dropdown">
+									<li><a href="search.html">Newest</a></li>
+									<li><a href="search.html">Popular</a></li>
+									<li><a href="search.html">Highest Price</a></li>
+									<li><a href="search.html">Lowest Price</a></li>
+									<li><a href="search.html">Beds (least)</a></li>
+									<li><a href="search.html">Beds (Most)</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+		    			
+	        		
+	        	</div>
+
+	        </div>
+        </div>
+		<div class="tile-block-area">
+								<div class="tile-block-container">
+						<a href="agents/3.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Laraib Zeeshan " src="assets/profile_img/avatar.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Laraib Zeeshan </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content"></div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">English,  Arabic</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">13</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">2</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/4.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Muhammad Usman Shakoor" src="assets/profile_img/83475035eba2840d836456845a8a2313.jpg"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Muhammad Usman Shakoor</div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content"></div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content"></div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">0</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/41784.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Wasif Bilal " src="assets/profile_img/231e3480c31a0f82d79a93365adb2302.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Wasif Bilal </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">5</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/41785.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Muhammad Wasim " src="assets/profile_img/46583f8667944fe3dcd7f63ca9b0dc9c.jpg"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Muhammad Wasim </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">4</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">1</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/41786.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Shahzad Mehmood " src="assets/profile_img/avatar.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Shahzad Mehmood </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">0</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/41787.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Awais Akram " src="assets/profile_img/931356ba0d0ba224942c7c1c9d2b563c.jpg"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Awais Akram </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">7</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">1</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/41788.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Hafiz Awais " src="assets/profile_img/avatar.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Hafiz Awais </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">64</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">14</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/45814.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Ali Usman " src="assets/profile_img/5da37484993ebfa3fc96db8d4836d30c.jpg"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Ali Usman </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">0</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/51615.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Attique Ur Rehman " src="assets/profile_img/a7b4df3dff6725d45777091c0cb984c7.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Attique Ur Rehman </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">4</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/51656.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Zeeshan Akram " src="../s3-ap-southeast-1.amazonaws.com/mycrm-pro-accounts-v2/user/avatar/1010/oSpJCarHrow4CncT.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Zeeshan Akram </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content"></div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content"></div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">6</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/77090.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Imtiaz Ahmad " src="assets/profile_img/315643fee463e1ee2b99533d71563511.jpg"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Eden Fort Real Estate" src="assets/images/logo1.png" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Imtiaz Ahmad </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content">Pakistan</div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content">Urdu, English</div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">5</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+									<div class="tile-block-container">
+						<a href="agents/83610.html" class="tile-block gtm-click gtm-impression-sent" data-id="119313" data-type="agent" data-properties="{&quot;position&quot;:&quot;1&quot;,&quot;listingStatus&quot;:&quot;Standard&quot;,&quot;broker&quot;:{&quot;id&quot;:&quot;880&quot;}}">
+							<div class="tile-block-content">
+								<div class="img-container placeholder-agent-lg">
+																		<img class="main-img" alt="Mudassar " src="assets/profile_img/avatar.png"> 
+									<div class="broker-logo-sm placeholder-broker-tile">
+																				<img class="img-responsive" alt="Emirates Homes Real Estate Broker" src="assets/images/no-image.jpg" style="height:43px;" >
+									</div>
+								</div> 
+								<div class="details-area">
+									<div class="ranking-tag hidden">Standard</div> 
+									<div class="name-section">
+										<div class="name">Mudassar </div> 
+										<div class="position">Agent</div>
+									</div> 
+									<div class="user-details">
+										<div class="detail">
+											<div class="user-nationality">
+												<div class="label1">Nationality:</div> 
+												<div class="label-content"></div>
+											</div> 
+											<div class="user-language">
+												<div class="label1">Languages:</div> 
+												<div class="label-content"></div>
+											</div> 
+											
+										</div>
+									</div>
+								</div> 
+								<div class="property-numbers">
+									<div class="numbers-rent">
+										<div class="number">0</div> 
+										<div class="title">for rent</div>
+									</div> 
+									<div class="numbers-buy">
+										<div class="number">0</div> 
+										<div class="title">for sale</div>
+									</div> 
+									<!-- <div class="numbers-commercial">
+										<div class="number">5</div> 
+										<div class="title">Commercial</div>
+									</div> --> 
+								</div>
+							</div>
+						</a>
+					</div>
+							
+		</div>
+		<div class="row">
+			<div class=" col-md-12 text-right">
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li class="active"><a>1</a></li><li><a href="agents8c69.html?per_page=2" data-ci-pagination-page="2">2</a></li><li><a href="agentse8ea.html?per_page=3" data-ci-pagination-page="3">3</a></li><li><a href="agents9e42.html?per_page=4" data-ci-pagination-page="4">4</a></li><li><a href="agentsf05c.html?per_page=5" data-ci-pagination-page="5">5</a></li><li><a href="agents8c69.html?per_page=2" data-ci-pagination-page="2" rel="next">Next</a></li><li><a href="agentsadcc.html?per_page=15" data-ci-pagination-page="15">Last</a></li>					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+	<!-- ====== FOOTER ====== -->
+	<footer id="footer">
+		<!-- Copyright -->
+				<a class="go-top"><i class="fa fa-angle-up"></i></a>
+		<div class="copyright">
+			<div class="container clearfix">
+				<div class="row">
+					<div class="col-md-6">
+						<p>Copyright &copy; 2017 - All Rights Reserved By Eden Fort Home Real Estate</p>
+					</div>
+					
+					<div class="col-md-6">
+						<ul>
+							<li><a href="sitemap.xml" target="_blank" title="SiteMap">SiteMap</a></li>
+							<li><a href="#" title="">Terms & Policy</a></li>
+							<li><a href="about.html" title="About">About</a></li>
+							<li><a href="contact.html" title="Contact Us">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script type="text/javascript" src="assets/js/jquery-2.1.3-min.js"></script>
+	<script type="text/javascript" src="assets/packeges/magicsuggest/magicsuggest-min.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/slick.min.js"></script>
+	<script type="text/javascript"> var base_url = 'index.html'; var site_url = 'index.html';</script>
+	<script type="text/javascript" src="assets/js/apps.min.js"></script>
+	
+	<script type="text/javascript">
+		function toggle_switch (argument) {
+
+			var checkval = $('input[name="switch"]:checked').val();
+			if(checkval == 1)
+			{
+				window.location.href = site_url+'companies';
+			}else{
+				window.location.href = site_url+'agents';
+			}
+		}
+	</script>
+	
+</body>
+
+<!-- Mirrored from www.edenforthomes.com/agents by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2019 08:08:26 GMT -->
+</html>

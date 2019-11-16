@@ -1,0 +1,3113 @@
+
+       <table class="table" bordered="1">  
+            <tr>  
+                 <th>property_id</th>  
+                 <th>reminder_type</th>  
+                 <th>reminder_of</th>  
+                 <th>add_by</th>
+                 <th>user_id</th>
+                 <th>date_time</th>
+                 <th>description</th>
+                 <th>status</th>
+            </tr>
+      
+        <tr>  
+             <td>26372</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-01-01 10:00:00</td>  
+             <td>Rented till 1 April 2020- Call to check the availability</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107395</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 12:30:00</td>  
+             <td>call back</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107397</td>  
+             <td>off plan</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 22:00:00</td>  
+             <td>off</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107398</td>  
+             <td>off plan</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 14:00:00</td>  
+             <td>powered off</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107399</td>  
+             <td>off plan</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 14:00:00</td>  
+             <td>sent whats app</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107401</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>He will give me details of villa tommorow
+this property is already rented out</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107407</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 10:00:00</td>  
+             <td>not answering</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107410</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107413</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 11:00:00</td>  
+             <td>call back</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107416</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 12:00:00</td>  
+             <td>not ansewing</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107417</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 12:00:00</td>  
+             <td>no answer</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107418</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-05 11:00:00</td>  
+             <td>vacant on May</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107424</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>no answer</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107427</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-06 11:00:00</td>  
+             <td>vacant july 1 bed unfurineshed</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107422</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-04 11:00:00</td>  
+             <td>not answering</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107428</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 12:00:00</td>  
+             <td>call back</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107429</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-04 11:00:00</td>  
+             <td>sent whats app</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107430</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-04 11:00:00</td>  
+             <td>not answering</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107435</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-06 14:00:00</td>  
+             <td>now rented</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107442</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 13:15:00</td>  
+             <td>call back</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107443</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-04 11:00:00</td>  
+             <td>call back</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107445</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-04 15:00:00</td>  
+             <td>not answering</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107448</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-01-01 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107464</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-04 11:00:00</td>  
+             <td>not Answering</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107471</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>no</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107465</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-11-11 11:00:00</td>  
+             <td>vacant from November 2019</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88116</td>  
+             <td>Call Back</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>Its AGENT Reminder ....</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107534</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-14 13:00:00</td>  
+             <td>not ansewing</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107542</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>not ansewring</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107548</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>busy</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107551</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>no answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107558</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>DIFC</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107577</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107581</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>no reply</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107582</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-04-14 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107613</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>Vacant from mid of june</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107630</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107644</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107650</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-04-14 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107654</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107664</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107671</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107680</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>not ansewring</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107683</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>no</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107699</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-04-04 14:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107700</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107706</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-12-01 11:00:00</td>  
+             <td>vacant from december</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>43492</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-01-10 10:00:00</td>  
+             <td>Call for Renewal or Vacating 
+Deal Closed by Wasif</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>107722</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107725</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107740</td>  
+             <td>Investor</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-01-01 14:00:00</td>  
+             <td>rent</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>251007</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-03-03 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>251009</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>July vacant</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251011</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2020-04-04 11:00:00</td>  
+             <td>sent whats app</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>251013</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251028</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>whatsapp</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251029</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>whatsapp</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251030</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>whatsapp</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251042</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251058</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251059</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251064</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251066</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251067</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251071</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251077</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>whats app sent</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251079</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251090</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251094</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251096</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251107</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251110</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>19839</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-10-02 10:00:00</td>  
+             <td>Rented at 31K , By simple real estate</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>77221</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>SDFGH</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251129</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251131</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251134</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>vacant from end of April 
+capital bay C</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201323</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201327</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>develpers already sold</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201328</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no reply</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201387</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no replay</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201393</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-03-11 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>201398</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135075</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>call back in Hindi</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135077</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>outside UAE</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135078</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answer</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201466</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251142</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>not Answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250782</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250788</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>next month</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250790</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>vacant from August 2019</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250792</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250798</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250804</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-09-01 11:00:00</td>  
+             <td>vacant from Octobor</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250836</td>  
+             <td>Investor</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>invester</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250817</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-09-01 11:00:00</td>  
+             <td>vacant from september</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250838</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>vacant from june 2019</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250860</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>vacant after 2 months</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250861</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250877</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>vacant after 2 weeks</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250880</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250897</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107380</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107455</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107547</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107565</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107594</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107609</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107612</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107682</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107698</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250841</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250974</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250975</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250983</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251032</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251130</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251153</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107687</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>107694</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201324</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201338</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>201450</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250786</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250847</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251089</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251125</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>send</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250935</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250937</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>vacant from  oct</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250939</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250940</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250931</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-11-01 11:00:00</td>  
+             <td>vacant from november</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250943</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250951</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250953</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250964</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent  Whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135057</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answer</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135072</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answer</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135074</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>rented call again</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135076</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answer</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251023</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>251044</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250904</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>vacant from october</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250927</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-09-01 11:00:00</td>  
+             <td>Vacant from september</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>87996</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-02-24 10:00:00</td>  
+             <td>Apartment was rented on 25 April 2019 (33K)</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>87996</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-02-24 10:00:00</td>  
+             <td>Apartment was rented on 25 April 2019 (33K)</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>84886</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-02-10 10:00:00</td>  
+             <td>Rented in April 2019, need to call and check availability</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250371</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2029-04-04 11:00:00</td>  
+             <td>sent whats app</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250373</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-03-01 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250374</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250379</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135086</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2020-04-01 00:00:00</td>  
+             <td>rented until nxt year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>135171</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>arabic speaking</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135174</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>62</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>no answer</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>88385</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-02-10 10:00:00</td>  
+             <td>Rented till 9th of April 2020.
+Call to check for renewal or Vacating .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88389</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-02-01 10:00:00</td>  
+             <td>Rented till 30 April 2020, Call to check for renewal for vacating.</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88384</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-01-01 11:00:00</td>  
+             <td>Rented till April 2020, Call to check for renewal for vacating.</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250389</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250395</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250396</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>Call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250398</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250402</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250407</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-01 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250413</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250417</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-08-01 11:00:00</td>  
+             <td>Vacant from August</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250436</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250448</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-05 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250464</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>whats app sent</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250477</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>whats app sent</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250483</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250485</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250486</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250490</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250496</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-12-01 11:00:00</td>  
+             <td>December will vacant</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250501</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250502</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>88920</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-11-01 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED.............</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88926</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-11-01 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT ......................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88927</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-01 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88928</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-20 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT.........................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88929</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-11-01 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT..................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250524</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250527</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-01 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250530</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-01 11:00:00</td>  
+             <td>next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250531</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>vacant in july</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250534</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-08-01 11:00:00</td>  
+             <td>vacant will be August</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250540</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-04 11:00:00</td>  
+             <td>sent whats app</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250542</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>vacant wiil october</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250550</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent what app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250552</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-04 11:00:00</td>  
+             <td>sent whats app</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88965</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-31 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT .......................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88966</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-20 10:00:00</td>  
+             <td>this property is already rented out ..............</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250571</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250573</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250580</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>vacant from october</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250595</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>89037</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-01 10:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT..............</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>89038</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT...................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>89040</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT...........</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>89042</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-10-01 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT.................</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>89044</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT...............</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250622</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-09-01 11:00:00</td>  
+             <td>vacant from september</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250636</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250643</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>sent whats app</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>135060</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>12</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>REMINDER FOR 1BHK</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>135062</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>28</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>coming on 14th June</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250370</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>he doesn't speak</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>210695</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2020-04-04 11:00:00</td>  
+             <td>next year vacant</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>85</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>ADMIN</td>  
+             <td>34</td>
+             <td>2019-09-06 11:00:00</td>  
+             <td>CALL FOR RENEWAL</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>135093</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-09-01 11:00:00</td>  
+             <td>its rented already</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>6113</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-08-01 13:00:00</td>  
+             <td>he wantd to move in august</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>6034</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>she want to move in june but budget 45k/12 cheques</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>6034</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>29</td>
+             <td>2019-06-22 15:16:00</td>  
+             <td>she want to move in june but budget 45k/12 cheques</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>250387</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>86</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>ADMIN</td>  
+             <td>34</td>
+             <td>2019-07-10 11:00:00</td>  
+             <td>HE WANTS TO VACATE THE APARTMENT .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249596</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-07-31 12:00:00</td>  
+             <td>HE IS SPEAKING ARABIC</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249595</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-10-31 11:59:00</td>  
+             <td>HE HAS MANY APARTMENT AND OFFICES BUT ALL ARE RENTED SO FOR REMINDER CALL HIM AGAIN ON 31 OCT</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249600</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-09-30 11:59:00</td>  
+             <td>HE IS NOT TAKING PROPERLY</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250409</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-10-01 11:59:00</td>  
+             <td>its rented and he said call me after few months .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>250388</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>31</td>
+             <td>2019-06-15 12:04:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249610</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-06-28 11:00:00</td>  
+             <td>TENANT DIDN'T WANT TO RENEW .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249611</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>61</td>
+             <td>2020-06-01 18:01:00</td>  
+             <td>1 Bed apt rent on 1 Jun 2019 by another agent.</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249611</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>61</td>
+             <td>2020-05-15 14:10:00</td>  
+             <td>Call Him after his tenancy ends</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249605</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-10-01 11:59:00</td>  
+             <td>CALL BACK</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249608</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-10-01 23:59:00</td>  
+             <td>ALL PROPERTY IS RENTED . CALL AFTER FEW MONTHS</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249610</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-10-01 23:59:00</td>  
+             <td>THIS LANDLORD HAS MULTIPLE UNITS</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249619</td>  
+             <td>Check Availability</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-09-01 11:59:00</td>  
+             <td>he has property but doesnt tell anything ,</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>ADMIN</td>  
+             <td>34</td>
+             <td>2019-07-20 11:00:00</td>  
+             <td>SHE WANTS TO VACATE THE APARTMENT BECAUSE SHE DIDN'T AGREED TO GIVE US RENEWAL FEES .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>89</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>ADMIN</td>  
+             <td>34</td>
+             <td>2019-08-28 11:00:00</td>  
+             <td>SHE WANTS TO VACATE THE APARTMENT .
+ON 31 AUGUST 2019.</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>90</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>ADMIN</td>  
+             <td>34</td>
+             <td>2019-06-30 11:00:00</td>  
+             <td>call him for renewal end of JUNE 2019</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249628</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>28</td>
+             <td>2020-05-01 11:00:00</td>  
+             <td>upcoming in May</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>135062</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>12</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>coming on 14th June</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249601</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-06-18 19:29:00</td>  
+             <td>call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249602</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-06-18 19:29:00</td>  
+             <td>call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249604</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-06-18 19:29:00</td>  
+             <td>not answering</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249611</td>  
+             <td>Not answering</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-06-18 19:29:00</td>  
+             <td>call back</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249618</td>  
+             <td>Call Back</td>  
+             <td>COLDCALLING</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-06-18 19:29:00</td>  
+             <td>she was busy in the meeting</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>7300</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>61</td>
+             <td>2019-06-12 15:25:00</td>  
+             <td>follow up the customer for viewing</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>91</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>34</td>
+             <td>2019-06-28 11:00:00</td>  
+             <td>CONTRACT HAS BEEN EXPIRED ON JUNE 30,2019......
+TENANT DIDN'T REPLY ME YET 
+THROUGH EMAIL . WE DON'T HAVE HIS CONTACT NUMBER.</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249630</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-04-01 11:00:00</td>  
+             <td>Check if available .... for rent 
+Furnished Apartment</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249629</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2020-01-04 11:00:00</td>  
+             <td>Check if available ....
+for rent</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>7391</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>30</td>
+             <td>2019-06-15 10:35:00</td>  
+             <td>ned to call</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>7548</td>  
+             <td>leadViewDate</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>30</td>
+             <td>2019-06-12 15:46:00</td>  
+             <td>i want to show him more options...</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>7603</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-07-01 11:59:00</td>  
+             <td>SHE HAS ALREADY VIEWED THE APARTMENT AND SHE WANNA MOVE IN END OF JULY TO I HAVE TO CALL HER 1ST WEEK OF JULY .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>7603</td>  
+             <td>leadViewDate</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-07-06 11:59:00</td>  
+             <td>SHE HAS LIKED THE APARTMENT AND SHE HAS TO MOVE IN END OF JULY SO , NEED TO SEE MORE APARTMENT</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>77133</td>  
+             <td>upcoming</td>  
+             <td>COLDCALLING</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>Need to call and check if it available for rent ... we rented this unit last year ....</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>7668</td>  
+             <td>followup_date</td>  
+             <td>Leads</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2019-08-31 11:59:00</td>  
+             <td></td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249652</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>35</td>
+             <td>2020-01-02 23:59:00</td>  
+             <td>the property is rented out .</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249653</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td></td>
+             <td>2019-08-28 11:00:00</td>  
+             <td>HE WANTS TO VACATE THE APARTMENT ON 31 AUGUST 2019...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249654</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2020-03-24 13:00:00</td>  
+             <td>THISPROPERTY IS VACANT ON 24-06-2020...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249655</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2020-03-24 13:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249657</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-06-28 11:00:00</td>  
+             <td>take handover</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249658</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-15 11:00:00</td>  
+             <td>TAKE HANDOVER</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249659</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-19 11:00:00</td>  
+             <td>ALREADY RENTED OUT ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249660</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2020-04-09 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT.....</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249661</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2020-04-24 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT...…….</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249662</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-25 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249663</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-25 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT ……….</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249664</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-25 11:00:00</td>  
+             <td>THIS PROPERTY IS ALREADY RENTED OUT ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249665</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-20 11:00:00</td>  
+             <td>this property is already rented out ………….</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249666</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-08-04 11:00:00</td>  
+             <td>THIS PROPERTY IS RENTED OUT ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249667</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-30 11:00:00</td>  
+             <td>PROPERTY RIGHT NOE ALREADY RENTED ….</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249668</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-08-04 11:00:00</td>  
+             <td>NOW PROPERTY IS RENTED OUT ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249669</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-08-09 11:00:00</td>  
+             <td>THIS PROPERTY IS RENTED OUT...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249670</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-08-09 11:00:00</td>  
+             <td>PROPERTY IS RENTED OUT ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249671</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-08-04 11:00:00</td>  
+             <td>PROPERTYIS ALREADY RENTED OUT ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249672</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-08-26 11:00:00</td>  
+             <td>PROPERTY IS ALREADY RENTED OUT ….</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>88</td>  
+             <td>dealContractDate</td>  
+             <td>Deals</td>  
+             <td>SUPERAGENT</td>  
+             <td>34</td>
+             <td>2019-07-15 11:00:00</td>  
+             <td>CALL FOR VACANT THE UNIT....</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>92</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>SUPERAGENT</td>  
+             <td>34</td>
+             <td>2019-07-22 11:00:00</td>  
+             <td>CALL TO OWNER FOR AVAILABILITY...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>93</td>  
+             <td>dealContractDate</td>  
+             <td>Leads</td>  
+             <td>SUPERAGENT</td>  
+             <td>34</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>call for renewal ...</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>82</td>  
+             <td>dealContractDate</td>  
+             <td>Deals</td>  
+             <td>SUPERAGENT</td>  
+             <td>34</td>
+             <td>2019-07-01 11:00:00</td>  
+             <td>CALL FOR RENEWAL</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>82</td>  
+             <td>dealContractDate</td>  
+             <td>Deals</td>  
+             <td>SUPERAGENT</td>  
+             <td>34</td>
+             <td>2019-07-15 11:00:00</td>  
+             <td>CALL FOR RENEWAL</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249673</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>25</td>
+             <td>2019-07-20 13:00:00</td>  
+             <td>Call for handover</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249674</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>25</td>
+             <td>2020-05-24 15:00:00</td>  
+             <td>upcoming next year</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249675</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>25</td>
+             <td>2019-06-20 18:59:00</td>  
+             <td>upcoming apartment</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249676</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>25</td>
+             <td>2020-04-20 17:00:00</td>  
+             <td>upcoming availability</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249677</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>25</td>
+             <td>2020-05-27 15:00:00</td>  
+             <td>upcoming availability</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249656</td>  
+             <td>upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>ADMIN</td>  
+             <td>12</td>
+             <td>2019-06-24 15:16:00</td>  
+             <td>test</td>  
+             <td>viewed</td>
+        </tr>
+       
+        <tr>  
+             <td>249679</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-07-02 11:00:00</td>  
+             <td>PROPERTY IS VACANT ON 04 - JULY - 2019 …..</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249679</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td></td>
+             <td>2019-07-02 11:00:00</td>  
+             <td>PROPERTY IS VACANT ON 04 - JULY - 2019 …..</td>  
+             <td></td>
+        </tr>
+       
+        <tr>  
+             <td>249680</td>  
+             <td>Upcoming</td>  
+             <td>PROPERTY</td>  
+             <td>AGENT</td>  
+             <td>22</td>
+             <td>2019-12-01 11:00:00</td>  
+             <td>APAERTMENT WILL BE VACATING ON 29-02-2020....</td>  
+             <td></td>
+        </tr>
+       </table>
