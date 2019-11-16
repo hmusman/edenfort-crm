@@ -214,6 +214,7 @@ EDEN FORT REAL ESTATE
 	        if(input::get('add_property_date_time')){
 	            $data=array(
 	                'property_id' => $property_id,
+                    'reminder_of' => 'PROPERTY',
 	                'reminder_type'=>input::get('add_property_reminder_type'),
 	                'date_time'=>date('Y-m-d H:i:s', strtotime(input::get('add_property_date_time'))),
 	                'description'=>input::get('add_property_reminder_description'),
@@ -314,6 +315,8 @@ EDEN FORT REAL ESTATE
                 Reminder::where('property_id',$property_id)->delete();
                 if(input::get('add_property_date_time')){
         	            $data=array(
+                            'property_id' => $property_id,
+                            'reminder_of' => 'PROPERTY',
         	                'unit_no' => input::get("unit_no"),
         	                'reminder_type'=>input::get('add_property_reminder_type'),
         	                'date_time'=>input::get('add_property_date_time'),
