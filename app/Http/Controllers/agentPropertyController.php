@@ -115,7 +115,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     	 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
     	 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
          $buildings=property::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');
-         $allBuildings=property::distinct('Building')->pluck('Building');
+         $allBuildings=Building::select("building_name")->orderBy("building_name","ASC")->get();
          $query = property::query();
                 if($request->p){
                     $query->where("property_type",$request->p);

@@ -623,7 +623,7 @@
                                     <select required="" class="form-control" style="font-size: 12px;" name="building" id="insertBuilding">
                                        <option value="">Select option</option>
                                        @foreach($allBuildings as $building)
-                                       <option value="{{$building}}">{{$building}}</option>
+                                       <option value="{{$building->building_name}}">{{$building->building_name}}</option>
                                        @endforeach
                                     </select>
                                  </div>
