@@ -650,7 +650,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
     	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
     	$buildings=Building::all();
-        $allBuildings=property::distinct('Building')->pluck('Building');
+        $allBuildings=Building::all();
     	$areas=property::select('area')->orderBy('updated_at', 'DESC')->get();
     	$bedrooms=property::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
     	$permissions = permission::where('user_id', session('user_id'))->first();
