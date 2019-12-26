@@ -28,7 +28,7 @@ class reminderController extends Controller
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
         }else if(session('role') == 'Admin'){
-            $result=Reminder::where(['status'=>'viewed',"add_by"=>"ADMIN"])->get();
+            $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id GROUP BY b.user_id;');
         }else if(session('role') == 'SuperAgent'){
             $result=Reminder::where('status' , 'viewed')->where('user_id',session('user_id'))
                      ->where(function($q) {
@@ -120,7 +120,7 @@ class reminderController extends Controller
     // 
      public function getreminderRecord(){
         $permissions = permission::where('user_id', session('user_id'))->first();
-        if(input::get('active') == 'ADMIN' || input::get('active') == 'SUPERAGENT'){
+        if(input::get('active') == 'SUPERAGENT'){
          	if(strtoupper(input::get('ref'))=='COLDCALLING'){
          		$areas=coldcallingModel::distinct('area')->pluck('area');
                 $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
@@ -188,6 +188,11 @@ class reminderController extends Controller
          	    return view('leads',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
          	}
          }
-        
+    }
+
+    public function oneUserReminder($id){
+        $user = user::where('id', $id)->get()->first();
+        $reminder = Reminder::where('user_id', $id)->get();
+        return view('single-user-reminder', compact('reminder','user'));
     }
 }

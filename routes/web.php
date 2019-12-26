@@ -38,6 +38,7 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('get-reminder-record', 'reminderController@getreminderRecord');
     
     Route::get('get-all-agents-reminder', 'getAgentReminders@index');
+    Route::get('get-single-user-reminder/{id}', 'reminderController@oneUserReminder');
     
     
 //===================COLDCALLING MODULES=================================

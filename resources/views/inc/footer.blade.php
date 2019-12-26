@@ -1,9 +1,21 @@
-            @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent') || ucwords(session('role'))==ucwords('SuperAgent'))  
+            @if(ucwords(session('role'))==ucwords('agent') || ucwords(session('role'))==ucwords('SuperAgent'))  
                      <div class="right-sidebar">
                         <div class="slimscrollright">
                             <div class="rpanel-title">Reminders<span><i class="ti-close right-side-toggle"></i></span> </div>
                             <div class="r-panel-body">
                                 <div class="row notification_bucket">
+                                                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @if(ucwords(session('role'))==ucwords('admin'))
+                    <div class="right-sidebar">
+                        <div class="slimscrollright">
+                            <div class="rpanel-title">Reminders<span><i class="ti-close right-side-toggle"></i></span> </div>
+                            <div class="r-panel-body">
+                                <div class="row notify mt-3">
                                                                         
                                 </div>
                             </div>
