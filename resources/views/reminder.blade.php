@@ -74,7 +74,7 @@
                     var temp="";
                     for(var i=0; i < data.length; i++){
                         $('.notification_counter').text(data.length);
-                       temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['id']+')</span><span style="float: right;"><i class="fa fa-close"></i></a></span><p class="ml-5">'+data[i]['status']+'</p></div>';
+                       temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['id']+')</span><span style="float: right;"><i class="fa fa-close"></i></a></span><p class="ml-5"></p></div>';
                     }
                     $('.notify').html(temp);
                 }

@@ -8,7 +8,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!-- Favicon icon -->
-      <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/assets/images/favicon.png')}}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/logo.png')}}">
       <title>Edenfort Properties</title>
       <!-- Bootstrap Core CSS -->
       <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -216,10 +216,9 @@
                @endif
                <!--superAgent-->
                @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
-                   @if(@$permissions->dashboardView==1) 
                        <li> <a class="has-arrow waves-effect waves-dark" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
                        </li>
-                   @endif
+                   
                    @if(@$permissions->propertyView==1)               
                        <li >
                           <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>

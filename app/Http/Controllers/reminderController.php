@@ -30,12 +30,7 @@ class reminderController extends Controller
         }else if(session('role') == 'Admin'){
             $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id GROUP BY b.user_id;');
         }else if(session('role') == 'SuperAgent'){
-            $result=Reminder::where('status' , 'viewed')->where('user_id',session('user_id'))
-                     ->where(function($q) {
-                         $q->where('add_by', 'ADMIN')
-                           ->orWhere('add_by', 'SuperAgent');
-                     })
-                     ->get();
+            $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id and (add_by="AGENT" or add_by="SUPERAGENT") GROUP BY b.user_id;');
         }
         return json_decode(json_encode($result),true);
     }

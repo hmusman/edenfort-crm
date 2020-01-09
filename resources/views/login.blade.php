@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/assets/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/logo.png')}}">
     <title>Edenfort Properties</title>
     <!-- Bootstrap Core CSS -->
 

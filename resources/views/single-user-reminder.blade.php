@@ -19,7 +19,7 @@
         text-decoration:underline !important;
     }
 </style>
-@if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Admin')))
+@if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Admin') || ucfirst('SuperAgent')))
 
   <script type="text/javascript">
 
