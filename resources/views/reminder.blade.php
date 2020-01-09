@@ -62,3 +62,45 @@
         })
       })
 </script>
+
+<!-- showing reminders to admin -->
+<script type="text/javascript">
+    $.notify.defaults( {autoHideDelay: 10000} )
+        $.ajax({
+                url:'<?php echo url('get-all-reminder') ?>',
+                type:'get',
+                dataType: "json",
+                success:function(data){
+                    var temp="";
+                    for(var i=0; i < data.length; i++){
+                        $('.notification_counter').text(data.length);
+                       temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['id']+')</span><span style="float: right;"><i class="fa fa-close"></i></a></span><p class="ml-5">'+data[i]['status']+'</p></div>';
+                    }
+                    $('.notify').html(temp);
+                }
+            }, 5000);
+         var audio = new Audio("<?php echo url('public/reminder.mp3')  ?>");
+      $('body').delegate('.close_notification','click',function(){
+        var notification = $(this);
+            $.ajax({
+            url:'<?php echo url('delete-reminder');  ?>',
+            type:'get',
+            data:{property_id:$(this).attr('property_id')},
+            success:function(data){
+              console.log(data);
+                if($.trim(data)=="false"){
+                    $.notify("something Went Wrong", "warn",{
+                        globalPosition: 'top right',
+                    });
+                }else{
+                    $.notify("Reminder Deleted Successfully", "warn",{elementPosition: 'bottom left',
+                        globalPosition: 'top left'});
+                    $('.ti-close').trigger('click');
+                    $('.notification_counter').text(data);
+                    notification.parent().remove();
+                    // $('.notification_bucket').html("");
+                }
+            }
+        })
+      })
+</script>
