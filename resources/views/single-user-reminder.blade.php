@@ -55,7 +55,8 @@
             @if(isset($reminder))
                @if(count($reminder) > 0)
                     @foreach($reminder as $rem)
-                        <tr>
+                        
+                        <tr data-href="{{ url('propertydetail')}}/{{$rem->property_id}}">
                           <td>{{$rem->add_by}}</td> 
                           <td>{{$rem->reminder_type}}</td>  
                           <td>{{$rem->reminder_of}} </td>
@@ -63,6 +64,7 @@
                           <td>{{$rem->description}}</td>
                           <td>{{$rem->unit_no}}</td>
                         </tr>
+                        
                     @endforeach
                 @else
                 <tr>
@@ -91,6 +93,11 @@
     <script>
         $(document).ready( function () {
             $('#myTable,#myTable2,#myTable3').DataTable();
+        });
+    </script>
+    <script>
+        $('#myTable').on( 'click', 'tbody tr', function () {
+          window.location.href = $(this).data('href');
         });
     </script>
     <style>

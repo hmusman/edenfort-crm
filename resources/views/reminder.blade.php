@@ -63,7 +63,7 @@
       })
 </script>
 
-<!-- showing reminders to admin -->
+<!-- showing reminders to admin, superagent-->
 <script type="text/javascript">
     $.notify.defaults( {autoHideDelay: 10000} )
         $.ajax({

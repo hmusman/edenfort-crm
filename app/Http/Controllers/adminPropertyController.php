@@ -334,4 +334,9 @@ EDEN FORT REAL ESTATE
                 return redirect('property')->with('msg','<div class="alert alert-danger">something went wrong!</div>');
             }
     }
+
+    public function propertydetail($id){
+        $data = property::where('id',$id)->first();
+        return view('propertydetail', compact('data'));
+    }
 }

@@ -81,6 +81,7 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('/whatsApp-OwnermsgsForProperty', 'adminPropertyController@whatsAppOwnerMsgsForProperty');
     
     Route::get('/property', 'adminPropertyController@index');
+    Route::get('/propertydetail/{id}', 'adminPropertyController@propertydetail');
     Route::get('setReminderForProperty', 'adminPropertyController@setReminderForProperty');
     Route::get('bulkUpdateStatusProperty','adminPropertyController@bulkUpdateStatusProperty');
     Route::get('/Propertysearch','adminPropertyController@index')->name('Propertysearch');
