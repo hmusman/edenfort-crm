@@ -30,8 +30,9 @@ class reminderController extends Controller
         }else if(session('role') == 'Admin'){
             $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id GROUP BY b.user_id;');
         }else if(session('role') == 'SuperAgent'){
-            $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id and (add_by="AGENT" or add_by="SUPERAGENT") GROUP BY b.user_id;');
+            $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT") GROUP BY b.user_id;');
         }
+        
         return json_decode(json_encode($result),true);
     }
     // 
@@ -51,9 +52,9 @@ class reminderController extends Controller
                      })->get();
         }
         foreach ($result as $key => $value) {
-            // $currentDate = strtotime($date);
-            // $futureDate = $currentDate+(60*5);
-            // $formatDate = date("Y-m-d G:i:s", $futureDate);
+            $currentDate = strtotime($date);
+            $futureDate = $currentDate+(60*5);
+            $formatDate = date("Y-m-d G:i:s", $futureDate);
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
         }
         return json_decode(json_encode($result),true);
@@ -189,5 +190,17 @@ class reminderController extends Controller
         $user = user::where('id', $id)->get()->first();
         $reminder = Reminder::where('user_id', $id)->get();
         return view('single-user-reminder', compact('reminder','user'));
+    }
+
+    public function remindersCount(){
+
+        if(session('role') == 'Agent'){
+            $remindersCount = DB::select('SELECT t.user_id as userid, t.add_by as urole, t.status as status, COUNT(t.status) as unviewed_reminders, a.id as uid, a.role, b.Rule_type as User from reminders t, users a, roles b where (t.status= "" and t.user_id=a.id and a.role=b.Rule_id AND b.Rule_type="Agent") GROUP BY t.user_id');
+        }else if(session('role') == 'Admin'){
+            $remindersCount = DB::select('SELECT t.user_id as userid, t.add_by as urole, t.status as status, COUNT(t.status) as unviewed_reminders, a.id as uid, a.role, b.Rule_type as User from reminders t, users a, roles b where (t.status= "" and t.user_id=a.id and a.role=b.Rule_id AND b.Rule_type="Admin") GROUP BY t.user_id');
+        }else if(session('role') == 'SuperAgent'){
+            $remindersCount = DB::select('SELECT t.user_id as userid, t.add_by as urole, t.status as status, COUNT(t.status) as unviewed_reminders, a.id as uid, a.role, b.Rule_type as User from reminders t, users a, roles b where (t.status= "" and t.user_id=a.id and a.role=b.Rule_id AND b.Rule_type="SuperAgent") GROUP BY t.user_id');
+        }
+        return json_decode(json_encode($remindersCount),true);
     }
 }

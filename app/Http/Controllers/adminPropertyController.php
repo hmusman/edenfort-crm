@@ -337,6 +337,14 @@ EDEN FORT REAL ESTATE
 
     public function propertydetail($id){
         $data = property::where('id',$id)->first();
+        if(session('role') == 'Agent'){
+            Reminder::where('property_id',$id)->where(['add_by' => 'AGENT','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+        }else if(session('role') == 'Admin'){
+            Reminder::where('property_id',$id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+        }
+        else if(session('role') == 'SuperAgent'){
+            Reminder::where('property_id',$id)->where(['add_by' => 'SUPERAGENT','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+        }
         return view('propertydetail', compact('data'));
     }
 }

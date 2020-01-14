@@ -56,7 +56,8 @@
                @if(count($reminder) > 0)
                     @foreach($reminder as $rem)
                         
-                        <tr data-href="{{ url('propertydetail')}}/{{$rem->property_id}}">
+                        <tr data-href="{{ url('propertydetail')}}/{{$rem->property_id}}" style="@if($rem->status=='viewed') background-color: #e2e2e2; 
+                        @endif">
                           <td>{{$rem->add_by}}</td> 
                           <td>{{$rem->reminder_type}}</td>  
                           <td>{{$rem->reminder_of}} </td>
@@ -80,7 +81,6 @@
  </div>
 		</div>
 	</div>
-
 @include('inc.footer')
 
  <!--<script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>-->

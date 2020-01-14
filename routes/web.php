@@ -35,10 +35,12 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('get-reminder', 'reminderController@getReminders');
     Route::get('delete-reminder', 'reminderController@deleteReminder');
     Route::get('get-all-reminder', 'reminderController@getallReminder');
+    Route::get('agent-reminder', 'reminderController@getallReminder');
     Route::get('get-reminder-record', 'reminderController@getreminderRecord');
     
     Route::get('get-all-agents-reminder', 'getAgentReminders@index');
     Route::get('get-single-user-reminder/{id}', 'reminderController@oneUserReminder');
+    Route::get('remindersCount', 'reminderController@remindersCount');
     
     
 //===================COLDCALLING MODULES=================================

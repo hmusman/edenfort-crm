@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $.notify.defaults( {autoHideDelay: 10000} )
         $.ajax({
-                url:'<?php echo url('get-all-reminder') ?>',
+                url:'<?php echo url('agent-reminder') ?>',
                 type:'get',
                 dataType: "json",
                 success:function(data){
@@ -36,7 +36,6 @@
                     $('.notification_bucket').html(temp);
                 }
             })
-
          }, 5000);
       $('body').delegate('.close_notification','click',function(){
         var notification = $(this);
@@ -80,6 +79,29 @@
                 }
             }, 5000);
          var audio = new Audio("<?php echo url('public/reminder.mp3')  ?>");
+         setInterval(function(){ 
+        var temp="";
+            $.ajax({
+                url:'<?php echo url('get-reminder') ?>',
+                type:'get',
+                dataType: "json",
+                success:function(data){
+                    temp+=$('.notification_bucket').html();
+                    for(var i=0; i < data.length; i++){
+                        audio.play();
+                       if(data[i]['status']!='viewed'){
+                            var getCount = parseInt($('.notification_counter').text());
+                          $('.notification_counter').text(getCount + data.length);
+                         $.notify("Reminder Alert", "warn");
+                           temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-reminder-record')  ?>?property_id='+data[i]['property_id']+'&ref='+data[i]['reminder_of']+'&active='+data[i]['add_by']+'" class="notification_link"><span><strong>'+data[i]['reminder_type']+'</strong></span><span class="unit_no">('+data[i]['reminder_of']+')</span><span style="float: right;"><a property_id="'+data[i]['property_id']+'"  class="close_notification"><i class="fa fa-close"></i></a></span><p>'+data[i]['description']+'</p></a></div>';
+                       }else{
+                         $.notify("Reminder Alert", "warn");
+                       }
+                    }
+                    $('.notification_bucket').html(temp);
+                }
+            })
+         }, 5000);
       $('body').delegate('.close_notification','click',function(){
         var notification = $(this);
             $.ajax({
@@ -103,4 +125,47 @@
             }
         })
       })
+</script>
+
+
+<script type="text/javascript">
+    setTimeout(function(){
+        $.ajax({
+            url:'<?php echo url('remindersCount') ?>',
+                type:'get',
+                dataType: "json",
+                success:function(data){
+                    for(var i=0; i < data.length; i++){
+                        var id = data[i]['userid'];
+                    if (data[i]['User']=='Admin' || data[i]['User']=='SuperAgent' || data[i]['User']=='Agent') {
+                        $.confirm({
+                            title: 'Reminder Alert!',
+                            content: 'Dear <strong><b>'+data[i]['urole']+'</b></strong>, you have <strong><b>' +data[i]['unviewed_reminders']+ '</b></strong> unviewed reminders, please select the following options. ',
+                            theme: 'material',
+                            type: 'blue',
+                             icon: 'fa fa-warning',
+                            buttons: {
+                                visit: {
+                                    text: 'Visit',
+                                    btnClass: 'btn-blue',
+                                    keys: ['enter', 'shift'],
+                                    action:function(){
+                                        window.location ='<?php echo url('get-single-user-reminder') ?>/'+id;
+                                    }
+                                },
+                                cancel:{
+                                    btnClass: 'btn-danger',
+                                    action: function(){
+                                    $.alert('Do you really want to cancel!');
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+
+                    
+                }
+      });
+    },1800000);
 </script>

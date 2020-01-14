@@ -397,7 +397,7 @@ public function addOwnerByAjax(Request $request){
                     $query->where("user_id",$request->agent);
                 }
                 if($request->unit){
-                    $query->where("unit_no",$request->unit);
+                    $query->where("unit_no","LIKE",'%'.$request->unit.'%');
                 }
                 if($request->contact){
                     $query->where("contact_no","LIKE",'%'.$request->contact.'%');
