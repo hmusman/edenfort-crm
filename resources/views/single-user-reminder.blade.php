@@ -66,8 +66,8 @@
                           <td>{{$rem->property_id}}</td>
                           <td>{{$rem->description}}</td>
                           <td>{{$rem->unit_no}}</td>
-                          <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&active={{$rem->add_by}}"><i style="font-size: 22px;" class="fas fa-book-open"></i></a>
-                            <a class="p-2 disable_reminder" href="{{url('delete-single-reminder')}}/{{$rem->property_id}}"><i style="font-size: 22px;" class="fas fa-backspace"></i></a></td>
+                          <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
+                            <a class="p-2 disable_reminder" href="{{url('delete-single-reminder')}}/{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a></td>
                         </tr>
                         
                     @endforeach
