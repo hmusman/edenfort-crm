@@ -115,10 +115,10 @@
             margin: 0 auto; ">
             <ul id="sidebarnav">
                @if(ucfirst(session('role'))==ucfirst('Agent'))        
-                    @if(@$permissions->dashboardView==1)
+                    
                         <li> <a class="has-arrow waves-effect waves-dark" href="{{url('/agentdashboard')}}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                        </li>
-                    @endif
+                    
                     @if(@$permissions->propertyView==1)        
                         <li>
                       <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Properties</span></a>
@@ -220,7 +220,6 @@
                @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
                        <li> <a class="has-arrow waves-effect waves-dark" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
                        </li>
-                   
                    @if(@$permissions->propertyView==1)               
                        <li >
                           <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>

@@ -50,7 +50,7 @@
                         globalPosition: 'top right',
                     });
                 }else{
-                    $.notify("Reminder Deleted Successfully", "warn",{elementPosition: 'bottom left',
+                    $.notify("Reminder Disable Successfully", "warn",{elementPosition: 'bottom left',
                         globalPosition: 'top left'});
                     $('.ti-close').trigger('click');
                     $('.notification_counter').text(data);
@@ -73,7 +73,7 @@
                     var temp="";
                     for(var i=0; i < data.length; i++){
                         $('.notification_counter').text(data.length);
-                       temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['id']+')</span><span style="float: right;"><i class="fa fa-close"></i></a></span><p class="ml-5"></p></div>';
+                       temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['id']+')</span><span style="float: right;"><a user_id="'+data[i]['user_id']+'"  class="close_notification"><i class="fa fa-close"></i></a></span></a></div>';
                     }
                     $('.notify').html(temp);
                 }
@@ -93,7 +93,7 @@
                             var getCount = parseInt($('.notification_counter').text());
                           $('.notification_counter').text(getCount + data.length);
                          $.notify("Reminder Alert", "warn");
-                           temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-reminder-record')  ?>?property_id='+data[i]['property_id']+'&ref='+data[i]['reminder_of']+'&active='+data[i]['add_by']+'" class="notification_link"><span><strong>'+data[i]['reminder_type']+'</strong></span><span class="unit_no">('+data[i]['reminder_of']+')</span><span style="float: right;"><a property_id="'+data[i]['property_id']+'"  class="close_notification"><i class="fa fa-close"></i></a></span><p>'+data[i]['description']+'</p></a></div>';
+                           temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-reminder-record')  ?>?property_id='+data[i]['property_id']+'&ref='+data[i]['reminder_of']+'&active='+data[i]['add_by']+'" class="notification_link"><span><strong>'+data[i]['reminder_type']+'</strong></span><span class="unit_no">('+data[i]['reminder_of']+')</span><span style="float: right;"><a user_id="'+data[i]['user_id']+'"  class="close_notification"><i class="fa fa-close"></i></a></span><p>'+data[i]['description']+'</p></a></div>';
                        }else{
                          $.notify("Reminder Alert", "warn");
                        }
@@ -105,9 +105,9 @@
       $('body').delegate('.close_notification','click',function(){
         var notification = $(this);
             $.ajax({
-            url:'<?php echo url('delete-reminder');  ?>',
+            url:'<?php echo url('delete-single-reminder');  ?>',
             type:'get',
-            data:{property_id:$(this).attr('property_id')},
+            data:{user_id:$(this).attr('user_id')},
             success:function(data){
               console.log(data);
                 if($.trim(data)=="false"){
@@ -115,7 +115,7 @@
                         globalPosition: 'top right',
                     });
                 }else{
-                    $.notify("Reminder Deleted Successfully", "warn",{elementPosition: 'bottom left',
+                    $.notify("Reminder Disable Successfully", "warn",{elementPosition: 'bottom left',
                         globalPosition: 'top left'});
                     $('.ti-close').trigger('click');
                     $('.notification_counter').text(data);
@@ -167,5 +167,5 @@
                     
                 }
       });
-    },1800000);
+    },900000);
 </script>

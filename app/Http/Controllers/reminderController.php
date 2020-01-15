@@ -28,11 +28,10 @@ class reminderController extends Controller
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
         }else if(session('role') == 'Admin'){
-            $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id GROUP BY b.user_id;');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed" or "")GROUP BY b.user_id');
         }else if(session('role') == 'SuperAgent'){
-            $result=DB::select('SELECT a.id as uid, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT") GROUP BY b.user_id;');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT") AND(b.status="viewed" or "") GROUP BY b.user_id;');
         }
-        
         return json_decode(json_encode($result),true);
     }
     // 
@@ -65,15 +64,15 @@ class reminderController extends Controller
         $date=$mytime->format('Y-m-d G:i').':00';
         if(input::get('property_id')){
             if(session('role') == 'Admin'){
-                 Reminder::where("property_id",input::get('property_id'))->where('add_by','ADMIN')->delete();
-                $result=Reminder::where(['add_by' => 'ADMIN','status' => 'viewed'])->get();
+                 Reminder::where("property_id",input::get('property_id'))->where(['add_by','ADMIN', 'status'=>'viewed'])->update(['status'=>'disable']);
+                $result=Reminder::where(['status'=>'viewed','add_by' => 'ADMIN','user_id'=>session('user_id')])->get();
                 echo count($result);
             }else if(session('role') == 'Agent'){
-                Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->delete();
+                Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->update(['status'=>"disable"]);
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
                 echo count($result);
             } else if(session('role') == 'SuperAgent'){
-                Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->delete();
+                Reminder::where("property_id",input::get('property_id'))->where(['add_by','SUPERAGENT', 'status'=>'viewed'])->update(['status'=>'disable']);
                 $result=Reminder::where('status' , 'viewed')->where('user_id',session('user_id'))
                      ->where(function($q) {
                          $q->where('add_by', 'ADMIN')
@@ -186,9 +185,9 @@ class reminderController extends Controller
          }
     }
 
-    public function oneUserReminder($id){
+     public function oneUserReminder($id){
         $user = user::where('id', $id)->get()->first();
-        $reminder = Reminder::where('user_id', $id)->get();
+        $reminder = Reminder::where('user_id', $id)->where('status','viewed')->orwhere('status', '')->get();
         return view('single-user-reminder', compact('reminder','user'));
     }
 
@@ -202,5 +201,18 @@ class reminderController extends Controller
             $remindersCount = DB::select('SELECT t.user_id as userid, t.add_by as urole, t.status as status, COUNT(t.status) as unviewed_reminders, a.id as uid, a.role, b.Rule_type as User from reminders t, users a, roles b where (t.status= "" and t.user_id=a.id and a.role=b.Rule_id AND b.Rule_type="SuperAgent") GROUP BY t.user_id');
         }
         return json_decode(json_encode($remindersCount),true);
+    }
+
+     public function deleteSingleReminder($id){
+        if(session('role') == 'Agent'){
+            Reminder::where('property_id',$id)->where(['add_by' => 'AGENT', 'status' => 'viewed' ,'user_id'=>session('user_id')])->update(["status"=>'disable']);
+        }else if(session('role') == 'Admin'){
+            Reminder::where('property_id',$id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable']);
+            // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+        }
+        else if(session('role') == 'SuperAgent'){
+            Reminder::where('property_id',$id)->where(['add_by' => 'SUPERAGENT','user_id'=>session('user_id')])->update(["status"=>'disable']);
+        }
+        return redirect()->back();
     }
 }

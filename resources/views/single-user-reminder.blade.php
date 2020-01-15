@@ -1,4 +1,15 @@
 @include('inc.header')
+@if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Admin') || ucfirst('SuperAgent')))
+
+  <script type="text/javascript">
+
+    window.location='{{url("/")}}';
+
+  </script>
+
+  <?php redirect('/'); ?>
+
+@endif
 <style>
     .nav-tabs li{
         color:white !important;
@@ -19,17 +30,7 @@
         text-decoration:underline !important;
     }
 </style>
-@if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Admin') || ucfirst('SuperAgent')))
 
-  <script type="text/javascript">
-
-    window.location='{{url("/")}}';
-
-  </script>
-
-  <?php redirect('/'); ?>
-
-@endif
 
 	<div class="page-wrapper">
 		<div class="container">
@@ -47,6 +48,7 @@
                             <th>Property ID</th>
                             <th>Description</th>
                             <th>Unit No.</th>
+                            <th>Action</th>
 
                             
                         </tr>
@@ -56,7 +58,7 @@
                @if(count($reminder) > 0)
                     @foreach($reminder as $rem)
                         
-                        <tr data-href="{{ url('propertydetail')}}/{{$rem->property_id}}" style="@if($rem->status=='viewed') background-color: #e2e2e2; 
+                        <tr style="@if($rem->status=='viewed') background-color: #e2e2e2; 
                         @endif">
                           <td>{{$rem->add_by}}</td> 
                           <td>{{$rem->reminder_type}}</td>  
@@ -64,6 +66,8 @@
                           <td>{{$rem->property_id}}</td>
                           <td>{{$rem->description}}</td>
                           <td>{{$rem->unit_no}}</td>
+                          <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&active={{$rem->add_by}}"><i style="font-size: 22px;" class="fas fa-book-open"></i></a>
+                            <a class="p-2 disable_reminder" href="{{url('delete-single-reminder')}}/{{$rem->property_id}}"><i style="font-size: 22px;" class="fas fa-backspace"></i></a></td>
                         </tr>
                         
                     @endforeach
@@ -95,11 +99,11 @@
             $('#myTable,#myTable2,#myTable3').DataTable();
         });
     </script>
-    <script>
+    <!-- <script>
         $('#myTable').on( 'click', 'tbody tr', function () {
           window.location.href = $(this).data('href');
         });
-    </script>
+    </script> -->
     <style>
         #myTable_wrapper,#myTable2_wrapper,#myTable3_wrapper{
             width:100% !important;

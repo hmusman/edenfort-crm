@@ -15,7 +15,7 @@
                         <div class="slimscrollright">
                             <div class="rpanel-title">Reminders<span><i class="ti-close right-side-toggle"></i></span> </div>
                             <div class="r-panel-body">
-                                <div class="row notify mt-3">
+                                <div class="row notify mt-4">
                                                                         
                                 </div>
                             </div>
