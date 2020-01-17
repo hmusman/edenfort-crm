@@ -33,6 +33,7 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
 //===================REMINDER MODULES ROUTES=================================
     // Reminders ROUTES
     Route::get('get-reminder', 'reminderController@getReminders');
+     Route::get('get-admin-reminder', 'reminderController@getAdminReminders');
     Route::get('delete-reminder', 'reminderController@deleteReminder');
     Route::get('delete-single-reminder/{id}', 'reminderController@deleteSingleReminder');
     Route::get('get-all-reminder', 'reminderController@getallReminder');

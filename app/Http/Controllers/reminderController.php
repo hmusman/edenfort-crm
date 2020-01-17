@@ -26,11 +26,13 @@ class reminderController extends Controller
 {
 	public function getallReminder(){
         if(session('role') == 'Agent'){
-            $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
+            $result=DB::select('SELECT t.* from reminders t where (status="viewed" and add_by="AGENT") ');
+            // Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
         }else if(session('role') == 'Admin'){
-            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed" or "")GROUP BY b.user_id');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed")GROUP BY b.user_id');
         }else if(session('role') == 'SuperAgent'){
-            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as id, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT") AND(b.status="viewed" or "") GROUP BY b.user_id;');
+
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT" or add_by="ADMIN") AND(b.status="viewed") GROUP BY b.user_id;');
         }
         return json_decode(json_encode($result),true);
     }
@@ -41,14 +43,24 @@ class reminderController extends Controller
         if(session('role') == 'Agent'){
             $result=Reminder::where('date_time','<=',$date)->where(['add_by' => 'AGENT','user_id'=>session('user_id')])->where('status',null)->get();
         }else if(session('role') == 'Admin'){
-            $result=Reminder::where('date_time','<=',$date)->where('add_by', 'ADMIN')->where('status',null)->get();
+            $result=DB::table('reminders')
+                    ->join('users', 'reminders.user_id','=','users.id')
+                    ->select('users.id AS uid', 'reminders.id AS id', 'users.user_name', 'reminders.user_id','reminders.status', DB::Raw('reminders.id, COUNT(*) AS rid'), DB::Raw('users.user_name, upper(substring(users.user_name, 1, 1)) as unam'))
+                    ->where('date_time','<=',$date)->where('reminders.status', null)->groupBy('reminders.user_id')->get();
+                    // Reminder::where('date_time','<=',$date)->where('add_by', 'ADMIN')->where('status',null)->get();
+            
         }
         else if(session('role') == 'SuperAgent'){
-            $result=Reminder::where('date_time','<=',$date)->where('user_id',session('user_id'))->where('status',null)
-                    ->where(function($q) {
-                         $q->where('add_by', 'ADMIN')
-                           ->orWhere('add_by', 'SuperAgent');
-                     })->get();
+            $result=DB::table('reminders')
+                    ->join('users', 'reminders.user_id','=','users.id')
+                    ->select('users.id AS uid', 'reminders.id AS id', 'users.user_name', 'reminders.user_id','reminders.status', DB::Raw('reminders.id, COUNT(*) AS rid'), DB::Raw('users.user_name, upper(substring(users.user_name, 1, 1)) as unam'))
+                    ->where('date_time','<=',$date)->where('reminders.status', null)->groupBy('reminders.user_id')->get();
+            //          
+            // Reminder::where('date_time','<=',$date)->where('user_id',session('user_id'))->where('status',null)
+            //         ->where(function($q) {
+            //              $q->where('add_by', 'ADMIN')
+            //                ->orWhere('add_by', 'SuperAgent');
+            //          })->get();
         }
         foreach ($result as $key => $value) {
             $currentDate = strtotime($date);
@@ -60,8 +72,6 @@ class reminderController extends Controller
     }
      // 
     public function deleteReminder(){
-        $mytime = \Carbon\Carbon::now();
-        $date=$mytime->format('Y-m-d G:i').':00';
         if(input::get('property_id')){
             if(session('role') == 'Admin'){
                  Reminder::where("property_id",input::get('property_id'))->where(['add_by','ADMIN', 'status'=>'viewed'])->update(['status'=>'disable']);
@@ -115,7 +125,7 @@ class reminderController extends Controller
     // 
      public function getreminderRecord(){
         $permissions = permission::where('user_id', session('user_id'))->first();
-        if(input::get('active') == 'SUPERAGENT'){
+        if(input::get('active') == 'SUPERAGENT' || 'ADMIN'){
          	if(strtoupper(input::get('ref'))=='COLDCALLING'){
          		$areas=coldcallingModel::distinct('area')->pluck('area');
                 $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
@@ -124,6 +134,9 @@ class reminderController extends Controller
                 $buildings=coldcallingModel::distinct('Building')->pluck('Building');
          		$result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
          		$buildingss=Building::all();
+                if(input::get('status')!='viewed'){
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
+                }
          		return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','buildingss'));
          	}else if(strtoupper(input::get('ref'))=='PROPERTY'){
          		$areas=property::distinct('area')->pluck('area');
@@ -134,6 +147,9 @@ class reminderController extends Controller
                 // $buildings=property::distinct('Building')->pluck('Building');
                  $buildings=Building::all();
          		$result_data=property::where("id",input::get('property_id'))->paginate(20);
+                if(input::get('status')!='viewed'){
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
+                }
          		return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','buildingss'));
          	}else if(strtoupper(input::get('ref'))=='LEADS'){
          	    $agents=lead::distinct('lead_user')->get(); 
@@ -143,6 +159,9 @@ class reminderController extends Controller
 	            $dbName=DB::getDatabaseName();
 	
 	            $upcomingLeadId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'leads'");
+                if(input::get('status')!='viewed'){
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
+                        }
          	    return view('agentLeadReport',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
          	}else{
          	    $buildings=Building::all();
@@ -150,6 +169,9 @@ class reminderController extends Controller
                 $deals=deal::where("id",input::get('property_id'))->get();
                 $dbName=DB::getDatabaseName();
                 $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");
+                if(input::get('status')!='viewed'){
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
+                }
          	    return view('dealsInformation',compact('deals','buildings','agents','upcomingDealId','permissions'));
          	}
          }else if(input::get('active') == 'AGENT'){
@@ -187,7 +209,17 @@ class reminderController extends Controller
 
      public function oneUserReminder($id){
         $user = user::where('id', $id)->get()->first();
-        $reminder = Reminder::where('user_id', $id)->where('status','viewed')->orwhere('status', '')->get();
+        $reminder = Reminder::where('user_id', $id)->where(function($q) {
+                         $q->where('status', 'viewed')
+                           ->orWhere('status', null);
+                     })
+                     ->get();
+        // $result=Reminder::where('status' , 'viewed')->where('user_id',session('user_id'))
+        //              ->where(function($q) {
+        //                  $q->where('add_by', 'ADMIN')
+        //                    ->orWhere('add_by', 'SuperAgent');
+        //              })
+        //              ->get();
         return view('single-user-reminder', compact('reminder','user'));
     }
 
@@ -211,7 +243,11 @@ class reminderController extends Controller
             // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
         }
         else if(session('role') == 'SuperAgent'){
-            Reminder::where('property_id',$id)->where(['add_by' => 'SUPERAGENT','user_id'=>session('user_id')])->update(["status"=>'disable']);
+            Reminder::where('property_id',$id)->where(['user_id'=>session('user_id')])
+            ->where(function($q) {
+                         $q->where('add_by', 'ADMIN')
+                           ->orWhere('add_by', 'SuperAgent');
+                     })->update(["status"=>'disable']);
         }
         return redirect()->back();
     }

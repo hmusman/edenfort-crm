@@ -42,7 +42,7 @@
                 <table id="myTable" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Agent Name</th>
+                            <th>Add By</th>
                             <th>Reminder Type</th>
                             <th>Reminder Of</th>
                             <th>Property ID</th>
@@ -60,13 +60,13 @@
                         
                         <tr style="@if($rem->status=='viewed') background-color: #e2e2e2; 
                         @endif">
-                          <td>{{$rem->add_by}}</td> 
+                          <td>{{ $user->user_name}}</td> 
                           <td>{{$rem->reminder_type}}</td>  
                           <td>{{$rem->reminder_of}} </td>
                           <td>{{$rem->property_id}}</td>
                           <td>{{$rem->description}}</td>
                           <td>{{$rem->unit_no}}</td>
-                          <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
+                          <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
                             <a class="p-2 disable_reminder" href="{{url('delete-single-reminder')}}/{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a></td>
                         </tr>
                         
