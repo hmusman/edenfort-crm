@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $.notify.defaults( {autoHideDelay: 10000} )
-        $.ajax({
+        setInterval(function(){
+            $.ajax({
                 url:'<?php echo url('agent-reminder') ?>',
                 type:'get',
                 dataType: "json",
@@ -12,7 +13,8 @@
                     }
                     $('.notification_bucket').html(temp);
                 }
-            },5000);
+            });
+        }, 5000);
          var audio = new Audio("<?php echo url('public/reminder.mp3')  ?>");
       setInterval(function(){ 
         var temp="";
