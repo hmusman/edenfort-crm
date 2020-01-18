@@ -130,6 +130,7 @@ class reminderController extends Controller
          		$areas=coldcallingModel::distinct('area')->pluck('area');
                 $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
                 $agents=user::where(['role'=>3])->get();
+                $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
                 $buildings=coldcallingModel::distinct('Building')->pluck('Building');
          		$result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
@@ -137,7 +138,7 @@ class reminderController extends Controller
                 if(input::get('status')!='viewed'){
                     Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                 }
-         		return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','buildingss'));
+         		return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss'));
          	}else if(strtoupper(input::get('ref'))=='PROPERTY'){
          		$areas=property::distinct('area')->pluck('area');
                 $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');   
@@ -180,11 +181,12 @@ class reminderController extends Controller
               $buildings = property::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
               $areas=coldcallingModel::whereIn('Building',$buildings)->distinct('area')->pluck('area');
               $agents=user::where(['role'=>3])->get();
-              $bedrooms=coldcallingModel::whereIn('Building',$buildings)->distinct('Bedroom')->pluck('Bedroom');   
+              $bedrooms=coldcallingModel::whereIn('Building',$buildings)->distinct('Bedroom')->pluck('Bedroom');
+              $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);   
               $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
               $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
               $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
-                return view('agentcoldcalling',compact('result_data','buildings','areas','bedrooms','agents','buildingss','permissions'));
+                return view('agentcoldcalling',compact('result_data','buildings','areas','bedrooms','agents','agentss', 'buildingss','permissions'));
             }else if(strtoupper(input::get('ref'))=='PROPERTY'){
                 $buildings = property::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
                 $areas=property::whereIn('Building',$buildings)->distinct('area')->pluck('area');
