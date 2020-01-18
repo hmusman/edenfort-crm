@@ -108,13 +108,19 @@
    border:2px solid #1976D2;
    margin:0px -2px;
    /*border-radius:10px;*/
+   border-radius:0px 10px 10px 0px;
    }
    .redirect_card_group .card:first-child .card-body,.redirect_card_group .card:first-child{
    border-radius:10px 0 0 10px;
    }
    .redirect_card_group .card:nth-child(2) .card-body,.redirect_card_group .card:nth-child(2){
-   border-radius:0px 10px 10px 0px;
+   border-radius:0px 0px 0px 0px;
    }
+/* 
+   .redirect_card_group .card:nth-child(2) .card-body,.redirect_card_group .card:nth-child(2){
+   border-radius:0px 0px 0px 0px;
+   } */
+
    .card .card-subtitle{
    font-size:16px;
    color:#1976D2;
@@ -236,6 +242,21 @@
          <h3 class="page_heading" style="padding-bottom: 0px;display:block !important;width:100%;">Properties</h3>
          <div class="card-group redirect_card_group">
             <div class="card">
+               <a href="#">
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="col-12">
+                           <h2 class="m-b-0">
+                              <img src="https://img.icons8.com/dusk/40/000000/home.png">
+                              <span class="card-subtitle">DEWA</span>
+                           </h2>
+                           <!--<h3 class="">64</h3>-->
+                        </div>
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <div class="card">
                <a href="{{url('property')}}?p=Commercial">
                   <div class="card-body">
                      <div class="row">
@@ -265,6 +286,8 @@
                   </div>
                </a>
             </div>
+
+          
             <!-- Column -->
             <!-- Column -->
          </div>
@@ -676,16 +699,19 @@
                            </div>
                            <!--/span-->
                         </div>
+
+
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Area</label>
+                                 <label class="control-label text-right col-md-3">Dewa No</label>
                                  <div class="col-md-9">
-                                    <input type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
-                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
+                                    <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
+                                    <!-- <small class="form-control-feedback"> This is inline help </small>  -->
                                  </div>
                               </div>
                            </div>
+                           <!--/span-->
                            <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Bedroom</label>
@@ -710,26 +736,31 @@
                               </div>
                            </div>
                            <!--/span-->
+
+
+
+                    
                         </div>
+
+
+
+
+
+
+
+
+
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Conditions</label>
+                                 <label class="control-label text-right col-md-3">Area</label>
                                  <div class="col-md-9">
-                                    <select name="Conditions"  class="form-control"  style="font-size: 12px;">
-                                       <option value="{{@$result[0]['Conditions']}}">{{@$result[0]['Conditions']}}</option>
-                                       <option value="Full Furnished">Full Furnished</option>
-                                       <option value="Furnished">Furnished</option>
-                                       <option value="unfurnished">unFurnished</option>
-                                       <option value="Semi Furnished">Semi Furnished</option>
-                                       <option value="FULLY FITTED">FULLY FITTED</option>
-                                       <option value="SHELL AND CORE">SHELL AND CORE</option>
-                                    </select>
+                                    <input type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
                                     <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                            <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Washroom</label>
                                  <div class="col-md-9">
@@ -751,17 +782,30 @@
                            </div>
                            <!--/span-->
                         </div>
-                        <!--/row-->
+
+
+
+
+                        
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">LandLord</label>
+                                 <label class="control-label text-right col-md-3">Conditions</label>
                                  <div class="col-md-9">
-                                    <input type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
+                                    <select name="Conditions"  class="form-control"  style="font-size: 12px;">
+                                       <option value="{{@$result[0]['Conditions']}}">{{@$result[0]['Conditions']}}</option>
+                                       <option value="Full Furnished">Full Furnished</option>
+                                       <option value="Furnished">Furnished</option>
+                                       <option value="unfurnished">unFurnished</option>
+                                       <option value="Semi Furnished">Semi Furnished</option>
+                                       <option value="FULLY FITTED">FULLY FITTED</option>
+                                       <option value="SHELL AND CORE">SHELL AND CORE</option>
+                                    </select>
+                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                             <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Email</label>
                                  <div class="col-md-9">
@@ -775,20 +819,26 @@
                            </div>
                            <!--/span-->
                         </div>
+
+
+
+
+                        <!--/row-->
+
+
+
+
+
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Phone Number</label>
+                                 <label class="control-label text-right col-md-3">LandLord</label>
                                  <div class="col-md-9">
-                                    <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
-                                    <input type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
-                                    <?php } }else { ?>
-                                    <input  type="text" class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
-                                    <?php  } ?>
+                                    <input type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                          <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Access</label>
                                  <div class="col-md-9">
@@ -831,12 +881,22 @@
                            </div>
                            <!--/span-->
                         </div>
+
+
+
+
+
+
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Area Sqft</label>
+                                 <label class="control-label text-right col-md-3">Phone Number</label>
                                  <div class="col-md-9">
-                                    <input type="number" class="form-control" name="Area_Sqft" value="{{@$result[0]['Area_Sqft']}}">
+                                    <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
+                                    <input type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
+                                    <?php } }else { ?>
+                                    <input  type="text" class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
+                                    <?php  } ?>
                                  </div>
                               </div>
                            </div>
@@ -848,7 +908,69 @@
                                  </div>
                               </div>
                            </div>
+                           <!--/span-->
                         </div>
+
+
+
+
+
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Area Sqft</label>
+                                 <div class="col-md-9">
+                                    <input type="number" class="form-control" name="Area_Sqft" value="{{@$result[0]['Area_Sqft']}}">
+                                 </div>
+                              </div>
+                           </div>
+                              <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Type</label>
+                                 <div class="col-md-9">
+                                    <select class="form-control access" name="access" style="font-size: 12px;" >
+                                       <option value="">Select option</option>
+                                       <option value="For Rent" <?php if(strtoupper(@$result[0]["DEWA"])==strtoupper("For Rent")){echo "selected";} ?>>DEWA</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Ccmmercial")){echo "selected";} ?> value="For Sale">Ccmmercial</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Residential")){echo "selected";} ?> value="Upcoming">Residential</option>
+        
+                                    </select>
+                                    <div class="options" style="padding-top:20px;">
+                                       @if(strtoupper(@$result[0]["access"])==strtoupper("Upcoming"))
+                                       @if(!is_null($reminders))
+                                       <div class="row">
+                                          <input type="hidden" name="add_property_reminder_type" value="{{$reminders->reminder_type}}"> 
+                                          <div class="col-sm-12">
+                                             <div class="form-group"> <input style="width:100%" type="datetime-local" value="{{$reminders->reminderDate($reminders->date_time)}}" class="form-control" name="add_property_date_time"> </div>
+                                          </div>
+                                          <div class="col-sm-12"> <textarea class="form-control reminder_description"  value="" style="width:100%" rows="4" name="add_property_reminder_description" placeholder="Description">{{$reminders->description}}</textarea></div>
+                                       </div>
+                                       @endif
+                                       @endif
+                                       @if(strtoupper(@$result[0]["access"])==strtoupper("For Sale"))
+                                       <select class="form-control sale_status valid" style="font-size:12px;margin-bottom: 20px;" name="sale_status" aria-invalid="false">
+                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Rented")){echo 'selected';}   ?>  value="Rented">Rented</option>
+                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Vacant")){echo 'selected';}   ?> value="Vacant">Vacant</option>
+                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Vacant on transfer")){echo 'selected';}   ?>  value="Vacant on transfer">Vacant on transfer</option>
+                                       </select>
+                                       <div class="form-group" style="margin-bottom: 20px;"><input type="date" value="{{@$result[0]["rented_date"]}}" name="rented_date" class="form-control rented_date"></div>
+                                       <div class="form-group"><input type="price" name="rented_price" value="{{@$result[0]["rented_price"]}}" placeholder="Rented Price" class="form-control rented_price"></div>
+                                       @endif
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
@@ -862,7 +984,8 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <!--/span-->
+                            <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Add Comment</label>
                                  <div class="col-md-9">
@@ -870,7 +993,17 @@
                                  </div>
                               </div>
                            </div>
+                           <!--/span-->
                         </div>
+
+
+                        
+
+
+
+
+
+                        
                         <!--/row-->
                         <div class="form-actions">
                            <div class="row">
