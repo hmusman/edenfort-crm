@@ -1052,17 +1052,35 @@ label{
                                              </div>
                                              <!--/span-->
                                           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                           <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Area</label>
-                                                   <div class="col-md-9">
-                                                      <input required="" type="text" name="area" class="form-control" value="">
-                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-md-6">
+                     <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Dewa No</label>
+                                 <div class="col-md-9">
+                                    <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
+                                    <!-- <small class="form-control-feedback"> This is inline help </small>  -->
+                                 </div>
+                              </div>
+                           </div>
+                        <!--/span-->
+
+
+
+                        <div class="col-md-6">
                                                 <div class="form-group row">
                                                    <label class="control-label text-right col-md-3">Bedroom</label>
                                                    <div class="col-md-9">
@@ -1082,6 +1100,54 @@ label{
                                                          <option value="11">11</option>
                                                          <option value="12">12</option>
                                                       </select>
+                                                   </div>
+                                                </div>
+                                             </div>
+                        <!--/span-->
+                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                <div class="form-group row">
+                                                   <label class="control-label text-right col-md-3">Area</label>
+                                                   <div class="col-md-9">
+                                                      <input required="" type="text" name="area" class="form-control" value="">
+                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
+                                                   </div>
+                                                </div>
+                                             </div>
+
+                                             
+                                             <div class="col-md-6">
+                                                <div class="form-group row">
+                                                   <label class="control-label text-right col-md-3">Washroom</label>
+                                                   <div class="col-md-9">
+                                                      <select name="Washroom" required class="form-control" style="font-size: 12px; ">
+                                                         <option value=""></option>
+                                                         <option value="1">1</option>
+                                                         <option value="1.5">1.5</option>
+                                                         <option value="2.5">2.5</option>
+                                                         <option value="3.5">3.5</option>
+                                                         <option value="4.5">4.5</option>
+                                                         <option value="5.5">5.5</option>
+                                                         <option value="6.5">6.5</option>
+                                                         <option value="7.5">7.5</option>
+                                                         <option value="8.5">8.5</option>
+                                                      </select>
+                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
                                                    </div>
                                                 </div>
                                              </div>
@@ -1105,21 +1171,9 @@ label{
                                              </div>
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Washroom</label>
+                                                   <label class="control-label text-right col-md-3">Email</label>
                                                    <div class="col-md-9">
-                                                      <select name="Washroom" required class="form-control" style="font-size: 12px; ">
-                                                         <option value=""></option>
-                                                         <option value="1">1</option>
-                                                         <option value="1.5">1.5</option>
-                                                         <option value="2.5">2.5</option>
-                                                         <option value="3.5">3.5</option>
-                                                         <option value="4.5">4.5</option>
-                                                         <option value="5.5">5.5</option>
-                                                         <option value="6.5">6.5</option>
-                                                         <option value="7.5">7.5</option>
-                                                         <option value="8.5">8.5</option>
-                                                      </select>
-                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
+                                                      <input type="email" class="form-control" name="email[]" value="">
                                                    </div>
                                                 </div>
                                              </div>
@@ -1132,25 +1186,6 @@ label{
                                                    <label class="control-label text-right col-md-3">LandLord</label>
                                                    <div class="col-md-9">
                                                       <input required="" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Email</label>
-                                                   <div class="col-md-9">
-                                                      <input type="email" class="form-control" name="email[]" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Phone Number</label>
-                                                   <div class="col-md-9">
-                                                      <input type="text" required="" class="form-control" name="contact_no[]" value="">
                                                    </div>
                                                 </div>
                                              </div>
@@ -1180,9 +1215,9 @@ label{
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Area Sqft</label>
+                                                   <label class="control-label text-right col-md-3">Phone Number</label>
                                                    <div class="col-md-9">
-                                                      <input required="" type="number" class="form-control" name="Area_Sqft" value="">
+                                                      <input type="text" required="" class="form-control" name="contact_no[]" value="">
                                                    </div>
                                                 </div>
                                              </div>
@@ -1193,6 +1228,54 @@ label{
                                                       <input required="" type="text" class="form-control" name="Price" value="">
                                                    </div>
                                                 </div>
+                                             </div>
+                                             <!--/span-->
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                <div class="form-group row">
+                                                   <label class="control-label text-right col-md-3">Area Sqft</label>
+                                                   <div class="col-md-9">
+                                                      <input required="" type="number" class="form-control" name="Area_Sqft" value="">
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                             <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Type</label>
+                                 <div class="col-md-9">
+                                    <select class="form-control access" name="access" style="font-size: 12px;" >
+                                       <option value="">Select option</option>
+                                       <option value="For Rent" <?php if(strtoupper(@$result[0]["DEWA"])==strtoupper("For Rent")){echo "selected";} ?>>DEWA</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Ccmmercial")){echo "selected";} ?> value="For Sale">Ccmmercial</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Residential")){echo "selected";} ?> value="Upcoming">Residential</option>
+        
+                                    </select>
+                                    <div class="options" style="padding-top:20px;">
+                                       @if(strtoupper(@$result[0]["access"])==strtoupper("Upcoming"))
+                                       @if(!is_null($reminders))
+                                       <div class="row">
+                                          <input type="hidden" name="add_property_reminder_type" value="{{$reminders->reminder_type}}"> 
+                                          <div class="col-sm-12">
+                                             <div class="form-group"> <input style="width:100%" type="datetime-local" value="{{$reminders->reminderDate($reminders->date_time)}}" class="form-control" name="add_property_date_time"> </div>
+                                          </div>
+                                          <div class="col-sm-12"> <textarea class="form-control reminder_description"  value="" style="width:100%" rows="4" name="add_property_reminder_description" placeholder="Description">{{$reminders->description}}</textarea></div>
+                                       </div>
+                                       @endif
+                                       @endif
+                                       @if(strtoupper(@$result[0]["access"])==strtoupper("For Sale"))
+                                       <select class="form-control sale_status valid" style="font-size:12px;margin-bottom: 20px;" name="sale_status" aria-invalid="false">
+                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Rented")){echo 'selected';}   ?>  value="Rented">Rented</option>
+                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Vacant")){echo 'selected';}   ?> value="Vacant">Vacant</option>
+                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Vacant on transfer")){echo 'selected';}   ?>  value="Vacant on transfer">Vacant on transfer</option>
+                                       </select>
+                                       <div class="form-group" style="margin-bottom: 20px;"><input type="date" value="{{@$result[0]["rented_date"]}}" name="rented_date" class="form-control rented_date"></div>
+                                       <div class="form-group"><input type="price" name="rented_price" value="{{@$result[0]["rented_price"]}}" placeholder="Rented Price" class="form-control rented_price"></div>
+                                       @endif
+                                    </div>
+                                 </div>
+                              </div>
+                        </div>
                                              </div>
                                           </div>
                                           <div class="row">
