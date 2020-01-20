@@ -26,8 +26,8 @@ class reminderController extends Controller
 {
 	public function getallReminder(){
         if(session('role') == 'Agent'){
-            $result=DB::select('SELECT t.* from reminders t where (status="viewed" and add_by="AGENT") ');
-            // Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
+            // $result=DB::select('SELECT t.* from reminders t where (status="viewed" and add_by="AGENT") ');
+            $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
         }else if(session('role') == 'Admin'){
             $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed")GROUP BY b.user_id');
         }else if(session('role') == 'SuperAgent'){
