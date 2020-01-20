@@ -249,6 +249,7 @@
 		</div>	
 <!--End of page-wrapper-->
 	</div>
+  <script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>
 
 @include('inc.footer')
 
@@ -324,7 +325,7 @@ Morris.Line({
 });
 });
 </script>
- <script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>
+ 
   <script src="{{url('public/assets/plugins/raphael/raphael-min.js')}}"></script>
     <script src="{{url('public/assets/plugins/morrisjs/morris.min.js')}}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

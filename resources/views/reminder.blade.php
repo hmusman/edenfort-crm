@@ -94,7 +94,8 @@
                           $('.notification_counter').text(getCount + data.length);
                          $.notify("Reminder Alert", "warn");
                            temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['rid']+')</span><span style="float: right;"><a user_id="'+data[i]['user_id']+'"  class="close_notification"><i class="fa fa-close"></i></a></span></a></div>';
-                       }else{
+                       }
+                       else{
                          $.notify("Reminder Alert", "warn");
                        }
                     }
