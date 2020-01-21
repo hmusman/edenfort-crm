@@ -242,7 +242,7 @@
          <h3 class="page_heading" style="padding-bottom: 0px;display:block !important;width:100%;">Properties</h3>
          <div class="card-group redirect_card_group">
             <div class="card">
-               <a href="#">
+               <a href="{{url('property')}}?p=Dewa">
                   <div class="card-body">
                      <div class="row">
                         <div class="col-12">
@@ -706,7 +706,7 @@
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Dewa No</label>
                                  <div class="col-md-9">
-                                    <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
+                                    <input type="text" class="form-control" name="dewa_no" value="{{@$result[0]['dewa_no']}}">
                                     <!-- <small class="form-control-feedback"> This is inline help </small>  -->
                                  </div>
                               </div>

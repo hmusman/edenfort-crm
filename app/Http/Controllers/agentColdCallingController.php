@@ -278,7 +278,8 @@ EDEN FORT REAL ESTATE
      public function index(Request $request){
          //permission 
           $permissions = permission::where('user_id', session('user_id'))->first();
-          $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
+          // $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
+          $allBuildings=Building::select("building_name")->orderBy("building_name","ASC")->get();
 		  
 		  
 	  $areas=coldcallingModel::distinct('area')->pluck('area');
@@ -1712,7 +1713,7 @@ $result_data=coldcallingModel::where('access', null)->where(['user_id'=>$current
       }//end Else of proprty as Commercial or Residential    
         
         
-       return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','buildingss','permissions']));
+       return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions']));
 
   
 

@@ -177,6 +177,10 @@ EDEN FORT REAL ESTATE
         if(count($checkUnitNo) > 0){
             return back()->with('msg','<div class="alert alert-danger">Unit# already exit against this Building!</div>');
         }
+        $checkDewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
+        if(count($checkDewaNo) > 0){
+            return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
+        }
         if(input::get('sale_status')){
             $sale_status=input::get('sale_status');
             if(input::get('rented_date')){
@@ -190,6 +194,7 @@ EDEN FORT REAL ESTATE
             $contact_no=array_filter(input::get("contact_no"));
 	    	$property=new property();
 			$property->unit_no=input::get("unit_no");
+            $property->dewa_no=input::get("dewa_no");
 	        $property->LandLord=input::get("LandLord");
 			$property->Building=input::get("building");
 	        $property->area=input::get("area");
@@ -294,6 +299,7 @@ EDEN FORT REAL ESTATE
                 $contact_no=array_filter(input::get("contact_no"));
                 $data=array(
     				'unit_no'=>input::get("unit_no"),
+                    'dewa_no'=>input::get("dewa_no"),
     		        'LandLord'=>input::get("LandLord"),
     				'Building'=>input::get("building"),
     		        'area'=>input::get("area"),

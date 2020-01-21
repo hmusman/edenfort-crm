@@ -148,6 +148,7 @@
                                           <td  class="propertyBulk hide" >{{$user->permission['propertyBulk']}}</td>
                                           <td  class="coldcallingView hide" >{{$user->permission['coldcallingView']}}</td>
                                           <td  class="coldcallingAdd hide" >{{$user->permission['coldcallingAdd']}}</td>
+                                          <td  class="coldCallingAssign hide" >{{$user->permission['coldCallingAssign']}}</td>
                                           <td  class="coldcallingBulk hide" >{{$user->permission['coldcallingBulk']}}</td>
                                           <td  class="leadView hide" >{{$user->permission['leadView']}}</td>
                                           <td  class="leadAdd hide" >{{$user->permission['leadAdd']}}</td>
@@ -306,6 +307,16 @@
                               </div>
                               <div class="form-group col-sm-3">
                                  <input type="checkbox" class="form-control"   name="coldcallingAdd" id="coldcallingAdd" value="1" >
+                              </div>
+                           </div>
+                            <div class="row">
+                              <div class="form-group col-sm-2">
+                                 <p class="h4" align="center"> Assign</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="coldCallingAssign" id="coldCallingAssign" value="1" >
                               </div>
                            </div>
                            <div class="row">
@@ -526,6 +537,7 @@
       var propertyBulk=$row.find(".propertyBulk").text();
       var coldcallingView=$row.find(".coldcallingView").text();
       var coldcallingAdd=$row.find(".coldcallingAdd").text();
+      var coldCallingAssign=$row.find(".coldCallingAssign").text();
       var coldcallingBulk=$row.find(".coldcallingBulk").text();
       var leadView=$row.find(".leadView").text();
       var leadAdd=$row.find(".leadAdd").text();
@@ -602,6 +614,12 @@
       $("#coldcallingAdd").prop('checked', true);
     }else{
       $("#coldcallingAdd").prop('checked', false);
+    }
+
+    if( coldCallingAssign=='1'){
+      $("#coldCallingAssign").prop('checked', true);
+    }else{
+      $("#coldCallingAssign").prop('checked', false);
     }
    
     if( coldcallingBulk=='1'){

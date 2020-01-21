@@ -211,6 +211,7 @@ class reminderController extends Controller
     }
 
      public function oneUserReminder($id){
+        $permissions = permission::where('user_id', session('user_id'))->first();
         $user = user::where('id', $id)->get()->first();
         $reminder = Reminder::where('user_id', $id)->where(function($q) {
                          $q->where('status', 'viewed')
@@ -223,7 +224,7 @@ class reminderController extends Controller
         //                    ->orWhere('add_by', 'SuperAgent');
         //              })
         //              ->get();
-        return view('single-user-reminder', compact('reminder','user'));
+        return view('single-user-reminder', compact('reminder','user','permissions'));
     }
 
     public function remindersCount(){

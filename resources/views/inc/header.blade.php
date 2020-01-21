@@ -234,7 +234,7 @@
                        </li>
                    @endif
                    @if(@$permissions->coldcallingView==1) 
-                       <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('agentColdCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
+                       <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
                        </li>
                    @endif
                    @if(@$permissions->buildingView==1)        

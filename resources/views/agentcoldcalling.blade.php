@@ -94,12 +94,13 @@ label{
     border:2px solid #1976D2;
     margin:0px -2px;
     /*border-radius:10px;*/
+    border-radius:0px 10px 10px 0px;
 }
 .redirect_card_group .card:first-child .card-body,.redirect_card_group .card:first-child{
     border-radius:10px 0 0 10px;
 }
 .redirect_card_group .card:nth-child(2) .card-body,.redirect_card_group .card:nth-child(2){
-    border-radius:0px 10px 10px 0px;
+    border-radius:0px 0px 0px 0px;
 }
 .card .card-subtitle{
     font-size:16px;
@@ -229,7 +230,23 @@ label{
                     <h3 class="page_heading">Cold Calling</h3>
                     <!--redirecting buttons starts-->
                     <!--redirecting buttons starts-->
+                    
                     <div class="card-group redirect_card_group">
+                        <div class="card">
+                        <a href="{{url('agentColdCalling')}}?p=Dewa">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="m-b-0">
+                                            <img src="https://img.icons8.com/dusk/40/000000/skyscrapers.png">
+                                            <span class="card-subtitle">DEWA</span>
+                                            </h2>
+                                    <!--<h3 class="">64</h3>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                         <div class="card">
                         <a href="{{url('agentColdCalling')}}?p=Commercial">
                             <div class="card-body">
@@ -1021,235 +1038,166 @@ label{
                           <h4 class="m-b-0 text-white">Property Details</h4>
                                  </div>
                                  <div class="card-body">
-                                    <form action="{{url('addPropertyByAgent')}}" class="form-horizontal" method="GET" enctype="multipart/form-data" id="property" novalidate>
-                                       <div class="form-body">
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Unit No</label>
-                                                   <div class="col-md-9">
-                                                      <input required="" type="text" class="form-control" name="unit_no" value="">
-                                                      <!-- <small class="form-control-feedback"> This is inline help </small>  -->
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                             <div class="col-md-6">
-                                                <div class="form-group has-danger row">
-                                                   <label class="control-label text-right col-md-3">Building</label>
-                                                   <div class="col-md-8">
-                                                      <select class="form-control" required style="font-size: 12px;" name="building" id="insertBuilding">
-                                                          <option value="">Select option</option>
-                                                          @foreach($buildingss as $buildingall)
-                                                              <option value="{{$buildingall}}">{{$buildingall}}</option>
-                                                          @endforeach
-                                                      </select>
-                                                   </div>
-                                                    <div class="col-sm-1" style="padding-top: 8px;">
-                                          <i class="fa fa-plus add-building" class="btn btn-primary" data-toggle="modal" data-target="#buildingModal" style="font-size:22px;color:black" aria-hidden="true"></i>
-                                       </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                          <div class="row">
-                     <div class="col-md-6">
+                                    <form action="<?php if(isset($_GET['action'])){ echo url('updatePropertyByAgent'); }else{ echo url('AddpropertyAgent'); } ?>" class="form-horizontal" method="post" enctype='multipart/form-data' id="property">
+                     @csrf
+                     <input type="hidden" name="property_id" value="{{@$result[0]['id']}}">
+                     <div class="form-body">
+                        <div class="row">
+                           <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Dewa No</label>
+                                 <label class="control-label text-right col-md-3">Unit No</label>
                                  <div class="col-md-9">
                                     <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
                                     <!-- <small class="form-control-feedback"> This is inline help </small>  -->
                                  </div>
                               </div>
                            </div>
-                        <!--/span-->
-
-
-
-                        <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Bedroom</label>
-                                                   <div class="col-md-9">
-                                                      <select required style="font-size: 12px;" name="Bedroom" class="form-control">
-                                                         <option value=""></option>
-                                                         <option value="studio">studio</option>
-                                                         <option value="1">1</option>
-                                                         <option value="2">2</option>
-                                                         <option value="3">3</option>
-                                                         <option value="4">4</option>
-                                                         <option value="5">5</option>
-                                                         <option value="6">6</option>
-                                                         <option value="7">7</option>
-                                                         <option value="8">8</option>
-                                                         <option value="9">9</option>
-                                                         <option value="10">10</option>
-                                                         <option value="11">11</option>
-                                                         <option value="12">12</option>
-                                                      </select>
-                                                   </div>
-                                                </div>
-                                             </div>
-                        <!--/span-->
-                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Area</label>
-                                                   <div class="col-md-9">
-                                                      <input required="" type="text" name="area" class="form-control" value="">
-                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
-                                                   </div>
-                                                </div>
-                                             </div>
-
-                                             
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Washroom</label>
-                                                   <div class="col-md-9">
-                                                      <select name="Washroom" required class="form-control" style="font-size: 12px; ">
-                                                         <option value=""></option>
-                                                         <option value="1">1</option>
-                                                         <option value="1.5">1.5</option>
-                                                         <option value="2.5">2.5</option>
-                                                         <option value="3.5">3.5</option>
-                                                         <option value="4.5">4.5</option>
-                                                         <option value="5.5">5.5</option>
-                                                         <option value="6.5">6.5</option>
-                                                         <option value="7.5">7.5</option>
-                                                         <option value="8.5">8.5</option>
-                                                      </select>
-                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Conditions</label>
-                                                   <div class="col-md-9">
-                                                      <select name="Conditions" class="form-control" required style="font-size: 12px;">
-                                                         <option value=""></option>
-                                                         <option value="Furnished">Furnished</option>
-                                                         <option value="unfurnished">unfurnished</option>
-                                                         <option value="full Furnished">full Furnished</option>
-                                                         <option value="Semi Furnished">Semi Furnished</option>
-                                                      </select>
-                                                      <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Email</label>
-                                                   <div class="col-md-9">
-                                                      <input type="email" class="form-control" name="email[]" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                          </div>
-                                          <!--/row-->
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">LandLord</label>
-                                                   <div class="col-md-9">
-                                                      <input required="" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Access</label>
-                                                   <div class="col-md-9">
-                                                      <select class="form-control access" name="access" style="font-size: 12px;" required>
-                                                         <option value="">Select option</option>
-                                                         <option value="For Rent">For Rent</option>
-                                                         <option value="For Sale">For Sale</option>
-                                                         <option value="Upcoming">Upcoming</option>
-                                                         <option value="Do Not Caller">Do Not Call</option>
-                                                         <option value="Call back">Call back</option>
-                                                         <option value="Not answering">Not answering</option>
-                                                         <option value="Not Intrested">Not Intrested</option>
-                                                         <option value="Intrested">Intrested</option>
-                                                         <option value="Don't call">Don't call</option>
-                                                      </select>
-                                                      <div class="options" style="padding-top:20px;">
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Phone Number</label>
-                                                   <div class="col-md-9">
-                                                      <input type="text" required="" class="form-control" name="contact_no[]" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Price</label>
-                                                   <div class="col-md-9">
-                                                      <input required="" type="text" class="form-control" name="Price" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!--/span-->
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Area Sqft</label>
-                                                   <div class="col-md-9">
-                                                      <input required="" type="number" class="form-control" name="Area_Sqft" value="">
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-md-6">
-                                             <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Type</label>
-                                 <div class="col-md-9">
-                                    <select class="form-control access" name="access" style="font-size: 12px;" >
+                           <!--/span-->
+                           <div class="col-md-6">
+                              <div class="form-group has-danger row">
+                                 <label class="control-label text-right col-md-3">Building</label>
+                                 <div class="col-md-8" style="padding-left: 15px;">
+                                    <select required="" class="form-control" style="font-size: 12px;" name="building" id="insertBuilding">
                                        <option value="">Select option</option>
-                                       <option value="For Rent" <?php if(strtoupper(@$result[0]["DEWA"])==strtoupper("For Rent")){echo "selected";} ?>>DEWA</option>
-                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Ccmmercial")){echo "selected";} ?> value="For Sale">Ccmmercial</option>
-                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Residential")){echo "selected";} ?> value="Upcoming">Residential</option>
-        
+                                       @foreach($allBuildings as $building)
+                                       <option value="{{$building->building_name}}">{{$building->building_name}}</option>
+                                       @endforeach
+                                    </select>
+                                 </div>
+                                 <div class="col-sm-1" style="padding-top: 8px;">
+                                    <i class="fa fa-plus add-building" class="btn btn-primary" data-toggle="modal" data-target="#buildingModal" style="font-size:22px;color:black" aria-hidden="true"></i>
+                                 </div>
+                              </div>
+                           </div>
+                           <!--/span-->
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Dewa No</label>
+                                 <div class="col-md-9">
+                                    <input type="text" class="form-control" name="dewa_no" value="{{@$result[0]['dewa_no']}}">
+                                    <!-- <small class="form-control-feedback"> This is inline help </small>  -->
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Bedroom</label>
+                                 <div class="col-md-9">
+                                    <select style="font-size: 12px;" name="Bedroom" class="form-control">
+                                       <option value="{{@$result[0]['Bedroom']}}">{{@$result[0]['Bedroom']}}</option>
+                                       <option value="studio">studio</option>
+                                       <option value="1">1</option>
+                                       <option value="2">2</option>
+                                       <option value="3">3</option>
+                                       <option value="4">4</option>
+                                       <option value="5">5</option>
+                                       <option value="6">6</option>
+                                       <option value="7">7</option>
+                                       <option value="8">8</option>
+                                       <option value="9">9</option>
+                                       <option value="10">10</option>
+                                       <option value="11">11</option>
+                                       <option value="12">12</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                         </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Area</label>
+                                 <div class="col-md-9">
+                                    <input  type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
+                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Washroom</label>
+                                 <div class="col-md-9">
+                                    <select name="Washroom" class="form-control" style="font-size: 12px; " >
+                                       <option value="{{@$result[0]['Washroom']}}">{{@$result[0]['Washroom']}}</option>
+                                       <option value="1">1</option>
+                                       <option value="1.5">1.5</option>
+                                       <option value="2.5">2.5</option>
+                                       <option value="3.5">3.5</option>
+                                       <option value="4.5">4.5</option>
+                                       <option value="5.5">5.5</option>
+                                       <option value="6.5">6.5</option>
+                                       <option value="7.5">7.5</option>
+                                       <option value="8.5">8.5</option>
+                                    </select>
+                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
+                                 </div>
+                              </div>
+                           </div>
+                           <!--/span-->
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Conditions</label>
+                                 <div class="col-md-9">
+                                    <select name="Conditions"  class="form-control" style="font-size: 12px;">
+                                       <option value="{{@$result[0]['Conditions']}}">{{@$result[0]['Conditions']}}</option>
+                                       <option value="Full Furnished">Full Furnished</option>
+                                       <option value="Furnished">Furnished</option>
+                                       <option value="unfurnished">unFurnished</option>
+                                       <option value="Semi Furnished">Semi Furnished</option>
+                                       <option value="FULLY FITTED">FULLY FITTED</option>
+                                       <option value="SHELL AND CORE">SHELL AND CORE</option>
+                                    </select>
+                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Email</label>
+                                 <div class="col-md-9">
+                                    <?php $temp=explode(',', @$result[0]['email']); if(count($temp) > 1){ foreach ($temp as $value) {?>
+                                    <input  type="email" class="form-control" name="email[]" value="{{$value}}" style="margin-bottom: 1%">
+                                    <?php } }else { ?>
+                                    <input type="email" class="form-control" name="email[]" value="{{@$result[0]['email']}}">
+                                    <?php  } ?>
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">LandLord</label>
+                                 <div class="col-md-9">
+                                    <input  type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Access</label>
+                                 <div class="col-md-9">
+                                    <select class="form-control access" name="access" style="font-size: 12px;"> 
+                                       <option value="">Select option</option>
+                                       <option value="For Rent" <?php if(strtoupper(@$result[0]["access"])==strtoupper("For Rent")){echo "selected";} ?>>For Rent</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("For Sale")){echo "selected";} ?> value="For Sale">For Sale</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Upcoming")){echo "selected";} ?> value="Upcoming">Upcoming</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Do Not Caller")){echo "selected";} ?> value="Do Not Caller">Do Not Call</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Call back")){echo "selected";} ?> value="Call back">Call back</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Not answering")){echo "selected";} ?> value="Not answering">Not answering</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Not Interested")){echo "selected";} ?> value="Not Interested">Not Interested</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Intrested")){echo "selected";} ?> value="Intrested">Intrested</option>
+                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Don't call")){echo "selected";} ?> value="Don't call">Don't call</option>
                                     </select>
                                     <div class="options" style="padding-top:20px;">
                                        @if(strtoupper(@$result[0]["access"])==strtoupper("Upcoming"))
@@ -1257,9 +1205,9 @@ label{
                                        <div class="row">
                                           <input type="hidden" name="add_property_reminder_type" value="{{$reminders->reminder_type}}"> 
                                           <div class="col-sm-12">
-                                             <div class="form-group"> <input style="width:100%" type="datetime-local" value="{{$reminders->reminderDate($reminders->date_time)}}" class="form-control" name="add_property_date_time"> </div>
+                                             <div class="form-group"> <input  style="width:100%" type="datetime-local" value="{{$reminders->reminderDate($reminders->date_time)}}" class="form-control" name="add_property_date_time"> </div>
                                           </div>
-                                          <div class="col-sm-12"> <textarea class="form-control reminder_description"  value="" style="width:100%" rows="4" name="add_property_reminder_description" placeholder="Description">{{$reminders->description}}</textarea></div>
+                                          <div class="col-sm-12"> <textarea class="form-control reminder_description" value="" style="width:100%" rows="4" name="add_property_reminder_description" placeholder="Description">{{$reminders->description}}</textarea></div>
                                        </div>
                                        @endif
                                        @endif
@@ -1275,34 +1223,85 @@ label{
                                     </div>
                                  </div>
                               </div>
+                           </div>
+                           
+                           <!--/span-->
                         </div>
-                                             </div>
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-md-6">
-                                                <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Add Comment</label>
-                                                   <div class="col-md-9">
-                                                      <textarea class="form-control" name="comment" required cols="4" rows="6"></textarea>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!--/row-->
-                                          <div class="form-actions">
-                                             <div class="row">
-                                                <div class="col-md-1"> </div>
-                                                <div class="col-md-6">
-                                                   <div class="row">
-                                                      <div class="col-md-offset-3 col-md-9" style="    padding-left: 10%;">
-                                                         <button type="submit" name="add_property" class="btn btn-success submit">Submit</button>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </form>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Phone Number</label>
+                                 <div class="col-md-9">
+                                    <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
+                                    <input  type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
+                                    <?php } }else { ?>
+                                    <input  type="text"  class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
+                                    <?php  } ?>
+                                 </div>
+                              </div>
+                           </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Area Sqft</label>
+                                 <div class="col-md-9">
+                                    <input  type="number" class="form-control" name="Area_Sqft" value="{{@$result[0]['Area_Sqft']}}">
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           <!--/span-->
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Price</label>
+                                 <div class="col-md-9">
+                                    <input  type="number" class="form-control" name="Price" value="{{@$result[0]['Price']}}">
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Property Type</label>
+                                 <div class="col-md-9">
+                                    <select class="form-control" style="font-size:12px !important;" name="property_type">
+                                        <option value="">Please Select Type</option>
+                                        <option @if(@$result[0]['property_type'] == "Commercial") selected @endif value="Commercial">Commercial</option>
+                                        <option @if(@$result[0]['property_type'] == "residential") selected @endif value="residential">Residential</option>
+                                         <option @if(@$result[0]['property_type'] == "Dewa") selected @endif value="Dewa">Dewa</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                            
+                           <div class="col-md-6">
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Add Comment</label>
+                                 <div class="col-md-9">
+                                    <textarea class="form-control" name="comment" cols="4" rows="6">{{@$result[0]['comment']}}</textarea>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--/row-->
+                        <div class="form-actions">
+                           <div class="row">
+                              <div class="col-md-1"> </div>
+                              <div class="col-md-6">
+                                 <div class="row">
+                                    <div class="col-md-offset-3 col-md-9" style="    padding-left: 10%;">
+                                       <button type="submit" name="add_property" class="btn btn-success submit"><?php if(isset($_GET["action"])){echo "Update";}else{echo "Submit";}?></button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
                                  </div>
                               </div>
                            </div>

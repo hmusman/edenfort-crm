@@ -14,6 +14,7 @@ use App\Models\user;
 use App\Models\userFiles;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\permission;
 use Session;
 use Excel;
 use File;
@@ -365,6 +366,7 @@ public function addOwnerByAjax(Request $request){
         
     }
      public function coldCalling(Request $request){
+      $permissions = permission::where('user_id', session('user_id'))->first();
           $areas=coldcallingModel::distinct('area')->pluck('area');
           $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
           $agents=user::where(['role'=>3,"status"=>1])->orWhere(['role'=>1])->get();
@@ -403,7 +405,7 @@ public function addOwnerByAjax(Request $request){
                     $query->where("contact_no","LIKE",'%'.$request->contact.'%');
                 }
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
-                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss']));
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions']));
                 
 
   

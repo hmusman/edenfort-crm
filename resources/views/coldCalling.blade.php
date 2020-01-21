@@ -229,7 +229,7 @@
          <!--redirecting buttons starts-->
          <div class="card-group redirect_card_group">
             <div class="card">
-               <a href="#">
+               <a href="{{url('coldCalling')}}?p=Dewa">
                   <div class="card-body">
                      <div class="row">
                         <div class="col-12">
@@ -540,16 +540,40 @@
                                     </div>
                                  </div>
                               </div>
+                              @if(ucfirst(session('role'))==ucfirst('Admin'))
                               <div class="col-md-2">
                                  <div class="filter_btn_wrapper">
                                     <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                  </div>
                               </div>
                               <div class="col-md-1 ">
-                                 <div class="filter_btn_wrapper">
-                                    <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
+                                       <div class="filter_btn_wrapper">
+                                          <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
+                                       </div>
+                                    </div>
+                              @endif
+                              @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
+                              @if(@$permissions->coldCallingAssign==NULL)
+                                 <div class="col-md-3">
+                                    <div class="filter_btn_wrapper">
+                                       <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                    </div>
                                  </div>
-                              </div>
+                              @else
+                               <div class="col-md-2">
+                                    <div class="filter_btn_wrapper">
+                                       <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                    </div>
+                                 </div>
+                              @endif
+                                  @if(@$permissions->coldCallingAssign==1) 
+                                    <div class="col-md-1 ">
+                                       <div class="filter_btn_wrapper">
+                                          <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
+                                       </div>
+                                    </div>
+                                 @endif
+                              @endif
                            </div>
                         </form>
                      </div>
@@ -1013,16 +1037,12 @@
                         </div>
                         <!--/span-->
                      </div>
-
-
-
-
                      <div class="row">
                      <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Dewa No</label>
                                  <div class="col-md-9">
-                                    <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
+                                    <input type="text" class="form-control" name="dewa_no" value="{{@$result[0]['dewa_no']}}">
                                     <!-- <small class="form-control-feedback"> This is inline help </small>  -->
                                  </div>
                               </div>
@@ -1203,42 +1223,20 @@
                               </div>
                            </div>
                         </div>
+
                         <div class="col-md-6">
-                        <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Type</label>
+                              <div class="form-group row">
+                                 <label class="control-label text-right col-md-3">Property Type</label>
                                  <div class="col-md-9">
-                                    <select class="form-control access" name="access" style="font-size: 12px;" >
-                                       <option value="">Select option</option>
-                                       <option value="For Rent" <?php if(strtoupper(@$result[0]["DEWA"])==strtoupper("For Rent")){echo "selected";} ?>>DEWA</option>
-                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Ccmmercial")){echo "selected";} ?> value="For Sale">Ccmmercial</option>
-                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("Residential")){echo "selected";} ?> value="Upcoming">Residential</option>
-        
+                                    <select class="form-control" style="font-size:12px !important;" name="property_type">
+                                       <option value="">Please Select Type</option>
+                                       <option @if(@$result[0]['property_type'] == "Commercial") selected @endif value="Commercial">Commercial</option>
+                                       <option @if(@$result[0]['property_type'] == "residential") selected @endif value="residential">residential</option>
+                                       <option @if(@$result[0]['property_type'] == "dewa") selected @endif value="dewa">DEWA</option>
                                     </select>
-                                    <div class="options" style="padding-top:20px;">
-                                       @if(strtoupper(@$result[0]["access"])==strtoupper("Upcoming"))
-                                       @if(!is_null($reminders))
-                                       <div class="row">
-                                          <input type="hidden" name="add_property_reminder_type" value="{{$reminders->reminder_type}}"> 
-                                          <div class="col-sm-12">
-                                             <div class="form-group"> <input style="width:100%" type="datetime-local" value="{{$reminders->reminderDate($reminders->date_time)}}" class="form-control" name="add_property_date_time"> </div>
-                                          </div>
-                                          <div class="col-sm-12"> <textarea class="form-control reminder_description"  value="" style="width:100%" rows="4" name="add_property_reminder_description" placeholder="Description">{{$reminders->description}}</textarea></div>
-                                       </div>
-                                       @endif
-                                       @endif
-                                       @if(strtoupper(@$result[0]["access"])==strtoupper("For Sale"))
-                                       <select class="form-control sale_status valid" style="font-size:12px;margin-bottom: 20px;" name="sale_status" aria-invalid="false">
-                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Rented")){echo 'selected';}   ?>  value="Rented">Rented</option>
-                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Vacant")){echo 'selected';}   ?> value="Vacant">Vacant</option>
-                                          <option <?php if(strtoupper(@$result[0]["sale_status"])==strtoupper("Vacant on transfer")){echo 'selected';}   ?>  value="Vacant on transfer">Vacant on transfer</option>
-                                       </select>
-                                       <div class="form-group" style="margin-bottom: 20px;"><input type="date" value="{{@$result[0]["rented_date"]}}" name="rented_date" class="form-control rented_date"></div>
-                                       <div class="form-group"><input type="price" name="rented_price" value="{{@$result[0]["rented_price"]}}" placeholder="Rented Price" class="form-control rented_price"></div>
-                                       @endif
-                                    </div>
                                  </div>
                               </div>
-                        </div>
+                           </div>
                         </div>
                      </div>
 
@@ -1266,25 +1264,7 @@
                            </div>
                         </div>
                      </div>
-                  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  
+                  </div>   
                </form>
             </div>
          </div>

@@ -47,7 +47,8 @@
                             <th>Reminder Of</th>
                             <th>Property ID</th>
                             <th>Description</th>
-                            <th>Unit No.</th>
+                            <!-- <th>Unit No.</th> -->
+                            <th>Date&Time</th>
                             <th>Action</th>
 
                             
@@ -65,7 +66,8 @@
                           <td>{{$rem->reminder_of}} </td>
                           <td>{{$rem->property_id}}</td>
                           <td>{{$rem->description}}</td>
-                          <td>{{$rem->unit_no}}</td>
+                          <!-- <td>{{$rem->unit_no}}</td> -->
+                          <td>{{$rem->date_time}}</td>
                           <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
                             <a class="p-2 disable_reminder" href="{{url('delete-single-reminder')}}/{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a></td>
                         </tr>
