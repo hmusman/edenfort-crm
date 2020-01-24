@@ -102,10 +102,11 @@ class SupervisionController extends Controller
     $todayDate = new DateTime('today');
     $datetime = new DateTime('tomorrow');
     $reminders = Reminder::whereDate("date_time",$datetime->format('Y-m-d'))->orWhereDate("date_time",$todayDate->format('Y-m-d'))->get();
+    $remSummery = DB::table('reminders')->join('users', 'users.id','=','reminders.user_id')->select('property_id','user_name','reminder_of','reminder_type','date_time', 'description','reason')->where('reminders.status','disable')->whereDate('date_time','>',Carbon::now()->subDays(30))->get();
     $latestProperties = property::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
      return view('dashboard',compact(['contracts','users','properties','agents','owners','admins','buildings','leads','rent','sale','upcoming',
-                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','agentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads"]));
+                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','activity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery']));
     }
     public function Supervision(){
        $result_data=Supervision::all();

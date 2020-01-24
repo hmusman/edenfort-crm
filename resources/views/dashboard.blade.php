@@ -278,6 +278,54 @@
     </div>
 </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12 col-xlg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                      <h2 align="center">Last 30 Days Remindes</h2>
+                      <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active show" aria-expanded="true">
+                          <table id="myTable2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sno# </th>
+                                        <th>Agent Name</th>
+                                        <th>Reminder of</th>
+                                        <th>Reminder Type</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Reason</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @php  $counter = 1; @endphp
+                                @foreach($remSummery as $reminder)
+                                        <tr>
+                                          <td class="text-center;"> {{$counter++}}</td>  
+                                          <!-- <td class="text-center;">{{$reminder->property_id}} </td> -->
+                                          <td class="text-center;">@if(is_null(@$reminder->user_name)) ADMIN @else {{@$reminder->user_name}} @endif</td>
+                                          <td class="text-center;"> {{$reminder->reminder_of}}</td>  
+                                          <td class="text-center;">{{$reminder->reminder_type}} </td>
+                                          <td class="text-center;"> {{date("Y-m-d",strtotime($reminder->date_time))}}</td>
+                                          <td class="text-center;"> {{$reminder->description}}</td>
+                                          <td class="text-center;"> {{$reminder->reason}}</td>
+                                          <td class="text-center;"> <a target="_blank" href="{{url('get-reminder-record')}}?property_id={{$reminder->property_id}}&ref={{$reminder->reminder_of}}&active={{@$reminder->add_by}}" class="btn btn-success" style="font-size:12px;">visit</a></td>
+                                        </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <!--end of agent report-->
                 <div class="row">
                     <!-- Column -->

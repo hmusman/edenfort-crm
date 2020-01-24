@@ -78,7 +78,7 @@ class reminderController extends Controller
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'ADMIN','user_id'=>session('user_id')])->get();
                 echo count($result);
             }else if(session('role') == 'Agent'){
-                Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->update(['status'=>"disable"]);
+                Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->update(['status'=>"disable",'reason'=>input::get('name')]);
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
                 echo count($result);
             } else if(session('role') == 'SuperAgent'){
@@ -239,20 +239,26 @@ class reminderController extends Controller
         return json_decode(json_encode($remindersCount),true);
     }
 
-     public function deleteSingleReminder($id){
-        if(session('role') == 'Agent'){
-            Reminder::where('property_id',$id)->where(['add_by' => 'AGENT', 'status' => 'viewed' ,'user_id'=>session('user_id')])->update(["status"=>'disable']);
-        }else if(session('role') == 'Admin'){
-            Reminder::where('property_id',$id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable']);
-            // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+     public function deleteSingleReminder(){
+        // $reason=strip_tags(input::get('reason'));
+        if(input::get('property_id')){
+            if(session('role') == 'Agent'){
+                Reminder::where('property_id',$id)->where(['add_by' => 'AGENT', 'status' => 'viewed' ,'user_id'=>session('user_id')])->update(["status"=>'disable']);
+            }else if(session('role') == 'Admin'){
+                Reminder::where('property_id',input::get('property_id'))->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable', 'reason'=>input::get('name')]);
+                // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+            }
+            else if(session('role') == 'SuperAgent'){
+                Reminder::where('property_id',input::get('property_id'))->where(['user_id'=>session('user_id')])
+                ->where(function($q) {
+                             $q->where('add_by', 'ADMIN')
+                               ->orWhere('add_by', 'SuperAgent');
+                         })->update(["status"=>'disable', 'reason'=>input::get('name')]);
+            }
+            return "true";
+        }else{
+            return "false";
         }
-        else if(session('role') == 'SuperAgent'){
-            Reminder::where('property_id',$id)->where(['user_id'=>session('user_id')])
-            ->where(function($q) {
-                         $q->where('add_by', 'ADMIN')
-                           ->orWhere('add_by', 'SuperAgent');
-                     })->update(["status"=>'disable']);
-        }
-        return redirect()->back();
+        
     }
 }
