@@ -106,7 +106,7 @@ class SupervisionController extends Controller
     $latestProperties = property::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
      return view('dashboard',compact(['contracts','users','properties','agents','owners','admins','buildings','leads','rent','sale','upcoming',
-                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','activity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery']));
+                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','agentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery']));
     }
     public function Supervision(){
        $result_data=Supervision::all();
