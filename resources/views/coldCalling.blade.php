@@ -1231,7 +1231,7 @@
                                     <select class="form-control" style="font-size:12px !important;" name="property_type">
                                        <option value="">Please Select Type</option>
                                        <option @if(@$result[0]['property_type'] == "Commercial") selected @endif value="Commercial">Commercial</option>
-                                       <option @if(@$result[0]['property_type'] == "residential") selected @endif value="residential">residential</option>
+                                       <option @if(@$result[0]['property_type'] == "residential") selected @endif value="residential">Residential</option>
                                        <option @if(@$result[0]['property_type'] == "dewa") selected @endif value="dewa">DEWA</option>
                                     </select>
                                  </div>
