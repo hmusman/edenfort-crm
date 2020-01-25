@@ -230,10 +230,10 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         if(count($checkUnitNo) > 0){
             return back()->with('msg','<div class="alert alert-danger">Unit# already exit against this Building!</div>');
         }
-        $checkdewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
-        if(count($checkdewaNo) > 0){
-            return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
-        }
+        // $checkdewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
+        // if(count($checkdewaNo) > 0){
+        //     return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
+        // }
         if(input::get('sale_status')){
             $sale_status=input::get('sale_status');
             if(input::get('rented_date')){

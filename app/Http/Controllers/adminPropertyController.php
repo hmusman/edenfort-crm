@@ -178,9 +178,9 @@ EDEN FORT REAL ESTATE
             return back()->with('msg','<div class="alert alert-danger">Unit# already exit against this Building!</div>');
         }
         $checkDewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
-        if(count($checkDewaNo) > 0){
-            return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
-        }
+        // if(count($checkDewaNo) > 0){
+        //     return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
+        // }
         if(input::get('sale_status')){
             $sale_status=input::get('sale_status');
             if(input::get('rented_date')){
