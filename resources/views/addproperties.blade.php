@@ -139,6 +139,13 @@
    float:none !important;
    }
 </style>
+<style>
+    .modal-body .row .data{
+        padding:10px 0px;
+        border: 1px solid #ccc;
+        border-bottom: 0px;
+        }
+</style>
 @if(!session("user_id") || strtoupper(session('role'))!=(strtoupper('Admin')|| strtoupper('SuperAgent')))
 <script type="text/javascript">
    window.location='{{url("/")}}';
@@ -510,17 +517,45 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <div class="col-md-3 ">
+                                 @if(ucfirst(session('role'))==ucfirst('Admin'))
+                              <div class="col-md-2">
+                                 <div class="filter_btn_wrapper">
+                                    <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                 </div>
+                              </div>
+                              <div class="col-md-1 ">
+                                       <div class="filter_btn_wrapper">
+                                          <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
+                                       </div>
+                                    </div>
+                              @endif
+                              @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
+                              @if(@$permissions->propertyAssign==NULL)
+                                 <div class="col-md-3">
                                     <div class="filter_btn_wrapper">
                                        <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                     </div>
                                  </div>
+                              @else
+                               <div class="col-md-2">
+                                    <div class="filter_btn_wrapper">
+                                       <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                    </div>
+                                 </div>
+                              @endif
+                                  @if(@$permissions->propertyAssign==1) 
+                                    <div class="col-md-1 ">
+                                       <div class="filter_btn_wrapper">
+                                          <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
+                                       </div>
+                                    </div>
+                                 @endif
+                              @endif
                               </div>
                            </form>
                         </div>
                      </div>
                   </div>
-                  <form id="bulkForm" class="form-inline">
                      <table  class="table">
                         <thead>
                            <tr>
@@ -541,6 +576,38 @@
                               <th colspan="2">Action</th>
                            </tr>
                         </thead>
+                         <form id="bulkForm" class="form-inline">
+                            @csrf
+                           <!-- Assign Property -->
+                        <div class="modal fade" id="assignproperty" tabindex="-1" role="dialog" aria-labelledby="assignproperty" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="assignproperty">Assign Property</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row" style="font-size:13px;">
+                                            <div class="col-sm-1 text-center"></div>
+                                            <div class="col-sm-3 text-center data"><strong style="font-weight:900;color:black;">Select</strong></div>
+                                            <div class="col-sm-7 text-center data"><strong style="font-weight:900;color:black;">Agent Name</strong></div>
+                                             <div class="col-sm-1 text-center"></div>
+                                            @foreach($agentss as $key => $agent)
+                                               <div class="col-sm-1 text-center"></div>
+                                               <div class="col-sm-3 text-center data"><input class="agents_ids" type="checkbox" name="agents_ids[{{$key}}]" value="{{$agent->id}}"></div>
+                                               <div class="col-sm-7 text-center data">{{$agent->user_name}}</div>
+                                               <div class="col-sm-1 text-center"></div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="submit" id="assign-property-btn" class="btn btn-success">Submit</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         <input type='hidden' value='' name='status' class='status'>
                         <input type='hidden' value='' name='sending_email' class="sending_email">
                         <input type='hidden' value='' name='time_date' class='time_date_input'>
@@ -935,7 +1002,7 @@
                                     <select class="form-control" style="font-size:12px !important;" name="property_type">
                                        <option value="">Please Select Type</option>
                                        <option @if(@$result[0]['property_type'] == "Commercial") selected @endif value="Commercial">Commercial</option>
-                                       <option @if(@$result[0]['property_type'] == "residential") selected @endif value="residential">Residential</option>
+                                       <option @if(@$result[0]['property_type'] == "residential") selected @endif value="residential">residential</option>
                                        <option @if(@$result[0]['property_type'] == "dewa") selected @endif value="dewa">DEWA</option>
                                     </select>
                                  </div>
@@ -1002,6 +1069,32 @@
 @include('inc.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
+
+<script>
+    $(document).ready(function(){
+        $("#assign-single-property").click(function(){
+            if(!$('.ind_chk_box:checkbox:checked').val()){
+                toastr["error"]("please select Rows!");
+            }else{
+               $("#assignproperty").modal("show"); 
+            }
+            
+        });
+        $("#assign-property-btn").click(function(){
+            if(!$('.agents_ids:checkbox:checked').val()){
+                toastr["error"]("Please select Agent");
+            }else{
+               if($('.agents_ids:checkbox:checked').length == 2){
+                   toastr["error"]("Please select Only One Agent");
+                   return;
+               }
+               $("#bulkForm").attr("action","{{url('assign-singleproperty')}}");
+               $("#bulkForm").attr("method","POST");
+               $("#bulkForm").submit();
+            }
+        })
+    })
+</script>
 <!-- add building using ajax-->
 <script>
    $(document).ready(function(){
@@ -1282,6 +1375,7 @@
    //     }
    // });
 </script>
+
 <?php }  ?>
 <script type="text/javascript">
    var value='<?php echo @$Bedroom;  ?>';

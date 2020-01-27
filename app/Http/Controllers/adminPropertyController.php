@@ -19,6 +19,17 @@ use App\Models\Building;
 use App\Models\permission;
 class adminPropertyController extends Controller
 {
+    public function singlePersonProperty(Request $request){
+        $properties = $request->check_boxes;
+        $agents = $request->agents_ids;
+        $agents = array_values($agents);
+        $properties = array_values($properties);
+        foreach($properties as $key => $propertyID){
+            property::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
+        }
+        return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>Property Assigned Successfully!</div>");
+    }
+
     public function sentEmails(){
         $message='';
         $check_boxes=input::get('check_boxes');
@@ -101,6 +112,7 @@ EDEN FORT REAL ESTATE
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
                  $buildings=Building::all();
+                 $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
                 //  
                 $query = property::query();
                 if($request->p){
@@ -129,7 +141,7 @@ EDEN FORT REAL ESTATE
                     $query->where("unit_no",$request->unit_no);
                 }
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
-                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions']));
+                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss']));
     }
     public function setReminderForProperty(Request $r){
         try{
@@ -177,7 +189,7 @@ EDEN FORT REAL ESTATE
         if(count($checkUnitNo) > 0){
             return back()->with('msg','<div class="alert alert-danger">Unit# already exit against this Building!</div>');
         }
-        $checkDewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
+        // $checkDewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
         // if(count($checkDewaNo) > 0){
         //     return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
         // }

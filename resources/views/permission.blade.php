@@ -145,6 +145,7 @@
                                           <td  class="propertyAdd hide" >{{$user->permission['propertyAdd']}}</td>
                                           <td  class="propertyEdit hide" >{{$user->permission['propertyEdit']}}</td>
                                           <td  class="propertyDelete hide" >{{$user->permission['propertyDelete']}}</td>
+                                          <td  class="propertyAssign hide" >{{$user->permission['propertyAssign']}}</td>
                                           <td  class="propertyBulk hide" >{{$user->permission['propertyBulk']}}</td>
                                           <td  class="coldcallingView hide" >{{$user->permission['coldcallingView']}}</td>
                                           <td  class="coldcallingAdd hide" >{{$user->permission['coldcallingAdd']}}</td>
@@ -274,6 +275,16 @@
                               </div>
                               <div class="form-group col-sm-3">
                                  <input type="checkbox" class="form-control"   name="propertyDelete" id="propertyDelete" value="1" >
+                              </div>
+                           </div>
+                            <div class="row">
+                              <div class="form-group col-sm-2">
+                                 <p class="h4" align="center"> Assign</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="propertyAssign" id="propertyAssign" value="1" >
                               </div>
                            </div>
                            <div class="row">
@@ -534,6 +545,7 @@
       var propertyAdd=$row.find(".propertyAdd").text();
       var propertyEdit=$row.find(".propertyEdit").text();
       var propertyDelete=$row.find(".propertyDelete").text();
+       var propertyAssign=$row.find(".propertyAssign").text();
       var propertyBulk=$row.find(".propertyBulk").text();
       var coldcallingView=$row.find(".coldcallingView").text();
       var coldcallingAdd=$row.find(".coldcallingAdd").text();
@@ -596,6 +608,12 @@
       $("#propertyDelete").prop('checked', true);
     }else{
       $("#propertyDelete").prop('checked', false);
+    }
+
+    if( propertyAssign=='1'){
+      $("#propertyAssign").prop('checked', true);
+    }else{
+      $("#propertyAssign").prop('checked', false);
     }
    
     if( propertyBulk=='1'){
