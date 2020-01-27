@@ -122,6 +122,12 @@
    background-color:#1976d2;
    color:#fff;
    }
+
+   @media (min-width: 1380px){
+      .media-wrapper{
+         width: 53% !important;
+      }
+   }
 </style>
 <style>
     .modal-body .row .data{
