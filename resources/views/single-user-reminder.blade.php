@@ -160,7 +160,7 @@
 
             $.ajax({
                  type: 'get',
-                 url: '<?php ) ?>',
+                 url: 
                  data: $('#formadd').serialize(),
 
                  success: function(data){
