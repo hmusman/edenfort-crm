@@ -19,6 +19,9 @@ use Session;
 use Excel;
 use File;
 use Mail;
+use App\Exports\ColdCallingExport;
+// use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 class adminColdCallingController extends Controller
 {
     public function singlePersonColdCalling(Request $request){
@@ -407,9 +410,14 @@ public function addOwnerByAjax(Request $request){
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
                 return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions']));
                 
-
-  
-
         
     }  
+
+    public function coldcallignexport() 
+    {
+        return Excel::download(new ColdCallingExport, 'ColdCallings.xlsx');
+    //      return [
+    //     (new PropertiesExport)->withHeadings(),
+    // ];
+    }
 }
