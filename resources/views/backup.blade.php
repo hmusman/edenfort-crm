@@ -16,7 +16,7 @@
         <h3 class="page_heading">Backups</h3>
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <div class="d-flex">
                         <button class="btn btn-danger" id="create-new-backup-button"><b><span><i class="fa fa-plus" ></i></span> Create Backup</b></button>
                         <span id="loader" style="visibility: hidden;margin-left: 15px !important;"><img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" style="width: 35px;height: 35px;"></span>

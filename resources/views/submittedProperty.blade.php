@@ -171,7 +171,7 @@ label,input,textarea{
      </ul>
      
       
-                                <div class="card-body">
+                                <div class="card-body table-responsive">
 								
 								 <div class="col-lg-12">
                                  <div class="row">

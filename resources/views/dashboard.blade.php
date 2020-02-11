@@ -164,7 +164,7 @@
                         <li class="btn btn-primary"><a data-toggle="tab" href="#menu2">Latest Leads</a></li>
                       </ul>
                       <div class="tab-content">
-                        <div id="home" class="tab-pane fade in active show" aria-expanded="true">
+                        <div id="home" class="tab-pane fade in active show table-responsive"" aria-expanded="true">
                           <table id="myTable2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -240,7 +240,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="menu2" class="tab-pane fade">
+                        <div id="menu2" class="tab-pane fade ">
                           <table id="myTable3" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -287,7 +287,7 @@
                     <div class="col-sm-12">
                       <h2 align="center">Last 30 Days Remindes</h2>
                       <div class="tab-content">
-                        <div id="home" class="tab-pane fade in active show" aria-expanded="true">
+                        <div id="home" class="tab-pane fade in active show table-responsive" aria-expanded="true">
                           <table id="myTable2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>

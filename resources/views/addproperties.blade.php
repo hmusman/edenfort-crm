@@ -556,6 +556,7 @@
                         </div>
                      </div>
                   </div>
+                  <div class="table-responsive">
                      <table  class="table">
                         <thead>
                            <tr>
@@ -705,6 +706,7 @@
                         <!--   </tr>-->
                         <!--</tfoot>-->
                      </table>
+                  </div>
                   </form>
                   @if(!isset($_GET['action']))
                   @if(isset($_GET['type']))

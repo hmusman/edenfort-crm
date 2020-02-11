@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <style>
    .nav-link{
-   padding: 15px 0px !important;
+   padding: 0px 15px !important;
    text-align:center !important;
    color:black;
    }
@@ -272,7 +272,7 @@
          <form action="{{url('SupervisionBulkActions')}}" method="GET" style="width: 100%;">
             <div class="col-12 col-sm-12">
                <div class="card">
-                  <div class="card-body">
+                  <div class="card-body table-responsive">
                      <div class="d-flex">
                          
                          @if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent')) 

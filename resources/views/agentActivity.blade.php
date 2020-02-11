@@ -72,7 +72,7 @@
                     </div> -->
                         <div class="col-12 col-sm-12">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body table-responsive">
                                     <div class="d-flex">
                                         <!-- <a id="add-new-owne-link" style="cursor: pointer;"><span><i class="fa fa-plus"></i></span></a> -->
                                         <div class="form-group ml-auto">

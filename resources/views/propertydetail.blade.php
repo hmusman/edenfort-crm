@@ -37,7 +37,7 @@
     <div class="tab-pane active p-20 " >
       <h2 align="center">Property Detail</h2>
        <div class="form-body">
-           <div class="row">
+           <div class="row table-responsive">
             <table id="myTable" class="table table-bordered table-hover">
                     <thead>
                         <tr>

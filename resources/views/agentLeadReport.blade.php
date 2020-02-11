@@ -452,7 +452,7 @@ label,input,textarea{
                            </div></div>
                            </div></div>
                            
-                           
+                           <div  class="table-responsive">
                                     <table  class="table">
                                         <thead>
                                             <tr>
@@ -628,7 +628,7 @@ label,input,textarea{
                                          </form>
                                     
                                     </table>
-                                </div>
+                               
                                   <div class="ml-auto pr-3">
   
      {{$leads->appends(Request::only('type','priority','build','source','agent','contact'))->links()}}  
@@ -638,7 +638,7 @@ label,input,textarea{
                 
                
                 </div>
-                
+                 </div>
       
 <!--start of assign popup-->
 <div class="modal fade" id="assignLeadModal" role="dialog">

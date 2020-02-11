@@ -55,14 +55,14 @@
 
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <div class="d-flex">
                         <a style="cursor: pointer" id="add-new-owne-link"><span><i class="fa fa-plus"></i></span></a>
                         <div class="form-group ml-auto">
                             <input id="demo-input-search2" class="demo-input-search" type="text" placeholder="Search" autocomplete="off">
                         </div>
                     </div>
-                    <table id="demo-foo-pagination" class="table m-b-0 toggle-arrow-tiny demo-pagination" style="margin-top: 2%" data-page-size="5" >
+                    <table id="demo-foo-pagination " class="table m-b-0 toggle-arrow-tiny demo-pagination" style="margin-top: 2%" data-page-size="5" >
                         <thead>
                             <tr>
                                 <th data-toggle="true"> user Name </th>

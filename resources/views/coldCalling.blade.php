@@ -70,7 +70,7 @@
    }
    .access_select{
    font-size: 12px;
-   width: 15%;
+   /*width: 15%;*/
    font-weight: 500;
    position: absolute;
    right: 15px;
@@ -122,6 +122,11 @@
    background-color:#1976d2;
    color:#fff;
    }
+    .media-wrapper{
+         left: 0;
+         right: 0;
+         margin:auto;
+      }
 
    @media (min-width: 1380px){
       .media-wrapper{
@@ -134,6 +139,9 @@
         padding:10px 0px;
         border: 1px solid #ccc;
         border-bottom: 0px;
+        }
+        .hover_effect:hover{
+         background-color:#1976d2;
         }
 </style>
 <!--add building using ajax, if building not exist-->
@@ -286,34 +294,57 @@
             <!-- Column -->
          </div>
          <!--redirecting buttons ends-->
-         <div class="media-wrapper" style="position:absolute;width:70%;margin:0 10%;background-color: #fff;border: 2px solid #1976D2;border-radius:50px">
+         <div class="media-wrapper" style="position:absolute;width:70%;background-color: #fff;border: 2px solid #1976D2;border-radius:50px">
             <div class="row">
-               <div class="col-md-4" style="padding-right:0">
-                  <div class="whatsapp-wrapper text-center hw" style="border-right:2px solid #1976d2;border-radius: 50px 0px 0 50px;">
+               <div class="col-md-3 " style="padding-right:0">
+                  <div class="whatsapp-wrapper hover_effect text-center hw" style="border-right:2px solid #1976d2;border-radius: 50px 0px 0 50px;">
                      <i class="fa fa-refresh reset" aria-hidden="true" style="display:none;"></i>
                      <a target="_blank" class="whatsapp" style="float:none">
                      <span>Without Owner</span><br>
-                     <img src="https://png.pngtree.com/element_our/md/20180626/md_5b321ca97f12d.png" style="width:50px;">
+                     <img src="https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/13033639581530103328-256.png" style="width:40px;    margin-bottom: 5px;">
                      </a>
                   </div>
                   <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute"></span>
                </div>
-               <div class="col-md-4" style="padding-left:0;padding-right:0">
-                  <div class="whatsapp2-wrappper text-center hw" style="border-right:2px solid #1976d2">
+               <div class="col-md-3 " style="padding-left:0;padding-right:0">
+                  <div class="whatsapp2-wrappper hover_effect text-center hw" style="border-right:2px solid #1976d2">
                      <i class="fa fa-refresh reset-2" aria-hidden="true" style="display:none;"></i>
                      <a target="_blank" class="whatsapp_2" style="float:none">
                      <span>With Owner</span><br>
-                     <img src="https://png.pngtree.com/element_our/md/20180626/md_5b321ca97f12d.png" style="width:50px;">
+                     <img src="https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/13033639581530103328-256.png" style="width:40px;    margin-bottom: 5px;">
                      </a>
                   </div>
                   <span class="msg-status-2" style="font-size:10px;font-weight:500;position:absolute"></span>
                </div>
-               <div class="col-md-4" style="padding-left:0">
-                  <div class="gmail-wapper text-center hw" style="height:100%;border-radius: 0px 50px 50px 0px;">
+               <div class="col-md-3 " style="padding-left:0">
+                  <div class="gmail-wapper hover_effect text-center hw" style="height:100%;border-right: 2px solid #1976d2;">
                      <span class="gmail_span" style="margin-right:40px">Gmail</span><br>
                      <!-- gmail envelope starts-->
                      <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="width:40px;cursor:pointer;">
                      <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;">
+                     <!-- gmail envelope ends-->
+                  </div>
+               </div>
+                <div class="col-md-3 " style="padding-left:0">
+                  <div class="gmail-wapper hover_effect text-center hw" style="height:100%;    padding: 18px;border-radius: 0px 50px 50px 0px;">
+                    <select class="form-control access_select " name="accessStatus" style="margin-right:18px;font-size: 11px;font-weight: 500;width: 80%;">
+                  <option value="">Select Option</option>
+                  <option value="Call Back">Call Back</option>
+                  <option  value="Not answering">Not answering</option>
+                  <option  value="Not Interested">Not Interested</option>
+                  <option  value="Interested">Interested</option>
+                  <option  value="For Sale">For Sale</option>
+                  <option  value="ForSale/ForRent">ForSale/ForRent</option>
+                  <option value="upcoming">upcoming</option>
+                  <option  value="For Rent">For Rent</option>
+                  <option  value="Off Plan">Off Plan</option>
+                  <option  value="Investor">Investor</option>
+                  <option  value="Check Availability">Check Availability</option>
+                  <option  value="Switch Off">Switch Off</option>
+                  <option  value="Wrong Number">Wrong Number</option>
+                  <option  value="Commercial">Commercial</option>
+                  <option  value="Residential">Residential</option>
+               </select>
                      <!-- gmail envelope ends-->
                   </div>
                </div>
@@ -355,16 +386,17 @@
          <input id="model" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger"  style="visibility: hidden;" type="button" value="">
          <!--REMINDER MODEL END HERE-->
          
-         <div class="container" style="max-width: 100%;padding: 0px 20px">
-            <div class="row">
-               <div>
-                  <a id="add-new-owne-link" style="cursor: pointer;" class="mb-1">
+       
+         <div class="row" style="margin-top:30px">
+               <div class="col-md-6">
+                  <a id="add-new-owne-link" style="cursor: pointer;float: left;" class="mb-1">
                   <span>
                   <i class="fa fa-plus"></i>
                   </span>
                   </a>
                </div>
-               <select class="form-control access_select " name="accessStatus" style="font-size: 11px;font-weight: 500;">
+               <div class="col-md-6">
+               <!-- <select class="form-control access_select " name="accessStatus" style="font-size: 11px;font-weight: 500;">
                   <option value="">Select Option</option>
                   <option value="Call Back">Call Back</option>
                   <option  value="Not answering">Not answering</option>
@@ -381,9 +413,10 @@
                   <option  value="Wrong Number">Wrong Number</option>
                   <option  value="Commercial">Commercial</option>
                   <option  value="Residential">Residential</option>
-               </select>
+               </select> -->
             </div>
          </div>
+         
          <!--PROPERTY CATEGORIES TABS START FROM HERE-->
          <ul class="nav nav-tabs ">
             <li class="nav-item">
@@ -586,6 +619,8 @@
                   </div>
                </div>
                <!--COLDCALLING FILTERS AND SEARCH END HERE--> 
+               <div class="table-responsive">
+
                <table id="" class="table">
                   <thead>
                      <tr>
@@ -977,6 +1012,7 @@
                      @endif
                   </form>
                </table>
+        
             </div>
             <div class="ml-auto pr-3">
                @if(isset($_GET['p']))

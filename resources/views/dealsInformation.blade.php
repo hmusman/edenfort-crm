@@ -418,6 +418,7 @@
                      </div>
                   </div>
                   <!--end of add deal-->
+                  <div class="table-responsive">
                   <table id="demo-foo-pagination" class="table m-b-0 toggle-arrow-tiny demo-pagination">
                      <thead>
                         <tr>
@@ -524,7 +525,9 @@
                             </tr>
                         </tfoot>
                   </table>
+
                   {{$deals->appends(Request::only('start_date','end_date','agent'))->links()}}
+                    </div>
                </div>
             </div>
          </div>

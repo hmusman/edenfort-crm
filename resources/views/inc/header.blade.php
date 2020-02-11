@@ -59,8 +59,9 @@
          .sidebar-nav ul li a{
          padding:0px 10px;
          }
+
          .scroll-sidebar{
-         padding:15px;
+         padding:15px 0px 0px 0px;
          }
          .sidebar-nav ul li ul{
          top:45px;
@@ -68,12 +69,21 @@
          .sidebar-nav #sidebarnav>li>ul{
          text-align:start;
          }
+         .hide-menu{
+          color: #1976d2;
+         }
+         @media (min-width: 320px) and (max-width: 768px) {
+
+         .scroll-sidebar {
+    padding: 69px 0px 0px 0px !important;
+}
+}
       </style>
    </head>
    <body class=" card-no-border logo-center">
       <div id="main-wrapper" >
       <header class="topbar"  >
-         <nav class="navbar  navbar navbar-fixed-top top-navbar navbar-expand-md navbar-light" style="
+         <nav class="navbar  navbar  top-navbar navbar-expand-md navbar-light" style="
             height: 20px !important; ">
             <div class="navbar-header">
                <a class="navbar-brand" href="{{url('/')}}">
@@ -85,7 +95,8 @@
                <li style="position: absolute;right: 0px;top: 5px;">
                   <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{url('public/assets/images/users/dumy.jpg'
                      )}}" alt="user" class="profile-pic" />
-                  </a>     
+                  </a> 
+
                   <div class="dropdown-menu dropdown-menu-right scale-up">
                      <ul class="dropdown-user">
                         <li>
@@ -106,155 +117,180 @@
                      </ul>
                   </div>
                </li>
+
             </ul>
          </nav>
+           
       </header>
-      @if(ucfirst(session('role'))!=ucfirst('owner'))  
+       @if(ucfirst(session('role'))!=ucfirst('owner'))  
       <div class="scroll-sidebar row" >
-         <nav class="sidebar-nav " style="background: white !important; float: none;
-            margin: 0 auto; ">
-            <ul id="sidebarnav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sidebar-nav "  style="background: white !important; float: none;  margin: 0 auto;width: 100%;padding: 10px; ">
+
+                <a class="navbar-brand" href="#" style="visibility: hidden;">EDENFORD</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul id="sidebarnav"  class="navbar-nav mr-auto">
                @if(ucfirst(session('role'))==ucfirst('Agent'))        
                     
-                        <li> <a class="has-arrow waves-effect waves-dark" href="{{url('/agentdashboard')}}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
-                       </li>
-                    
+                   <li class="nav-item"> 
+                      <a class="nav-link nav-link" href="{{url('/agentdashboard')}}" aria-expanded="false">
+                          <i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span>
+                        </a>
+                  </li>
                     @if(@$permissions->propertyView==1)        
-                        <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Properties</span></a>
-                      <ul aria-expanded="false" class="collapse" style="margin-top:-23px;">
-                         <li><a href="{{url('allAddedProperties')}}">
-                            Registrations</a>
-                         </li>
-                         <li><a href="{{url('allAddedProperties')}}?type=For Sale">Sale</a></li>
-                         <li><a href="{{url('allAddedProperties')}}?type=For Rent">Rent</a></li>
-                         <li><a href="{{url('allAddedProperties')}}?type=upcoming">Upcoming</a></li>
-                      </ul>
-                    </li>
+                       <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Properties</span>
+                      </a> 
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{url('allAddedProperties')}}">
+                                        Registrations</a>
+                      <a class="dropdown-item" href="{{url('allAddedProperties')}}?type=For Sale">Sale</a>
+                      <a   class="dropdown-item"  href="{{url('allAddedProperties')}}?type=For Rent">Rent</a>
+                      <a class="dropdown-item"href="{{url('allAddedProperties')}}?type=upcoming">Upcoming
+                      </a>
+                    </div>
+
+                    </li> 
                     @endif
                    @if(@$permissions->buildingView==1)        
-                   <li> <a class="has-arrow waves-effect waves-dark" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
+                      <li class="nav-item">  <a  class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
                    </li>
                    @endif
                    @if(@$permissions->coldcallingView==1) 
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('agentColdCalling')}}" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Cold Calling</span></a>
+                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('agentColdCalling')}}" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Cold Calling</span></a>
                    </li>
                    @endif
                    @if(@$permissions->leadView==1) 
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/leads')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Leads</span></a>
+                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/leads')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Leads</span></a>
                    </li>
                    @endif
                    @if(@$permissions->supervisionView==1)
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
+                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
                    </li>
                    @endif
                    @if(@$permissions->dealView==1) 
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/dealsInfo')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Deals</span></a>
+                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/dealsInfo')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Deals</span></a>
                    </li>
                    @endif
                    @if(@\App\Models\permission::permissions()->loanView == 1) 
-                        <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
+                        <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
                         </li>
                     @endif
                @elseif(ucfirst(session('role'))==ucfirst('admin'))          
-                   <li> <a class="has-arrow waves-effect waves-dark" href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><br><span class="hide-menu">Dashboard</span></a>
+                   <li class="nav-item"> <a class="nav-link nav-link" href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><br><span class="hide-menu">Dashboard</span></a>
                    </li>
-                   <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Properties</span></a>
-                      <ul aria-expanded="false" class="collapse">
-                         <li><a href="{{url('property')}}">
-                            Registrations</a>
-                         </li>
-                         <li><a href="{{url('property')}}?type=For Rent">Rent</a></li>
-                         <li><a href="{{url('property')}}?type=For Sale">Sale</a></li>
-                         <li><a href="{{url('property')}}?type=upcoming">Upcoming</a></li>
-                      </ul>
+                   <li class="nav-item dropdown">
+                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Properties</span></a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item"href="{{url('property')}}">
+                                        Registrations</a>
+                      <a class="dropdown-item" href="{{url('property')}}?type=For Rent">Rent</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{url('property')}}?type=For Sale">Sale</a>
+                      <a class="dropdown-item" href="{{url('property')}}?type=upcoming">Upcoming</a>
+                  </div>
                    </li>
-                   <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-window-open"></i><br><span class="hide-menu">Add & Assign</span></a>
-                      <ul aria-expanded="false" class="collapse" style="margin-top:5px;">
-                         <li><a href="{{url('assignAgent')}}">Assign Coldcalling</a></li>
-                         <li><a href="{{url('buildings')}}">Building</a></li>
-                      </ul>
+
+                  <li class="nav-item dropdown">
+                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-window-open"></i><br><span class="hide-menu">Add & Assign</span></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{url('assignAgent')}}">Assign Coldcalling</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" <a href="{{url('buildings')}}">Building</a>
+                  </div>
                    </li>
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><br><span class="hide-menu">Cold Calling</span></a>
+
+
+                   <li class="three-column"> <a class="nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><br><span class="hide-menu">Cold Calling</span></a>
                    </li>
                @endif
                @if(ucfirst(session('role'))==ucfirst('admin'))
-                   <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Users</span></a>
-                      <ul aria-expanded="false" class="collapse">
-                         <li><a href="{{url('admins')}}">Users</a></li>
-                         <li><a href="{{url('AgentActivity')}}?type=For Rent">Agent Activities</a></li>
-                      </ul>
+                   <li class="nav-item dropdown">
+                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Users</span></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{url('admins')}}">Users</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{url('AgentActivity')}}?type=For Rent">Agent Activities</a>
+                        </div>
                    </li>
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><br><span class="hide-menu">Supervisions</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><br><span class="hide-menu">Supervisions</span></a>
                    </li>
-                   <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Deals</span></a>
-                      <ul aria-expanded="false" class="collapse">
-                         <li><a href="{{url('dealsInfo')}}">Deals</a></li>
-                         <li><a href="{{url('get-months-deals')}}?type=For Rent">Recent Deals</a></li>
-                      </ul>
+
+
+                   <li class="nav-item dropdown">
+                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Deals</span></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"  href="{{url('dealsInfo')}}">Deals</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{url('get-months-deals')}}?type=For Rent">Recent Deals</a>
+                        </div>
                    </li>
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><br><span class="hide-menu">Leads</span></a>
+
+                   <li class="three-column"> <a class="nav-link" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><br><span class="hide-menu">Leads</span></a>
                    </li>
                    </li>
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/loans')}}" aria-expanded="false"><i class="mdi mdi-coin"></i><br><span class="hide-menu">Loans</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="mdi mdi-coin"></i><br><span class="hide-menu">Loans</span></a>
                    </li>
-                   <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Setup</span></a>
-                      <ul aria-expanded="false" class="collapse">
-                         <li><a href="{{url('submittedProperties')}}">Requests</a></li>
-                         <li><a href="{{url('permission')}}?type=For Rent">Permission</a></li>
-                         <li><a href="{{url('months')}}?type=For Rent">Months</a></li>
-                         <li><a href="{{url('email-templates')}}?type=For Rent">Email Templates</a></li>
-                      </ul>
+
+                   <li class="nav-item dropdown">
+
+                      <a class="nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Setup</span></a>
+
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item"  href="{{url('submittedProperties')}}">Requests</a>
+                      <a class="dropdown-item" href="{{url('permission')}}?type=For Rent">Permission</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{url('months')}}?type=For Rent">Months</a>
+                      <a class="dropdown-item"  href="{{url('email-templates')}}?type=For Rent">Email Templates</a>
+                    </div>
                    </li>
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/backup')}}" aria-expanded="false"><i class="mdi mdi-disk"></i><br><span class="hide-menu">Backups</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/backup')}}" aria-expanded="false"><i class="mdi mdi-disk"></i><br><span class="hide-menu">Backups</span></a>
                    </li>
-                   <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('direct-pdf-report')}}" aria-expanded="false"><i style="padding-bottom: 5px;padding-top: 8px;font-size: 15px;font-weight: bold;" class="fa fa-file-pdf-o"></i><br><span class="hide-menu">Direct Report</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('direct-pdf-report')}}" aria-expanded="false"><i style="padding-bottom: 5px;padding-top: 8px;font-size: 15px;font-weight: bold;" class="fa fa-file-pdf-o"></i><br><span class="hide-menu">Direct Report</span></a>
                    </li>
                @endif
                <!--superAgent-->
                @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
-                       <li> <a class="has-arrow waves-effect waves-dark" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+                       <li class="nav-item" > <a class="nav-link nav-link" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
                        </li>
                    @if(@$permissions->propertyView==1)               
-                       <li >
-                          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
-                          <ul aria-expanded="false" class="collapse" style="margin-top:-23px;">
-                             <li><a href="{{url('property')}}">
-                                Registrations</a>
-                             </li>
-                             <li><a href="{{url('property')}}?type=For Rent">Rent</a></li>
-                             <li><a href="{{url('property')}}?type=For Sale">Sale</a></li>
-                             <li><a href="{{url('property')}}?type=upcoming">Upcoming</a></li>
-                          </ul>
-                       </li>
+                     <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url('property')}}">
+                                                      Registrations</a>
+                                <a class="dropdown-item" href="{{url('property')}}?type=For Rent">Rent</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{url('property')}}?type=For Sale">Sale</a>
+                                   <a class="dropdown-item"href="{{url('property')}}?type=upcoming">Upcoming</a>
+                           </div>
+                      </li>
                    @endif
                    @if(@$permissions->coldcallingView==1) 
-                       <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
+                       <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
                        </li>
                    @endif
                    @if(@$permissions->buildingView==1)        
-                       <li> <a class="has-arrow waves-effect waves-dark" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
+                       <li class="nav-item" > <a class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
                        </li>
                    @endif
                    @if(@$permissions->supervisionView==1)
-                       <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
+                       <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
                        </li>
                    @endif
                     @if(@$permissions->dealView==1) 
-                        <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/dealsInfo')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Deals</span></a>
+                        <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('/dealsInfo')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Deals</span></a>
                         </li>
                     @endif
                     @if(@$permissions->leadView==1) 
-                       <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Leads</span></a>
+                       <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Leads</span></a>
                        </li>
                     @endif
                     @if(@\App\Models\permission::permissions()->loanView == 1)
-                        <li class="three-column"> <a class="has-arrow waves-effect waves-dark" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
+                        <li class="three-column nav-item"> <a class="nav-link nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
                         </li>
                     @endif
                @endif
@@ -266,6 +302,7 @@
          <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><span class="badge notification_counter">0</span><i class="fa fa-bell text-white"></i></button>
       </div>
       @endif
+   
       <div class="modal fade" id="exampleModalPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
