@@ -17,6 +17,9 @@ use App\Models\role;
 use App\Models\Reminder;
 use App\Models\Building;
 use App\Models\permission;
+use App\Exports\PropertiesExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 class adminPropertyController extends Controller
 {
     public function singlePersonProperty(Request $request){
@@ -366,4 +369,13 @@ EDEN FORT REAL ESTATE
         }
         return view('propertydetail', compact('data'));
     }
+
+    public function propertiesexport() 
+    {
+        return Excel::download(new PropertiesExport, 'properties.xlsx');
+    //      return [
+    //     (new PropertiesExport)->withHeadings(),
+    // ];
+    }
+
 }

@@ -145,6 +145,16 @@
         border: 1px solid #ccc;
         border-bottom: 0px;
         }
+   .export{
+       float: right;
+       margin-top: -49px;
+       margin-right: -75px;
+       background-color: #1976D2;
+       color: #fff;
+       border-radius: 20px;
+       min-height: 38px;
+       display: initial;
+   }
 </style>
 @if(!session("user_id") || strtoupper(session('role'))!=(strtoupper('Admin')|| strtoupper('SuperAgent')))
 <script type="text/javascript">
@@ -339,6 +349,11 @@
                   </div>
                </div>
             </div>
+            <form action="{{url('propertiesexport')}}" method="get" accept-charset="utf-8">
+               @csrf
+               <button class="export btn" type="submit">Export CSV</button>
+            </form>
+               
          </div>
          <form action="{{url('PropertyBulkActions')}}" method="GET" style="width: 100%;">
             <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">

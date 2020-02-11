@@ -8,6 +8,10 @@ Route::post('assign-singleproperty','adminPropertyController@singlePersonPropert
 Route::get('direct-pdf-report', 'directPdfReportController@index');
 Route::post('direct-pdf-report', 'directPdfReportController@generate');
 
+//Excel report
+Route::get('propertiesexport', 'adminPropertyController@propertiesexport')->name('export_properties');
+Route::get('coldcallignexport', 'adminColdCallingController@coldcallignexport')->name('export_coldcallings');
+
 
 Route::get('backup', 'BackupController@index');
 Route::get('backup/create', 'BackupController@create');
