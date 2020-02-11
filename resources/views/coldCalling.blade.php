@@ -132,6 +132,16 @@
       .media-wrapper{
          width: 53% !important;
       }
+      .export{
+           float: right !important;
+    margin-top: -55px !important;
+    margin-right: 28px !important;
+    background-color: #1976D2 !important;
+    color: #fff !important;
+    border-radius: 20px !important;
+    min-height: 35px !important;
+    display: initial !important;
+   }
    }
 </style>
 <style>
@@ -140,9 +150,22 @@
         border: 1px solid #ccc;
         border-bottom: 0px;
         }
+<<<<<<< HEAD
         .hover_effect:hover{
          background-color:#1976d2;
         }
+=======
+   .export{
+       float: right;
+       margin-top: -19px;
+       margin-right: -17px;
+       background-color: #1976D2;
+       color: #fff;
+       border-radius: 20px;
+       min-height: 32px;
+       display: initial;
+   }
+>>>>>>> 9173b5629c3841554c248e926628d35112ce4825
 </style>
 <!--add building using ajax, if building not exist-->
 <div class="modal fade" id="buildingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -415,6 +438,9 @@
                   <option  value="Residential">Residential</option>
                </select> -->
             </div>
+            <form action="{{url('coldcallignexport')}}" method="get" accept-charset="utf-8">
+            <button class="btn export" type="submit">Export CSV</button>
+            </form>
          </div>
          
          <!--PROPERTY CATEGORIES TABS START FROM HERE-->
