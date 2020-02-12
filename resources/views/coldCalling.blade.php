@@ -132,16 +132,13 @@
       .media-wrapper{
          width: 53% !important;
       }
-      .export{
-           float: right !important;
-    margin-top: -55px !important;
-    margin-right: 28px !important;
-    background-color: #1976D2 !important;
-    color: #fff !important;
-    border-radius: 20px !important;
-    min-height: 35px !important;
-    display: initial !important;
+     
    }
+   @media (min-width: 680px){
+      .media-wrapper{
+         width: 53% !important;
+      }
+     
    }
 </style>
 <style>
@@ -150,22 +147,67 @@
         border: 1px solid #ccc;
         border-bottom: 0px;
         }
-<<<<<<< HEAD
         .hover_effect:hover{
          background-color:#1976d2;
         }
-=======
    .export{
        float: right;
-       margin-top: -19px;
-       margin-right: -17px;
+       margin-top: -55px;
+       margin-right: -100px;
        background-color: #1976D2;
        color: #fff;
        border-radius: 20px;
        min-height: 32px;
        display: initial;
    }
->>>>>>> 9173b5629c3841554c248e926628d35112ce4825
+   @media only screen and (max-width: 600px) {
+   .nav-tabs{
+      width: 100%;
+   }
+   .export{
+    float: right;
+    margin-top: -55px ;
+    margin-right: -27px !important;
+    background-color: #1976D2;
+    color: #fff;
+    border-radius: 20px;
+    min-height: 38px;
+    display: initial;
+}
+#add-new-owne-link {
+    padding: 17px 22px !important;
+    border-radius: 100% !important;
+    position: relative;
+    top: 230px;
+    right: -58px;
+    float: none !important;
+}
+.whatsapp-wrapper{
+       border: 2px solid #1976d2 !important;
+    border-radius: 50px 50px 50px 50px !important;
+    width: 95%;
+}
+.whatsapp2-wrappper{
+       border: 2px solid #1976d2 !important;
+    border-radius: 50px 50px 50px 50px !important;
+    width: 92%;
+    margin-left: 13px;
+}
+.gmail-wapper{
+   border: 2px solid #1976d2 !important;
+    height: 114% !important;
+    width: 96%;
+    margin-left: 10px;
+    border-radius: 50px 50px 50px 50px !important;
+}
+.media-wrapper{
+   width: 70% !important;
+    margin: auto !important;
+    background-color: #dfdddd00 !important;
+    border: none !important;
+    border-radius: 50px !important;
+}
+}
 </style>
 <!--add building using ajax, if building not exist-->
 <div class="modal fade" id="buildingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -317,40 +359,54 @@
             <!-- Column -->
          </div>
          <!--redirecting buttons ends-->
-         <div class="media-wrapper" style="position:absolute;width:70%;background-color: #fff;border: 2px solid #1976D2;border-radius:50px">
-            <div class="row">
-               <div class="col-md-3 " style="padding-right:0">
-                  <div class="whatsapp-wrapper hover_effect text-center hw" style="border-right:2px solid #1976d2;border-radius: 50px 0px 0 50px;">
-                     <i class="fa fa-refresh reset" aria-hidden="true" style="display:none;"></i>
-                     <a target="_blank" class="whatsapp" style="float:none">
-                     <span>Without Owner</span><br>
-                     <img src="https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/13033639581530103328-256.png" style="width:40px;    margin-bottom: 5px;">
-                     </a>
+         <div class="container">
+            @if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
+            @if(@$permissions->propertyAdd==1)
+            <a id="add-new-owne-link" style="cursor: pointer; float: left;
+    margin-left: -75px;" class="mb-1"><span><i class="fa fa-plus"></i></span></a>
+            @endif
+            @else
+            <a id="add-new-owne-link" style="cursor: pointer; float: left;
+    margin-left: -75px;" class="mb-1"><span><i class="fa fa-plus"></i></span></a>
+            @endif
+            <div class="media-wrapper" style="width:70%;margin:auto;background-color: #fff;border: 2px solid #1976D2;border-radius:50px">
+               <div class="row">
+                  <div class="col-md-4" style="padding-right:0">
+                     <div class="whatsapp-wrapper text-center hw" style="border-right:2px solid #1976d2;border-radius: 50px 0px 0 50px;">
+                        <i class="fa fa-refresh reset" aria-hidden="true" style="display:none;"></i>
+                        <a target="_blank"  class="whatsapp" style="float:none">
+                        <span>Without Owner</span><br>
+                        <img src="https://png.pngtree.com/element_our/md/20180626/md_5b321ca97f12d.png" style="width:50px;"/>
+                        </a>
+                     </div>
+                     <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute"></span>
                   </div>
-                  <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute"></span>
-               </div>
-               <div class="col-md-3 " style="padding-left:0;padding-right:0">
-                  <div class="whatsapp2-wrappper hover_effect text-center hw" style="border-right:2px solid #1976d2">
-                     <i class="fa fa-refresh reset-2" aria-hidden="true" style="display:none;"></i>
-                     <a target="_blank" class="whatsapp_2" style="float:none">
-                     <span>With Owner</span><br>
-                     <img src="https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/13033639581530103328-256.png" style="width:40px;    margin-bottom: 5px;">
-                     </a>
+                  <div class="col-md-4" style="padding-left:0;padding-right:0">
+                     <div class="whatsapp2-wrappper text-center hw" style="border-right:2px solid #1976d2">
+                        <i class="fa fa-refresh reset-2" aria-hidden="true" style="display:none;"></i>
+                        <a target="_blank"  class="whatsapp_2" style="float:none">
+                        <span>With Owner</span><br>
+                        <img src="https://png.pngtree.com/element_our/md/20180626/md_5b321ca97f12d.png" style="width:50px;"/>
+                        </a>
+                     </div>
+                     <span class="msg-status-2" style="font-size:10px;font-weight:500;position:absolute"></span>
                   </div>
-                  <span class="msg-status-2" style="font-size:10px;font-weight:500;position:absolute"></span>
-               </div>
-               <div class="col-md-3 " style="padding-left:0">
-                  <div class="gmail-wapper hover_effect text-center hw" style="height:100%;border-right: 2px solid #1976d2;">
-                     <span class="gmail_span" style="margin-right:40px">Gmail</span><br>
-                     <!-- gmail envelope starts-->
-                     <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="width:40px;cursor:pointer;">
-                     <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;">
-                     <!-- gmail envelope ends-->
+                  <div class="col-md-4" style="padding-left:0">
+                     <div class="gmail-wapper text-center hw" style="height:100%;border-radius: 0px 50px 50px 0px;">
+                        <span class="gmail_span" style="margin-right:40px">Gmail</span><br>
+                        <!-- gmail envelope starts-->
+                        <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="width:40px;cursor:pointer;"/>
+                        <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;"/>
+                        <!-- gmail envelope ends-->
+                     </div>
                   </div>
                </div>
-                <div class="col-md-3 " style="padding-left:0">
-                  <div class="gmail-wapper hover_effect text-center hw" style="height:100%;    padding: 18px;border-radius: 0px 50px 50px 0px;">
-                    <select class="form-control access_select " name="accessStatus" style="margin-right:18px;font-size: 11px;font-weight: 500;width: 80%;">
+            </div>
+            <div class="col-md-3 " style="padding-left:0">
+                  <div class="text-center hw" style="height:100%;    padding: 18px;border-radius: 0px 50px 50px 0px;">
+                    <select class="form-control access_select " name="accessStatus" style="margin-right: -344%;
+    margin-top: -78px;
+    width: 80%;">
                   <option value="">Select Option</option>
                   <option value="Call Back">Call Back</option>
                   <option  value="Not answering">Not answering</option>
@@ -371,80 +427,53 @@
                      <!-- gmail envelope ends-->
                   </div>
                </div>
-            </div>
+            <form class="export_form" action="{{url('coldcallingexport')}}" method="get" accept-charset="utf-8">
+               @csrf
+               <button class="export btn" type="submit">Export CSV</button>
+            </form>
+               
          </div>
          <!--REMINDER MODEL START FROM HERE-->
-         <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-sm">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <h4 class="modal-title" id="mySmallModalLabel">Set Remider</h4>
-                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  </div>
-                  <div class="modal-body">
-                     <div class="container">
-                        <div class="row">
-                           <div class='col-sm-12'>
-                              <div class="form-group">
-                                 <input type="datetime-local" class="form-control date-time" placeholder="set min date" id="min-date"> 
-                                 <span class="date_time_error" style="font-size: 11px;font-weight: 500;color: red;"></span>
+         <form action="{{url('PropertyBulkActions')}}" method="GET" style="width: 100%;">
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+               <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h4 class="modal-title" id="mySmallModalLabel">Set Remider</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                     </div>
+                     <div class="modal-body">
+                        <div class="container">
+                           <div class="row">
+                              <div class='col-sm-12'>
+                                 <div class="form-group">
+                                    <input type="datetime-local" class="form-control datetime" id="min-date"> 
+                                    <span class="date_time_error" style="font-size: 11px;font-weight: 500;color: red;"></span>
+                                 </div>
                               </div>
-                           </div>
-                           <div class="col-sm-12">
-                              <textarea class="form-control reminder_description" rows="4" class="" name="reminder_description" placeholder="Description"></textarea>
-                              <span class="reminder_description-error" style="font-size: 11px;font-weight: 500;color: red;"></span>
-                           </div>
-                           <div class="col-sm-12" style="text-align: end">
-                              <div class="form-group" style="padding-top: 6%;">
-                                 <input type="button" value="OK" class="reminder btn " >
-                                 <input type="button" value="OK" class="btn update-status-by-row" style="display:none" >
+                              <div class="col-sm-12">
+                                 <textarea class="form-control reminder_description" rows="4" class="" name="reminder_description" placeholder="Description"></textarea>
+                                 <span class="reminder_description-error" style="font-size: 11px;font-weight: 500;color: red;"></span>
+                              </div>
+                              <div class="col-sm-12" style="text-align: end">
+                                 <div class="form-group" style="padding-top: 6%;">
+                                    <input type="button" value="OK" class="reminder btn btn-success" >
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
+                  <!-- /.modal-content -->
                </div>
+               <!-- /.modal-dialog -->
             </div>
-         </div>
-         <input id="model" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger"  style="visibility: hidden;" type="button" value="">
+         </form>
          <!--REMINDER MODEL END HERE-->
-         
-       
-         <div class="row" style="margin-top:30px">
-               <div class="col-md-6">
-                  <a id="add-new-owne-link" style="cursor: pointer;float: left;" class="mb-1">
-                  <span>
-                  <i class="fa fa-plus"></i>
-                  </span>
-                  </a>
-               </div>
-               <div class="col-md-6">
-               <!-- <select class="form-control access_select " name="accessStatus" style="font-size: 11px;font-weight: 500;">
-                  <option value="">Select Option</option>
-                  <option value="Call Back">Call Back</option>
-                  <option  value="Not answering">Not answering</option>
-                  <option  value="Not Interested">Not Interested</option>
-                  <option  value="Interested">Interested</option>
-                  <option  value="For Sale">For Sale</option>
-                  <option  value="ForSale/ForRent">ForSale/ForRent</option>
-                  <option value="upcoming">upcoming</option>
-                  <option  value="For Rent">For Rent</option>
-                  <option  value="Off Plan">Off Plan</option>
-                  <option  value="Investor">Investor</option>
-                  <option  value="Check Availability">Check Availability</option>
-                  <option  value="Switch Off">Switch Off</option>
-                  <option  value="Wrong Number">Wrong Number</option>
-                  <option  value="Commercial">Commercial</option>
-                  <option  value="Residential">Residential</option>
-               </select> -->
-            </div>
-            <form action="{{url('coldcallignexport')}}" method="get" accept-charset="utf-8">
-            <button class="btn export" type="submit">Export CSV</button>
-            </form>
-         </div>
+         <input id="model" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger"  style="visibility: hidden;" type="button" value="">
          
          <!--PROPERTY CATEGORIES TABS START FROM HERE-->
-         <ul class="nav nav-tabs ">
+         <ul class="nav nav-tabs " style="    margin-top: -35px;">
             <li class="nav-item">
                @if(@$_GET['type']=='')
                <a href="{{url('coldCalling')}}@if(isset($_GET['p']))?p={{$_GET['p']}} @endif"  class="nav-link active py-3">All property</a>

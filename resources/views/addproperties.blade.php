@@ -155,6 +155,51 @@
        min-height: 38px;
        display: initial;
    }
+@media only screen and (max-width: 600px) {
+   .export{
+    float: right;
+    margin-top: -6px;
+    margin-right: -27px;
+    background-color: #1976D2;
+    color: #fff;
+    border-radius: 20px;
+    min-height: 38px;
+    display: initial;
+}
+#add-new-owne-link {
+    padding: 17px 22px !important;
+    border-radius: 100% !important;
+    position: relative;
+    top: 222px;
+    right: 16px;
+    float: none !important;
+}
+.whatsapp-wrapper{
+       border: 2px solid #1976d2 !important;
+    border-radius: 50px 50px 50px 50px !important;
+    width: 95%;
+}
+.whatsapp2-wrappper{
+       border: 2px solid #1976d2 !important;
+    border-radius: 50px 50px 50px 50px !important;
+    width: 92%;
+    margin-left: 13px;
+}
+.gmail-wapper{
+   border: 2px solid #1976d2 !important;
+    height: 114% !important;
+    width: 96%;
+    margin-left: 10px;
+    border-radius: 50px 50px 50px 50px !important;
+}
+.media-wrapper{
+   width: 70% !important;
+    margin: auto !important;
+    background-color: #dfdddd00 !important;
+    border: none !important;
+    border-radius: 50px !important;
+}
+}
 </style>
 @if(!session("user_id") || strtoupper(session('role'))!=(strtoupper('Admin')|| strtoupper('SuperAgent')))
 <script type="text/javascript">

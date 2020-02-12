@@ -53,6 +53,9 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
       <style>
+        .hide-menu{
+          color: #000000b8 !important;
+        }
          .sidebar-nav #sidebarnav > li{
          text-align:center;
          }
@@ -76,6 +79,11 @@
 
          .scroll-sidebar {
     padding: 69px 0px 0px 0px !important;
+}
+ @media only screen and (max-width: 600px) {
+  .sidebar-nav{
+    padding: 10px !important;
+  }
 }
 }
       </style>
@@ -124,23 +132,22 @@
       </header>
        @if(ucfirst(session('role'))!=ucfirst('owner'))  
       <div class="scroll-sidebar row" >
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sidebar-nav "  style="background: white !important; float: none;  margin: 0 auto;width: 100%;padding: 10px; ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sidebar-nav "  style="background: white !important; float: none;  margin: 0 auto;width: 100%;">
 
                 <a class="navbar-brand" href="#" style="visibility: hidden;">EDENFORD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul id="sidebarnav"  class="navbar-nav mr-auto">
-               @if(ucfirst(session('role'))==ucfirst('Agent'))        
-                    
+            <ul id="sidebarnav"  class="navbar-nav mr-auto" style="margin-left: 15px;">
+               @if(ucfirst(session('role'))==ucfirst('Agent'))         
                    <li class="nav-item"> 
                       <a class="nav-link nav-link" href="{{url('/agentdashboard')}}" aria-expanded="false">
-                          <i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span>
+                          <i class="mdi mdi-gauge"></i><b><span class="hide-menu">Dashboard</span></b>
                         </a>
                   </li>
                     @if(@$permissions->propertyView==1)        
-                       <li class="nav-item dropdown">
+                      <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Properties</span>
                       </a> 
@@ -180,10 +187,10 @@
                         </li>
                     @endif
                @elseif(ucfirst(session('role'))==ucfirst('admin'))          
-                   <li class="nav-item"> <a class="nav-link nav-link" href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><br><span class="hide-menu">Dashboard</span></a>
+                   <li class="nav-item"> <a class="nav-link nav-link" href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
                    </li>
                    <li class="nav-item dropdown">
-                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Properties</span></a>
+                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"href="{{url('property')}}">
                                         Registrations</a>
@@ -195,33 +202,33 @@
                    </li>
 
                   <li class="nav-item dropdown">
-                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-window-open"></i><br><span class="hide-menu">Add & Assign</span></a>
+                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-window-open"></i><span class="hide-menu">Add & Assign</span></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="{{url('assignAgent')}}">Assign Coldcalling</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" <a href="{{url('buildings')}}">Building</a>
+                      <a class="dropdown-item"></a> <a href="{{url('buildings')}}">Building</a>
                   </div>
                    </li>
 
 
-                   <li class="three-column"> <a class="nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><br><span class="hide-menu">Cold Calling</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
                    </li>
                @endif
                @if(ucfirst(session('role'))==ucfirst('admin'))
                    <li class="nav-item dropdown">
-                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Users</span></a>
+                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Users</span></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{url('admins')}}">Users</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{url('AgentActivity')}}?type=For Rent">Agent Activities</a>
                         </div>
                    </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><br><span class="hide-menu">Supervisions</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
                    </li>
 
 
                    <li class="nav-item dropdown">
-                      <a class=" nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Deals</span></a>
+                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Deals</span></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item"  href="{{url('dealsInfo')}}">Deals</a>
                             <div class="dropdown-divider"></div>
@@ -229,15 +236,15 @@
                         </div>
                    </li>
 
-                   <li class="three-column"> <a class="nav-link" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><br><span class="hide-menu">Leads</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Leads</span></a>
                    </li>
                    </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="mdi mdi-coin"></i><br><span class="hide-menu">Loans</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">Loans</span></a>
                    </li>
 
                    <li class="nav-item dropdown">
 
-                      <a class="nav-link dropdown-toggle" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><br><span class="hide-menu">Setup</span></a>
+                      <a class="nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Setup</span></a>
 
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="{{url('submittedProperties')}}">Requests</a>
@@ -247,9 +254,9 @@
                       <a class="dropdown-item"  href="{{url('email-templates')}}?type=For Rent">Email Templates</a>
                     </div>
                    </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('/backup')}}" aria-expanded="false"><i class="mdi mdi-disk"></i><br><span class="hide-menu">Backups</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('/backup')}}" aria-expanded="false"><i class="mdi mdi-disk"></i><span class="hide-menu">Backups</span></a>
                    </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('direct-pdf-report')}}" aria-expanded="false"><i style="padding-bottom: 5px;padding-top: 8px;font-size: 15px;font-weight: bold;" class="fa fa-file-pdf-o"></i><br><span class="hide-menu">Direct Report</span></a>
+                   <li class="three-column"> <a class="nav-link" href="{{url('direct-pdf-report')}}" aria-expanded="false"><i style="padding-bottom: 5px;padding-top: 8px;font-size: 15px;font-weight: bold;" class="fa fa-file-pdf-o"></i><span class="hide-menu">Direct Report</span></a>
                    </li>
                @endif
                <!--superAgent-->
@@ -258,7 +265,7 @@
                        </li>
                    @if(@$permissions->propertyView==1)               
                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
+                          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{url('property')}}">
                                                       Registrations</a>
