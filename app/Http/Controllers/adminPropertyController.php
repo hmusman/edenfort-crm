@@ -370,9 +370,9 @@ EDEN FORT REAL ESTATE
         return view('propertydetail', compact('data'));
     }
 
-    public function propertiesexport() 
+    public function propertiesexport(Request $request) 
     {
-        return Excel::download(new PropertiesExport, 'properties.xlsx');
+        return Excel::download(new PropertiesExport($request), 'properties.xlsx');
     //      return [
     //     (new PropertiesExport)->withHeadings(),
     // ];

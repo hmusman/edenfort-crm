@@ -150,30 +150,23 @@
         .hover_effect:hover{
          background-color:#1976d2;
         }
-   .export{
-       float: right;
-       margin-top: -55px;
-       margin-right: -100px;
-       background-color: #1976D2;
-       color: #fff;
-       border-radius: 20px;
-       min-height: 32px;
-       display: initial;
-   }
+   
    @media only screen and (max-width: 600px) {
+    .t_table{
+          margin-top: 27px !important;
+    }
+    .repo{
+          margin-right: -14% !important;
+    margin-top: -4px !important;
+    width: 42% !important;
+    }
+    #export{
+      width: 100%;
+    }
    .nav-tabs{
       width: 100%;
    }
-   .export{
-    float: right;
-    margin-top: -55px ;
-    margin-right: -27px !important;
-    background-color: #1976D2;
-    color: #fff;
-    border-radius: 20px;
-    min-height: 38px;
-    display: initial;
-}
+  
 #add-new-owne-link {
     padding: 17px 22px !important;
     border-radius: 100% !important;
@@ -404,7 +397,7 @@
             </div>
             <div class="col-md-3 " style="padding-left:0">
                   <div class="text-center hw" style="height:100%;    padding: 18px;border-radius: 0px 50px 50px 0px;">
-                    <select class="form-control access_select " name="accessStatus" style="margin-right: -344%;
+                    <select class="form-control access_select repo" name="accessStatus" style="margin-right: -344%;
     margin-top: -78px;
     width: 80%;">
                   <option value="">Select Option</option>
@@ -427,14 +420,9 @@
                      <!-- gmail envelope ends-->
                   </div>
                </div>
-            <form class="export_form" action="{{url('coldcallingexport')}}" method="get" accept-charset="utf-8">
-               @csrf
-               <button class="export btn" type="submit">Export CSV</button>
-            </form>
-               
          </div>
          <!--REMINDER MODEL START FROM HERE-->
-         <form action="{{url('PropertyBulkActions')}}" method="GET" style="width: 100%;">
+         <form action="{{url('PropertyBulkActions')}}" method="GET" style="width: 100%;" class="t_table">
             <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
                <div class="modal-dialog modal-sm">
                   <div class="modal-content">
@@ -561,12 +549,12 @@
          </ul>
          <!--PROPERTY CATEGORIES TABS END HERE-->
          <div class="card">
-            <div class="card-body">
+            <div class="card-body table-responsive">
                <!--COLDCALLING FILTERS AND SEARCH START FROM HERE-->  
                <div class="col-lg-12">
                   <div class="row">
                      <div class="col-md-12">
-                        <form action="{{ route('coldcallingsearch') }}" method="GET" class="">
+                        <form method="GET" class="coldcallingForm" id="coldsForm">
                            <div class="row mt-2 mb-2">
                               <div class="col-md-9">
                                  <div class="row">
@@ -635,9 +623,9 @@
                                  </div>
                               </div>
                               @if(ucfirst(session('role'))==ucfirst('Admin'))
-                              <div class="col-md-2">
+                              <div class="col-md-1">
                                  <div class="filter_btn_wrapper">
-                                    <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                    <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
                                  </div>
                               </div>
                               <div class="col-md-1 ">
@@ -645,6 +633,12 @@
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
                                        </div>
                                     </div>
+                                <div class="col-md-1">
+                                  <div class="filter_btn_wrapper">
+                                    <input type="button" class="btn btn-primary" id="export" value="Export CVS">
+                                    <!-- <a class="export btn btn-primary" style="color: white;" href="{{url('coldcallignexport')}}">Export CSV</a> -->
+                                </div>
+                               </div>
                               @endif
                               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
                               @if(@$permissions->coldCallingAssign==NULL)
@@ -661,7 +655,7 @@
                                  </div>
                               @endif
                                   @if(@$permissions->coldCallingAssign==1) 
-                                    <div class="col-md-1 ">
+                                    <div class="col-md-1">
                                        <div class="filter_btn_wrapper">
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
                                        </div>
@@ -674,7 +668,7 @@
                   </div>
                </div>
                <!--COLDCALLING FILTERS AND SEARCH END HERE--> 
-               <div class="table-responsive">
+               <div class="">
 
                <table id="" class="table">
                   <thead>
@@ -746,6 +740,7 @@
                            </div>
                         </div>
                         <!--ASSIGN SINGLE COLDCALLING-->
+                        
                      <input type='hidden' value='' name='status' class='status'>
                      <input type='hidden' value='' name='sending_email' class="sending_email">
                      <input type='hidden' value='' name='time_date' class='time_date_input'>
@@ -1791,6 +1786,19 @@
             }
         })
     })
+</script>
+<script>
+  $(document).ready(function(){
+     document.getElementById("filter").onclick = function() {
+      document.getElementById("coldsForm").action = "{{route('coldcallingsearch')}}";
+      document.getElementById("coldsForm").submit();
+    };
+
+    document.getElementById("export").onclick = function() {
+      document.getElementById("coldsForm").action = "{{url('coldcallingexport')}}";
+      document.getElementById("coldsForm").submit(); 
+    };
+  });
 </script>
 
 

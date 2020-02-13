@@ -19,11 +19,13 @@ use Session;
 use Excel;
 use File;
 use Mail;
+use Maatwebsite\Excel\Concerns\Exportable;
 use App\Exports\ColdCallingExport;
-// use Maatwebsite\Excel\Facades\Excel;
+
 use Maatwebsite\Excel\Concerns\WithHeadings;
 class adminColdCallingController extends Controller
 {
+
     public function singlePersonColdCalling(Request $request){
         $properties = $request->check_boxes;
         $agents = $request->agents_ids;
@@ -413,9 +415,9 @@ public function addOwnerByAjax(Request $request){
         
     }  
 
-    public function coldcallignexport() 
+    public function coldcallignexport(Request $request) 
     {
-        return Excel::download(new ColdCallingExport, 'ColdCallings.xlsx');
+        return Excel::download(new ColdCallingExport($request), 'ColdCallings.xlsx');
     //      return [
     //     (new PropertiesExport)->withHeadings(),
     // ];

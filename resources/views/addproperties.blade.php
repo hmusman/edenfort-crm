@@ -145,27 +145,10 @@
         border: 1px solid #ccc;
         border-bottom: 0px;
         }
-   .export{
-       float: right;
-       margin-top: -49px;
-       margin-right: -75px;
-       background-color: #1976D2;
-       color: #fff;
-       border-radius: 20px;
-       min-height: 38px;
-       display: initial;
-   }
 @media only screen and (max-width: 600px) {
-   .export{
-    float: right;
-    margin-top: -6px;
-    margin-right: -27px;
-    background-color: #1976D2;
-    color: #fff;
-    border-radius: 20px;
-    min-height: 38px;
-    display: initial;
-}
+#export{
+      width: 100%;
+    }
 #add-new-owne-link {
     padding: 17px 22px !important;
     border-radius: 100% !important;
@@ -394,11 +377,6 @@
                   </div>
                </div>
             </div>
-            <form action="{{url('propertiesexport')}}" method="get" accept-charset="utf-8">
-               @csrf
-               <button class="export btn" type="submit">Export CSV</button>
-            </form>
-               
          </div>
          <form action="{{url('PropertyBulkActions')}}" method="GET" style="width: 100%;">
             <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
@@ -513,14 +491,14 @@
             </ul>
             <!-- </form>-->
             <div class="card">
-               <div class="card-body">
+               <div class="card-body table-responsive">
                   <!-- <div class="d-flex mb-4">-->
                   <div class="col-lg-12">
                      <div class="row">
                         <div class="col-md-12">
-                           <form action="{{ route('Propertysearch') }}" method="GET" class="">
+                           <form method="GET" class="" id="propertyForm">
                               <div class="row mt-2 mb-2">
-                                 <div class="col-md-9">
+                                 <div class="col-md-8">
                                     <div class="row">
                                        @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
                                        @if(isset($_GET['p'])) <input type="hidden" name="p" value="{{@$_GET['p']}}"/> @endif
@@ -580,7 +558,7 @@
                                  @if(ucfirst(session('role'))==ucfirst('Admin'))
                               <div class="col-md-2">
                                  <div class="filter_btn_wrapper">
-                                    <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                    <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
                                  </div>
                               </div>
                               <div class="col-md-1 ">
@@ -588,6 +566,12 @@
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
                                        </div>
                                     </div>
+                               <div class="col-md-1">
+                                  <div class="filter_btn_wrapper">
+                                    <input type="button" class="btn btn-primary" id="export" value="Export CVS">
+                                    <!-- <a class="export btn btn-primary" style="color: white;" href="{{url('coldcallignexport')}}">Export CSV</a> -->
+                                </div>
+                             
                               @endif
                               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
                               @if(@$permissions->propertyAssign==NULL)
@@ -616,7 +600,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="table-responsive">
+                  <div class="">
                      <table  class="table">
                         <thead>
                            <tr>
@@ -1442,6 +1426,19 @@
 <script type="text/javascript">
    var value='<?php echo @$Bedroom;  ?>';
    $('.Bedroom').val(value);
+</script>
+<script>
+  $(document).ready(function(){
+     document.getElementById("filter").onclick = function() {
+      document.getElementById("propertyForm").action = "{{ route('Propertysearch') }}";
+      document.getElementById("propertyForm").submit();
+    };
+
+    document.getElementById("export").onclick = function() {
+      document.getElementById("propertyForm").action = "{{url('propertiesexport')}}";
+      document.getElementById("propertyForm").submit(); 
+    };
+  });
 </script>
 @include('reminder')
 </body>
