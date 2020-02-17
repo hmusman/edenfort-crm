@@ -410,7 +410,8 @@ public function addOwnerByAjax(Request $request){
                     $query->where("contact_no","LIKE",'%'.$request->contact.'%');
                 }
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
-                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions']));
+                $upcoming = coldcallingModel::where('access','Upcoming')->count();
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming']));
                 
         
     }  

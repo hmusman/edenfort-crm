@@ -140,6 +140,12 @@
    }
 </style>
 <style>
+   .upcoming_badge{
+    background-color: red;
+    position: absolute;
+    margin-top: -12px;
+    margin-left: -9px;
+   }
     .modal-body .row .data{
         padding:10px 0px;
         border: 1px solid #ccc;
@@ -439,9 +445,9 @@
                </li>
                <li class="nav-item">
                   @if(@$_GET['type']=='upcoming')
-                  <a href="{{url('property')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=upcoming"  class="nav-link active py-3">Upcoming</a>
+                  <a href="{{url('property')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=upcoming"  class="nav-link active py-3">Upcoming<span class="@if($upcoming==0) hide @endif badge upcoming_badge">{{$upcoming}}</span></a>
                   @else
-                  <a href="{{url('property')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=upcoming"  class="nav-link py-3">Upcoming</a>
+                  <a href="{{url('property')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=upcoming"  class="nav-link py-3">Upcoming<span class="@if($upcoming==0) hide @endif badge upcoming_badge">{{$upcoming}}</span></a>
                   @endif
                </li>
                <li class="nav-item">
@@ -569,8 +575,8 @@
                                <div class="col-md-1">
                                   <div class="filter_btn_wrapper">
                                     <input type="button" class="btn btn-primary" id="export" value="Export CVS">
-                                    <!-- <a class="export btn btn-primary" style="color: white;" href="{{url('coldcallignexport')}}">Export CSV</a> -->
                                 </div>
+                             </div>
                              
                               @endif
                               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
@@ -581,14 +587,14 @@
                                     </div>
                                  </div>
                               @else
-                               <div class="col-md-2">
+                               <div class="col-md-3">
                                     <div class="filter_btn_wrapper">
                                        <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                     </div>
                                  </div>
                               @endif
                                   @if(@$permissions->propertyAssign==1) 
-                                    <div class="col-md-1 ">
+                                    <div class="col-md-1">
                                        <div class="filter_btn_wrapper">
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
                                        </div>
@@ -765,12 +771,14 @@
          <!--  </form>-->
       </div>
       <!-- back button -->
+      <div class="row back_btn_row m-b-40" style="display: {{@$Formdisplay}};>;padding: 0px 40px;">
       <div class="row back_btn_row m-b-40">
          <div class="col-12 back_wrapper">
             <span ><i class="fas fa-arrow-circle-left" id="back_to_owner"></i></span>
             <span id="back_to_owner_text">New Property</span>
          </div>
       </div>
+   </div>
       <!-- owners info  -->
       <div class="row owner_information_link" style="display: {{@$Formdisplay}};>">
          <div class="col-lg-12">
@@ -848,21 +856,8 @@
                                  </div>
                               </div>
                            </div>
-                           <!--/span-->
-
-
-
-                    
+                           <!--/span-->          
                         </div>
-
-
-
-
-
-
-
-
-
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
@@ -894,12 +889,7 @@
                               </div>
                            </div>
                            <!--/span-->
-                        </div>
-
-
-
-
-                        
+                        </div>           
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
@@ -932,16 +922,7 @@
                            </div>
                            <!--/span-->
                         </div>
-
-
-
-
                         <!--/row-->
-
-
-
-
-
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
@@ -994,12 +975,6 @@
                            </div>
                            <!--/span-->
                         </div>
-
-
-
-
-
-
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
@@ -1023,11 +998,6 @@
                            </div>
                            <!--/span-->
                         </div>
-
-
-
-
-
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group row">
@@ -1037,10 +1007,6 @@
                                  </div>
                               </div>
                            </div>
-
-
-
-
                            <div class="col-md-6">
                               <div class="form-group row">
                                  <label class="control-label text-right col-md-3">Property Type</label>
@@ -1055,17 +1021,7 @@
                               </div>
                            </div>
 
-
                         </div>
-
-
-
-
-
-
-
-
-
 
                         <div class="row">
                         
@@ -1082,14 +1038,6 @@
                           
                            <!--/span-->
                         </div>
-
-
-                        
-
-
-
-
-
                         
                         <!--/row-->
                         <div class="form-actions">

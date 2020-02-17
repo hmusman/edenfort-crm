@@ -144,7 +144,8 @@ EDEN FORT REAL ESTATE
                     $query->where("unit_no",$request->unit_no);
                 }
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
-                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss']));
+                $upcoming = property::where('access','Upcoming')->count();
+                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));
     }
     public function setReminderForProperty(Request $r){
         try{

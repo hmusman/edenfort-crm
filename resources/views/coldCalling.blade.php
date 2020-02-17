@@ -6,6 +6,12 @@
 <?php redirect('/'); ?>
 @endif
 <style type="text/css">
+   .upcoming_badge{
+      background-color: red;
+    position: absolute;
+    margin-top: -12px;
+    margin-left: -5px;
+   }
    .filter_input{
    background-color:#1976D2 ;
    color:#fff;
@@ -485,9 +491,9 @@
             </li>
             <li class="nav-item">
                @if(@$_GET['type']=='upcoming')
-               <a href="{{url('coldCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=upcoming"  class="nav-link active py-3">Upcoming</a>
+               <a href="{{url('coldCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=upcoming"  class="nav-link active py-3">Upcoming <span class="@if($upcoming==0) hide @endif badge upcoming_badge">{{$upcoming}}</span></a>
                @else
-               <a href="{{url('coldCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=upcoming"  class="nav-link py-3">Upcoming</a>
+               <a href="{{url('coldCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=upcoming"  class="nav-link py-3">Upcoming <span class="@if($upcoming==0) hide @endif badge upcoming_badge">{{$upcoming}}</span></a>
                @endif
             </li>
             <li class="nav-item">
