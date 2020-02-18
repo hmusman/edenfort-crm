@@ -146,13 +146,14 @@ class reminderController extends Controller
                 $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
                 $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
+                 $upcoming = property::where('access','Upcoming')->count();
                 // $buildings=property::distinct('Building')->pluck('Building');
                  $buildings=Building::all();
          		$result_data=property::where("id",input::get('property_id'))->paginate(20);
                 if(input::get('status')!='viewed'){
                     Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                 }
-         		return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss'));
+         		return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming'));
          	}else if(strtoupper(input::get('ref'))=='LEADS'){
          	    $agents=lead::distinct('lead_user')->get(); 
                 $buildings=Building::distinct('building_name')->get();
