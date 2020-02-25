@@ -138,7 +138,8 @@ class reminderController extends Controller
                 if(input::get('status')!='viewed'){
                     Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                 }
-         		return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss'));
+            $upcoming = property::where('access','Upcoming')->count();
+         		return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming'));
          	}else if(strtoupper(input::get('ref'))=='PROPERTY'){
          		$areas=property::distinct('area')->pluck('area');
                 $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');   
