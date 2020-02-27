@@ -255,7 +255,9 @@ EDEN FORT REAL ESTATE
         $bedrooms=property::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
     	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
         $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
-        return view("addproperties",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'buildings'=>$buildings,'reminders'=>$reminders,'areas'=>$areas,'bedrooms'=>$bedrooms,'agentss'=>$agentss]);
+        $upcoming = property::where('access','Upcoming')->count();
+
+        return view("addproperties",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'buildings'=>$buildings,'reminders'=>$reminders,'areas'=>$areas,'bedrooms'=>$bedrooms,'agentss'=>$agentss,'upcoming'=>$upcoming]);
     }
     public function addLandlordEmailPass(){
         if(input::get('email')){
