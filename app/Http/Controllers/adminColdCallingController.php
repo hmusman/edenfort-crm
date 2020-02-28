@@ -231,6 +231,7 @@ EDEN FORT REAL ESTATE
         $sStatus=$r->saleStatus;
         $sPrice=$r->salePrice;
         $AreaSqft=$r->Area_Sqft;
+        $comment=$r->comment;
        foreach($check_boxes as $key=>$value){
             if(isset($check_boxes[$key])){
                 if(!isset($rStatus[$key])){
@@ -250,6 +251,7 @@ EDEN FORT REAL ESTATE
                             'sale_price' => $sPrice[$key],
                             'property_type' => $status,
                             'Area_Sqft' => $AreaSqft[$key],
+                            'comment' => $comment[$key],
                         );
                       }else{
                           $data=array(
@@ -263,6 +265,7 @@ EDEN FORT REAL ESTATE
                             'sale_price' => $sPrice[$key],
                             'access' => $status,
                             'Area_Sqft' => $AreaSqft[$key],
+                            'comment' => $comment[$key],
                         );
                       }
                coldCallingModel::where("id",$check_boxes[$key])->update($data);
