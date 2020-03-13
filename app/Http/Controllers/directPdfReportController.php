@@ -66,11 +66,11 @@ class directPdfReportController extends Controller
             $query = coldcallingModel::query();
             if($request->from_date){
                 $fromDate = $request->from_date;
-                $query->where("created_at",">=",$request->from_date);
+                $query->where("coldcallings.created_at",">=",$request->from_date);
             }
             if($request->to_date){
                 $toDate = $request->to_date;
-                $query->where("created_at","<=",$request->to_date);
+                $query->where("coldcallings.created_at","<=",$request->to_date);
             }
             $searchTerm = $request->agent;
             $query->where(function($q) use ($searchTerm){
