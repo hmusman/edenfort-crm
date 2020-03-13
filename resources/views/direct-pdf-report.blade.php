@@ -45,6 +45,7 @@
                                 <select id="report_type" name="report_type" class="form-control font-size" required>
                                     <option value="property">Agent Property</option>
                                     <option value="lead">Agent Lead</option>
+                                    <option value="coldcallings">Agent ColdCallings</option>
                                 </select>
                             </div>
                             <div class="col-sm-2">

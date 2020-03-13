@@ -1017,7 +1017,7 @@
                                     <label style="text-align: start">Comment</label>
                                     <input type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control">
                                  </div>
-                                 <div class="col-sm-4 p-2" style="display: none;">
+                                 <div class="col-sm-4 p-2">
                                     <div class="container">
                                        <div class="row">
                                           <div class="col-xs-6">
@@ -1035,7 +1035,7 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <div class="col-sm-4 p-2" style="display: none;">
+                                 <div class="col-sm-4 p-2">
                                     <div class="container">
                                        <div class="row">
                                           <div class="col-xs-6">

@@ -62,6 +62,23 @@ class directPdfReportController extends Controller
             
             $leads = $query->where("lead_user",$agentName->user_name)->get();
             view()->share(['leads'=>$leads,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$request->report_type]);  
+        }else if($request->report_type == "coldcallings"){
+            $query = coldcallingModel::query();
+            if($request->from_date){
+                $fromDate = $request->from_date;
+                $query->where("created_at",">=",$request->from_date);
+            }
+            if($request->to_date){
+                $toDate = $request->to_date;
+                $query->where("created_at","<=",$request->to_date);
+            }
+            $searchTerm = $request->agent;
+            $query->where(function($q) use ($searchTerm){
+                $q->where('user_id',$searchTerm);
+            });
+            $query->join('users','coldcallings.user_id','=','users.id');
+            $coldcallings = $query->get();
+            view()->share(['coldcallings'=>$coldcallings,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$request->report_type]);   
         }
 
         $pdf = PDF::loadView('direct-report-template')->setPaper('a2', 'portrait');

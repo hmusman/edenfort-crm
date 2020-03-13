@@ -100,7 +100,7 @@
                 @endif
             </tbody>
         </table>
-        @else
+        @elseif(@$leads)
             <table class="table">
             <thead style="background: #F5F5F5;">
                 <tr>
@@ -132,6 +132,49 @@
                             <td>{{$lead->lead_source}}</td>
                             <td>{{$lead->callTotalTime}}</td>
                             <td>{{date('M d Y',strtotime($lead->created_at))}}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                            <td colspan="11" style="text-align:center;">No Data Found!</td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+        @elseif(@$coldcallings)
+            <table class="table">
+            <thead style="background: #F5F5F5;">
+                <tr>
+                    <th>Sno#</th>
+                    <th>Unit No</th>
+                    <th>Building</th>
+                    <th>Area</th>
+                    <th>Landlord</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Bedrooms</th>
+                    <th>Area SqFt</th>
+                    <th>Price</th>
+                    <th>Agent Name</th>
+                    <th>Agent Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(count($coldcallings) > 0)
+                    @foreach($coldcallings as $key => $coldcalling)
+                        <tr>
+                            <td>{{++$key}}</td>
+                            <td>{{$coldcalling->unit_no}}</td>
+                            <td>{{$coldcalling->Building}}</td>
+                            <td>{{$coldcalling->area}}</td>
+                            <td>{{$coldcalling->LandLord}}</td>
+                            <td>{{$coldcalling->contact_no}}</td>
+                            <td>{{$coldcalling->email}}</td>
+                            <td>{{$coldcalling->Bedroom}}</td>
+                            <td>{{$coldcalling->Area_Sqft}}</td>
+                            <td>{{$coldcalling->Price}}</td>
+                            <td>{{$coldcalling->user_name}}</td>
+                            <td>{{$coldcalling->Phone}}</td>
                         </tr>
                     @endforeach
                 @else
