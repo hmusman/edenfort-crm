@@ -22,7 +22,7 @@ use App\Models\permission;
 class directPdfReportController extends Controller
 {
     public function index(){
-        $agents = user::where(["status"=>1,"role"=>3])->get();
+        $agents = user::whereIn('role', array(3,4))->get();
         return view("direct-pdf-report",compact("agents"));
     }
     public function generate(Request $request){
@@ -78,7 +78,8 @@ class directPdfReportController extends Controller
             });
             $query->join('users','coldcallings.user_id','=','users.id');
             $coldcallings = $query->get();
-            view()->share(['coldcallings'=>$coldcallings,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$request->report_type]);   
+            $report_type = 'Property';
+            view()->share(['coldcallings'=>$coldcallings,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$report_type]);   
         }
 
         $pdf = PDF::loadView('direct-report-template')->setPaper('a2', 'portrait');
