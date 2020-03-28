@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+ini_set('max_execution_time', 300);
+
 use Illuminate\Http\Request;
 use App\Models\Supervision;
 use App\Models\SupervisionCheaque;
@@ -34,6 +36,10 @@ class directPdfReportController extends Controller
         $agentName = user::find($request->agent);
         if($request->report_type == "property"){
             $query = property::query();
+            if($request->access_type  != ''){
+                $accessType = $request->access_type;
+                $query->where("access","=",$request->accessType);
+            }
             if($request->from_date){
                 $fromDate = $request->from_date;
                 $query->where("created_at",">=",$request->from_date);
@@ -64,14 +70,27 @@ class directPdfReportController extends Controller
             view()->share(['leads'=>$leads,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$request->report_type]);  
         }else if($request->report_type == "coldcallings"){
             $query = coldcallingModel::query();
+            
             if($request->from_date){
                 $fromDate = $request->from_date;
-                $query->where("coldcallings.created_at",">=",$request->from_date);
+                $query->where("coldcallings.updated_at",">=",$request->from_date);
             }
             if($request->to_date){
                 $toDate = $request->to_date;
-                $query->where("coldcallings.created_at","<=",$request->to_date);
+                $query->where("coldcallings.updated_at","<=",$request->to_date);
             }
+            if($request->access_type != ''){
+                // dd($request->access_type);
+                $accessType = $request->access_type;
+                if($accessType == 'Pending'){
+                    $query->where("coldcallings.access","=",NULL);
+                }else{
+
+                    $query->where("coldcallings.access","=",$accessType);
+                }
+                
+            }
+
             $searchTerm = $request->agent;
             $query->where(function($q) use ($searchTerm){
                 $q->where('user_id',$searchTerm);
@@ -83,6 +102,7 @@ class directPdfReportController extends Controller
         }
 
         $pdf = PDF::loadView('direct-report-template')->setPaper('a2', 'portrait');
+
         return $pdf->download(''.$agentName->user_name.'-direct-report.pdf');
     }
     

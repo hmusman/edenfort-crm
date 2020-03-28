@@ -31,7 +31,7 @@
                     <form action="" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label for="agent" class="font-size">Select Agent</label>
                                 <select id="agent" name="agent" class="form-control font-size" required>
                                     <option value="">Select Agent</option>
@@ -40,12 +40,33 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label for="report_type" class="font-size">Select Report Type</label>
                                 <select id="report_type" name="report_type" class="form-control font-size" required>
                                     <option value="property">Agent Property</option>
                                     <option value="lead">Agent Lead</option>
                                     <option value="coldcallings">Agent ColdCallings</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="access_type" class="font-size">Access Type</label>
+                                 <select id="access_type" name="access_type" class="form-control font-size" required>
+                                    <option value=" ">Select Access Type</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="callback">Call Back</option>
+                                    <option value="Not Answering">Not Answering</option>
+                                    <option value="Not Interested">Not Interested</option>
+                                    <option value="Interested">Interested</option>
+                                    <option value="For Sale">For Sale</option>
+                                    <option value="For Rent">For Rent</option>
+                                    <option value="Upcomming">Upcomming</option>
+                                    <option value="Off Plan">Off Plan</option>
+                                    <option value="Investor">Investor</option>
+                                    <option value="Check Availability">Check Availability</option>
+                                    <option value="Switch Off">Switch Off</option>
+                                    <option value="Wrong Number">Wrong Number</option>
+                                    <option value="Commercial">Commercial</option>
+                                    <option value="Residential">Residential</option>
                                 </select>
                             </div>
                             <div class="col-sm-2">
@@ -56,7 +77,7 @@
                                 <label class="font-size">TO Date</label>
                                 <input type="date" class="font-size form-control" name="to_date">
                             </div>
-                            <div class="col-sm-2" style="padding-top: 32px;">
+                            <div class="col-sm-1" style="padding-top: 32px;">
                                 <button type="submit" class="font-size btn btn-danger"><b><span><i class="fa fa-file-pdf-o" ></i></span> Generate Report</b></button>
                             </div>
                         </div>

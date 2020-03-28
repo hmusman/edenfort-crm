@@ -154,6 +154,7 @@
                     <th>Email</th>
                     <th>Bedrooms</th>
                     <th>Area SqFt</th>
+                    <th>Access</th>
                     <th>Price</th>
                     <th>Agent Name</th>
                     <th>Agent Phone</th>
@@ -172,6 +173,7 @@
                             <td>{{$coldcalling->email}}</td>
                             <td>{{$coldcalling->Bedroom}}</td>
                             <td>{{$coldcalling->Area_Sqft}}</td>
+                            <td>{{$coldcalling->access}}</td>
                             <td>{{$coldcalling->Price}}</td>
                             <td>{{$coldcalling->user_name}}</td>
                             <td>{{$coldcalling->Phone}}</td>
