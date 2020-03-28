@@ -59,7 +59,7 @@
                                     <option value="Interested">Interested</option>
                                     <option value="For Sale">For Sale</option>
                                     <option value="For Rent">For Rent</option>
-                                    <option value="Upcomming">Upcomming</option>
+                                    <option value="Upcoming">Upcoming</option>
                                     <option value="Off Plan">Off Plan</option>
                                     <option value="Investor">Investor</option>
                                     <option value="Check Availability">Check Availability</option>

@@ -36,18 +36,6 @@ class directPdfReportController extends Controller
         $agentName = user::find($request->agent);
         if($request->report_type == "property"){
             $query = property::query();
-
-            if($request->access_type != ''){
-                // dd($request->access_type);
-                $accessType = $request->access_type;
-                if($accessType == 'Pending'){
-                    $query->where("coldcallings.access","=",NULL);
-                }else{
-
-                    $query->where("coldcallings.access","=",$accessType);
-                }
-                
-            }
             
             if($request->from_date){
                 $fromDate = $request->from_date;
@@ -57,6 +45,20 @@ class directPdfReportController extends Controller
                 $toDate = $request->to_date;
                 $query->where("created_at","<=",$request->to_date);
             }
+            if($request->access_type != ''){
+                // dd($request->access_type);
+                $access = $request->access_type;
+                // dd($access);
+                if($access == 'Pending'){
+                    $query->where("access","=",NULL);
+
+                }else{
+
+                    $query->where("access","=",$access);
+                }
+                
+            }
+            
             $searchTerm = $request->agent;
             $query->where(function($q) use ($searchTerm){
                 $q->where('user_id',$searchTerm)

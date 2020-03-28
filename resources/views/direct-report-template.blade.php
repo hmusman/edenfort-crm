@@ -70,6 +70,7 @@
                     <th>Email</th>
                     <th>Bedrooms</th>
                     <th>Area SqFt</th>
+                    <th>Access</th>
                     <th>Price</th>
                     <th>Agent Name</th>
                     <th>Agent Phone</th>
@@ -88,6 +89,7 @@
                             <td>{{$property->email}}</td>
                             <td>{{$property->Bedroom}}</td>
                             <td>{{$property->Area_Sqft}}</td>
+                            <td>{{$property->access}}</td>
                             <td>{{$property->Price}}</td>
                             <td>{{$property->Agent->user_name}}</td>
                             <td>{{$property->Agent->Phone}}</td>
