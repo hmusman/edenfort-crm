@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-ini_set('max_execution_time', 300);
+ini_set('max_execution_time', 600);
 
 use Illuminate\Http\Request;
 use App\Models\Supervision;
