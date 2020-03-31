@@ -255,7 +255,7 @@ class reminderController extends Controller
                 ->where(function($q) {
                              $q->where('add_by', 'ADMIN')
                                ->orWhere('add_by', 'SuperAgent')
-                               ->orWhere('add_by', 'Agent');;
+                               ->orWhere('add_by', 'Agent');
                          })->update(["status"=>'disable', 'reason'=>input::get('name')]);
             }
             return "true";
