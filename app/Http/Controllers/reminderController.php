@@ -27,9 +27,9 @@ class reminderController extends Controller
 	public function getallReminder(){
         if(session('role') == 'Agent'){
             // $result=DB::select('SELECT t.* from reminders t where (status="viewed" and add_by="AGENT") ');
-            $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
+            $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->orderBy('date_time', 'DESC')->get();
         }else if(session('role') == 'Admin'){
-            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed")GROUP BY b.user_id');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") GROUP BY b.user_id');
         }else if(session('role') == 'SuperAgent'){
 
             $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT" or add_by="ADMIN") AND(b.status="viewed") GROUP BY b.user_id;');
@@ -218,7 +218,7 @@ class reminderController extends Controller
         $reminder = Reminder::where('user_id', $id)->where(function($q) {
                          $q->where('status', 'viewed')
                            ->orWhere('status', null);
-                     })
+                     })->orderBy('date_time', 'DESC')
                      ->get();
         // $result=Reminder::where('status' , 'viewed')->where('user_id',session('user_id'))
         //              ->where(function($q) {
@@ -254,7 +254,8 @@ class reminderController extends Controller
                 Reminder::where('property_id',input::get('property_id'))->where(['user_id'=>session('user_id')])
                 ->where(function($q) {
                              $q->where('add_by', 'ADMIN')
-                               ->orWhere('add_by', 'SuperAgent');
+                               ->orWhere('add_by', 'SuperAgent')
+                               ->orWhere('add_by', 'Agent');;
                          })->update(["status"=>'disable', 'reason'=>input::get('name')]);
             }
             return "true";

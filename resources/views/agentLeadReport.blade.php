@@ -8,6 +8,11 @@
 @endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <style>
+  .date{
+        background-color: #1976d2;
+        color: white;
+        font-size: 11px !important;
+  }
 .filter_input {
     background-color: #1976D2;
     color: #fff;
@@ -274,13 +279,30 @@ label,input,textarea{
                                             </datalist>
                                        </div>
                                    </div>
-                                     
-                                   
+                                    
                                      <div class="col-md-2 pl-1 pr-1">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="unit_no" placeholder="contact" name="contact">
                                             <datalist id="contact">
                                                 <option value="">contact</option>
+                                         
+                                            </datalist>
+                                       </div>
+                                   </div>
+                                    <div class="col-md-2 pl-1 pr-1">
+                                       <div class="dropdown_wrapper ">
+                                           <input type="date" class="font-size form-control date" name="from_date" placeholder="From Date">
+                                            <datalist id="contact">
+                                                <option value="">date</option>
+                                         
+                                            </datalist>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-2 pl-1 pr-1">
+                                       <div class="dropdown_wrapper ">
+                                           <input type="date" class="font-size form-control date" name="to_date" placeholder="To Date">
+                                            <datalist id="contact">
+                                                <option value="">date</option>
                                          
                                             </datalist>
                                        </div>

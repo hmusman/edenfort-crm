@@ -713,7 +713,7 @@
                               @else
                               <td>{{ucfirst($record->Agent['user_name'])}}</td>
                               @endif
-                              <td>{{date('d-m-Y',strtotime($record->created_at))}}</td>
+                              <td>{{date('d-m-Y',strtotime($record->updated_at))}}</td>
                               <td>
                                  @if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
                                  @if(@$permissions->propertyEdit==1)

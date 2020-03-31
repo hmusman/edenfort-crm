@@ -211,6 +211,12 @@ class leadController extends Controller
     if($request->contact){
         $query->where('contact_no', 'LIKE', "%{$request->contact}%");
     }
+     if($request->from_date){
+        $query->where('updated_at', '>=', $request->from_date);
+    }
+     if($request->to_date){
+        $query->where('updated_at', '<=', $request->to_date);
+    }
     $leads = $query->orderBy('created_at','DESC')->paginate(25);
     return view('agentLeadReport',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
     
