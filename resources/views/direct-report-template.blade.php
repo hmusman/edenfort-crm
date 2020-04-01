@@ -55,6 +55,25 @@
                 <label>To Date :</label>  
                 <p>{{@$toDate}}</p>
             </div>
+            @if(@$properties)
+                <div class="col-xs-2">
+                    <label>Total Properties :</label> 
+                    <p>{{@$total_properties}}</p>
+                </div>
+            @endif
+            @if(@$leads)
+                <div class="col-xs-2">
+                    <label>Total Leads :</label>  
+                    <p>{{@$total_leads}}</p>
+                </div>
+            @endif
+            @if(@$coldcallings)
+                <div class="col-xs-2">
+                    <label>Total Properties :</label>  
+                    <p>{{@$total_coldcallings}}</p>
+                </div>
+            @endif
+            
             <div class="col-xs-4"></div>
         </div><br>
         @if(@$properties)
