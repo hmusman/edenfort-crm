@@ -262,7 +262,7 @@
                  this.val(arr);
                  
                  $('#selected ').append('<input type="hidden" name="point" value="'+arr+'"></input>');
-                alert(arr);
+                // alert(arr);
             },
         });
 </script>
