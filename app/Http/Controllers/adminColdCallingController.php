@@ -38,35 +38,40 @@ class adminColdCallingController extends Controller
     }
     public function sentEmails(){
         $message='';
+        $receiverEmail = '';
+        $contactName = '';
+        $contactEmail = '';
+        $data = '';
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
             
-if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
-            $message .='
-Building : '.$data->Building.' <br> 
-Size - '.$data->Area_Sqft.'<br>
-Price -'.$data->Price.'<br>
-Type- '.$data->type.'<br>
-Condition- '.$data->Conditions.'<br><br> 
+                  if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
+                         $message .='
+                          Building : '.$data->Building.' <br> 
+                          Size - '.$data->Area_Sqft.'<br>
+                          Sale Price -'.$data->sale_price.'<br>
+                          Rent Price -'.$data->rented_price.'<br>
+                          Type- '.$data->type.'<br>
+                          Condition- '.$data->Conditions.'<br><br> 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'<br>
-EDEN FORT REAL ESTATE
-';
-$template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
-$contactMessage = str_replace("{data}",$message,$template->template_date);
-$receiverEmail = $data->email;
-$data = array('name'=>"EdenFort CRM");
-$contactName = 'EdenFort CRM';
-$contactEmail = input::get('sending_email');
- $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-{   
-    $message->from($contactEmail, $contactName);
-    $message->to('adnanshaukat832@gmail.com', 'EdenFort CRM')->subject('Property Alert');
-});
-}
+                          Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'<br>
+                            EDEN FORT REAL ESTATE<br><br>';
+                          $template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
+                          $contactMessage = str_replace("{data}",$message,$template->template_date);
+                          $receiverEmail = $data->email;
+                          $data = array('name'=>"EdenFort CRM");
+                          $contactName = 'EdenFort CRM';
+                          $contactEmail = input::get('sending_email');
+                           $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
+                         
+                    }
         }
+         Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
+          {   
+              $message->from($contactEmail, $contactName);
+              $message->to('abdulrehmanse99@gmail.com', 'EdenFort CRM')->subject('Property Alert');
+          });
         return 'true';
     }
     public function whatsAppMsgs(){
