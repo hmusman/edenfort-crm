@@ -16,6 +16,7 @@ use App\Models\user;
 use App\Models\deal;
 use App\Models\userFiles;
 use App\Models\Reminder;
+use App\Models\ReminderHistory;
 use App\Models\role;
 use App\Models\permission;
 use Session;
@@ -263,5 +264,32 @@ class reminderController extends Controller
             return "false";
         }
         
+    }
+
+
+    public function updateReminderRecord(){
+      if(input::get('property_id')){
+        $timedate = date('Y-m-d H:i:s', strtotime(input::get('datetime')));
+        if(session('role') == 'Admin' ){
+
+            $property = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id']);
+            $property_id = $property->property_id;
+            $oldReminder = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id', 'reminder_type', 'reminder_of', 'user_id', 'date_time', 'description']);
+
+            // $history = json_encode($oldReminder);
+            Reminder::where('property_id', input::get('property_id'))
+                      ->update(['description' => input::get('description'), 'date_time' => $timedate, 'status' => NULL]);
+
+            ReminderHistory::updateOrCreate(
+              ['property_id' => $property_id],
+              ['history' => $oldReminder]
+            );
+            
+        }
+
+        return "true";
+      }else{
+            return "false";
+        }
     }
 }

@@ -44,6 +44,7 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('get-all-reminder', 'reminderController@getallReminder');
     Route::get('agent-reminder', 'reminderController@getallReminder');
     Route::get('get-reminder-record', 'reminderController@getreminderRecord');
+    Route::get('update-reminder', 'reminderController@updateReminderRecord');
     
     Route::get('get-all-agents-reminder', 'getAgentReminders@index');
     Route::get('get-single-user-reminder/{id}', 'reminderController@oneUserReminder');

@@ -42,6 +42,7 @@
                 <table id="myTable" class="table table-bordered table-hover">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Add By</th>
                             <th>Reminder Type</th>
                             <th>Reminder Of</th>
@@ -55,12 +56,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php $i=1; ?>
             @if(isset($reminder))
                @if(count($reminder) > 0)
                     @foreach($reminder as $rem)
                         
                         <tr style="@if($rem->status=='viewed') background-color: #e2e2e2; 
                         @endif">
+                          <td><?php echo $i; ?></td> 
                           <td>{{ $user->user_name}}</td> 
                           <td>{{$rem->reminder_type}}</td>  
                           <td>{{$rem->reminder_of}} </td>
@@ -68,9 +71,13 @@
                           <td>{{$rem->description}}</td>
                           <!-- <td>{{$rem->unit_no}}</td> -->
                           <td>{{$rem->date_time}}</td>
-                          <td><a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
+                          <td><div class="row" style="padding-left: 14px;">
+                            <a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
                             @if($rem->user_id==session('user_id'))
-                            <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a>@endif</td>
+                            <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a><br>
+                            <a class="p-2 update_reminder" href="#" property_id="{{$rem->property_id}}">Update<i class="fas fa-edit"></i></a>@endif
+                        </div>
+                        </td>
                         </tr>
 
                        <!--  <div id="create" class="modal fade" role="dialog">
@@ -111,7 +118,7 @@
 </div>
  -->
                             
-                        
+                        <?php $i++;  ?>
                     @endforeach
                 @else
                 <tr>
@@ -219,6 +226,86 @@
                                             });
                                         }else{
                                             $.notify("Reminder Disable Successfully", "warn",{elementPosition: 'bottom left',
+                                                globalPosition: 'top left'});
+                                            $('.ti-close').trigger('click');
+                                            $('.notification_counter').text(data);
+                                            notification.parent().remove();
+                                            location.reload();
+                                            // $('.notification_bucket').html("");
+                                        }
+                                    }
+                                });
+                                // });
+                        }
+                        // $.alert('Reminder Disable Successfully!');
+                    }
+                },
+                cancel: function () {
+                    //close
+                },
+            },
+            // onContentReady: function () {
+            //     // bind to events
+            //     var jc = this;
+            //     this.$content.find('form').on('submit', function (e) {
+            //         // if the user submits the form by pressing enter in the field.
+            //         e.preventDefault();
+            //         // jc.$$formSubmit.trigger('click'); // reference the button and click it
+            //     });
+            // }
+        });
+      })
+
+
+    </script>
+    <script>
+         $('body').delegate('.update_reminder','click',function(){
+        var property_id=$(this).attr('property_id');
+        var notification = $(this);
+        // $('.property_id').val(property_id);
+        $.confirm({
+            title: 'Update Reminder!',
+            content: '' +
+            '<form action="" class="formName">' +
+            '<div class="form-group">' +
+            '<label><i class="fa fa-info-circel"></i>Time & date:</label>' +
+            '<input type="datetime-local" placeholder="Please enter the valid reason." class="datetime form-control" required />' +
+            '<label><i class="fa fa-info-circel"></i>Description:</label>' +
+            '<input type="text" placeholder="Please enter the valid reason." class="description form-control" required />' +
+            '</div>' +
+            '</form>',
+             type: 'blue',
+             icon: 'fa fa-warning',
+            buttons: {
+                formSubmit: {
+                    text: 'Submit',
+                    btnClass: 'btn-blue submit',
+                    action: function () {
+                        var datetime = this.$content.find('.datetime').val();
+                        var description = this.$content.find('.description').val();
+                        if(!datetime){
+                            $.alert('Date & Time is required');
+                            return false;
+                        }
+                        else if(!description){
+                            $.alert('Description is required');
+                            return false;
+                        }
+                        else{
+                            // $('body').delegate('click','.formSubmit',function(){
+                            
+                                    $.ajax({
+                                    url:'<?php echo url("update-reminder") ?>',
+                                    type:'get',
+                                    data:{property_id, datetime, description},
+                                    success:function(data){
+                                      console.log(data);
+                                        if($.trim(data)=="false"){
+                                            $.notify("something Went Wrong", "warn",{
+                                                globalPosition: 'top right',
+                                            });
+                                        }else{
+                                            $.notify("Reminder Updated Successfully", "warn",{elementPosition: 'bottom left',
                                                 globalPosition: 'top left'});
                                             $('.ti-close').trigger('click');
                                             $('.notification_counter').text(data);
