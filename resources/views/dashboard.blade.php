@@ -466,7 +466,14 @@ Morris.Line({
             font-weight: 500 !important;
         }
     </style>
-    @include('reminder')
+    @if(ucfirst(session('role')) == (ucfirst('Admin')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
+      @include('reminder')
+    @endif
+
     </body>
 
 </html>

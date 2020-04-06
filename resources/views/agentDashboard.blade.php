@@ -252,8 +252,14 @@
   <script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>
 
 @include('inc.footer')
-
-@include('reminder')
+    
+    @if(ucfirst(session('role')) == (ucfirst('Admin')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
+      @include('reminder')
+    @endif
 
 <script type="text/javascript">
 	$(function() {

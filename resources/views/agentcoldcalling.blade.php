@@ -1,6 +1,4 @@
 @include('inc.header')
-
-
 @if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Agent') || ucfirst('SuperAgent')))
   <script type="text/javascript">
     window.location='{{url("/")}}';
@@ -1710,6 +1708,13 @@ $('body').delegate('.add_phone','click',function(){
    })
 </script>
 <!--REMINDER AJAX REQUEST CODE START FROM HERE-->
-@include('reminder')
+@if(ucfirst(session('role')) == (ucfirst('Admin')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
+      @include('reminder')
+    @endif
+
     </body>
 </html>

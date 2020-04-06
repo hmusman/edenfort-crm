@@ -1177,6 +1177,13 @@ $('.sent-email-btn').click(function(){
        }
    })
 </script>
-@include('reminder')
+@if(ucfirst(session('role')) == (ucfirst('Admin')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
+      @include('reminder')
+    @endif
+
 </body>
 </html>

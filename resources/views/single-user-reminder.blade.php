@@ -72,8 +72,8 @@
                           <!-- <td>{{$rem->unit_no}}</td> -->
                           <td>{{$rem->date_time}}</td>
                           <td><div class="row" style="padding-left: 14px;">
-                            <a class="p-2" href="{{ url('get-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
-                            @if($rem->user_id==session('user_id'))
+                            <a class="p-2" href="{{ url('get-single-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
+                            @if($rem->user_id==ucfirst(session('user_id')))
                             <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a><br>
                             <a class="p-2 update_reminder" href="#" property_id="{{$rem->property_id}}">Update<i class="fas fa-edit"></i></a>@endif
                         </div>
@@ -354,7 +354,14 @@
             font-weight: 500 !important;
         }
     </style>
-    @include('reminder')
+   @if(ucfirst(session('role')) == (ucfirst('Admin')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
+      @include('reminder')
+    @endif
+
     </body>
 
 </html>

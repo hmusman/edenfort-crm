@@ -299,13 +299,14 @@
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <div class="page-wrapper">
    <div class="container-fluid">
-      <div class="row owner_main_row" style="display:block">
-         <h3 class="page_heading">Cold Calling</h3>
-         @if(session('msg'))
+      @if(session('msg'))
          {!! session('msg') !!}
-         @endif
+      @endif
+      <div class="row owner_main_row" style="display:{{@$Recorddisplay}}">
+         <h3 class="page_heading">Cold Calling</h3>
+         
          <!--redirecting buttons starts-->
-         <div class="card-group redirect_card_group">
+         <div class="card-group redirect_card_group" style="margin-left: 13%;">
             <div class="card">
                <a href="{{url('coldCalling')}}?p=Dewa">
                   <div class="card-body">
@@ -441,7 +442,7 @@
                            <div class="row">
                               <div class='col-sm-12'>
                                  <div class="form-group">
-                                    <input type="datetime-local" class="form-control datetime" id="min-date"> 
+                                    <input type="datetime-local" name="datetime" class="form-control date-time" id="min-date"> 
                                     <span class="date_time_error" style="font-size: 11px;font-weight: 500;color: red;"></span>
                                  </div>
                               </div>
@@ -467,7 +468,7 @@
          <input id="model" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger"  style="visibility: hidden;" type="button" value="">
          
          <!--PROPERTY CATEGORIES TABS START FROM HERE-->
-         <ul class="nav nav-tabs " style="    margin-top: -35px;">
+         <ul class="nav nav-tabs " style="margin-top: -35px; width: 100%;">
             <li class="nav-item">
                @if(@$_GET['type']=='')
                <a href="{{url('coldCalling')}}@if(isset($_GET['p']))?p={{$_GET['p']}} @endif"  class="nav-link active py-3">All property</a>
@@ -571,9 +572,11 @@
                                           <input type="text" class="form-control filter_input" list="building" placeholder="select Building" name="build" @if(@$_GET['build']) value="{{@$_GET['build']}}" @endif>
                                           <datalist id="building">
                                              <option value="">Select building</option>
+                                             @if(@$$buildings)
                                              @foreach($buildings as $building)
                                              <option value="{{$building}}"></option>
                                              @endforeach
+                                             @endif
                                           </datalist>
                                        </div>
                                     </div>
@@ -603,9 +606,11 @@
                                        <div class="dropdown_wrapper ">
                                           <input id="name" class="form-control filter_input" list="allNames" autocomplete="off" @if(@$_GET[agent]) value="{{@$_GET['agent']}}" @endif placeholder="select Agent"/>
                                           <datalist id="allNames">
+                                            @if(@$agents )
                                              @foreach($agents as $agent)
                                              <option data-value="{{$agent->id}}" value="{{$agent->user_name}}" >{{$agent->user_name}}</option>
                                              @endforeach
+                                            @endif
                                           </datalist>
                                           <input type="hidden" id="agentId" name="agent" value="">
                                        </div>
@@ -694,6 +699,7 @@
                         <th>Off Plan</th>
                         <th>Investor</th>
                         <th>Email</th>
+                        <th>Action</th>
                         @else
                         <th class="checkall" style="cursor:pointer">Select All</th>
                         <th>Unit No </th>
@@ -805,6 +811,9 @@
                               </div>
                               <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;display: table-cell;position: relative;right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                               <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_email">Add</label>
+                           </td>
+                           <td>
+                             <a href="{{url('EditColdcalling')}}?record_id={{$record->id}}&coldcalling-action=edit" class="edit_supervision">Edit <i class="fa fa-edit"></i></a>
                            </td>
                         </tr>
                         <!--TOGGLE ROW START FROM HERE-->
@@ -1071,6 +1080,7 @@
         
             </div>
             <div class="ml-auto pr-3">
+              @if(@$result_data)
                @if(isset($_GET['p']))
                @if(isset($_GET['type']))
                {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}}
@@ -1084,25 +1094,29 @@
                {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}}                       
                @endif   
                @endif
+              @endif
             </div>
          </div>
       </div>
    </div>
    <!-- ADD COLDCALLING PROPERTY START FROM HERE -->
-   <div class="row back_btn_row m-b-40" style="display: {{@$Formdisplay}};>;padding: 0px 40px;">
+   <div class="row back_btn_row m-b-40" style="display: {{@$Formdisplay}};>; padding: 0px 40px;">
+    @if(isset($_GET["coldcalling-action"]))
+    @else
       <div class="col-12 back_wrapper">
          <span><i class="fas fa-arrow-circle-left" id="back_to_owner"></i></span>
          <span id="back_to_owner_text">New ColdCalling Property</span>
       </div>
+    @endif
    </div>
    <div class="row owner_information_link" style="display: {{@$Formdisplay}};>;padding: 0px 40px;">
       <div class="col-lg-12">
          <div class="card card-outline-info">
             <div class="card-header">
-               <h4 class="m-b-0 text-white">Property Details</h4>
+               <h4 class="m-b-0 text-white"><?php if(isset($_GET["coldcaliing-action"])){echo "Edit Details";}else{echo "Property Details";} ?></h4>
             </div>
             <div class="card-body">
-               <form action="{{url('Addproperty')}}" class="form-horizontal" method="post" enctype='multipart/form-data' id="property">
+               <form action="<?php if(isset($_GET['coldcalling-action'])){ echo url('UpdateColdcalling'); }else{ echo url('Addproperty'); } ?>" class="form-horizontal" method="post" enctype='multipart/form-data' id="property">
                   @csrf
                   <input type="hidden" name="property_id" value="{{@$result[0]['id']}}">
                   <div class="form-body">
@@ -1188,7 +1202,7 @@
                            <div class="form-group row">
                               <label class="control-label text-right col-md-3">Washroom</label>
                               <div class="col-md-9">
-                                 <select name="Washroom" required class="form-control" style="font-size: 12px; " >
+                                 <select name="Washroom" class="form-control" style="font-size: 12px; " >
                                     <option value="{{@$result[0]['Washroom']}}">{{@$result[0]['Washroom']}}</option>
                                     <option value="1">1</option>
                                     <option value="1.5">1.5</option>
@@ -1211,7 +1225,7 @@
                            <div class="form-group row">
                               <label class="control-label text-right col-md-3">Conditions</label>
                               <div class="col-md-9">
-                                 <select name="Conditions"  class="form-control" required style="font-size: 12px;">
+                                 <select name="Conditions"  class="form-control" style="font-size: 12px;">
                                     <option value="{{@$result[0]['Conditions']}}">{{@$result[0]['Conditions']}}</option>
                                     <option value="Furnished">Furnished</option>
                                     <option value="unfurnished">unfurnished</option>
@@ -1306,7 +1320,7 @@
                            <div class="form-group row">
                               <label class="control-label text-right col-md-3">Price</label>
                               <div class="col-md-9">
-                                 <input required="" type="number" class="form-control" name="Price" value="{{@$result[0]['Price']}}">
+                                 <input type="number" class="form-control" name="Price" value="{{@$result[0]['Price']}}">
                               </div>
                            </div>
                         </div>
@@ -1344,7 +1358,7 @@
                            <div class="form-group row">
                               <label class="control-label text-right col-md-3">Add Comment</label>
                               <div class="col-md-9">
-                                 <textarea class="form-control" name="comment" required cols="4" rows="6">{{@$result[0]['comment']}}</textarea>
+                                 <textarea class="form-control" name="comment" cols="4" rows="6">{{@$result[0]['comment']}}</textarea>
                               </div>
                            </div>
                         </div>
@@ -1356,7 +1370,7 @@
                            <div class="col-md-6">
                               <div class="row">
                                  <div class="col-md-offset-3 col-md-9" style="    padding-left: 10%;">
-                                    <button type="submit" name="add_property" class="btn btn-success submit"><?php if(isset($_GET["action"])){echo "Update";}else{echo "Submit";}?></button>
+                                    <button type="submit" name="add_property" class="btn btn-success submit"><?php if(isset($_GET["coldcalling-action"])){echo "Update";}else{echo "Submit";}?></button>
                                  </div>
                               </div>
                            </div>
@@ -1806,9 +1820,47 @@
     };
   });
 </script>
-
+<script type="text/javascript">
+   $("#LandLord option").each(function(){
+       if($(this).val()=="{{@$result[0]['LandLord']}}"){
+           $(this).attr("Selected",true);
+       }
+   })
+    $("#agent option").each(function(){
+       if($(this).val()=="{{@$result[0]['agent']}}"){
+           $(this).attr("Selected",true);
+       }
+   })
+    $("#insertBuilding option").each(function(){
+       if($(this).val()=="{{@$result[0]['Building']}}"){
+           $(this).attr("Selected",true);
+       }
+   });
+    //datalist on click, agents search
+   // $(document).delegate('#name','click', function () {
+   //     alert();
+   //     var val = this.value;
+   //     if($('#allNames option').filter(function(){
+   //         if(this.value === val) {
+   //           var agentId = $(this).attr("data-value");
+   //           console.log(agentId+" if condition");
+   //           $("#agentId").val(agentId);
+   //         }      
+   //     }).length) {
+   //         //send ajax request
+        
+   //     }
+   // });
+</script>
 
 <!--REMINDER AJAX REQUEST CODE START FROM HERE-->
-@include('reminder')
+@if(ucfirst(session('role')) == (ucfirst('Admin')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+      @include('admin_SuperAgent_reminders')
+    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
+      @include('reminder')
+    @endif
+
 </body>
 </html>

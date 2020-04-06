@@ -64,6 +64,7 @@ class directPdfReportController extends Controller
                 ->orWhere('add_by', $searchTerm);
             });
             $properties = $query->get();
+            $total_properties =  $query->where('user_id',$request->agent)->count();
             view()->share(['properties'=>$properties,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$request->report_type, 'total_properties'=>$total_properties]);    
         }else if($request->report_type == "lead"){
             $query = lead::query();
@@ -89,6 +90,7 @@ class directPdfReportController extends Controller
             }
             
             $leads = $query->where("lead_user",$agentName->user_name)->get();
+            $total_leads = $query->where("lead_user",$agentName->user_name)->count();
             view()->share(['leads'=>$leads,'fromDate'=>@$fromDate,"toDate"=>@$toDate,"agentName"=>$agentName->user_name,'reportType'=>$request->report_type, 'total_leads'=>$total_leads]);  
         }else if($request->report_type == "coldcallings"){
             $query = coldcallingModel::query();
@@ -112,6 +114,7 @@ class directPdfReportController extends Controller
 
                 $query->whereIn('coldcallings.access', $access);
                 // dd($query);
+                $total_coldcallings =  $query->whereIn('coldcallings.access', $access)->where('user_id',$searchTerm)->count();
             }
             // if($request->point){
             //     // dd($request->access_type);

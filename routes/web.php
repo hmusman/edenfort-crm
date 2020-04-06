@@ -44,6 +44,7 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('get-all-reminder', 'reminderController@getallReminder');
     Route::get('agent-reminder', 'reminderController@getallReminder');
     Route::get('get-reminder-record', 'reminderController@getreminderRecord');
+    Route::get('get-single-reminder-record', 'reminderController@getSingleReminderRecord');
     Route::get('update-reminder', 'reminderController@updateReminderRecord');
     
     Route::get('get-all-agents-reminder', 'getAgentReminders@index');
@@ -99,8 +100,16 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('Addproperty', 'adminPropertyController@Addproperty');
     Route::post('Editproperty', 'adminPropertyController@Editproperty');
     Route::get('EditProperty', 'adminPropertyController@EditProperty');
+
+    Route::post('EditColdcalling', 'adminColdCallingController@EditColdcalling');
+    Route::get('EditColdcalling', 'adminColdCallingController@EditColdcalling');
+
     Route::post('UpdateProperty', 'adminPropertyController@UpdateProperty');
     Route::get('UpdateProperty', 'adminPropertyController@UpdateProperty');
+
+    Route::post('UpdateColdcalling', 'adminColdCallingController@UpdateColdcalling');
+    Route::get('UpdateColdcalling', 'adminColdCallingController@UpdateColdcalling');
+
     Route::get('OwnerProperty', 'ownerController@OwnerProperty');
     Route::get('/addLandlordEmailPass', 'adminPropertyController@addLandlordEmailPass');
      Route::get('DeletePropertyByAdmin/{id}', 'adminPropertyController@DeleteProperty');
