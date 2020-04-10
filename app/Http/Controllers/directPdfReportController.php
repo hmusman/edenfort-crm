@@ -114,7 +114,7 @@ class directPdfReportController extends Controller
 
                 $query->whereIn('coldcallings.access', $access);
                 // dd($query);
-                $total_coldcallings =  $query->whereIn('coldcallings.access', $access)->where('user_id',$searchTerm)->count();
+                $total_coldcallings =  $query->whereIn('coldcallings.access', $access)->where('user_id',$request->agent)->count();
             }
             // if($request->point){
             //     // dd($request->access_type);
