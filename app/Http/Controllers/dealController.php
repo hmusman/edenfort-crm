@@ -41,6 +41,7 @@ class dealController extends Controller {
         $buildings = Building::all();
         $agents = user::where(['role' => 3])->get();
         $query = deal::query();
+        $getAgentName = '';
         if($request->start_date){
             $query->where("deal_start_date",">=",$request->start_date);
         }

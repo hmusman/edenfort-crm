@@ -7,6 +7,15 @@
 @endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <style>
+   @media only screen and (max-width: 600px) {
+    .filter{
+        width: 98%;
+        margin-left: 3px !important;
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+    
+   }
 .filter_input{
         background-color:#1976D2 ;
         color:#fff;
@@ -87,7 +96,7 @@
                                               <input type="hidden" id="agentId" name="agent" value="">
                                            </div>
                                            </div>
-                                        <div class="col-md-3 ml-5">
+                                        <div class="col-md-3 ml-5 filter">
                                        <div class="filter_btn_wrapper">
                                            <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                        </div>

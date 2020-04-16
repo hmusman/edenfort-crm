@@ -68,6 +68,73 @@
    .btn-add-contract{
         margin-bottom:10px;   
    }
+    @media only screen and (max-width: 600px) {
+      .tabcontent-border{
+         width: 122%;
+         margin-left: -10%;
+      }
+      .unit_no{
+         margin-right: 78%;
+      }
+      .building{
+         margin-right: 80%;
+      }
+      .location{
+         margin-right: 80%;
+      }
+      .bedroom{
+         margin-right: 80%;
+      }
+      .condition{
+         margin-right: 80%;
+      }
+      .washroom{
+         margin-right: 80%;
+      }
+      .owner{
+         margin-right: 80%;
+      }
+      .maintenence-amount{
+         margin-right: 54%;
+      }  
+      .access{
+         margin-right: 80%;
+      }  
+      .dep_amount{
+         margin-right: 49%;         
+      }  
+      .add-building{
+       float: right;
+        margin-top: -20%;
+     }
+
+     .add-user{
+       float: right;
+        margin-top: -20%;
+     }
+     .name{
+         margin-right: 80%;         
+      } 
+      .number{
+         margin-right: 80%;
+      }
+      .email{
+         margin-right: 83%;
+      }
+      .s_date{
+         margin-right: 74%;
+      }
+      .e_date{
+         margin-right: 76%;
+      }
+      .contract{
+         margin-right: 57%;
+      }
+      .btn-add-contract{
+         margin-top: 10%;
+      }
+
+    }
 </style>
 <!--add user mode-->
 <div class="modal fade" id="exampleModal_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -403,7 +470,7 @@
                               <div class="row">
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Unit No</label>
+                                       <label class="control-label text-right col-md-3 unit_no">Unit No</label>
                                        <div class="col-md-9">
                                           <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
                                           <!-- <small class="form-control-feedback"> This is inline help </small>  -->
@@ -413,7 +480,7 @@
                                  <!--/span-->
                                  <div class="col-md-6">
                                     <div class="form-group has-danger row">
-                                       <label class="control-label text-right col-md-3">Building</label>
+                                       <label class="control-label text-right col-md-3 building">Building</label>
                                        <div class="col-md-8" style="padding-left: 15px;">
                                           <select class="form-control" required="" style="font-size: 12px;" name="building" id="building">
                                              <option value="">Select option</option>
@@ -432,7 +499,7 @@
                               <div class="row">
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Location</label>
+                                       <label class="control-label text-right col-md-3 location">Location</label>
                                        <div class="col-md-9">
                                           <input required="" type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
                                           <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
@@ -441,7 +508,7 @@
                                  </div>
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Bedroom</label>
+                                       <label class="control-label text-right col-md-3 bedroom">Bedroom</label>
                                        <div class="col-md-9">
                                           <select required="" style="font-size: 12px;" name="Bedroom" class="form-control">
                                              <option value="{{@$result[0]['Bedroom']}}">{{@$result[0]['Bedroom']}}</option>
@@ -468,7 +535,7 @@
                               <div class="row">
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Conditions</label>
+                                       <label class="control-label text-right col-md-3 condition">Conditions</label>
                                        <div class="col-md-9">
                                           <select required="" style="font-size: 12px;" name="Conditions" class="form-control" required="">
                                              <option value="{{@$result[0]['area']}}">{{@$result[0]['Conditions']}}</option>
@@ -482,7 +549,7 @@
                                  </div>
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Washroom</label>
+                                       <label class="control-label text-right col-md-3 washroom">Washroom</label>
                                        <div class="col-md-9">
                                           <select  style="font-size: 12px;" name="Washroom" class="form-control">
                                              <option value="{{@$result[0]['Washroom']}}">{{@$result[0]['Washroom']}}</option>
@@ -506,7 +573,7 @@
                               <div class="row">
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Owner</label>
+                                       <label class="control-label text-right col-md-3 owner">Owner</label>
                                        <div class="col-md-8" style="padding-left: 15px;">
                                           <select class="form-control" required="" style="font-size: 12px;" name="assigned_user" id="assigned_user">
                                              <option value="">Select option</option>
@@ -522,7 +589,7 @@
                                  </div>
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Maintenance amount</label>
+                                       <label class="control-label text-right col-md-3 maintenence-amount">Maintenance amount</label>
                                        <div class="col-md-9">
                                           <input required="" type="number" name="maintenance_amount" class="form-control" value="{{@$result[0]['maintenance_amount']}}" <?php if(isset($_GET["action"])){echo "disabled";} ?>>
                                           <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
@@ -535,7 +602,7 @@
                               <div class="row">
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Access</label>
+                                       <label class="control-label text-right col-md-3 access">Access</label>
                                        <div class="col-md-9">
                                           <select class="form-control" name="access" style="font-size: 13px;" required="">
                                              <option value="">Select option</option>
@@ -549,7 +616,7 @@
                                  </div>
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Security Deposit Amount</label>
+                                       <label class="control-label text-right col-md-3 dep_amount">Security Deposit Amount</label>
                                        <div class="col-md-9">
                                           <input required="" type="number" name="security_deposit_amount" class="form-control" value="{{@$result[0]['security_deposit_amount']}}" <?php if(isset($_GET["action"])){echo "disabled";} ?>>
                                        </div>
@@ -566,7 +633,7 @@
                               <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Name</label>
+                                       <label class="control-label text-right col-md-3 name">Name</label>
                                        <div class="col-md-9">
                                           <input required="" type="text" class="form-control" name="tenant_name" value="{{@$result[0]['tenant_name']}}">
                                        </div>
@@ -574,7 +641,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Number</label>
+                                       <label class="control-label text-right col-md-3 number">Number</label>
                                        <div class="col-md-9">
                                           <input required="" type="number" class="form-control" name="tenant_number" value="{{@$result[0]['tenant_number']}}">
                                        </div>
@@ -582,7 +649,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Email</label>
+                                       <label class="control-label text-right col-md-3 email">Email</label>
                                        <div class="col-md-9">
                                           <input required="" type="email" class="form-control" name="tenant_email" value="{{@$result[0]['tenant_email']}}">
                                        </div>
@@ -593,7 +660,7 @@
                               <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Start Date</label>
+                                       <label class="control-label text-right col-md-3 s_date">Start Date</label>
                                        <div class="col-md-9">
                                           <input required="" type="Date" class="form-control" name="contract_start_date" value="{{@$result[0]['contract_start_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                        </div>
@@ -601,7 +668,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">End Date</label>
+                                       <label class="control-label text-right col-md-3 e_date">End Date</label>
                                        <div class="col-md-9">
                                           <input required="" type="Date" class="form-control" name="contract_end_date" value="{{@$result[0]['contract_end_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                        </div>
@@ -609,7 +676,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Contract Attchment</label>
+                                       <label class="control-label text-right col-md-3 contract">Contract Attchment</label>
                                        <div class="col-md-6">
                                           <?php if(!isset($_GET['action'])){ ?>
                                           <input required="" type="file" class="file" name="contract_attachment">
@@ -649,7 +716,7 @@
                               <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">Start Date</label>
+                                       <label class="control-label text-right col-md-3 s_date">Start Date</label>
                                        <div class="col-md-9">
                                           <input required="" type="Date" class="form-control" name="supervision_contract_start_date" value="{{@$result[0]['supervision_contract_start_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                        </div>
@@ -657,7 +724,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-3">End Date</label>
+                                       <label class="control-label text-right col-md-3 e_date">End Date</label>
                                        <div class="col-md-9">
                                           <input required="" type="Date" class="form-control" name="supervision_contract_end_date" value="{{@$result[0]['supervision_contract_end_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                        </div>
@@ -665,7 +732,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group row">
-                                       <label class="control-label text-right col-md-5">Contract Attchment</label>
+                                       <label class="control-label text-right col-md-5 contract">Contract Attchment</label>
                                        <div class="col-md-7">
                                           <?php if(!isset($_GET['action'])){ ?>
                                           <input required="" type="file" class="file" name="supervision_contract_attachment">

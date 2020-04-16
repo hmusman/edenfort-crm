@@ -57,6 +57,9 @@
    padding-top:8px !important;
    padding-bottom:8px !important;
    }
+    @media only screen and (max-width: 600px) {
+      
+    }
 </style>
 <div class="page-wrapper" style="margin-top: 2%;">
    <div class="container-fluid">

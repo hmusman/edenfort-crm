@@ -81,9 +81,57 @@
     padding: 69px 0px 0px 0px !important;
 }
  @media only screen and (max-width: 600px) {
+  .nav-justified{
+    width: 100% !important;
+    margin-left: -1px !important;
+  }
+  .deals_tabs{
+        width: 98% !important;
+        margin-left: 1px !important;
+      }
+  .profile{
+    position: absolute;
+    right: 20px !important;
+    top: 5px;
+  }
+  .topbar .top-navbar .navbar-nav .dropdown-menu {
+    position: absolute;
+    margin-left: -800%;
+  }
   .sidebar-nav{
     padding: 10px !important;
   }
+  .cold-nav{
+    width: 120% !important;
+    margin-left: -14px !important;
+    margin-right: -8%;
+  }
+  .cold-card{
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2) !important;
+    width: 121%!important;
+    margin-left: -29px !important;
+    margin-right: -5%;
+  }
+  .nav.nav-tabs{
+    width: 120%;
+    margin-left: -30px;
+  }
+  .card-no-border .card {
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    width: 121%;
+    margin-left: -29px;
+}
+.redirect_card_group{
+  margin-left: 29% !important;
+}
+.reminder-table{
+  width: 115%;
+  margin-left: -4%;
+}
+.agent-report{
+  margin-left: -30px;
+  margin-right: -26px;
+}
 }
 }
       </style>
@@ -100,7 +148,7 @@
                </a>
             </div>
             <ul class="navbar-nav my-lg-0">
-               <li style="position: absolute;right: 0px;top: 5px;">
+               <li class="profile" style="position: absolute;right: 0px;top: 5px;">
                   <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{url('public/assets/images/users/dumy.jpg'
                      )}}" alt="user" class="profile-pic" />
                   </a> 

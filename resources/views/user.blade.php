@@ -6,6 +6,37 @@
   <?php redirect('/'); ?>
 @endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
+    <style type="text/css" media="screen">
+         @media only screen and (max-width: 600px) {
+            .username{
+                margin-right: 72%;
+            }
+            .first_name{
+                margin-right: 72%;
+            }
+            .last_name{
+                margin-right: 72%;
+            }
+            .gender{
+                margin-right: 80%;
+            }
+            .dob{
+                margin-right: 70%;
+            }
+            .role{
+                margin-right: 90%;
+            }
+            .email{
+                margin-right: 90%;
+            }
+            .phone{
+                margin-right: 90%;
+            }
+            .password{
+                margin-right: 90%;
+            }
+         }
+    </style>
  <div class="page-wrapper" style="margin-top: 2%;">
 <div class="container-fluid">
     @if(session('msg'))
@@ -138,7 +169,7 @@
                                 
                                  <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">User Name</label>
+                                        <label class="control-label text-right col-md-3 username">User Name</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder="user Name" name="user_name" value="{{@$record->user_name}}" required="" id="user_name">
                                            <!--  <small class="form-control-feedback"> This is inline help </small> --> </div>
@@ -147,7 +178,7 @@
                                 <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">First Name</label>
+                                        <label class="control-label text-right col-md-3 first_name">First Name</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder="First Name" name="First_name" value="{{@$record->First_name}}" required="">
                                            <!--  <small class="form-control-feedback"> This is inline help </small> --> </div>
@@ -160,7 +191,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group has-danger row">
-                                        <label class="control-label text-right col-md-3">Last Name</label>
+                                        <label class="control-label text-right col-md-3 last_name">Last Name</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control form-control-danger" placeholder="Last Name" name="Last_Name" required="" value="{{@$record->Last_name}}">
                                             <!-- <small class="form-control-feedback"> This field has error. </small> --> </div>
@@ -168,7 +199,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Gender</label>
+                                        <label class="control-label text-right col-md-3 gender">Gender</label>
 
                                         <div class="col-md-9">
                                               <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="Gender" style="font-size: 12px;" required="">
@@ -185,7 +216,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Date of Birth</label>
+                                        <label class="control-label text-right col-md-3 dob">Date of Birth</label>
                                         <div class="col-md-9">
                                             <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="birth_date" required="" value="{{@$record->birth_date}}">
                                         </div>
@@ -193,7 +224,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Role</label>
+                                        <label class="control-label text-right col-md-3 role">Role</label>
                                         <div class="col-md-9">
                                             <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="role" style="font-size: 12px;" required="" id="role">
                                                 <option value="">Select Role</option>
@@ -220,7 +251,7 @@
                                 <?php } ?>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Email</label>
+                                        <label class="control-label text-right col-md-3 email">Email</label>
                                         <div class="col-md-9">
                                             <input type="email" class="form-control" name="Email" placeholder="Email" required="" value="{{@$record->Email}}">
                                         </div>
@@ -246,7 +277,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Phone</label>
+                                        <label class="control-label text-right col-md-3 phone">Phone</label>
                                         <div class="col-md-9">
                                             <input type="number" class="form-control" name="Phone" placeholder="Phone" required="" value="{{@$record->Phone}}">
                                         </div>
@@ -255,7 +286,7 @@
                                 <!--/span-->
                                <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Password</label>
+                                        <label class="control-label text-right col-md-3 password">Password</label>
                                         <div class="col-md-9">
                                             <input type="Password" class="form-control" name="Password" placeholder="**********" value="{{@$record->Password}}">
                                         </div>

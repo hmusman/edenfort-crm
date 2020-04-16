@@ -40,6 +40,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<style type="text/css" media="screen">
+     @media only screen and (max-width: 600px) {
+  .topbar{
+    margin-top: -33%;
+  }
+  .login{
+    margin-top: 33% !important;
+  }
+}
+</style>
 </head>
 
 <body class="fix-header card-no-border logo-center">
@@ -115,7 +126,7 @@
     @endif
 @endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additionalLogin.css')}}">
-            <div class="container-fluid" style="margin-top: 4%;">
+            <div class="container-fluid login" style="margin-top: 4%;">
                 <h3>Login</h3>
                  <form action="{{url('CheckLogin')}}" method="post" id="login_form">
                     @csrf

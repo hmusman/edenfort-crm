@@ -39,6 +39,7 @@
             background-color: white;
             font-size: 12px;
             width: 86%;
+            z-index: 9999;
         }
 
         .MultiCheckBoxDetailBody {

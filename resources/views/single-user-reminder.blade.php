@@ -33,13 +33,13 @@
 
 
 	<div class="page-wrapper">
-		<div class="container">
+		<div class="container reminder-table">
 			 <div style="background:white;" class="mb-3 px-3">
     <div class="tab-pane active p-20 " >
       <h3 align="center">{{ $user->user_name}}'s Reminders</h3>
        <div class="form-body">
            <div class="row"> 
-                <table id="myTable" class="table table-bordered table-hover">
+                <table id="myTable" class="table table-bordered table-hover table-responsive">
                     <thead>
                         <tr>
                             <th>#</th>

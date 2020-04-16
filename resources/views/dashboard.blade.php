@@ -1,5 +1,17 @@
 @include('inc.header')
 <style>
+   @media only screen and (max-width: 600px) {
+    .crd{
+      margin-left: 10px;
+    }
+    .nav.nav-tabs {
+      width: 100%;
+      margin-left: -4px;
+    }
+    .btn{
+          margin-top: 10px;
+    }
+   }
     .nav-tabs li{
         color:white !important;
          text-align:center !important;
@@ -40,11 +52,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <h2 class="m-b-0"><i class="mdi mdi-briefcase-check text-info"></i></h2>
                                     <h3 class="">{{$properties}}</h3>
                                     <h6 class="card-subtitle">Properties</h6></div>
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <div class="progress">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -57,11 +69,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-success"></i></h2>
                                     <h3 class="">{{$contracts}}</h3>
                                     <h6 class="card-subtitle">Supervisions</h6></div>
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <div class="progress">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -74,7 +86,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <h2 class="m-b-0"><i class="mdi mdi-wallet text-purple"></i></h2>
                                     <h3 class="">
                                         
@@ -85,7 +97,7 @@
                          @endif
                                         </h3>
                                     <h6 class="card-subtitle">Cold Calling</h6></div>
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <div class="progress">
                                         <div class="progress-bar bg-primary" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -98,11 +110,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
                                     <h3 class="">{{$leads}}</h3>
                                     <h6 class="card-subtitle">Leads</h6></div>
-                                <div class="col-12">
+                                <div class="col-12 crd">
                                     <div class="progress">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -115,7 +127,7 @@
 
 <!--Agent monthly report or last 30 days report -->
 
- <div style="background:white;" class="mb-3 px-3">
+ <div style="background:white;" class="agent-report mb-3 px-3">
     <div class="tab-pane active p-20 " >
       <h3 align="center">Agent 30 Days Report</h3>
        <div class="form-body">

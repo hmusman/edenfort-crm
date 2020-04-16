@@ -140,11 +140,76 @@
       }
      
    }
-   @media (min-width: 680px){
+    @media only screen and (max-width: 600px) {
       .media-wrapper{
          width: 53% !important;
       }
-     
+      .cold{
+        margin-left: -50px;
+        max-width: 112%;
+        margin-left: -18%;
+      }
+      #back_to_owner_text, #back_to_prop_text {
+          padding: 5px 15px;
+          font-size: 19px;
+          font-weight: 500;
+      }
+
+      .owner_information_link{
+        margin-left: -57px !important;
+      }
+      .mobile-card{
+        width: 113% !important;
+      }
+     .unit_no{
+       margin-right: 78%;
+     }
+     .building{
+       margin-right: 80%;
+     }
+     .landlord{
+       margin-right: 80%;
+     }
+     .add_comment{
+       margin-right: 66%;
+     }
+     .phone{
+       margin-right: 66%;
+     }
+     .dewa_no{
+       margin-right: 76%;
+     }
+     .bedroom{
+       margin-right: 77%;
+     }
+     .washroom{
+       margin-right: 77%;
+     }
+     .condition{
+       margin-right: 77%;
+     }
+     .area {
+       margin-right: 90%;
+     }
+     .email{
+       margin-right: 90%;
+     }
+     .access{
+       margin-right: 90%;
+     }
+     .price{
+       margin-right: 90%;
+     }
+     .areasqft{
+       margin-right: 75%;
+     }
+     .ptype{
+       margin-right: 67%;
+     }
+     .add-building{
+       float: right;
+        margin-top: -20%;
+     }
    }
 </style>
 <style>
@@ -468,7 +533,7 @@
          <input id="model" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger"  style="visibility: hidden;" type="button" value="">
          
          <!--PROPERTY CATEGORIES TABS START FROM HERE-->
-         <ul class="nav nav-tabs " style="margin-top: -35px; width: 100%;">
+         <ul class="nav nav-tabs cold-nav" style="margin-top: -35px; width: 100%;">
             <li class="nav-item">
                @if(@$_GET['type']=='')
                <a href="{{url('coldCalling')}}@if(isset($_GET['p']))?p={{$_GET['p']}} @endif"  class="nav-link active py-3">All property</a>
@@ -555,7 +620,7 @@
             </li>
          </ul>
          <!--PROPERTY CATEGORIES TABS END HERE-->
-         <div class="card">
+         <div class="card cold-card">
             <div class="card-body table-responsive">
                <!--COLDCALLING FILTERS AND SEARCH START FROM HERE-->  
                <div class="col-lg-12">
@@ -1103,14 +1168,14 @@
    <div class="row back_btn_row m-b-40" style="display: {{@$Formdisplay}};>; padding: 0px 40px;">
     @if(isset($_GET["coldcalling-action"]))
     @else
-      <div class="col-12 back_wrapper">
+      <div class="col-12 back_wrapper cold">
          <span><i class="fas fa-arrow-circle-left" id="back_to_owner"></i></span>
          <span id="back_to_owner_text">New ColdCalling Property</span>
       </div>
     @endif
    </div>
    <div class="row owner_information_link" style="display: {{@$Formdisplay}};>;padding: 0px 40px;">
-      <div class="col-lg-12">
+      <div class="col-lg-12 mobile-card">
          <div class="card card-outline-info">
             <div class="card-header">
                <h4 class="m-b-0 text-white"><?php if(isset($_GET["coldcaliing-action"])){echo "Edit Details";}else{echo "Property Details";} ?></h4>
@@ -1123,7 +1188,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Unit No</label>
+                              <label class="control-label text-right col-md-3 unit_no">Unit No</label>
                               <div class="col-md-9">
                                  <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
                                  <!-- <small class="form-control-feedback"> This is inline help </small>  -->
@@ -1133,7 +1198,7 @@
                         <!--/span-->
                         <div class="col-md-6">
                            <div class="form-group has-danger row">
-                              <label class="control-label text-right col-md-3">Building</label>
+                              <label class="control-label text-right col-md-3 building">Building</label>
                               <div class="col-md-8" style="padding-left: 15px;">
                                  <select class="form-control" required style="font-size: 12px;" name="building" id="insertBuilding">
                                     <option value="">Select option</option>
@@ -1152,7 +1217,7 @@
                      <div class="row">
                      <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Dewa No</label>
+                                 <label class="control-label text-right col-md-3 dewa_no">Dewa No</label>
                                  <div class="col-md-9">
                                     <input type="text" class="form-control" name="dewa_no" value="{{@$result[0]['dewa_no']}}">
                                     <!-- <small class="form-control-feedback"> This is inline help </small>  -->
@@ -1162,7 +1227,7 @@
                         <!--/span-->
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Bedroom</label>
+                              <label class="control-label text-right col-md-3 bedroom">Bedroom</label>
                               <div class="col-md-9">
                                  <select required style="font-size: 12px;" name="Bedroom" class="form-control">
                                     <option value="{{@$result[0]['Bedroom']}}">{{@$result[0]['Bedroom']}}</option>
@@ -1191,7 +1256,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Area</label>
+                              <label class="control-label text-right col-md-3 area">Area</label>
                               <div class="col-md-9">
                                  <input required="" type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
                                  <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
@@ -1200,7 +1265,7 @@
                         </div>
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Washroom</label>
+                              <label class="control-label text-right col-md-3 washroom">Washroom</label>
                               <div class="col-md-9">
                                  <select name="Washroom" class="form-control" style="font-size: 12px; " >
                                     <option value="{{@$result[0]['Washroom']}}">{{@$result[0]['Washroom']}}</option>
@@ -1223,7 +1288,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Conditions</label>
+                              <label class="control-label text-right col-md-3 condition">Conditions</label>
                               <div class="col-md-9">
                                  <select name="Conditions"  class="form-control" style="font-size: 12px;">
                                     <option value="{{@$result[0]['Conditions']}}">{{@$result[0]['Conditions']}}</option>
@@ -1238,7 +1303,7 @@
                         </div>
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Email</label>
+                              <label class="control-label text-right col-md-3 email">Email</label>
                               <div class="col-md-9">
                                  <?php $temp=explode(',', @$result[0]['email']); if(count($temp) > 1){ foreach ($temp as $value) {?>
                                  <input  type="email" class="form-control" name="email[]" value="{{$value}}" style="margin-bottom: 1%">
@@ -1254,7 +1319,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">LandLord</label>
+                              <label class="control-label text-right col-md-3 landlord">LandLord</label>
                               <div class="col-md-9">
                                  <input required="" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
                               </div>
@@ -1262,7 +1327,7 @@
                         </div>
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Access</label>
+                              <label class="control-label text-right col-md-3 access">Access</label>
                               <div class="col-md-9">
                                  <select class="form-control access" name="access" style="font-size: 12px;" required>
                                     <option value="">Select option</option>
@@ -1306,7 +1371,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Phone Number</label>
+                              <label class="control-label text-right col-md-3 phone">Phone Number</label>
                               <div class="col-md-9">
                                  <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
                                  <input required="" type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
@@ -1318,7 +1383,7 @@
                         </div>
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Price</label>
+                              <label class="control-label text-right col-md-3 price">Price</label>
                               <div class="col-md-9">
                                  <input type="number" class="form-control" name="Price" value="{{@$result[0]['Price']}}">
                               </div>
@@ -1329,7 +1394,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Area Sqft</label>
+                              <label class="control-label text-right col-md-3 areasqft">Area Sqft</label>
                               <div class="col-md-9">
                                  <input required="" type="number" class="form-control" name="Area_Sqft" value="{{@$result[0]['Area_Sqft']}}">
                               </div>
@@ -1338,7 +1403,7 @@
 
                         <div class="col-md-6">
                               <div class="form-group row">
-                                 <label class="control-label text-right col-md-3">Property Type</label>
+                                 <label class="control-label text-right col-md-3 ptype">Property Type</label>
                                  <div class="col-md-9">
                                     <select class="form-control" style="font-size:12px !important;" name="property_type">
                                        <option value="">Please Select Type</option>
@@ -1356,7 +1421,7 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                              <label class="control-label text-right col-md-3">Add Comment</label>
+                              <label class="control-label text-right col-md-3 add_comment">Add Comment</label>
                               <div class="col-md-9">
                                  <textarea class="form-control" name="comment" cols="4" rows="6">{{@$result[0]['comment']}}</textarea>
                               </div>

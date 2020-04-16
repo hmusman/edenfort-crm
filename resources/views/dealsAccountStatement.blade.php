@@ -83,6 +83,12 @@ label,input,textarea,select{
     position: relative;
     left: -8px;
 }
+ @media only screen and (max-width: 600px) {
+  .deals_tabs{
+      width: 120% !important;
+      margin-left: -30px !important;
+  }
+ }
 
 </style>
         <div class="page-wrapper" style="margin-top: 2%;">

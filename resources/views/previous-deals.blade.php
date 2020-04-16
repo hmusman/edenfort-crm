@@ -82,6 +82,18 @@
         margin-left: 20px;
         margin-top: 4px;
    }
+    @media only screen and (max-width: 600px) {
+      .deals{
+        margin-left: 8%;
+      }
+      .nav-item{
+        margin-left: 5%;
+      }
+      .aed-cards{
+        margin-left: 4%;
+        margin-right: 3%;
+      }
+    }
 </style>
 <div class="page-wrapper" style="margin-top: 2%;">
 <div class="container-fluid">
@@ -90,7 +102,7 @@
    <div class="col-12 col-sm-12">
       {!! session('message') !!}
       <div class="card">
-          <form action="{{url('get-months-deals')}}" method="get">
+          <form class="deals" action="{{url('get-months-deals')}}" method="get">
              <ul class="nav nav-tabs deals_tabs">
                 <li class="nav-item">
                     
@@ -106,7 +118,7 @@
             @php 
                 $commission = App\Models\deal::getTotalDealsCommissions($currentMonth,$currentYear);  
             @endphp
-            <div class="row">
+            <div class="row aed-cards">
                <div class="col-sm-4">
                   <div class="card mt-0 mb-0">
                      <div class="d-flex flex-row">

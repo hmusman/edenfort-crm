@@ -17,6 +17,20 @@
     padding: 10px 10px !important;
     text-align: start !important;
 }
+ @media only screen and (max-width: 600px) {
+  .select_agent{
+    margin-left: 7%;
+  }
+  .select_from{
+    margin-left: 22%;
+  }
+  .select_to{
+    margin-left: 27%;
+  }
+  .submit_btn{
+    margin-left: 34%;
+  }
+ }
 </style>
   
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,19 +96,19 @@
                                      <div class="actions">
                                         <form action="{{url('agentActivityProperties')}}" method="get">
                                           <table>
-                                            <tr>
-                                              <td><label>Select Agent : </label></td>
+                                            <tr class="row ml-3">
+                                              <td class="select_agent"><label>Select Agent : </label></td>
                                               <td><select style="font-size: 12px;" class="form-control" name="agent" required="">
                                                 <option disabled selected="" value="">Select Agent</option>
                                                 @foreach($agents as $allAgents)
                                                 <option <?php if($allAgents->id==@$selectedAgent){ echo "selected"; }   ?> value="{{$allAgents->id}}">{{$allAgents->user_name}}</option>
                                                 @endforeach
                                             </select></td>
-                                            <td><label>From : </label></td>
+                                            <td class="select_from"><label>From : </label></td>
                                             <td><label><input required="" type="date" name="from_date" class="form-control" value="{{@$from_date}}"></label></td>
-                                            <td><label>TO : </label></td>
+                                            <td class="select_to"><label>TO : </label></td>
                                             <td><label><input required="" value="{{@$to_date}}" type="date" name="to_date" class="form-control"></label></td>
-                                            <td><label><input type="submit" name="get_activities" class="btn btn-primary" value="Submit"></label></td>
+                                            <td class="submit_btn"><label><input type="submit" name="get_activities" class="btn btn-primary" value="Submit"></label></td>
                                             </tr>
                                           </table>
                                         </form>
