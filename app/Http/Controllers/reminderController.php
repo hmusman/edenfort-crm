@@ -30,13 +30,14 @@ class reminderController extends Controller
         $date=$mytime->format('Y-m-d G:i:s');
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->where('date_time', '<=', $date)->orderBy('date_time', 'DESC')->get();
+            // dd($result);
         }
         else if(session('role') == 'Admin'){
-            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") GROUP BY b.user_id');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") b.date_time <= CURRENT_TIMESTAMP GROUP BY b.user_id');
         }
         else if(session('role') == 'SuperAgent'){
 
-            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT" or add_by="ADMIN") AND(b.status="viewed") GROUP BY b.user_id;');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id and (add_by="SUPERAGENT" or add_by="AGENT" or add_by="ADMIN") AND(b.status="viewed") and b.date_time <= CURRENT_TIMESTAMP GROUP BY b.user_id;');
         }
         return json_decode(json_encode($result),true);
     }
@@ -44,6 +45,7 @@ class reminderController extends Controller
      public function getReminders(){
         $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i:s');
+        // dd($date);
         if(session('role') == 'Agent'){
             $result=Reminder::where(['add_by' => 'AGENT','user_id'=>session('user_id')])->where('status',null)->where('date_time','<=',$date)->get();
             // dd($result);
@@ -309,6 +311,21 @@ class reminderController extends Controller
       if(input::get('property_id')){
         $timedate = date('Y-m-d H:i:s', strtotime(input::get('datetime')));
         if(session('role') == 'Admin' ){
+
+            $property = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id']);
+            $property_id = $property->property_id;
+            $oldReminder = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id', 'reminder_type', 'reminder_of', 'user_id', 'date_time', 'description']);
+
+            // $history = json_encode($oldReminder);
+            Reminder::where('property_id', input::get('property_id'))->where('user_id', session('user_id'))->update(['description' => input::get('description'), 'date_time' => $timedate, 'status' => NULL]);
+
+            ReminderHistory::updateOrCreate(
+              ['property_id' => $property_id],
+              ['history' => $oldReminder]
+            );
+            
+        }
+        else if(session('role') == 'SuperAgent' ){
 
             $property = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id']);
             $property_id = $property->property_id;

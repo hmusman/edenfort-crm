@@ -74,7 +74,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 Building : '.$data->Building.'  
 Size - '.$data->Area_Sqft.'
 Price -'.$data->Price.'
-Type- '.$data->type.'
+Bedroom- '.$data->Bedroom.'
 Condition- '.$data->Conditions.' 
 
 Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'

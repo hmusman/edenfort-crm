@@ -6,6 +6,13 @@
 <?php redirect('/'); ?>
 @endif
 <style type="text/css">
+  .filter_button{
+    margin-left: 850px;
+    margin-top: -36px;
+  }
+  .assign_button, .export_button{
+    margin-top: -36px;
+  }
    .upcoming_badge{
       background-color: red;
     position: absolute;
@@ -141,6 +148,14 @@
      
    }
     @media only screen and (max-width: 600px) {
+      .filter_button, .assign_button, .export_button {
+      margin-top: 0px !important;
+      margin-left: 0px !important;
+    } 
+      .coldAssign, .coldFilter{
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+      }
       .media-wrapper{
          width: 53% !important;
       }
@@ -628,16 +643,16 @@
                      <div class="col-md-12">
                         <form method="GET" class="coldcallingForm" id="coldsForm">
                            <div class="row mt-2 mb-2">
-                              <div class="col-md-9">
+                              <div class="col-md-12">
                                  <div class="row">
                                     @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
                                     @if(isset($_GET['p'])) <input type="hidden" name="p" value="{{@$_GET['p']}}"/> @endif
-                                    <div class="col-md-2 pl-1 pr-1">
+                                    <div class="col-md-4 pl-1 pr-1">
                                        <div class="dropdown_wrapper ">
                                           <input type="text" class="form-control filter_input" list="building" placeholder="select Building" name="build" @if(@$_GET['build']) value="{{@$_GET['build']}}" @endif>
                                           <datalist id="building">
                                              <option value="">Select building</option>
-                                             @if(@$$buildings)
+                                             @if(@$buildings)
                                              @foreach($buildings as $building)
                                              <option value="{{$building}}"></option>
                                              @endforeach
@@ -699,17 +714,17 @@
                                  </div>
                               </div>
                               @if(ucfirst(session('role'))==ucfirst('Admin'))
-                              <div class="col-md-1">
+                              <div class="col-md-2  filter_button">
                                  <div class="filter_btn_wrapper">
                                     <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
                                  </div>
                               </div>
-                              <div class="col-md-1 ">
+                              <div class="col-md-1 assign_button">
                                        <div class="filter_btn_wrapper">
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
                                        </div>
                                     </div>
-                                <div class="col-md-1">
+                                <div class="col-md-1 export_button">
                                   <div class="filter_btn_wrapper">
                                     <input type="button" class="btn btn-primary" id="export" value="Export CVS">
                                     <!-- <a class="export btn btn-primary" style="color: white;" href="{{url('coldcallignexport')}}">Export CSV</a> -->
@@ -718,22 +733,22 @@
                               @endif
                               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
                               @if(@$permissions->coldCallingAssign==NULL)
-                                 <div class="col-md-3">
+                                 <div class="col-md-3 coldFilter" style="margin-left: 1071px; margin-top: -36px; padding-left: 0%; padding-right: 9px;">
                                     <div class="filter_btn_wrapper">
                                        <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                     </div>
                                  </div>
                               @else
-                               <div class="col-md-2">
+                               <div class="col-md-2 pl-1 pr-1 coldFilter" style="margin-left: 959px; margin-top: -36px;">
                                     <div class="filter_btn_wrapper">
                                        <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                     </div>
                                  </div>
                               @endif
                                   @if(@$permissions->coldCallingAssign==1) 
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 pl-1 pr-1 coldAssign" style="margin-top: -36px;">
                                        <div class="filter_btn_wrapper">
-                                          <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign">
+                                          <input type="button" class="btn btn-success btn-block" id="assign-single-coldcalling" value="Assign" style="    height: 34px;">
                                        </div>
                                     </div>
                                  @endif
@@ -1199,14 +1214,16 @@
                         <div class="col-md-6">
                            <div class="form-group has-danger row">
                               <label class="control-label text-right col-md-3 building">Building</label>
-                              <div class="col-md-8" style="padding-left: 15px;">
-                                 <select class="form-control" required style="font-size: 12px;" name="building" id="insertBuilding">
-                                    <option value="">Select option</option>
-                                    @foreach($buildingss as $building)
-                                    <option value="{{$building->building_name}}">{{$building->building_name}}</option>
-                                    @endforeach
-                                 </select>
-                              </div>
+                              <div class="col-md-8 building_input" style="padding-left: 15px;">
+                                  <input type="text" class="form-control filter_input_name" list="buildings" placeholder="select Building" name="building" value="">
+                                     <datalist id="buildings">
+                                        <option value="">Select building</option>
+                                        @foreach($buildingss as $building)
+                                        <option value="{{$building->building_name}}"></option>
+                                        @endforeach
+                                     </datalist>
+                                 </div>
+
                               <div class="col-sm-1" style="padding-top: 8px;">
                                  <i class="fa fa-plus add-building" class="btn btn-primary" data-toggle="modal" data-target="#buildingModal" style="font-size:22px;color:black" aria-hidden="true"></i>
                               </div>
@@ -1473,8 +1490,9 @@
                success:function(data){
                    if($.trim(data) == 'true'){
             
-                       $('#insertBuilding').append('<option selected value="'+buildingName+'">'+buildingName+'</option>');
+                       $('#buildings').append('<option selected value="'+buildingName+'">'+buildingName+'</option>');
                        $('.close-model').trigger('click');
+                       $("#buildings").load(location.href + " #buildings");
                    }else{
                        alert('something went wrong!');
                    }

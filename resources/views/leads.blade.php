@@ -180,7 +180,7 @@ label,input,textarea{
      </ul>
      
       
-                                <div class="card-body">
+                                <div class="card-body table-responsive">
                                     
                                   
                               <div class="col-lg-12">
@@ -225,7 +225,7 @@ label,input,textarea{
                             <div class="row">
                           @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
                           @if(isset($_GET['priority'])) <input type="hidden" name="priority" value="{{@$_GET['priority']}}"/> @endif
-                                        <div class="col-md-2 pl-1 pr-1">
+                                        <div class="col-md-5 pl-1 pr-1">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="building" placeholder="select Building" name="build">
                                             <datalist id="building">
@@ -237,7 +237,7 @@ label,input,textarea{
                                        </div>
                                    </div>
                                    
-                                   <div class="col-md-2 pl-1 pr-1">
+                                   <div class="col-md-3 pl-1 pr-1">
                                        <div class="dropdown_wrapper "> 
                                            <input type="text" id="name" class="form-control filter_input" list="source" placeholder="select source" >
                                             <datalist id="source">

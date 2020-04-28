@@ -12,6 +12,33 @@
   <?php redirect('/'); ?>
 @endif
 <style type="text/css">
+    .wtsp:hover,
+  .gml:hover{
+    background-color:blue !important;
+  }
+@media only screen and (max-width: 600px) {
+  .wtsp, .gml{
+    border-radius: 50px !important;
+  }
+  #add-new-owne-link{
+    position: absolute;
+    margin-top: 26%;
+  }
+  .access_select{
+    width: 44% !important;
+    margin-top: 30%;
+  }
+  .bttn{
+    margin-left: 10% !important;
+  }
+  .search{
+    width: 99% !important;
+  }
+}
+    .filterr{
+        margin-right: 0rem !important;
+        padding-right: .25rem;
+    }
     .filter_input{
         background-color:#1976D2 ;
         color:#fff;
@@ -420,10 +447,10 @@ label{
                              <option  value="Residential">Residential</option>
                           </select>
                         </div>
-                        <div class="media-wrapper" style="width: 60%;margin: -4% auto;position: relative;background-color: #fff;border: 2px solid #1976D2;border-radius:50px;">
+                        <div class="media-wrapper" style="width: 60%;margin: -4% auto;">
                             <div class="row">
-                                <div class="col-md-6" style="padding-right:0">
-                                    <div class="whatsapp-wrapper text-center hw" style="height:100%;border-right:2px solid #1976d2;border-radius: 50px 0px 0 50px;">
+                                <div class="col-md-6 wtsp" style="padding-right:0 ; border-radius: 50px 0px 0px 50px; border: 2px solid blue; background-color: white;    height: 60px; ">
+                                    <div class="whatsapp-wrapper text-center hw" style="height:100%;">
                                     <i class="fa fa-refresh reset" aria-hidden="true" style="display:none;"></i>
                                     <a target="_blank"  class="whatsapp">
                                         <img src="https://png.pngtree.com/element_our/md/20180626/md_5b321ca97f12d.png" style="width:50px;"/>
@@ -432,12 +459,12 @@ label{
                                     </div>
                                     <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute"></span>
                                 </div>
-                                <div class="col-md-6" style="padding-left:0">
-                                <div class="gmail-wapper text-center hw" style="height:100%;border-radius: 0px 50px 50px 0px;">
-                                    <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="height:50px;cursor:pointer;margin-left: 40px;">
-                                    <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;">
+                                <div class="col-md-6 gml" style="padding-left:0; border-radius: 0px 50px 50px 0px; border: 2px solid blue; background-color: white;">
+                                  <div class="gmail-wapper text-center hw" style="height:100%;">
+                                      <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="height:50px;cursor:pointer;margin-left: 40px;">
+                                      <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;">
+                                  </div>
                                 </div>
-                    </div>
                             </div>
                         </div>
                       </div>
@@ -544,17 +571,17 @@ label{
                              <!--COLDCALLING FILTERS AND SEARCH START FROM HERE-->  
                               <div class="col-lg-12">
                                  <div class="row">
-                                   <div class="col-md-12">
+                                   <div class="col-md-12 search">
                                
                                         
                       <form action="{{ route('agentcoldcallingsearch') }}" method="GET" class="">
                           <div class="row mt-2 mb-2">
-                          <div class="col-md-9">
+                          <div class="col-md-12">
                             <div class="row">
                             @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
 
                              @if(isset($_GET['p'])) <input type="hidden" name="p" value="{{@$_GET['p']}}"/> @endif
-                                        <div class="col-md-2 ">
+                                        <div class="col-md-3 pl-1 filterr">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="building" placeholder="select Building" name="build">
                                             <datalist id="building">
@@ -566,7 +593,7 @@ label{
                                        </div>
                                    </div>
                                   
-                                        <div class="col-md-2">
+                                        <div class="col-md-3 pl-1 filterr">
                                        <div class="dropdown_wrapper "> 
                                            <input type="text" class="form-control filter_input" list="area" placeholder="select area" name="area">
                                             <datalist id="area">
@@ -577,7 +604,7 @@ label{
                                             </datalist>
                                        </div>
                                    </div>
-                                        <div class="col-md-2 ">
+                                        <div class="col-md-2 pl-1 filterr">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="bedroom" placeholder="select Bedroom" name="bedroom">
                                             <datalist id="bedroom">
@@ -588,7 +615,7 @@ label{
                                             </datalist>
                                        </div>
                                    </div>
-                                        <div class="col-md-2" style="display:none;">
+                                        <div class="col-md-2 pl-1 filterr" style="display:none;">
                                        <div class="dropdown_wrapper ">
                                         <input id="name" class="form-control filter_input" list="allNames" autocomplete="off" placeholder="select Agent"/>
                                       <datalist id="allNames">
@@ -600,7 +627,7 @@ label{
                                    </div>
                                    </div>
                                    
-                                      <div class="col-md-2 ">
+                                      <div class="col-md-2 pl-1 filterr">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="unit" placeholder="unit_No" name="unit">
                                             <datalist id="unit">
@@ -610,7 +637,7 @@ label{
                                        </div>
                                    </div>
                                    
-                                     <div class="col-md-2 ">
+                                     <div class="col-md-2 pl-1 filterr">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="unit_no" placeholder="contact" name="contact">
                                             <datalist id="contact">
@@ -623,7 +650,7 @@ label{
                                 </div></div>   
                                    
                                    
-                                        <div class="col-md-3 ">
+                                        <div class="col-md-2 pl-1 pr-1 mt-1 bttn" style="margin-left: 1067px;">
                                        <div class="filter_btn_wrapper">
                                            <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                        </div>
@@ -640,7 +667,7 @@ label{
                               
                               <!--COLDCALLING FILTERS AND SEARCH END HERE--> 
                               
-                              <table id="" class="table">
+                              <table id="" class="table table-responsive">
                                  <thead>
                                     <tr>
                                     @if(@$_GET['type']=='')
@@ -1054,13 +1081,14 @@ label{
                            <div class="col-md-6">
                               <div class="form-group has-danger row">
                                  <label class="control-label text-right col-md-3">Building</label>
-                                 <div class="col-md-8" style="padding-left: 15px;">
-                                    <select required="" class="form-control" style="font-size: 12px;" name="building" id="insertBuilding">
-                                       <option value="">Select option</option>
-                                       @foreach($allBuildings as $building)
-                                       <option value="{{$building->building_name}}">{{$building->building_name}}</option>
-                                       @endforeach
-                                    </select>
+                                 <div class="col-md-8 building_input" style="padding-left: 15px;">
+                                  <input type="text" class="form-control filter_input_name" list="buildings" placeholder="select Building" name="building" value="">
+                                     <datalist id="buildings">
+                                        <option value="">Select building</option>
+                                        @foreach($allBuildings as $building)
+                                        <option value="{{$building->building_name}}"></option>
+                                        @endforeach
+                                     </datalist>
                                  </div>
                                  <div class="col-sm-1" style="padding-top: 8px;">
                                     <i class="fa fa-plus add-building" class="btn btn-primary" data-toggle="modal" data-target="#buildingModal" style="font-size:22px;color:black" aria-hidden="true"></i>
@@ -1355,8 +1383,10 @@ $('.sent-email-btn').click(function(){
                success:function(data){
                    if($.trim(data) == 'true'){
             
-                       $('#insertBuilding').append('<option selected value='+buildingName+'>'+buildingName+'</option>');
+                       $('#buildings').append('<option selected value='+buildingName+'>'+buildingName+'</option>');
                        $('.close-model').trigger('click');
+                       $("#buildings").load(location.href + " #buildings");
+
                    }else{
                        alert('something went wrong!');
                    }

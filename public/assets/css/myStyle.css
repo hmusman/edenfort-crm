@@ -28,7 +28,7 @@ input[type=checkbox]{
 .unit_no{
     font-size: 11px;
     font-weight: 500;
-    margin-left: 5px;
+    margin-left: 0px !important;
     font-family: sans-serif;
 }
 #demo-foo-pagination th.sorter-indicator .footable-sort-indicator{

@@ -8,6 +8,16 @@
 @endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <style>
+  @media only screen and (max-width: 600px) {
+    .leadFilter{
+      margin-left: 0px !important;
+      margin-top: 0px !important;
+      margin-right: 16px;
+    }
+    .search{
+      padding-right: 30px;
+    }
+  }
   .date{
         background-color: #1976d2;
         color: white;
@@ -230,12 +240,12 @@ label,input,textarea{
                            <!--end priority-->               
                       <form action="{{ route('leadSearch') }}" method="GET" class="">
                           <div class="row mt-2 mb-2">
-                          <div class="col-md-9">
+                          <div class="col-md-12 search">
                             <div class="row">
                           @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
                           @if(isset($_GET['priority'])) <input type="hidden" name="priority" value="{{@$_GET['priority']}}"/> @endif
                           
-                                        <div class="col-md-2 pl-1 pr-1">
+                                        <div class="col-md-4 pl-1 pr-1">
                                        <div class="dropdown_wrapper ">
                                            <input type="text" class="form-control filter_input" list="building" placeholder="select Building" name="build">
                                             <datalist id="building">
@@ -311,7 +321,7 @@ label,input,textarea{
                                 </div></div>   
                                    
                                    
-                                        <div class="col-md-3 ">
+                                        <div class="col-md-2 pl-1 pr-1 leadFilter" style="margin-left: 1041px;margin-top: -37px;">
                                        <div class="filter_btn_wrapper">
                                            <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                        </div>

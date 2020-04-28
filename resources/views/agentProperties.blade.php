@@ -4,6 +4,24 @@
 <link href="{{url('public/assets/css/style.css')}}" rel="stylesheet">
 <link href="{{url('public/assets/css/myStyle.css')}}" rel="stylesheet" >
 <style type="text/css">
+  .wtsp:hover,
+  .gml:hover{
+    background-color:blue !important;
+  }
+@media only screen and (max-width: 600px) {
+  .wtsp, .gml{
+    border-radius: 50px !important;
+  }
+  #add-new-owne-link{
+    right: 19px !important;
+  }
+  .agents-nav{
+    width: 120% !important;
+  }
+  .agent-property{
+    width: 95% !important;
+  }
+}
    .access_select,.action_select{
    background-color: #1976D2;
    color: #fff;
@@ -284,10 +302,10 @@
          @else
    <a  style="cursor: pointer; height:40px;" class="mb-3"><span><i class=""></i></span></a>
          @endif
-            <div class="media-wrapper" style="width: 60%;position: relative;margin:auto;background-color: #fff;border: 2px solid #1976D2;border-radius:50px;">
+            <div class="media-wrapperr" style="width: 60%; margin:auto;">
                             <div class="row">
-                                <div class="col-md-6" style="padding-right:0">
-                                    <div class="whatsapp-wrapper text-center hw" style="height:100%;border-right:2px solid #1976d2;border-radius: 50px 0px 0 50px;">
+                                <div class="col-md-6 wtsp" style="padding-right:0 ; border-radius: 50px 0px 0px 50px; border: 2px solid blue; background-color: white;    height: 60px; ">
+                                    <div class="whatsapp-wrapper text-center hw" style="height:100%;">
                                     <i class="fa fa-refresh reset" aria-hidden="true" style="display:none;"></i>
                                     <a target="_blank"  class="whatsapp">
                                         <img src="https://png.pngtree.com/element_our/md/20180626/md_5b321ca97f12d.png" style="width:50px;"/>
@@ -296,12 +314,12 @@
                                     </div>
                                     <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute"></span>
                                 </div>
-                                <div class="col-md-6" style="padding-left:0">
-                                <div class="gmail-wapper text-center hw" style="height:100%;border-radius: 0px 50px 50px 0px;">
-                                    <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="height:50px;cursor:pointer;margin-left: 40px;">
-                                    <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;">
+                                <div class="col-md-6 gml" style="padding-left:0; border-radius: 0px 50px 50px 0px; border: 2px solid blue; background-color: white;">
+                                  <div class="gmail-wapper text-center hw" style="height:100%;">
+                                      <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="height:50px;cursor:pointer;margin-left: 40px;">
+                                      <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;">
+                                  </div>
                                 </div>
-                    </div>
                             </div>
                         </div>
          </div>
@@ -347,7 +365,7 @@
          </form>
          <input id="model" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger"  style="visibility: hidden;" type="button" value="">
          <div class="col-12 col-sm-12">
-            <ul class="nav nav-tabs ">
+            <ul class="nav nav-tabs agents-nav">
                <li class="nav-item">
                   @if(@$_GET['type']=='')
                   <a href="{{url('allAddedProperties')}}<?php if(isset($_GET['p'])){ echo '?p='.$_GET['p'].'&';} ?>"  class="nav-link active py-3">All property</a>
@@ -423,9 +441,9 @@
             </ul>
             <!-- </form>-->
             <div class="card">
-               <div class="card-body">
+               <div class="card-body table-responsive">
                   <!-- <div class="d-flex mb-4">-->
-                  <div class="col-lg-12">
+                  <div class="col-lg-12 agent-property">
                      <div class="row">
                         <div class="col-md-12">
                            <form action="{{ route('PropertysearchForAgent') }}" method="GET" class="">
@@ -434,7 +452,7 @@
                                     <div class="row">
                                        @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
                                        @if(isset($_GET['p'])) <input type="hidden" name="p" value="{{@$_GET['p']}}"/> @endif
-                                       <div class="col-md-2 pl-1 pr-1">
+                                       <div class="col-md-3 pl-1 pr-1">
                                           <div class="dropdown_wrapper ">
                                              <input type="text" class="form-control filter_input" list="building" placeholder="select Building" name="build">
                                              <datalist id="building">
@@ -445,7 +463,7 @@
                                              </datalist>
                                           </div>
                                        </div>
-                                       <div class="col-md-2 pl-1 pr-1">
+                                       <div class="col-md-3 pl-1 pr-1">
                                           <div class="dropdown_wrapper ">
                                              <input type="text" class="form-control filter_input" list="area" placeholder="select area" name="area">
                                              <datalist id="area">
@@ -456,7 +474,7 @@
                                              </datalist>
                                           </div>
                                        </div>
-                                       <div class="col-md-2 pl-1 pr-1">
+                                       <div class="col-md-3 pl-1 pr-1">
                                           <div class="dropdown_wrapper ">
                                              <input type="text" class="form-control filter_input" list="bedroom" placeholder="select Bedroom" name="bedroom">
                                              <datalist id="bedroom">
@@ -635,13 +653,14 @@
                            <div class="col-md-6">
                               <div class="form-group has-danger row">
                                  <label class="control-label text-right col-md-3">Building</label>
-                                 <div class="col-md-8" style="padding-left: 15px;">
-                                    <select required="" class="form-control" style="font-size: 12px;" name="building" id="insertBuilding">
-                                       <option value="">Select option</option>
-                                       @foreach($allBuildings as $building)
-                                       <option value="{{$building->building_name}}">{{$building->building_name}}</option>
-                                       @endforeach
-                                    </select>
+                                 <div class="col-md-8 building_input" style="padding-left: 15px;">
+                                  <input type="text" class="form-control filter_input_name" list="buildings" placeholder="select Building" name="building" value="">
+                                     <datalist id="buildings">
+                                        <option value="">Select building</option>
+                                        @foreach($allBuildings as $building)
+                                        <option value="{{$building->building_name}}"></option>
+                                        @endforeach
+                                     </datalist>
                                  </div>
                                  <div class="col-sm-1" style="padding-top: 8px;">
                                     <i class="fa fa-plus add-building" class="btn btn-primary" data-toggle="modal" data-target="#buildingModal" style="font-size:22px;color:black" aria-hidden="true"></i>
@@ -991,8 +1010,11 @@ $('.sent-email-btn').click(function(){
                success:function(data){
                    if($.trim(data) == 'true'){
             
-                       $('#insertBuilding').append('<option selected value='+buildingName+'>'+buildingName+'</option>');
+                       $('#buildings').append('<option value='+buildingName+'></option>');
                        $('.close-model').trigger('click');
+                       // alert(buildingName);
+                       // $('.building_input').reload();
+                       $("#buildings").load(location.href + " #buildings");
                    }else{
                        alert('something went wrong!');
                    }

@@ -3,6 +3,25 @@
 <link href="{{url('public/assets/css/style.css')}}" rel="stylesheet">
 <link href="{{url('public/assets/css/myStyle.css')}}" rel="stylesheet" >
 <style type="text/css">
+   #building option{
+      font-size: 13px;
+   }
+   @if(@$permissions->propertyAssign==0)
+      .superAgentFilter{
+         margin-left: 1053px !important;
+         margin-top: 3px;
+      }
+   @endif 
+   .superAgentFilter{
+      margin-left: 842px;
+      margin-top: 3px;
+   }
+   .superAgentAssign{
+      margin-top: 3px;
+   }
+   .superAgentAssign input{
+      height: 36px;
+   }
    .access_select,.action_select{
    background-color: #1976D2;
    color: #fff;
@@ -152,6 +171,18 @@
         border-bottom: 0px;
         }
 @media only screen and (max-width: 600px) {
+.adminFilter,.adminAssign,.adminExport{
+   margin-left: 0px !important;
+   padding-right: 26px !important;
+
+}
+.search{
+   padding-right: 36px !important;
+}
+.superAgentFilter, .superAgentAssign{
+   margin-left: 0px !important;
+   padding-right: 25px !important;
+}
 #export{
       width: 100%;
     }
@@ -553,11 +584,11 @@
                         <div class="col-md-12">
                            <form method="GET" class="" id="propertyForm">
                               <div class="row mt-2 mb-2">
-                                 <div class="col-md-8">
+                                 <div class="col-md-12 search">
                                     <div class="row">
                                        @if(isset($_GET['type'])) <input type="hidden" name="type" value="{{@$_GET['type']}}"/> @endif
                                        @if(isset($_GET['p'])) <input type="hidden" name="p" value="{{@$_GET['p']}}"/> @endif
-                                       <div class="col-md-2 pl-1 pr-1">
+                                       <div class="col-md-4 pl-1 pr-1">
                                           <div class="dropdown_wrapper ">
                                              <input type="text" value="{{@$_GET[build]}}" class="form-control filter_input" list="building" placeholder="select Building" name="build">
                                              <datalist id="building">
@@ -611,17 +642,17 @@
                                     </div>
                                  </div>
                                  @if(ucfirst(session('role'))==ucfirst('Admin'))
-                              <div class="col-md-2">
+                              <div class="col-md-2 pl-1 pr-1 adminFilter" style="margin-left: 66%; margin-top: 1%">
                                  <div class="filter_btn_wrapper">
                                     <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
                                  </div>
                               </div>
-                              <div class="col-md-1 ">
+                              <div class="col-md-1 pl-1 pr-1 adminAssign" style="margin-top: 1%;">
                                        <div class="filter_btn_wrapper">
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
                                        </div>
                                     </div>
-                               <div class="col-md-1">
+                               <div class="col-md-1 pl-1 pr-1 adminExport" style=" margin-top: 1%;">
                                   <div class="filter_btn_wrapper">
                                     <input type="button" class="btn btn-primary" id="export" value="Export CVS">
                                 </div>
@@ -630,20 +661,20 @@
                               @endif
                               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
                               @if(@$permissions->propertyAssign==NULL)
-                                 <div class="col-md-3">
+                                 <div class="col-md-2 pl-1 pr-1 superAgentFilter">
                                     <div class="filter_btn_wrapper">
                                        <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                     </div>
                                  </div>
                               @else
-                               <div class="col-md-3">
+                               <div class="col-md-2 pl-1 pr-1 superAgentFilter">
                                     <div class="filter_btn_wrapper">
                                        <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                     </div>
                                  </div>
                               @endif
                                   @if(@$permissions->propertyAssign==1) 
-                                    <div class="col-md-1">
+                                    <div class="col-md-2 pl-1 pr-1 superAgentAssign">
                                        <div class="filter_btn_wrapper">
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
                                        </div>
@@ -854,13 +885,14 @@
                            <div class="col-md-6">
                               <div class="form-group has-danger row">
                                  <label class="control-label text-right col-md-3 building">Building</label>
-                                 <div class="col-md-8" style="padding-left: 15px;">
-                                    <select class="form-control" required=""  style="font-size: 12px;" name="building" id="insertBuilding">
-                                       <option value="">Select option</option>
-                                       @foreach($buildings as $building)
-                                       <option value="{{$building->building_name}}">{{$building->building_name}}</option>
-                                       @endforeach
-                                    </select>
+                                 <div class="col-md-8 building_input" style="padding-left: 15px;">
+                                  <input type="text" class="form-control filter_input_name" list="buildings" placeholder="select Building" name="building" value="">
+                                     <datalist id="buildings">
+                                        <option value="">Select building</option>
+                                        @foreach($buildings as $building)
+                                        <option value="{{$building->building_name}}"></option>
+                                        @endforeach
+                                     </datalist>
                                  </div>
                                  <div class="col-sm-1" style="padding-top: 8px;">
                                     <i class="fa fa-plus add-building" class="btn btn-primary" data-toggle="modal" data-target="#buildingModal" style="font-size:22px;color:black" aria-hidden="true"></i>
@@ -1217,8 +1249,9 @@
                data : {'buldingName' : buildingName},
                success:function(data){
                    if($.trim(data) == 'true'){
-                       $('#insertBuilding').append('<option selected value="'+buildingName+'">'+buildingName+'</option>');
+                       $('#buildings').append('<option selected value="'+buildingName+'">'+buildingName+'</option>');
                        $('.close-model').trigger('click');
+                       $("#buildings").load(location.href + " #buildings");
                    }else{
                        alert('something went wrong!');
                    }
@@ -1437,6 +1470,7 @@
     };
   });
 </script>
+
 @if(ucfirst(session('role')) == (ucfirst('Admin')))
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
