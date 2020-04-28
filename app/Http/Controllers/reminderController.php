@@ -33,7 +33,7 @@ class reminderController extends Controller
             // dd($result);
         }
         else if(session('role') == 'Admin'){
-            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") b.date_time <= CURRENT_TIMESTAMP GROUP BY b.user_id');
+            $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") and b.date_time <= CURRENT_TIMESTAMP GROUP BY b.user_id');
         }
         else if(session('role') == 'SuperAgent'){
 
