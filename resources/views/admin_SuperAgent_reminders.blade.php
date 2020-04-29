@@ -2,7 +2,6 @@
 <!-- showing reminders to admin, superagent-->
 <script type="text/javascript">
     $.notify.defaults( {autoHideDelay: 10000} )
-    setInterval(function(){ 
         $.ajax({
                 url:'<?php echo url('get-all-reminder') ?>',
                 type:'get',
@@ -15,8 +14,7 @@
                     }
                     $('.notify').html(temp);
                 }
-             })
-         }, 3000);
+            }, 5000);
          var audio = new Audio("<?php echo url('public/reminder.mp3')  ?>");
          setInterval(function(){ 
         var temp="";
