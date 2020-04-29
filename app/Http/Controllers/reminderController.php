@@ -45,7 +45,6 @@ class reminderController extends Controller
      public function getReminders(){
         $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i:s');
-        $message = '';
         // dd($date);
         if(session('role') == 'Agent'){
             $result=Reminder::where(['add_by' => 'AGENT','user_id'=>session('user_id')])->where('status',null)->where('date_time','<=',$date)->get();
@@ -73,39 +72,12 @@ class reminderController extends Controller
             $futureDate = $currentDate+(60*5);
             $formatDate = date("Y-m-d G:i:s", $futureDate);
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
-            $rem = Reminder::where('id',$value->id)->first();
-            $property = property::where('id', $rem->property_id)->first();
-            $user = user::where('id', $rem->user_id)->first();
-            $message .='
-                Reminder Of : '.$rem->reminder_of.'<br>
-                Reminder type : '.$rem->reminder_type.'<br>
-                Building Name : '.$property->Building.'<br>
-                Area : '.$property->area.'<br>
-                Landloard : '.$property->Landlord.'<br>
-                Email : '.$property->email.'<br>
-                Contact No : '.$property->contact_no.'<br><br>
-
-                Edenfort Real Estate <br><br><br>
-
-            ';
-            $receiverEmail = $user->Email;
-            $data = array('name'=>"EdenFort CRM");
-            $contactName = 'EdenFort CRM';
-            $contactEmail = 'admin@youcanbuyindubai.com';
-            $contactMessage = $message;
-            $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-            Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-            {   
-                $message->from(str_replace(" ","",$contactEmail), $contactName);
-                $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Reminder Alert');
-            });
         }
         return json_decode(json_encode($result),true);
     }
     public function getAdminReminders(){
         $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i:s');
-        $message = '';
         // $result1;
         if(session('role') == 'Admin'){
             $result1= DB::table('reminders')->select('reminders.id as rid','reminders.*', 'users.*')->join('users', 'users.id','=','reminders.user_id')->where('user_id',session('user_id'))->where('reminders.date_time','<=',$date)->where('reminders.status',NULL)->get();
@@ -126,33 +98,6 @@ class reminderController extends Controller
             $futureDate = $currentDate+(60*5);
             $formatDate = date("Y-m-d G:i:s", $futureDate);
             Reminder::where('id',$value->rid)->update(["status"=>'viewed']);
-
-            $rem = Reminder::where('id',$value->rid)->first();
-            $property = property::where('id', $rem->property_id)->first();
-            $user = user::where('id', $rem->user_id)->first();
-            $message .='
-                Reminder Of : '.$rem->reminder_of.'<br>
-                Reminder type : '.$rem->reminder_type.'<br>
-                Building Name : '.$property->Building.'<br>
-                Area : '.$property->area.'<br>
-                Landloard : '.$property->Landlord.'<br>
-                Email : '.$property->email.'<br>
-                Contact No : '.$property->contact_no.'<br><br>
-
-                Edenfort Real Estate <br><br><br>
-
-            ';
-            $receiverEmail = $user->Email;
-            $data = array('name'=>"EdenFort CRM");
-            $contactName = 'EdenFort CRM';
-            $contactEmail = 'admin@youcanbuyindubai.com';
-            $contactMessage = $message;
-            $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-            Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-            {   
-                $message->from(str_replace(" ","",$contactEmail), $contactName);
-                $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Reminder Alert');
-            });
         }
         // dd($result1, $result2);
         return json_decode(json_encode($result1),true);
@@ -261,7 +206,7 @@ class reminderController extends Controller
             $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
             $buildingss=Building::all();
                 if(input::get('status')!='viewed'){
-                    Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                 }
             $upcoming = property::where('access','Upcoming')->count();
             return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming'));
@@ -277,7 +222,7 @@ class reminderController extends Controller
                  $buildings=Building::all();
             $result_data=property::where("id",input::get('property_id'))->paginate(20);
                 if(input::get('status')!='viewed'){
-                    Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                 }
             return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming'));
           }else if(strtoupper(input::get('ref'))=='LEADS'){
@@ -289,7 +234,7 @@ class reminderController extends Controller
   
               $upcomingLeadId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'leads'");
                 if(input::get('status')!='viewed'){
-                    Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                         }
               return view('agentLeadReport',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
           }else{
@@ -299,7 +244,7 @@ class reminderController extends Controller
                 $dbName=DB::getDatabaseName();
                 $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");
                 if(input::get('status')!='viewed'){
-                    Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
+                    Reminder::where('property_id',input::get('property_id'))->update(['status'=>'viewed']);
                 }
               return view('dealsInformation',compact('deals','buildings','agents','upcomingDealId','permissions'));
           }
