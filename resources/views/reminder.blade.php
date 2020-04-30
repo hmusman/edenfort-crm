@@ -26,7 +26,7 @@
                     temp+=$('.notification_bucket').html();
                     for(var i=0; i < data.length; i++){
                         audio.play();
-                       if(data[i]['status']='viewed'){
+                       if(data[i]['status']!='viewed'){
                             var getCount = parseInt($('.notification_counter').text());
                           $('.notification_counter').text(getCount + data.length);
                          $.notify("Reminder Alert", "warn");
