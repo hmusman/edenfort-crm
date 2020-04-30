@@ -75,7 +75,7 @@ class reminderController extends Controller
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
             $rem = Reminder::where('id',$value->id)->first();
             $property = property::where('id', $rem->property_id)->first();
-            $user = user::where('id', $rem->user_id)->first();
+            
             $message .='
                 Reminder Of : '.$rem->reminder_of.'<br>
                 Reminder type : '.$rem->reminder_type.'<br>
@@ -88,7 +88,11 @@ class reminderController extends Controller
                 Edenfort Real Estate <br><br><br>
 
             ';
-            $receiverEmail = $user->Email;
+            
+        }
+        if($result.count() > 0){
+          $user = user::where('id', session('user_id'))->first();
+          $receiverEmail = $user->Email;
             $data = array('name'=>"EdenFort CRM");
             $contactName = 'EdenFort CRM';
             $contactEmail = 'admin@youcanbuyindubai.com';
@@ -129,7 +133,7 @@ class reminderController extends Controller
 
             $rem = Reminder::where('id',$value->rid)->first();
             $property = property::where('id', $rem->property_id)->first();
-            $user = user::where('id', $rem->user_id)->first();
+           
             $message .='
                 Reminder Of : '.$rem->reminder_of.'<br>
                 Reminder type : '.$rem->reminder_type.'<br>
@@ -142,7 +146,12 @@ class reminderController extends Controller
                 Edenfort Real Estate <br><br><br>
 
             ';
-            $receiverEmail = $user->Email;
+            
+        }
+        // dd($result1, $result2);
+        if($result1->count() > 0){
+           $user = user::where('id', session('user_id'))->first();
+          $receiverEmail = $user->Email;
             $data = array('name'=>"EdenFort CRM");
             $contactName = 'EdenFort CRM';
             $contactEmail = 'admin@youcanbuyindubai.com';
@@ -154,7 +163,6 @@ class reminderController extends Controller
                 $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Reminder Alert');
             });
         }
-        // dd($result1, $result2);
         return json_decode(json_encode($result1),true);
     }
      // 
