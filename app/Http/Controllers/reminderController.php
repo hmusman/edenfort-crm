@@ -241,7 +241,7 @@ class reminderController extends Controller
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
                 $result_data=property::where("id",input::get('property_id'))->paginate(20);
                 $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
-                return view('agentproperties',compact('result_data','buildings','areas','bedrooms','agents','buildingss','permissions','allBuildings'));
+                return view('agentProperties',compact('result_data','buildings','areas','bedrooms','agents','buildingss','permissions','allBuildings'));
             }
             else{
          	    $agents=lead::distinct('lead_user')->pluck('lead_user'); 
