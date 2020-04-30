@@ -90,7 +90,7 @@ class reminderController extends Controller
             ';
             
         }
-        if($result.count() > 0){
+        if($result->count() > 0){
           $user = user::where('id', session('user_id'))->first();
           $receiverEmail = $user->Email;
             $data = array('name'=>"EdenFort CRM");
