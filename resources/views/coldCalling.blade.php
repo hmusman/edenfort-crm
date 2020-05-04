@@ -514,7 +514,7 @@
                <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <h4 class="modal-title" id="mySmallModalLabel">Set Remider</h4>
+                        <h4 class="modal-title" id="mySmallModalLabel">Set Reminder</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                      </div>
                      <div class="modal-body">

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\reminderMails;
 use Illuminate\Http\Request;
 use App\Models\Supervision;
 use App\Models\SupervisionCheaque;
@@ -23,10 +24,11 @@ use Session;
 use Excel;
 use File;
 use Mail;
+
 class reminderController extends Controller
 {
 	public function getallReminder(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->where('date_time', '<=', $date)->orderBy('date_time', 'DESC')->get();
@@ -43,7 +45,7 @@ class reminderController extends Controller
     }
     // 
      public function getReminders(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         $message = '';
         // dd($date);
@@ -75,41 +77,77 @@ class reminderController extends Controller
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
             $rem = Reminder::where('id',$value->id)->first();
             $property = property::where('id', $rem->property_id)->first();
-            
-            $message .='
-                Reminder Of : '.$rem->reminder_of.'<br>
-                Reminder type : '.$rem->reminder_type.'<br>
-                Building Name : '.$property->Building.'<br>
-                Area : '.$property->area.'<br>
-                Landloard : '.$property->Landlord.'<br>
-                Email : '.$property->email.'<br>
-                Contact No : '.$property->contact_no.'<br><br>
+            $user = user::where('id', session('user_id'))->first();
+            $receiverEmail = $user->Email;
+            if($rem->reminder_of=='Deals'){
+                $massage = [
+                'reminder_of' => $rem->reminder_of,
+                'reminder_type' => $rem->reminder_type,
+                'deal_start_date' => $deal->deal_start_date,
+                'contract_start_date' => $deal->contract_start_date,
+                'contract_end_date' => $deal->contract_end_date,
+                'building' => $deal->building,
+                'referenceNo' => $deal->referenceNo,
+                'broker_name' => $deal->broker_name,
+                'unit_no' => $deal->unit_no,
+                'client_name' => $deal->client_name,
+                'contanct_no' => $deal->contanct_no,
+                'email' => $deal->email,
+                'property_type' => $deal->property_type,
+                'rent_sale_value' => $deal->rent_sale_value,
+                'rentalCheques' => $deal->rentalCheques,
+                'deal_Status' => $deal->deal_Status,
+                'agent_name' => $deal->agent_name,
+                'gross_commission' => $deal->gross_commission,
+                'gc_vat' => $deal->gc_vat,
+                'company_commision' => $deal->company_commision,
+                'cc_Vat' => $deal->cc_Vat,
+                'efAgent_Commission' => $deal->efAgent_Commission,
+                'efAgent_Vat' => $deal->efAgent_Vat,
+                'secondAgentName' => $deal->secondAgentName,
+                'secondAgentCompany' => $deal->secondAgentCompany,
+                'sacPhone' => $deal->sacPhone,
+                'secondAgent_Commission' => $deal->secondAgent_Commission,
+                'sacAgent_Vat' => $deal->sacAgent_Vat,
+                'thirdAgentName' => $deal->thirdAgentName,
+                'thirdAgentCompany' => $deal->thirdAgentCompany,
+                'tacPhone' => $deal->tacPhone,
+                'thirdAgentCommission' => $deal->thirdAgentCommission,
+                'tacVat' => $deal->tacVat,
+                'paymentTerms' => $deal->paymentTerms,
+                'chequeNumber' => $deal->chequeNumber,
+                'ownerCompanyName' => $deal->ownerCompanyName,
+                'ownerName' => $deal->ownerName,
+                'ownerPhone' => $deal->ownerPhone,
+                'ownerEmail' => $deal->ownerEmail,
+                'ownerNameSecond' => $deal->ownerNameSecond,
+                'ownerPhoneSecond' => $deal->ownerPhoneSecond,
+                'ownerEmailSecond' => $deal->ownerEmailSecond,
+                'chequeAmount' => $deal->chequeAmount,
+                'note' => $deal->note,
 
-                Edenfort Real Estate <br><br><br>
+            ];
+            }else{
+                $massage = [
+                'reminder_of' => $rem->reminder_of,
+                'reminder_type' => $rem->reminder_type,
+                'Building' => $property->Building,
+                'area' => $property->area,
+                'Landloard' => $property->Landlord,
+                'email' => $property->email,
+                'contact_no' => $property->contact_no,
 
-            ';
+            ];
+
+            Mail::to($receiverEmail)->send(new reminderMails($massage));
             
         }
-        if($result->count() > 0){
-          $user = user::where('id', session('user_id'))->first();
-          $receiverEmail = $user->Email;
-            $data = array('name'=>"EdenFort CRM");
-            $contactName = 'EdenFort CRM';
-            $contactEmail = 'admin@youcanbuyindubai.com';
-            $contactMessage = $message;
-            $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-            Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-            {   
-                $message->from(str_replace(" ","",$contactEmail), $contactName);
-                $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Reminder Alert');
-            });
-        }
+        
         return json_decode(json_encode($result),true);
     }
     public function getAdminReminders(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
-        $message = '';
         // $result1;
         if(session('role') == 'Admin'){
             $result1= DB::table('reminders')->select('reminders.id as rid','reminders.*', 'users.*')->join('users', 'users.id','=','reminders.user_id')->where('user_id',session('user_id'))->where('reminders.date_time','<=',$date)->where('reminders.status',NULL)->get();
@@ -133,36 +171,76 @@ class reminderController extends Controller
 
             $rem = Reminder::where('id',$value->rid)->first();
             $property = property::where('id', $rem->property_id)->first();
-           
-            $message .='
-                Reminder Of : '.$rem->reminder_of.'<br>
-                Reminder type : '.$rem->reminder_type.'<br>
-                Building Name : '.$property->Building.'<br>
-                Area : '.$property->area.'<br>
-                Landloard : '.$property->Landlord.'<br>
-                Email : '.$property->email.'<br>
-                Contact No : '.$property->contact_no.'<br><br>
+            $deal = deal::where('id', $rem->property_id)->first();
+            $user = user::where('id', session('user_id'))->first();
+            $receiverEmail = $user->Email;
+            if($rem->reminder_of=='Deals'){
+                $massage = [
+                'reminder_of' => $rem->reminder_of,
+                'reminder_type' => $rem->reminder_type,
+                'deal_start_date' => $deal->deal_start_date,
+                'contract_start_date' => $deal->contract_start_date,
+                'contract_end_date' => $deal->contract_end_date,
+                'building' => $deal->building,
+                'referenceNo' => $deal->referenceNo,
+                'broker_name' => $deal->broker_name,
+                'unit_no' => $deal->unit_no,
+                'client_name' => $deal->client_name,
+                'contanct_no' => $deal->contanct_no,
+                'email' => $deal->email,
+                'property_type' => $deal->property_type,
+                'rent_sale_value' => $deal->rent_sale_value,
+                'rentalCheques' => $deal->rentalCheques,
+                'deal_Status' => $deal->deal_Status,
+                'agent_name' => $deal->agent_name,
+                'gross_commission' => $deal->gross_commission,
+                'gc_vat' => $deal->gc_vat,
+                'company_commision' => $deal->company_commision,
+                'cc_Vat' => $deal->cc_Vat,
+                'efAgent_Commission' => $deal->efAgent_Commission,
+                'efAgent_Vat' => $deal->efAgent_Vat,
+                'secondAgentName' => $deal->secondAgentName,
+                'secondAgentCompany' => $deal->secondAgentCompany,
+                'sacPhone' => $deal->sacPhone,
+                'secondAgent_Commission' => $deal->secondAgent_Commission,
+                'sacAgent_Vat' => $deal->sacAgent_Vat,
+                'thirdAgentName' => $deal->thirdAgentName,
+                'thirdAgentCompany' => $deal->thirdAgentCompany,
+                'tacPhone' => $deal->tacPhone,
+                'thirdAgentCommission' => $deal->thirdAgentCommission,
+                'tacVat' => $deal->tacVat,
+                'paymentTerms' => $deal->paymentTerms,
+                'chequeNumber' => $deal->chequeNumber,
+                'ownerCompanyName' => $deal->ownerCompanyName,
+                'ownerName' => $deal->ownerName,
+                'ownerPhone' => $deal->ownerPhone,
+                'ownerEmail' => $deal->ownerEmail,
+                'ownerNameSecond' => $deal->ownerNameSecond,
+                'ownerPhoneSecond' => $deal->ownerPhoneSecond,
+                'ownerEmailSecond' => $deal->ownerEmailSecond,
+                'chequeAmount' => $deal->chequeAmount,
+                'note' => $deal->note,
 
-                Edenfort Real Estate <br><br><br>
+            ];
+            }else{
+                $massage = [
+                'reminder_of' => $rem->reminder_of,
+                'reminder_type' => $rem->reminder_type,
+                'Building' => $property->Building,
+                'area' => $property->area,
+                'Landloard' => $property->Landlord,
+                'email' => $property->email,
+                'contact_no' => $property->contact_no,
 
-            ';
+            ];
+            }
+            
+
+            Mail::to($receiverEmail)->send(new reminderMails($massage));
             
         }
         // dd($result1, $result2);
-        if($result1->count() > 0){
-           $user = user::where('id', session('user_id'))->first();
-          $receiverEmail = $user->Email;
-            $data = array('name'=>"EdenFort CRM");
-            $contactName = 'EdenFort CRM';
-            $contactEmail = 'admin@youcanbuyindubai.com';
-            $contactMessage = $message;
-            $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-            Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-            {   
-                $message->from(str_replace(" ","",$contactEmail), $contactName);
-                $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Reminder Alert');
-            });
-        }
+        
         return json_decode(json_encode($result1),true);
     }
      // 
@@ -303,7 +381,7 @@ class reminderController extends Controller
           }else{
               $buildings=Building::all();
                 $agents=user::where(['role'=>3])->get();
-                $deals=deal::where("id",input::get('property_id'))->get();
+                $deals=deal::where("id",input::get('property_id'))->paginate(25);
                 $dbName=DB::getDatabaseName();
                 $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");
                 if(input::get('status')!='viewed'){
@@ -315,7 +393,7 @@ class reminderController extends Controller
     }
 
      public function oneUserReminder($id){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $datetime = $mytime->format('Y-m-d G:i:s');
         $permissions = permission::where('user_id', session('user_id'))->first();
         $user = user::where('id', $id)->get()->first();
