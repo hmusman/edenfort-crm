@@ -138,6 +138,7 @@ class reminderController extends Controller
                 'contact_no' => $property->contact_no,
 
             ];
+        }
 
             Mail::to($receiverEmail)->send(new reminderMails($massage));
             
