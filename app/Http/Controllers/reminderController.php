@@ -223,6 +223,8 @@ class reminderController extends Controller
                 'note' => $deal->note,
 
             ];
+
+            Mail::to('upcoming@edenfort.ae')->send(new reminderMails($massage));
             }else{
                 $massage = [
                 'reminder_of' => $rem->reminder_of,
