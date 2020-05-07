@@ -456,9 +456,9 @@
                            <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
                            @endif
                            <td class="dealId" style="display:none;">{{$deal->id}}</td>
-                           <td class="deal_start_date">{{$deal->deal_start_date}}</td>
-                           <td class="contract_start_date">{{$deal->contract_start_date}}</td>
-                           <td class="contract_end_date">{{$deal->contract_end_date}}</td>
+                           <td class="deal_start_date">{{date('d-m-Y',strtotime($deal->deal_start_date))}}</td>
+                           <td class="contract_start_date">{{date('d-m-Y',strtotime($deal->contract_start_date))}}</td>
+                           <td class="contract_end_date">{{date('d-m-Y',strtotime($deal->contract_end_date))}}</td>
                            <td class="building">{{$deal->building}}</td>
                            <td class="referenceNo">{{$deal->referenceNo}}</td>
                            <td class="broker_name">{{$deal->broker_name}}</td>

@@ -291,13 +291,89 @@
 </div>
 </div>
 
+ @if(ucfirst(session('role'))==ucfirst('Admin')) 
 <div class="row">
     <div class="col-lg-12 col-xlg-12">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12">
-                      <h2 align="center">Last 30 Days Remindes</h2>
+                      <h2 align="center">Deals Report</h2>
+                      <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active show table-responsive" aria-expanded="true">
+                          <!-- <div class="row">
+                            <li class="mr-2 ml-2" style="color: red">Days Left: 7 or less than 7</li>
+                            <li class="mr-2 ml-2" style="color: orange">Days Left: 14 or less than 14</li>
+                            <li class="mr-2 ml-2" style="color: green">Days Left: 21 or less than 21</li>
+                            <li class="mr-2 ml-2" style="color: black">Days Left: 31 or less than 31</li>
+                          </div> -->
+                          
+                          <table id="myTable3" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sno# </th>
+                                        <th>Deal Start Date</th>
+                                        <th>Contract Start Date</th>
+                                        <th>Contract End Date</th>
+                                        <th>Building</th>
+                                        <th>Refrence No.</th>
+                                        <th>Broker</th>
+                                        <th>Unit</th>
+                                        <th>Client Name</th>
+                                        <th>Contact</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @php  $counter = 1; @endphp
+                                @foreach($deals as $deal)
+                                @php  
+                                    $date1 = $currentDate;
+                                    $date2 = $deal->cEnd;
+
+                                    $diff = abs(strtotime($date2) - strtotime($date1));
+
+                                    $years = floor($diff / (365*60*60*24));
+                                    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                                    $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+                                @endphp
+                                
+                                        <tr>
+                                          <td class="text-center" style="color: <?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important"> {{$counter++}}<br> <small style="font-size: 63%;font-weight: 400;background-color:<?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important;color: white;padding: 3px 2px 3px 1px;border-radius: 50px;">{{$days}} days Left</small></td> 
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->dStart))}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->cStart))}}</td>  
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->cEnd))}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{$deal->build}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{$deal->refNo}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{$deal->broker}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{$deal->unit}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{$deal->cName}}</td>
+                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "orange"; if($days > 14 && $days <= 21) echo "green"; if($days > 21 && $days <= 31) echo "black";?>!important">{{$deal->contact}}</td>
+                                          <td class="text-center" style=""> <a target="_blank" href="{{url('get-single-reminder-record')}}?property_id={{$deal->dealId}}&ref=Deals&active=ADMIN" class="btn btn-success" style="font-size:12px;">visit</a></td>
+                                        </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@endif
+
+
+<div class="row">
+    <div class="col-lg-12 col-xlg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                      <h2 align="center">Last 30 Days Reminders</h2>
                       <div class="tab-content">
                         <div id="home" class="tab-pane fade in active show table-responsive" aria-expanded="true">
                           <table id="myTable2" class="table table-bordered table-hover">
@@ -338,6 +414,8 @@
     </div>
 </div>
 </div>
+
+
 <!--end of agent report-->
                 <div class="row">
                     <!-- Column -->

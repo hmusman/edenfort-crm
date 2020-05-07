@@ -16,6 +16,7 @@ use App\Models\user;
 use App\Models\userFiles;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\deal;
 use Session;
 use Excel;
 use File;
@@ -103,10 +104,18 @@ class SupervisionController extends Controller
     $datetime = new DateTime('tomorrow');
     $reminders = Reminder::whereDate("date_time",$datetime->format('Y-m-d'))->orWhereDate("date_time",$todayDate->format('Y-m-d'))->get();
     $remSummery = DB::table('reminders')->join('users', 'users.id','=','reminders.user_id')->select('property_id','user_name','reminder_of','reminder_type','date_time', 'description','reason')->where('reminders.status','disable')->whereDate('date_time','>',Carbon::now()->subDays(30))->get();
+    $currentDate = Carbon::now()->format('Y-m-d');
+    // dd($currentDate);
+    $futureDate = Carbon::now()->addMonths(3)->format('Y-m-d');
+    $deals = DB::table('deals')->select('deals.id as dealId', 'deals.contract_start_date as cStart','deals.deal_start_date as dStart', 'deals.contract_end_date as cEnd', 'deals.referenceNo as refNo', 'deals.client_name as cName', 'deals.property_type as pType', 'deals.broker_name as broker', 'deals.unit_no as unit', 'deals.contanct_no as contact', 'deals.building as build', 'deals.dealStatus as dStatus', 'users.First_name as fName', 'users.Last_name as lName')->join('users', 'users.id', '=', 'deals.agent_name')->whereBetween('deals.contract_end_date', array($currentDate, $futureDate))->orderBy('deals.contract_end_date', 'ASC')->get();
+
+    // DB::select('SELECT d.id as dealId, d.contract_start_date as cStart, d.contract_end_date as cEnd, d.referenceNo as refNo, d.client_name as cName, d.property_type as pType, d.building as build, d.dealStatus as dStatus, u.First_name, u.Last_name from deals d, users u where d.agent_name = u.id and d.contract_end_date between '+$currentDate+' and '+$futureDate+' ORDER By d.contract_end_date ASC');
+    // deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
+    // dd($deals);
     $latestProperties = property::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
      return view('dashboard',compact(['contracts','users','properties','agents','owners','admins','buildings','leads','rent','sale','upcoming',
-                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery']));
+                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery','deals','currentDate']));
     }
     public function Supervision(){
        $result_data=Supervision::all();
