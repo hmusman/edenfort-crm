@@ -28,7 +28,7 @@ use Mail;
 class reminderController extends Controller
 {
 	public function getallReminder(){
-        $mytime = \Carbon\Carbon::now()->addHour();
+        $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i:s');
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->where('date_time', '<=', $date)->orderBy('date_time', 'DESC')->get();
@@ -45,7 +45,7 @@ class reminderController extends Controller
     }
     // 
      public function getReminders(){
-        $mytime = \Carbon\Carbon::now()->addHour();
+        $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i:s');
         $message = '';
         // dd($date);
@@ -147,7 +147,7 @@ class reminderController extends Controller
         return json_decode(json_encode($result),true);
     }
     public function getAdminReminders(){
-        $mytime = \Carbon\Carbon::now()->addHour();
+        $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i:s');
         $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
         // dd($currentDate);
@@ -461,7 +461,7 @@ class reminderController extends Controller
     }
 
      public function oneUserReminder($id){
-        $mytime = \Carbon\Carbon::now()->addHour();
+        $mytime = \Carbon\Carbon::now();
         $datetime = $mytime->format('Y-m-d G:i:s');
         $permissions = permission::where('user_id', session('user_id'))->first();
         $user = user::where('id', $id)->get()->first();
