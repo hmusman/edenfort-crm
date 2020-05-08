@@ -28,7 +28,7 @@ use Mail;
 class reminderController extends Controller
 {
 	public function getallReminder(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->where('date_time', '<=', $date)->orderBy('date_time', 'DESC')->get();
@@ -45,7 +45,7 @@ class reminderController extends Controller
     }
     // 
      public function getReminders(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         $message = '';
         // dd($date);
@@ -147,13 +147,18 @@ class reminderController extends Controller
         return json_decode(json_encode($result),true);
     }
     public function getAdminReminders(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
+        $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
+        // dd($currentDate);
+        $futureDate = \Carbon\Carbon::now()->addMonths(3)->format('Y-m-d');
+    
         // $result1;
         if(session('role') == 'Admin'){
             $result1= DB::table('reminders')->select('reminders.id as rid','reminders.*', 'users.*')->join('users', 'users.id','=','reminders.user_id')->where('user_id',session('user_id'))->where('reminders.date_time','<=',$date)->where('reminders.status',NULL)->get();
             // Reminder::where('date_time','<=',$date)->where('status',null)->get();
           // dd($result1);
+            $deals = deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
         }
         else if(session('role') == 'SuperAgent'){
             $result1=DB::table('reminders')->select('reminders.id as rid','reminders.*', 'users.*')->join('users', 'users.id','=','reminders.user_id')->where('user_id',session('user_id'))->where('reminders.date_time','<=',$date)->where('reminders.status',NULL)->get();
@@ -163,6 +168,66 @@ class reminderController extends Controller
             //                   $q->where('add_by', 'ADMIN')
             //                     ->orWhere('add_by', 'SuperAgent');
             //               })->get();
+        }
+        if(session('role') == 'Admin'){
+        foreach ($deals as $key => $value) {
+            if($value->email_notification == 0){
+
+            deal::where('id',$value->id)->update(['email_notification'=>1]);
+
+            $massage = [
+                'reminder' => "Deals_without_reminder",
+                'reminder_of' => "Deals",
+                'reminder_type' => "Deal Contract",
+                'deal_start_date' => $value->deal_start_date,
+                'contract_start_date' => $value->contract_start_date,
+                'contract_end_date' => $value->contract_end_date,
+                'building' => $value->building,
+                'referenceNo' => $value->referenceNo,
+                'broker_name' => $value->broker_name,
+                'unit_no' => $value->unit_no,
+                'client_name' => $value->client_name,
+                'contanct_no' => $value->contanct_no,
+                'email' => $value->email,
+                'property_type' => $value->property_type,
+                'rent_sale_value' => $value->rent_sale_value,
+                'rentalCheques' => $value->rentalCheques,
+                'deal_Status' => $value->deal_Status,
+                'agent_name' => $value->agent_name,
+                'gross_commission' => $value->gross_commission,
+                'gc_vat' => $value->gc_vat,
+                'company_commision' => $value->company_commision,
+                'cc_Vat' => $value->cc_Vat,
+                'efAgent_Commission' => $value->efAgent_Commission,
+                'efAgent_Vat' => $value->efAgent_Vat,
+                'secondAgentName' => $value->secondAgentName,
+                'secondAgentCompany' => $value->secondAgentCompany,
+                'sacPhone' => $value->sacPhone,
+                'secondAgent_Commission' => $value->secondAgent_Commission,
+                'sacAgent_Vat' => $value->sacAgent_Vat,
+                'thirdAgentName' => $value->thirdAgentName,
+                'thirdAgentCompany' => $value->thirdAgentCompany,
+                'tacPhone' => $value->tacPhone,
+                'thirdAgentCommission' => $value->thirdAgentCommission,
+                'tacVat' => $value->tacVat,
+                'paymentTerms' => $value->paymentTerms,
+                'chequeNumber' => $value->chequeNumber,
+                'ownerCompanyName' => $value->ownerCompanyName,
+                'ownerName' => $value->ownerName,
+                'ownerPhone' => $value->ownerPhone,
+                'ownerEmail' => $value->ownerEmail,
+                'ownerNameSecond' => $value->ownerNameSecond,
+                'ownerPhoneSecond' => $value->ownerPhoneSecond,
+                'ownerEmailSecond' => $value->ownerEmailSecond,
+                'chequeAmount' => $value->chequeAmount,
+                'note' => $value->note,
+
+            ];
+
+            Mail::to('upcoming@edenfort.ae')->send(new reminderMails($massage));
+            }
+        }
+
         }
         foreach ($result1 as $key => $value) {
             $currentDate = strtotime($date);
@@ -396,7 +461,7 @@ class reminderController extends Controller
     }
 
      public function oneUserReminder($id){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $datetime = $mytime->format('Y-m-d G:i:s');
         $permissions = permission::where('user_id', session('user_id'))->first();
         $user = user::where('id', $id)->get()->first();

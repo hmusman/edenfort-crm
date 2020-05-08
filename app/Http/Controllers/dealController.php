@@ -50,9 +50,18 @@ class dealController extends Controller {
         }
         if($request->agent){
             $getAgentName = user::find($request->agent);
-            $query->where("agent_name","<=",$request->agent);
+            $query->where("agent_name",$request->agent);
         }
-        $deals = $query->orderBy("created_at","DESC")->paginate(20);
+        if($request->unit_no){
+
+            $query->where("unit_no",$request->unit_no);
+        }
+        if($request->build){
+
+            $query->where("building",$request->build);
+        }
+        $deals = $query->orderBy(DB::raw('ABS(DATEDIFF(deals.contract_end_date, NOW()))', 'ASC'))->paginate(20);
+        // dd($deals);
         $permissions = permission::where('user_id', session('user_id'))->first();
         $dbName = DB::getDatabaseName();
         $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");

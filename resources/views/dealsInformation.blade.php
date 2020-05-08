@@ -58,7 +58,14 @@
    padding-bottom:8px !important;
    }
     @media only screen and (max-width: 600px) {
-      
+      .filter_deal{
+        padding-top: 77px !important;
+        margin-top: -68px !important;
+        margin-left: 0% !important;
+      }
+      .deal_search{
+        width: 234%;
+      }
     }
 </style>
 <div class="page-wrapper" style="margin-top: 2%;">
@@ -111,9 +118,28 @@
                </ul>
                <div class="card-body">
                    <form action="{{url('dealsInfo')}}" method="get" style="width:100%">
-                        <div class="row" style="padding: 0px;margin: 0px;position: relative;top: -15px;">
-                            <div class="col-md-10">
-                                <div class="row mt-2 mb-2">
+                    <div class="row" style="float: right;margin-top: -20px;">
+                      <div class="col-sm-2">
+                            <div class="form-group ml-auto">
+                                <input id="demo-input-search2" class="demo-input-search" type="text" placeholder="Search" autocomplete="off">
+                            </div>
+                            </div>
+                    </div>
+                        <div class="row" style="padding: 0px;margin: 0px;position: relative;top: -2px;left: -3px;">
+                            <div class="col-md-12">
+                                <div class="row mt-2 mb-2 deal_search">
+                                  <div class="col-md-3 pl-1 pr-1">
+                                       <label>Building Name</label>
+                                      <div class="dropdown_wrapper ">
+                                        <input type="text" value="{{@$_GET[build]}}" class="form-control filter_input" list="building" placeholder="select Building" name="build">
+                                           <datalist id="building">
+                                              <option value="">Select building</option>
+                                              @foreach($buildings as $building)
+                                              <option value="{{$building->building_name}}" >{{$building->building_name}}</option>
+                                              @endforeach
+                                           </datalist>
+                                      </div>
+                                   </div>
                                    <div class="col-md-2 pl-1 pr-1">
                                        <label>Contract Start Date</label>
                                       <div class="dropdown_wrapper ">
@@ -138,18 +164,20 @@
                                          <input type="hidden" id="agentId" name="agent" value="">
                                       </div>
                                    </div>
-                                   <div class="col-md-3 " style="padding-top: 31px;">
+                                   <div class="col-md-2 pl-1 pr-1">
+                                       <label>Unit No.</label>
+                                      <div class="dropdown_wrapper ">
+                                         <input type="text" value="{{ @$_GET['unit_no'] }}" class="form-control filter_input" name="unit_no"  placeholder="Unit No.">
+                                      </div>
+                                   </div>
+                                   <div class="col-md-2 pl-1 pr-1 filter_deal" style="padding-top: 31px;margin-left: 92%;margin-top: -68px;">
                                       <div class="filter_btn_wrapper">
                                          <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter">
                                       </div>
                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                            <div class="form-group ml-auto">
-                                <input id="demo-input-search2" class="demo-input-search" type="text" placeholder="Search" autocomplete="off">
-                            </div>
-                            </div>
+                            
                             </div>
                   </form>
                   <!--start of add deal popup-->
