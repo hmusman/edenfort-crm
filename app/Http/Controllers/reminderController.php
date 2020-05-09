@@ -28,7 +28,7 @@ use Mail;
 class reminderController extends Controller
 {
 	public function getallReminder(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         if(session('role') == 'Agent'){
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->where('date_time', '<=', $date)->orderBy('date_time', 'DESC')->get();
@@ -45,7 +45,7 @@ class reminderController extends Controller
     }
     // 
      public function getReminders(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         $message = '';
         // dd($date);
@@ -139,15 +139,15 @@ class reminderController extends Controller
 
             ];
         }
-
-            Mail::to($receiverEmail)->send(new reminderMails($massage));
+            $emails = [$receiverEmail, 'upcoming@edenfort.ae'];
+            Mail::to($emails)->send(new reminderMails($massage));
             
         }
         
         return json_decode(json_encode($result),true);
     }
     public function getAdminReminders(){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $date=$mytime->format('Y-m-d G:i:s');
         $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
         // dd($currentDate);
@@ -176,8 +176,8 @@ class reminderController extends Controller
             deal::where('id',$value->id)->update(['email_notification'=>1]);
 
             $massage = [
-                'reminder' => "Deals_without_reminder",
-                'reminder_of' => "Deals",
+                'reminder_of' => "Deals_without_reminder",
+                'reminder_of-1' => "Deals",
                 'reminder_type' => "Deal Contract",
                 'deal_start_date' => $value->deal_start_date,
                 'contract_start_date' => $value->contract_start_date,
@@ -288,8 +288,6 @@ class reminderController extends Controller
                 'note' => $deal->note,
 
             ];
-
-            Mail::to('upcoming@edenfort.ae')->send(new reminderMails($massage));
             }else{
                 $massage = [
                 'reminder_of' => $rem->reminder_of,
@@ -303,8 +301,9 @@ class reminderController extends Controller
             ];
             }
             
-
-            Mail::to($receiverEmail)->send(new reminderMails($massage));
+            $emails = [$receiverEmail,'upcoming@edenfort.ae'];
+            Mail::to($emails)->send(new reminderMails($massage));
+            // Mail::to('')->send(new reminderMails($massage));
             
         }
         // dd($result1, $result2);
@@ -461,7 +460,7 @@ class reminderController extends Controller
     }
 
      public function oneUserReminder($id){
-        $mytime = \Carbon\Carbon::now();
+        $mytime = \Carbon\Carbon::now()->addHour();
         $datetime = $mytime->format('Y-m-d G:i:s');
         $permissions = permission::where('user_id', session('user_id'))->first();
         $user = user::where('id', $id)->get()->first();

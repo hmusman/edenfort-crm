@@ -71,13 +71,13 @@
         </div>  
       </div>
     </div>
-    @if($massage['reminder']=='Deals_without_reminder')
+    @if($massage['reminder_of']=='Deals_without_reminder')
     <div class="row">
       <div class="col-sm-12">
         <div class="card" style="border: 1px solid lightgray; border-radius: 37px; width: 95%;margin-left: 29px;  margin: auto; height: 950px;">
           <div class="card-body ">
             <h3 class="card-title card-header">Edenfort CRM Reminder Alert</h3>
-            <h3 style="padding-left: 25px;" class="card-text"><strong>Reminder alert of {{$massage['reminder_of']}}</strong></h3>
+            <h3 style="padding-left: 25px;" class="card-text"><strong>Reminder alert of {{$massage['reminder_of-1']}}</strong></h3>
             <div class="col-sm-6" style="width: 50%; float: left;">
               <table id="customers" style="margin-left: 25px;">
               <tr>
@@ -459,31 +459,31 @@
                 <div class="card" style="border: 1px solid lightgray; border-radius: 37px; width: 50%;margin-left: 29px;">
                   <div class="card-body ">
                     <h3 class="card-title card-header">Edenfort CRM Reminder Alert</h3>
-                    <h3 style="padding-left: 25px;" class="card-text"><strong>Reminder alert of Property</strong></h3>
+                    <h3 style="padding-left: 25px;" class="card-text"><strong>Reminder alert of {{$massage['reminder_of']}}</strong></h3>
                     <table id="customers" style="margin-left: 25px;">
                       <tr>
                         <td><strong>Reminder Type:</strong></td>
-                        <td>coldcalling</td>
+                        <td>{{$massage['reminder_type']}}</td>
                       </tr>
                       <tr>
                         <td><strong>Building Name:</strong></td>
-                        <td>ABC</td>
+                        <td>{{$massage['Building']}}</td>
                       </tr>
                       <tr>
                         <td><strong>Area:</strong></td>
-                        <td>abc</td>
+                        <td>{{$massage['area']}}</td>
                       </tr>
                       <tr>
                         <td><strong>LandLoard:</strong></td>
-                        <td>qwerty</td>
+                        <td>{{$massage['Landloard']}}</td>
                       </tr>
                       <tr>
                         <td><strong>Email:</strong></td>
-                        <td>qwertyuiop</td>
+                        <td>{{$massage['email']}}</td>
                       </tr>
                       <tr>
                         <td><strong>Contact No:</strong></td>
-                        <td><span itemprop="telephone"><a href="tel:+0987654321">0987654321</a></span></td>
+                        <td><span itemprop="telephone"><a href="tel:+{{$massage['contact_no']}}">{{$massage['contact_no']}}</a></span></td>
                       </tr>
                      
                     </table>
