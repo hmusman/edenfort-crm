@@ -391,8 +391,8 @@
                               <td>{{$record->area}}</td>
                               <td>{{$record->tenant_name}}</td>
                               <td>{{$record->Bedroom}}</td>
-                              <td>{{$record->contract_start_date}}</td>
-                              <td>{{$record->contract_end_date}}</td>
+                              <td>{{date('d-m-Y',strtotime($record->contract_start_date))}}</td>
+                              <td>{{date('d-m-Y',strtotime($record->contract_end_date))}}</td>
                            <!--   <td>
                                  <select class="form-control access_select" style="font-size: 11px;font-weight: 500;" required="" name="updated_access[{{$counter++}}]">
                                     <option <?php if($record->access=="For Rent"){echo "selected";}  ?> value="For Rent">For Rent</option>

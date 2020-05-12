@@ -119,7 +119,7 @@
                                 <td>{{ucwords($values->Phone)}}</td>
                                 <td>{{ucwords($values->Email)}}</td>
                                 <td>{{ucwords($values->Rule_type)}} </td>
-                                <td>{{ucwords($values->birth_date)}}</td>
+                                <td>{{date('d-m-Y',strtotime(ucwords($values->birth_date)))}}</td>
                                 <td><a class="edit_supervision" href='{{url("EditUser/{$values->id}")}}?action=editUser&user={{@$heading}}'><i class="fa fa-edit"></i> Edit</a></td>
                             </tr>
                            <?php  } 

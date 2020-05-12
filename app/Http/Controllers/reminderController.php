@@ -80,6 +80,7 @@ class reminderController extends Controller
             $user = user::where('id', session('user_id'))->first();
             $receiverEmail = $user->Email;
             if($rem->reminder_of=='Deals'){
+                $subject = $rem->reminder_of;
                 $massage = [
                 'reminder_of' => $rem->reminder_of,
                 'reminder_type' => $rem->reminder_type,
@@ -128,6 +129,7 @@ class reminderController extends Controller
 
             ];
             }else{
+                $subject = $rem->reminder_of;
                 $massage = [
                 'reminder_of' => $rem->reminder_of,
                 'reminder_type' => $rem->reminder_type,
@@ -140,7 +142,7 @@ class reminderController extends Controller
             ];
         }
             $emails = [$receiverEmail, 'upcoming@edenfort.ae'];
-            Mail::to($emails)->send(new reminderMails($massage));
+            Mail::to($emails)->send(new reminderMails($massage, $subject));
             
         }
         
@@ -174,7 +176,7 @@ class reminderController extends Controller
             if($value->email_notification == 0){
 
             deal::where('id',$value->id)->update(['email_notification'=>1]);
-
+            $subject = "Deals";
             $massage = [
                 'reminder_of' => "Deals_without_reminder",
                 'reminder_of-1' => "Deals",
@@ -224,7 +226,7 @@ class reminderController extends Controller
 
             ];
 
-            Mail::to('upcoming@edenfort.ae')->send(new reminderMails($massage));
+            Mail::to('upcoming@edenfort.ae')->send(new reminderMails($massage,$subject));
             }
         }
 
@@ -241,6 +243,7 @@ class reminderController extends Controller
             $user = user::where('id', session('user_id'))->first();
             $receiverEmail = $user->Email;
             if($rem->reminder_of=='Deals'){
+                $subject = $rem->reminder_of;
                 $massage = [
                 'reminder_of' => $rem->reminder_of,
                 'reminder_type' => $rem->reminder_type,
@@ -289,6 +292,7 @@ class reminderController extends Controller
 
             ];
             }else{
+                $subject = $rem->reminder_of;
                 $massage = [
                 'reminder_of' => $rem->reminder_of,
                 'reminder_type' => $rem->reminder_type,
@@ -302,7 +306,7 @@ class reminderController extends Controller
             }
             
             $emails = [$receiverEmail,'upcoming@edenfort.ae'];
-            Mail::to($emails)->send(new reminderMails($massage));
+            Mail::to($emails)->send(new reminderMails($massage, $subject));
             // Mail::to('')->send(new reminderMails($massage));
             
         }

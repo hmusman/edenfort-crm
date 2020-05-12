@@ -12,14 +12,16 @@ class reminderMails extends Mailable
     use Queueable, SerializesModels;
 
     public $massage;
+    public $subject;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($massage)
+    public function __construct($massage, $subject)
     {
         $this->massage = $massage;
+        $this->subject = $subject;
     }
 
     /**
@@ -29,6 +31,6 @@ class reminderMails extends Mailable
      */
     public function build()
     {
-        return $this->subject('Reminder Alert | Edenfort CRM')->view('reminder-mail');
+        return $this->subject($this->subject.' Reminder Alert | Edenfort CRM')->view('reminder-mail');
     }
 }
