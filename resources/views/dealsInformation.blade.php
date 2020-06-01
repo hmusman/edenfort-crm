@@ -158,7 +158,7 @@
                                          <input id="name" value="{{@$getAgentName->user_name }}" class="form-control filter_input" list="allNames" autocomplete="off" placeholder="select Agent"/>
                                          <datalist id="allNames">
                                             @foreach($agents as $agent)
-                                                <option data-value="{{$agent->id}}" value="{{$agent->user_name}}" >{{$agent->user_name}}</option>
+                                                <option data-value="{{$agent->id}}" value="{{$agent->user_name}}" >{{$agent->First_name}} {{$agent->Last_name}}</option>
                                             @endforeach
                                          </datalist>
                                          <input type="hidden" id="agentId" name="agent" value="">
@@ -347,7 +347,7 @@
                                              <label>Name: Agent</label>
                                              <select class="form-control" name="agentName">
                                                 @foreach($agents as $agent)
-                                                <option value="{{$agent->id}}">{{$agent->user_name}}</option>
+                                                <option value="{{$agent->id}}">{{$agent->First_name}} {{$agent->Last_name}}</option>
                                                 @endforeach                      
                                              </select>
                                           </div>
