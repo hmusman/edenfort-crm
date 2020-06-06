@@ -143,6 +143,9 @@ EDEN FORT REAL ESTATE
                 if($request->unit_no){
                     $query->where("unit_no",$request->unit_no);
                 }
+                if($request->contact_no){
+                    $query->where("contact_no", 'LIKE', '%' .$request->contact_no. '%');
+                }
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
                 $upcoming = property::where('access','Upcoming')->count();
                 return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));

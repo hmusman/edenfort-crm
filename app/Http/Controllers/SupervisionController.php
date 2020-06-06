@@ -103,7 +103,7 @@ class SupervisionController extends Controller
     $todayDate = new DateTime('today');
     $datetime = new DateTime('tomorrow');
     $reminders = Reminder::whereDate("date_time",$datetime->format('Y-m-d'))->orWhereDate("date_time",$todayDate->format('Y-m-d'))->get();
-    $remSummery = DB::table('reminders')->join('users', 'users.id','=','reminders.user_id')->select('property_id','user_name','reminder_of','reminder_type','date_time', 'description','reason')->where('reminders.status','disable')->whereDate('date_time','>',Carbon::now()->subDays(30))->get();
+    $remSummery = DB::table('reminders')->join('users', 'users.id','=','reminders.user_id')->select('property_id','user_name','reminder_of','reminder_type','date_time', 'description','reason','add_by')->where('reminders.status','disable')->whereDate('date_time','>',Carbon::now()->subDays(30))->get();
     $currentDate = Carbon::now()->format('Y-m-d');
     // dd($currentDate);
     $futureDate = Carbon::now()->addMonths(3)->format('Y-m-d');

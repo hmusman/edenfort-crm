@@ -401,7 +401,7 @@
                                           <td class="text-center;"> {{date("Y-m-d",strtotime($reminder->date_time))}}</td>
                                           <td class="text-center;"> {{$reminder->description}}</td>
                                           <td class="text-center;"> {{$reminder->reason}}</td>
-                                          <td class="text-center;"> <a target="_blank" href="{{url('get-reminder-record')}}?property_id={{$reminder->property_id}}&ref={{$reminder->reminder_of}}&active={{@$reminder->add_by}}" class="btn btn-success" style="font-size:12px;">visit</a></td>
+                                          <td class="text-center;"> <a target="_blank" href="{{url('get-reminder-record')}}?property_id={{$reminder->property_id}}&ref={{$reminder->reminder_of}}&active={{$reminder->add_by}}" class="btn btn-success" style="font-size:12px;">visit</a></td>
                                         </tr>
                                 @endforeach
                                 </tbody>

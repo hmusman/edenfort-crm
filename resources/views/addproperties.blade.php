@@ -639,20 +639,25 @@
                                              <input id="unit_no" name="unit_no" value="{{@$_GET[unit_no]}}" class="form-control filter_input" autocomplete="off" placeholder="Unit No"/>
                                           </div>
                                        </div>
+                                       <div class="col-md-2 pl-1 pr-1">
+                                          <div class="dropdown_wrapper ">
+                                             <input id="contact_no" name="contact_no" value="{{@$_GET[contact_no]}}" class="form-control filter_input" autocomplete="off" placeholder="Contact No"/>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
                                  @if(ucfirst(session('role'))==ucfirst('Admin'))
-                              <div class="col-md-2 pl-1 pr-1 adminFilter" style="margin-left: 66%; margin-top: 1%">
+                              <div class="col-md-2 pl-1 pr-1 adminFilter" style="margin-left: 842px;margin-top: -35px;">
                                  <div class="filter_btn_wrapper">
                                     <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
                                  </div>
                               </div>
-                              <div class="col-md-1 pl-1 pr-1 adminAssign" style="margin-top: 1%;">
+                              <div class="col-md-1 pl-1 pr-1 adminAssign" style="margin-top: -35px;">
                                        <div class="filter_btn_wrapper">
                                           <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
                                        </div>
                                     </div>
-                               <div class="col-md-1 pl-1 pr-1 adminExport" style=" margin-top: 1%;">
+                               <div class="col-md-1 pl-1 pr-1 adminExport" style=" margin-top: -35px;">
                                   <div class="filter_btn_wrapper">
                                     <input type="button" class="btn btn-primary" id="export" value="Export CVS">
                                 </div>
