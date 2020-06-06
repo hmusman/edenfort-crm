@@ -403,6 +403,45 @@ class reminderController extends Controller
          	    return view('leads',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
          	}
          }
+        else if(input::get('active') == 'ADMIN' || input::get('active') == 'SuperAgent'){
+          $allBuildings=Building::select("building_name")->orderBy("building_name","ASC")->get();
+            if(strtoupper(input::get('ref'))=='COLDCALLING'){
+
+              $permissions = permission::where('user_id', session('user_id'))->first();
+              $areas=coldcallingModel::distinct('area')->pluck('area');
+              $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
+              $agents=user::where(['role'=>3,"status"=>1])->orWhere(['role'=>1])->get();
+              $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
+              $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
+              $buildings=coldcallingModel::distinct('Building')->pluck('Building');
+              $buildingss=Building::all();
+              $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
+              // $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
+              $upcoming = coldcallingModel::where('access','Upcoming')->count();
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming']));
+            }else if(strtoupper(input::get('ref'))=='PROPERTY'){
+                $permissions = permission::where('user_id', session('user_id'))->first();
+                $areas=property::distinct('area')->pluck('area');
+                $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');
+                $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
+                $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
+                 $buildings=Building::all();
+                 $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
+                $result_data=property::where("id",input::get('property_id'))->paginate(20);
+                $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
+                $upcoming = property::where('access','Upcoming')->count();
+                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));            }
+            else{
+                $agents=lead::distinct('lead_user')->pluck('lead_user'); 
+                $buildings=Building::distinct('building_name')->get();
+                $sources=lead::distinct('lead_source')->pluck('lead_source');
+                $leads=lead::where('id',input::get('property_id'))->paginate(25);
+                $dbName=DB::getDatabaseName();
+    
+                $upcomingLeadId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'leads'");
+                return view('leads',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
+            }
+         }
     }
 
     public function getSingleReminderRecord(){
