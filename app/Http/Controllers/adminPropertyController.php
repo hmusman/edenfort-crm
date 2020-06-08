@@ -33,6 +33,19 @@ class adminPropertyController extends Controller
         return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>Property Assigned Successfully!</div>");
     }
 
+    public function singlePersonBuilding(Request $request){
+        $properties = $request->check_boxes;
+        $agents = $request->agents_ids;
+        $agents = array_values($agents);
+        $properties = array_values($properties);
+        // dd($properties, $agents);
+
+        foreach($properties as $key => $propertyID){
+            coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
+        }
+        return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>Coldcalling Assigned Successfully!</div>");
+    }
+
     public function sentEmails(){
         $message='';
         $check_boxes=input::get('check_boxes');

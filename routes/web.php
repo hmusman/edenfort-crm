@@ -3,6 +3,8 @@ ini_set('memory_limit', '2024M');
 
 Route::post('assign-singlecoldcalling','adminColdCallingController@singlePersonColdCalling');
 Route::post('assign-singleproperty','adminPropertyController@singlePersonProperty');
+Route::post('assign-singlebuilding','adminPropertyController@singlePersonBuilding');
+
 
 // PDF REPORT
 Route::get('direct-pdf-report', 'directPdfReportController@index');

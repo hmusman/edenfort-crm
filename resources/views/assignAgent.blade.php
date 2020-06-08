@@ -16,6 +16,11 @@
     }
     
    }
+   .modal-body .row .data{
+        padding:10px 0px;
+        border: 1px solid #ccc;
+        border-bottom: 0px;
+        }
 .filter_input{
         background-color:#1976D2 ;
         color:#fff;
@@ -101,6 +106,11 @@
                                            <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
                                        </div>
                                    </div>
+                                   <div class="col-md-3 filter">
+                                       <div class="filter_btn_wrapper">
+                                           <input type="button" class="btn btn-success btn-block assign_btn" value="Assign" name="assign" style="padding: 10px 2px 10px 0px;" id="assign-single-property">
+                                       </div>
+                                   </div>
                                      </form> 
                                </div>
                              
@@ -110,17 +120,60 @@
                     <table  class="table m-b-0 toggle-arrow-tiny" style="margin-top: 2%" data-page-size="20" >
                         <thead>
                             <tr>
+                                <th class="checkall" style="cursor:pointer">Select All</th>
                                 <th data-toggle="true">SNO#</th>
                                 <th data-toggle="true">Building Name</th>
-                                 <th data-toggle="true">Assign Agent</th>                               
+                                <th data-toggle="true">Assign Agent</th>                               
                                 <th data-toggle="all">Action</th>
                                 <!--<th data-toggle="all">Action</th>-->
                             </tr>
                         </thead>     
                         <tbody>
+                          <form id="bulkForm" class="form-inline">
+                            @csrf
+                           <!-- Assign Property -->
+                        <div class="modal fade" id="assignproperty" tabindex="-1" role="dialog" aria-labelledby="assignproperty" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="assignproperty">Assign Property</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row" style="font-size:13px;">
+                                            <div class="col-sm-1 text-center"></div>
+                                            <div class="col-sm-3 text-center data"><strong style="font-weight:900;color:black;">Select</strong></div>
+                                            <div class="col-sm-7 text-center data"><strong style="font-weight:900;color:black;">Agent Name</strong></div>
+                                             <div class="col-sm-1 text-center"></div>
+                                            @foreach($agents as $key => $agent)
+                                               <div class="col-sm-1 text-center"></div>
+                                               <div class="col-sm-3 text-center data"><input class="agents_ids" type="checkbox" name="agents_ids[{{$key}}]" value="{{$agent->id}}"></div>
+                                               <div class="col-sm-7 text-center data">{{$agent->user_name}}</div>
+                                               <div class="col-sm-1 text-center"></div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" id="assign-property-btn" class="btn btn-success">Submit</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                   <?php if(count($value) > 0){ $counter=1;
                              foreach($value as $values){ ?>
                                     <tr>
+                                        <td>@if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
+                                             @if(@$permissions->propertyBulk==1)
+                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$values->id}}">
+                                             @else
+                                             Not Allowed
+                                             @endif
+                                             @else
+                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$values->id}}">
+                                             @endif
+                                        </td>
                                         <td>{{$counter++}}</td>
                                         <td>{{ucwords($values->Building)}}  <label class="label label-success">{{count($values->buildingCount)}} </label></td>
                                         <td>{{$values->user->user_name}}</td>
@@ -144,6 +197,7 @@
                     </table>
                     
                 </div>
+                 </form>
                  <div class="ml-auto pr-3">
                             {{$value->appends(Request::only('building','agent'))->links()}}
                           </div>
@@ -226,6 +280,8 @@
     </div>
 </div>
 @include('inc.footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
 <?php  if(isset($_GET['action'])) { ?>
     <script type="text/javascript">
         $("#agent option").each(function(){
@@ -235,8 +291,47 @@
         })
     </script>
 <?php }  ?>
+<script>
+    $(document).ready(function(){
+        $("#assign-single-property").click(function(){
+            if(!$('.ind_chk_box:checkbox:checked').val()){
+                toastr["error"]("please select Rows!");
+            }else{
+               $("#assignproperty").modal("show"); 
+            }
+            
+        });
+        $("#assign-property-btn").click(function(){
+            if(!$('.agents_ids:checkbox:checked').val()){
+                toastr["error"]("Please select Agent");
+            }else{
+               if($('.agents_ids:checkbox:checked').length == 2){
+                   toastr["error"]("Please select Only One Agent");
+                   // return;
+               }
+               $("#bulkForm").attr("action","{{url('assign-singlebuilding')}}");
+               $("#bulkForm").attr("method","POST");
+               $("#bulkForm").submit();
+            }
+        })
+    })
+</script>
 <script type="text/javascript">
 $(document).ready(function(){
+  $(document).ready(function(){
+           // Select all
+    var clicked = false;
+    $(".checkall").on("click", function() {
+      $(".ind_chk_box").prop("checked", !clicked);
+      if(!clicked){
+         $(".ind_chk_box").attr("checked",""); 
+      }else{
+          $(".ind_chk_box").removeAttr("checked"); 
+      }
+      clicked = !clicked;
+    });
+  });
+
         //datalist on click, agents search
 $("#name").on('input', function () {
     var val = this.value;
