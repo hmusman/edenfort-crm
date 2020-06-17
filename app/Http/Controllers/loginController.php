@@ -63,6 +63,14 @@ if(isset($validate_user->id)){
                     session()->put("fname",$validate_user->First_name);
                     
                      return redirect('agentdashboard');
+                 }else if(strtoupper($role[0])==strtoupper("SuperDuperAdmin")){
+                    session()->put("role",$role[0]);
+                    session()->put("user_id",$validate_user->id);
+                    session()->put("user_name",$validate_user->user_name);
+                    session()->put("email",$validate_user->Email);
+                    session()->put("fname",$validate_user->First_name);
+                    // dd($role[0]);
+                     return redirect('dashboard');
                  }else if(strtoupper($role[0])==strtoupper("superAgent")){
                     session()->put("role",$role[0]);
                     session()->put("user_id",$validate_user->id);

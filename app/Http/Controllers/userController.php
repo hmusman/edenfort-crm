@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use App\Models\user;
 use App\Models\role;
+use App\Models\permission;
 use App\Models\Supervision;
 use DB;
 class userController extends Controller
@@ -18,19 +19,25 @@ class userController extends Controller
   //     }
   // }
     public function owners(Request $request){
+    $permissions = permission::where('user_id', session('user_id'))->first();
+
           $Role=role::all();
           $value=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-          return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'owners']);
+          return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'owners', 'permissions'=>$permissions]);
     }
     public function agents(Request $request){
+    $permissions = permission::where('user_id', session('user_id'))->first();
+
           $Role=role::all();
           $value=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='Agent'");
-          return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'agents']);
+          return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'agents', 'permissions'=>$permissions]);
     }
      public function admins(Request $request){
+    $permissions = permission::where('user_id', session('user_id'))->first();
+
           $Role=role::all();
           $value=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='admin'");
-          return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'admins']);
+          return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'admins', 'permissions'=>$permissions]);
     }
     public function insertUser(Request $request){
       $route=$request->input('user');

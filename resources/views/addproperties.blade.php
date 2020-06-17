@@ -14,10 +14,10 @@
    @endif 
    .superAgentFilter{
       margin-left: 842px;
-      margin-top: 3px;
+      margin-top: -36px;
    }
    .superAgentAssign{
-      margin-top: 3px;
+      margin-top: -36px;
    }
    .superAgentAssign input{
       height: 36px;
@@ -270,7 +270,7 @@
  }
 }
 </style>
-@if(!session("user_id") || strtoupper(session('role'))!=(strtoupper('Admin')|| strtoupper('SuperAgent')))
+@if(!session("user_id") || strtoupper(session('role'))!=(strtoupper('Admin') || strtoupper('SuperAgent') || strtoupper('SuperDuperAdmin')))
 <script type="text/javascript">
    window.location='{{url("/")}}';
 </script>
@@ -646,22 +646,22 @@
                                        </div>
                                     </div>
                                  </div>
-                                 @if(ucfirst(session('role'))==ucfirst('Admin'))
-                              <div class="col-md-2 pl-1 pr-1 adminFilter" style="margin-left: 842px;margin-top: -35px;">
-                                 <div class="filter_btn_wrapper">
-                                    <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
-                                 </div>
-                              </div>
-                              <div class="col-md-1 pl-1 pr-1 adminAssign" style="margin-top: -35px;">
-                                       <div class="filter_btn_wrapper">
-                                          <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
-                                       </div>
+                                 @if(ucfirst(session('role'))==ucfirst('Admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
+                                 <div class="col-md-2 pl-1 pr-1 adminFilter" style="margin-left: 842px;margin-top: -35px;">
+                                    <div class="filter_btn_wrapper">
+                                       <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
                                     </div>
-                               <div class="col-md-1 pl-1 pr-1 adminExport" style=" margin-top: -35px;">
-                                  <div class="filter_btn_wrapper">
-                                    <input type="button" class="btn btn-primary" id="export" value="Export CVS">
+                                 </div>
+                                 <div class="col-md-1 pl-1 pr-1 adminAssign" style="margin-top: -35px;">
+                                          <div class="filter_btn_wrapper">
+                                             <input type="button" class="btn btn-success btn-block" id="assign-single-property" value="Assign">
+                                          </div>
+                                       </div>
+                                  <div class="col-md-1 pl-1 pr-1 adminExport" style=" margin-top: -35px;">
+                                     <div class="filter_btn_wrapper">
+                                       <input type="button" class="btn btn-primary" id="export" value="Export CVS">
+                                   </div>
                                 </div>
-                             </div>
                              
                               @endif
                               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
@@ -1482,6 +1482,8 @@
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == ucfirst('Agent'))
       @include('reminder')
+   @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+      @include('admin_SuperAgent_reminders')
     @endif
 
 </body>

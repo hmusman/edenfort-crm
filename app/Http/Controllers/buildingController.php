@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Input;
 use DB;
 use App\Models\user;
 use App\Models\Reminder;
+use App\Models\permission;
 use App\Models\role;
 
 class buildingController extends Controller
 {
     public function index(){
+    $permissions = permission::where('user_id', session('user_id'))->first();
+
     	$value=Building::all();
     	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
-    	return view('addBuildings',compact(['value','agents']));
+    	return view('addBuildings',compact(['value','agents','permissions']));
     }
     public function insertBuilding(){
     	try{

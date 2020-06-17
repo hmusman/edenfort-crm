@@ -13,8 +13,10 @@ use App\Models\permission;
 class emailTemplateController extends Controller
 {
     public function index(){
+        $permissions = permission::where('user_id', session('user_id'))->first();
+
         $templates = DB::table('email_templates')->orderBy('created_at','DESC')->get();
-        return view('emailTemplate',compact('templates'));
+        return view('emailTemplate',compact('templates', 'permissions'));
     }
     public function addTemplate(){
         $data = array(

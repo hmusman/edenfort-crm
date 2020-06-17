@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\permission;
 class dealController extends Controller {
     public function months() {
+        $permissions = permission::where('user_id', session('user_id'))->first();
+
         $month = DB::table('months')->first();
-        return view('open-close-months', compact('month'));
+        return view('open-close-months', compact('month', 'permissions'));
     }
     public function closeMonth() {
         $month = DB::table('months')->first();
@@ -21,6 +23,8 @@ class dealController extends Controller {
         return back()->with('success', "<div class='alert alert-success'>Month Closed Successfully! <br><b>Next Month Opened Automatically</b></div>");
     }
     public function getRecentDeals() {
+        $permissions = permission::where('user_id', session('user_id'))->first();
+
         $date = explode("-", input::get('current'));
         if (input::get('current')) {
             $currentMonth = $date[1];
@@ -30,16 +34,19 @@ class dealController extends Controller {
             $currentYear = Carbon::now()->year;
         }
         $agents = user::where(['role' => 3])->paginate(10);
-        return view('previous-deals', compact('agents', 'currentMonth', 'currentYear'));
+        return view('previous-deals', compact('agents', 'currentMonth', 'currentYear','permissions'));
     }
     public function getDeals() {
+        $permissions = permission::where('user_id', session('user_id'))->first();
+
         $month = DB::table('months')->select('month')->where('status', 'open')->first();
         $agents = user::where(['role' => 3])->paginate(10);
-        return view('dealsAccountStatement', compact('agents', 'month'));
+        return view('dealsAccountStatement', compact('agents', 'month', 'permissions'));
     }
     public function index(Request $request) {
         $buildings = Building::all();
-        $agents = user::where(['role' => 3])->get();
+        $agents = user::where(['role' => 3])->orwhere(['role' => 5])->get();
+        // dd($agents);
         $query = deal::query();
         $getAgentName = '';
         if($request->start_date){

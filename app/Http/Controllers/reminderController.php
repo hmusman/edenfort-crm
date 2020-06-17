@@ -34,6 +34,9 @@ class reminderController extends Controller
             $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->where('date_time', '<=', $date)->orderBy('date_time', 'DESC')->get();
             // dd($result);
         }
+        else if(session('role') == 'SuperDuperAdmin'){
+           $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") and b.date_time <= CURRENT_TIMESTAMP GROUP BY b.user_id');
+        }
         else if(session('role') == 'Admin'){
             $result=DB::select('SELECT a.id as uid, b.user_id as user_id, upper(substring(a.user_name, 1, 1)) as unam, a.user_name, count(b.id) as rid, b.status from users a,reminders b where a.id=b.user_id AND(b.status="viewed") and b.date_time <= CURRENT_TIMESTAMP GROUP BY b.user_id');
         }
@@ -77,6 +80,10 @@ class reminderController extends Controller
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
             $rem = Reminder::where('id',$value->id)->first();
             $property = property::where('id', $rem->property_id)->first();
+            if(empty($property)){
+                $property = coldcallingModel::where('id', $rem->property_id)->first();
+            }
+            $lead = lead::where('id', $rem->property_id)->first();
             $user = user::where('id', session('user_id'))->first();
             $receiverEmail = $user->Email;
             if($rem->reminder_of=='Deals'){
@@ -128,6 +135,24 @@ class reminderController extends Controller
                 'note' => $deal->note,
 
             ];
+            }else if($rem->reminder_of=='Leads'){
+                $subject = $rem->reminder_of;
+                $massage = [
+                'reminder_of' => $rem->reminder_of,
+                'reminder_type' => $rem->reminder_type,
+                'Building' => $lead->building,
+                'area' => $lead->area,
+                'client_name' => $lead->client_name,
+                'email' => $lead->email,
+                'contact_no' => $lead->contact_no,
+                'submission_date' => $lead->submission_date,
+                'view_date_time' => $lead->view_date_time,
+                'followup_date' => $lead->followup_date,
+                'lead_user' => $lead->lead_user,
+                'status' => $lead->status,
+                'priority' => $lead->priority,
+
+            ];
             }else{
                 $subject = $rem->reminder_of;
                 $massage = [
@@ -162,16 +187,23 @@ class reminderController extends Controller
           // dd($result1);
             $deals = deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
         }
+        else if(session('role') =='SuperDuperAdmin'){
+            $result1= DB::table('reminders')->select('reminders.id as rid','reminders.*', 'users.*')->join('users', 'users.id','=','reminders.user_id')->where('user_id',session('user_id'))->where('reminders.date_time','<=',$date)->where('reminders.status',NULL)->get();
+            // Reminder::where('date_time','<=',$date)->where('status',null)->get();
+          // dd($result1);
+            $deals = deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
+        }
         else if(session('role') == 'SuperAgent'){
             $result1=DB::table('reminders')->select('reminders.id as rid','reminders.*', 'users.*')->join('users', 'users.id','=','reminders.user_id')->where('user_id',session('user_id'))->where('reminders.date_time','<=',$date)->where('reminders.status',NULL)->get();
 
+            $deals = deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
             // Reminder::where('date_time','<=',$date)->where('user_id',session('user_id'))            ->where('status',null)
             //               ->where(function($q) {
             //                   $q->where('add_by', 'ADMIN')
             //                     ->orWhere('add_by', 'SuperAgent');
             //               })->get();
         }
-        if(session('role') == 'Admin'){
+        if(session('role') == 'Admin' || session('role') == 'SuperDuperAdmin'|| session('role') == 'SuperAgent'){
         foreach ($deals as $key => $value) {
             if($value->email_notification == 0){
 
@@ -240,6 +272,7 @@ class reminderController extends Controller
             $rem = Reminder::where('id',$value->rid)->first();
             $property = property::where('id', $rem->property_id)->first();
             $deal = deal::where('id', $rem->property_id)->first();
+            $lead = lead::where('id', $rem->property_id)->first();
             $user = user::where('id', session('user_id'))->first();
             $receiverEmail = $user->Email;
             if($rem->reminder_of=='Deals'){
@@ -291,6 +324,25 @@ class reminderController extends Controller
                 'note' => $deal->note,
 
             ];
+            }
+            else if($rem->reminder_of=='Leads'){
+                $subject = $rem->reminder_of;
+                $massage = [
+                'reminder_of' => $rem->reminder_of,
+                'reminder_type' => $rem->reminder_type,
+                'Building' => $lead->building,
+                'area' => $lead->area,
+                'client_name' => $lead->client_name,
+                'email' => $lead->email,
+                'contact_no' => $lead->contact_no,
+                'submission_date' => $lead->submission_date,
+                'view_date_time' => $lead->view_date_time,
+                'followup_date' => $lead->followup_date,
+                'lead_user' => $lead->lead_user,
+                'status' => $lead->status,
+                'priority' => $lead->priority,
+
+            ];
             }else{
                 $subject = $rem->reminder_of;
                 $massage = [
@@ -321,7 +373,7 @@ class reminderController extends Controller
                  Reminder::where("property_id",input::get('property_id'))->where(['add_by','ADMIN', 'status'=>'viewed'])->update(['status'=>'disable']);
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'ADMIN','user_id'=>session('user_id')])->get();
                 echo count($result);
-            }else if(session('role') == 'Agent'){
+            }else if(session('role') == 'Agent' || session('role') == 'SuperDuperAdmin'){
                 Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->update(['status'=>"disable",'reason'=>input::get('name')]);
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
                 echo count($result);
@@ -542,6 +594,10 @@ class reminderController extends Controller
                 Reminder::where('property_id',input::get('property_id'))->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable', 'reason'=>input::get('name')]);
                 // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
             }
+            else if(session('role') == 'SuperDuperAdmin'){
+                Reminder::where('property_id',input::get('property_id'))->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable', 'reason'=>input::get('name')]);
+                // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
+            }
             else if(session('role') == 'SuperAgent'){
                 Reminder::where('property_id',input::get('property_id'))->where(['user_id'=>session('user_id')])
                 ->where(function($q) {
@@ -562,6 +618,21 @@ class reminderController extends Controller
       if(input::get('property_id')){
         $timedate = date('Y-m-d H:i:s', strtotime(input::get('datetime')));
         if(session('role') == 'Admin' ){
+
+            $property = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id']);
+            $property_id = $property->property_id;
+            $oldReminder = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id', 'reminder_type', 'reminder_of', 'user_id', 'date_time', 'description']);
+
+            // $history = json_encode($oldReminder);
+            Reminder::where('property_id', input::get('property_id'))->where('user_id', session('user_id'))->update(['description' => input::get('description'), 'date_time' => $timedate, 'status' => NULL]);
+
+            ReminderHistory::updateOrCreate(
+              ['property_id' => $property_id],
+              ['history' => $oldReminder]
+            );
+            
+        }
+        else if(session('role') == 'SuperDuperAdmin' ){
 
             $property = Reminder::where('property_id',input::get('property_id'))->where('user_id',session('user_id'))->first(['property_id']);
             $property_id = $property->property_id;

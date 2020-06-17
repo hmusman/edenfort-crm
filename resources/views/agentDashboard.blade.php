@@ -1,5 +1,5 @@
 @include('inc.header')
-@if(!session("user_id") || ucfirst(session('role'))!=ucfirst('agent'))
+@if(!session("user_id") && ucfirst(session('role')) != ucfirst('agent'))
   <script type="text/javascript">
     window.location='{{url("/")}}';
   </script>
@@ -259,6 +259,10 @@
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == ucfirst('Agent'))
       @include('reminder')
+    @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+      @include('reminder')
+    @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+      @include('admin_SuperAgent_reminders')
     @endif
 
 <script type="text/javascript">

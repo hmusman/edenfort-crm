@@ -24,8 +24,9 @@ use App\Models\permission;
 class directPdfReportController extends Controller
 {
     public function index(){
-        $agents = user::whereIn('role', array(3,4))->get();
-        return view("direct-pdf-report",compact("agents"));
+        $permissions = permission::where("user_id",session("user_id"))->first();
+        $agents = user::whereIn('role', array(3,4,5))->get();
+        return view("direct-pdf-report",compact("agents", "permissions"));
     }
     public function generate(Request $request){
         $request->validate([

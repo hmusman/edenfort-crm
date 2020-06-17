@@ -1,4 +1,4 @@
-            @if(ucwords(session('role'))==ucwords('agent') )  
+            @if(ucwords(session('role')) == ucwords('agent'))  
                      <div class="right-sidebar">
                         <div class="slimscrollright">
                             <div class="rpanel-title">Reminders<span><i class="ti-close right-side-toggle"></i></span> </div>
@@ -10,7 +10,7 @@
                         </div>
                     </div>
                 @endif
-                @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('SuperAgent'))
+                @if(ucwords(session('role')) == ucwords('admin') || ucwords(session('role')) == ucwords('SuperAgent') || ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
                     <div class="right-sidebar">
                         <div class="slimscrollright">
                             <div class="rpanel-title">Reminders<span><i class="ti-close right-side-toggle"></i></span> </div>

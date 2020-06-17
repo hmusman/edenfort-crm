@@ -713,7 +713,7 @@
                                     </div>
                                  </div>
                               </div>
-                              @if(ucfirst(session('role'))==ucfirst('Admin'))
+                              @if(ucfirst(session('role'))==ucfirst('Admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
                               <div class="col-md-2  filter_button">
                                  <div class="filter_btn_wrapper">
                                     <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search" id="filter">
@@ -1943,6 +1943,8 @@
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == ucfirst('Agent'))
       @include('reminder')
+    @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+      @include('admin_SuperAgent_reminders')
     @endif
 
 </body>

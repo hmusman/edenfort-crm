@@ -53,6 +53,15 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
       <style>
+        @if(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+        #sidebarnav{
+            margin-left: -50px !important;
+        }
+        .sidebar-nav ul li a {
+            padding: 0px 10px;
+            /*font-size: 13px;*/
+        }
+        @endif
         .hide-menu{
           color: #000000b8 !important;
         }
@@ -234,8 +243,8 @@
                         <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
                         </li>
                     @endif
-               @elseif(ucfirst(session('role'))==ucfirst('admin'))          
-                   <li class="nav-item"> <a class="nav-link nav-link" href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+               @elseif(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))          
+                   <li class="nav-item"> <a class="nav-link nav-link" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
                    </li>
                    <li class="nav-item dropdown">
                       <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
@@ -261,8 +270,14 @@
 
                    <li class="three-column"> <a class="nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
                    </li>
+                   @if(ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
+                   @if(@$permissions->buildingView==1)        
+                      <li class="nav-item">  <a  class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
+                   </li>
+                   @endif
+                   @endif
                @endif
-               @if(ucfirst(session('role'))==ucfirst('admin'))
+               @if(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
                    <li class="nav-item dropdown">
                       <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Users</span></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -273,7 +288,6 @@
                    </li>
                    <li class="three-column"> <a class="nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
                    </li>
-
 
                    <li class="nav-item dropdown">
                       <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Deals</span></a>
@@ -352,7 +366,7 @@
             </ul>
          </nav>
       </div>
-      @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent')  || ucwords(session('role'))==ucwords('SuperAgent'))
+      @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent')  || ucwords(session('role'))==ucwords('SuperAgent') || ucwords(session('role'))==ucfirst('SuperDuperAdmin'))
       <div>
          <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><span class="badge notification_counter">0</span><i class="fa fa-bell text-white"></i></button>
       </div>

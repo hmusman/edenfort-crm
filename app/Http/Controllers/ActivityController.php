@@ -14,17 +14,20 @@ use DB;
 use App\Models\user;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\permission;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
     public function agentsAll(){
+    $permissions = permission::where('user_id', session('user_id'))->first();
+
 		$agents = user::where('role',3)->get();
         $selectedAgent=input::get('agent');
         $previousDate=date("Y-m-d h:i:s",strtotime("-1 days"));
         $todayDate=date("Y-m-d h:i:s");
         $properties =property::whereBetween('updated_at',[$previousDate, $todayDate])->get();
-		return view('agentActivity',compact('agents','properties'));
+		return view('agentActivity',compact('agents','properties','permissions'));
 	}
 	public function agentActivityProperties(){
         $selectedAgent=input::get('agent');

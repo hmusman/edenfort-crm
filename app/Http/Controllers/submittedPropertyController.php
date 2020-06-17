@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\submittedProperty;
 use DB;
 use App\Models\property;
+use App\Models\permission;
 class submittedPropertyController extends Controller
 {
     public function index(Request $r){
    
- 
+       $permissions = permission::where("user_id",session("user_id"))->first();
 
         $access=$r->access;
         $contact_no=$r->contact;
@@ -81,7 +82,7 @@ class submittedPropertyController extends Controller
 }//end else of get type
 
 $properties=$result;
-    	return view('submittedProperty',compact('properties'));
+    	return view('submittedProperty',compact('properties', 'permissions'));
     }
 
 

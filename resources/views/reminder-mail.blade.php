@@ -105,15 +105,30 @@
     <p><strong>note : </strong>{{$massage['note']}}</p>
     <p><strong>Email : </strong>{{$massage['email']}}</p> 
     <p><strong>Contact No : </strong><span itemprop="telephone"><a href="tel:+{{$massage['contanct_no']}}">{{$massage['contanct_no']}}</a></span></p> 
+    @elseif($massage['reminder_of']=='Leads')
+      <p><strong>Reminder Of : </strong>{{$massage['reminder_of']}}</p>
+      <p><strong>Reminder Type : </strong>{{$massage['reminder_type']}}</p>
+      <p><strong>Building : </strong>{{$massage['Building']}}</p>
+      <p><strong>Area : </strong>{{$massage['area']}}</p>
+      <p><strong>Client Name : </strong>{{$massage['client_name']}}</p>
+      <p><strong>Email : </strong>{{$massage['email']}}</p>
+      <p><strong>Contact No : </strong><span itemprop="telephone"><a href="tel:+{{$massage['contact_no']}}">{{$massage['contact_no']}}</a></span></p>
+      <p><strong>Submission Date : </strong>{{$massage['submission_date']}}</p>
+      <p><strong>View Date Time : </strong>{{$massage['view_date_time']}}</p>
+      <p><strong>Followup Date : </strong>{{$massage['followup_date']}}</p>
+      <p><strong>Lead User : </strong>{{$massage['lead_user']}}</p>
+      <p><strong>Status : </strong>{{$massage['status']}}</p>
+      <p><strong>Priority : </strong>{{$massage['priority']}}</p><br>
+      <p><strong>Edenfort Real Estate</strong></p>
     @else
-      <p>Reminder Of : {{$massage['reminder_of']}}</p>
-      <p>Reminder Type : {{$massage['reminder_type']}}</p>
-      <p>Building : {{$massage['Building']}}</p>
-      <p>Area : {{$massage['area']}}</p>
-      <p>LandLoard : {{$massage['Landloard']}}</p>
-      <p>Email : {{$massage['email']}}</p>
-      <p>Contact No : <span itemprop="telephone"><a href="tel:+{{$massage['contanct_no']}}">{{$massage['contanct_no']}}</a></span></p><br>
-      <p>Edenfort Real Estate</p>
+      <p><strong>Reminder Of : </strong>{{$massage['reminder_of']}}</p>
+      <p><strong>Reminder Type : </strong>{{$massage['reminder_type']}}</p>
+      <p><strong>Building : </strong>{{$massage['Building']}}</p>
+      <p><strong>Area : </strong>{{$massage['area']}}</p>
+      <p><strong>LandLoard : </strong>{{$massage['Landloard']}}</p>
+      <p><strong>Email : </strong>{{$massage['email']}}</p>
+      <p><strong>Contact No : </strong><span itemprop="telephone"><a href="tel:+{{$massage['contact_no']}}">{{$massage['contact_no']}}</a></span></p><br>
+      <p><strong>Edenfort Real Estate</strong></p>
       
     @endif
 </div>

@@ -366,6 +366,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 	   
     }
     public function assignAgent(Request $request){
+    $permissions = permission::where('user_id', session('user_id'))->first();
 
     $agents=user::where(['role'=>3])->orWhere(['role'=>1])->get();
     $building=coldcallingModel::distinct('Building')->pluck('Building');
@@ -384,7 +385,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
           $value=coldcallingModel::select('Building','id','user_id')->groupBy('Building')->orderBy(\DB::raw('count(Building)'), 'DESC')->paginate(50);
        }
     
-    	return view('assignAgent',compact(['value','agents','building']));
+    	return view('assignAgent',compact(['value','agents','building','permissions']));
     }
     
     public function insertbuildingAssign(){

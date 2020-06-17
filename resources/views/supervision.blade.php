@@ -1,12 +1,12 @@
 @include('inc.header')
-@if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Admin') || ucfirst('SuperAgent') || ucfirst('Agent')))
+@if(!session("user_id") || ucfirst(session('role'))!=(ucfirst('Admin') || ucfirst('SuperAgent') || ucfirst('Agent') || ucfirst('SuperDuperAdmin')))
 <script type="text/javascript">
    window.location='{{url("/")}}';
 </script>
 <?php redirect('/'); ?>
 @endif
 
-@if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent'))  
+@if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent') || ucfirst('SuperDuperAdmin'))  
 @if(@$permissions->supervisionView!=1)
 <script type="text/javascript">
     window.location='{{url("404")}}';
@@ -1009,6 +1009,8 @@
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == ucfirst('Agent'))
       @include('reminder')
+   @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+      @include('admin_SuperAgent_reminders')
     @endif
 
 </body>

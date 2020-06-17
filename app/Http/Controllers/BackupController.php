@@ -8,6 +8,7 @@ use League\Flysystem\Adapter\Local;
 use Log;
 use Response;
 use Storage;
+use App\Models\permission;
 use Request;
 
 
@@ -15,6 +16,8 @@ class BackupController extends Controller
 {
     public function index()
     {
+        $permissions = permission::where("user_id",session("user_id"))->first();
+
         $this->data['backups'] = [];
 
         foreach (config('backup.backup.destination.disks') as $disk_name) {
@@ -42,7 +45,7 @@ class BackupController extends Controller
         $this->data['backups'] = array_reverse($this->data['backups']);
         $this->data['title'] = 'Backups';
 
-        return view('backup', $this->data);
+        return view('backup', $this->data, compact('permissions'));
     }
 
     public function create()

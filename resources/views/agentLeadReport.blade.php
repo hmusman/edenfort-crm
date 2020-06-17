@@ -1410,6 +1410,8 @@ $(document).delegate('.pulse-effect','click',function(){
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == ucfirst('Agent'))
       @include('reminder')
+    @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+      @include('admin_SuperAgent_reminders')
     @endif
 
 </body>
