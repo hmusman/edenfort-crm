@@ -450,7 +450,7 @@
                   </div>
                   <!--end of add deal-->
                   <div class="table-responsive">
-                  <table id="demo-foo-pagination" class="table m-b-0 toggle-arrow-tiny demo-pagination">
+                  <table id="demo-foo-pagination" class="table m-b-0 toggle-arrow-tiny demo-pagination" >
                      <thead>
                         <tr>
                            <th>Select</th>
@@ -474,68 +474,139 @@
                         <?php $counter=0;  ?>
                         @foreach($deals as $deal)
                         <tr>
-                           @if(ucfirst(session('role'))==ucfirst('Agent') ) 
-                           @if(@$permissions->dealBulk!=1)
-                           <td>Not Allowed</td>
-                           @else 
-                           <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
-                           @endif
-                           @else
-                           <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
-                           @endif
-                           <td class="dealId" style="display:none;">{{$deal->id}}</td>
-                           <td class="deal_start_date">{{date('d-m-Y',strtotime($deal->deal_start_date))}}</td>
-                           <td class="contract_start_date">{{date('d-m-Y',strtotime($deal->contract_start_date))}}</td>
-                           <td class="contract_end_date">{{date('d-m-Y',strtotime($deal->contract_end_date))}}</td>
-                           <td class="building">{{$deal->building}}</td>
-                           <td class="referenceNo">{{$deal->referenceNo}}</td>
-                           <td class="broker_name">{{$deal->broker_name}}</td>
-                           <td class="unit_no">{{$deal->unit_no}}</td>
-                           <td class="client_name">{{$deal->client_name}}</td>
-                           <td class="contanct_no">{{$deal->contanct_no}}</td>
-                           <td class="email" style="display:none;">{{$deal->email}}</td>
-                           <td class="property_type" style="display:none;">{{$deal->property_type}}</td>
-                           <td class="rent_sale_value"  style="display:none;">{{$deal->rent_sale_value}}</td>
-                           <td class="rentalCheques"  style="display:none;">{{$deal->rentalCheques}}</td>
-                           <td class="deal_Status"  style="display:none;">{{$deal->dealStatus}}</td>
-                           <td class="agent_name" style="display:none;">{{$deal->agent_name}}</td>
-                           <td class="gross_commission" style="display:none;">{{$deal->gross_commission}}</td>
-                           <td class="gc_vat" style="display:none;">{{$deal->gc_vat}}</td>
-                           <td class="company_commision" style="display:none;">{{$deal->company_commision}}</td>
-                           <td class="cc_Vat" style="display:none;">{{$deal->cc_vat}}</td>
-                           <td class="efAgent_Commission" style="display:none;">{{$deal->efAgentCommission}}</td>
-                           <td class="efAgent_Vat" style="display:none;">{{$deal->efAgentVat}}</td>
-                           <td class="secondAgentName" style="display:none;">{{$deal->secondAgentName}}</td>
-                           <td class="secondAgentCompany" style="display:none;">{{$deal->secondAgentCompany}}</td>
-                           <td class="sacPhone" style="display:none;">{{$deal->sacPhone}}</td>
-                           <td class="secondAgent_Commission" style="display:none;">{{$deal->secondAgentCommission}}</td>
-                           <td class="sacAgent_Vat" style="display:none;">{{$deal->sacAgentVat}}</td>
-                           <td class="thirdAgentName" style="display:none;">{{$deal->thirdAgentName}}</td>
-                           <td class="thirdAgentCompany" style="display:none;">{{$deal->thirdAgentCompany}}</td>
-                           <td class="tacPhone" style="display:none;">{{$deal->tacPhone}}</td>
-                           <td class="thirdAgentCommission" style="display:none;">{{$deal->thirdAgentCommission}}</td>
-                           <td class="tacVat" style="display:none;">{{$deal->tacVat}}</td>
-                           <td class="paymentTerms" style="display:none;">{{$deal->paymentTerms}}</td>
-                           <td class="chequeNumber" style="display:none;">{{$deal->chequeNumber}}</td>
-                           <td class="ownerCompanyName" style="display:none;">{{$deal->ownerCompanyName}}</td>
-                           <td class="ownerName" style="display:none;">{{$deal->ownerName}}</td>
-                           <td class="ownerPhone" style="display:none;">{{$deal->ownerPhone}}</td>
-                           <td class="ownerEmail" style="display:none;">{{$deal->ownerEmail}}</td>
-                           <td class="ownerNameSecond" style="display:none;">{{$deal->ownerNameSecond}}</td>
-                           <td class="ownerPhoneSecond" style="display:none;">{{$deal->ownerPhoneSecond}}</td>
-                           <td class="ownerEmailSecond" style="display:none;">{{$deal->ownerEmailSecond}}</td>
-                           <td class="chequeAmount" style="display:none;">{{$deal->chequeAmount}}</td>
-                           <td class="note" style="display:none;">{{$deal->note}}</td>
-                           @if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent')) 
-                           @if(@$permissions->dealEdit!=1)
-                           <td>Not Allowed</td>
-                           @else 
-                           <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
-                           </td>
-                           @endif
-                           @else
-                           <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
-                           </td>
+                          @php
+                            $date1 = strtotime($deal->contract_end_date);
+                            $date2 = strtotime($date);
+                            $diff = ($date1 - $date2)/60/60/24;
+                          @endphp
+                          @if($diff <= 90 && $diff >0)
+                             @if(ucfirst(session('role'))==ucfirst('Agent') ) 
+                             @if(@$permissions->dealBulk!=1)
+                             <td>Not Allowed</td>
+                             @else 
+                             <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
+                             @endif
+                             @else
+                             <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
+                             @endif
+                             <td class="dealId" style="display:none;">{{$deal->id}}</td>
+                             <td class="deal_start_date">{{date('d-m-Y',strtotime($deal->deal_start_date))}}</td>
+                             <td class="contract_start_date">{{date('d-m-Y',strtotime($deal->contract_start_date))}}</td>
+                             <td class="contract_end_date">{{date('d-m-Y',strtotime($deal->contract_end_date))}}</td>
+                             <td class="building">{{$deal->building}}</td>
+                             <td class="referenceNo">{{$deal->referenceNo}}</td>
+                             <td class="broker_name">{{$deal->broker_name}}</td>
+                             <td class="unit_no">{{$deal->unit_no}}</td>
+                             <td class="client_name">{{$deal->client_name}}</td>
+                             <td class="contanct_no">{{$deal->contanct_no}}</td>
+                             <td class="email" style="display:none;">{{$deal->email}}</td>
+                             <td class="property_type" style="display:none;">{{$deal->property_type}}</td>
+                             <td class="rent_sale_value"  style="display:none;">{{$deal->rent_sale_value}}</td>
+                             <td class="rentalCheques"  style="display:none;">{{$deal->rentalCheques}}</td>
+                             <td class="deal_Status"  style="display:none;">{{$deal->dealStatus}}</td>
+                             <td class="agent_name" style="display:none;">{{$deal->agent_name}}</td>
+                             <td class="gross_commission" style="display:none;">{{$deal->gross_commission}}</td>
+                             <td class="gc_vat" style="display:none;">{{$deal->gc_vat}}</td>
+                             <td class="company_commision" style="display:none;">{{$deal->company_commision}}</td>
+                             <td class="cc_Vat" style="display:none;">{{$deal->cc_vat}}</td>
+                             <td class="efAgent_Commission" style="display:none;">{{$deal->efAgentCommission}}</td>
+                             <td class="efAgent_Vat" style="display:none;">{{$deal->efAgentVat}}</td>
+                             <td class="secondAgentName" style="display:none;">{{$deal->secondAgentName}}</td>
+                             <td class="secondAgentCompany" style="display:none;">{{$deal->secondAgentCompany}}</td>
+                             <td class="sacPhone" style="display:none;">{{$deal->sacPhone}}</td>
+                             <td class="secondAgent_Commission" style="display:none;">{{$deal->secondAgentCommission}}</td>
+                             <td class="sacAgent_Vat" style="display:none;">{{$deal->sacAgentVat}}</td>
+                             <td class="thirdAgentName" style="display:none;">{{$deal->thirdAgentName}}</td>
+                             <td class="thirdAgentCompany" style="display:none;">{{$deal->thirdAgentCompany}}</td>
+                             <td class="tacPhone" style="display:none;">{{$deal->tacPhone}}</td>
+                             <td class="thirdAgentCommission" style="display:none;">{{$deal->thirdAgentCommission}}</td>
+                             <td class="tacVat" style="display:none;">{{$deal->tacVat}}</td>
+                             <td class="paymentTerms" style="display:none;">{{$deal->paymentTerms}}</td>
+                             <td class="chequeNumber" style="display:none;">{{$deal->chequeNumber}}</td>
+                             <td class="ownerCompanyName" style="display:none;">{{$deal->ownerCompanyName}}</td>
+                             <td class="ownerName" style="display:none;">{{$deal->ownerName}}</td>
+                             <td class="ownerPhone" style="display:none;">{{$deal->ownerPhone}}</td>
+                             <td class="ownerEmail" style="display:none;">{{$deal->ownerEmail}}</td>
+                             <td class="ownerNameSecond" style="display:none;">{{$deal->ownerNameSecond}}</td>
+                             <td class="ownerPhoneSecond" style="display:none;">{{$deal->ownerPhoneSecond}}</td>
+                             <td class="ownerEmailSecond" style="display:none;">{{$deal->ownerEmailSecond}}</td>
+                             <td class="chequeAmount" style="display:none;">{{$deal->chequeAmount}}</td>
+                             <td class="note" style="display:none;">{{$deal->note}}</td>
+                             @if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent')) 
+                             @if(@$permissions->dealEdit!=1)
+                             <td>Not Allowed</td>
+                             @else 
+                             <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
+                             </td>
+                             @endif
+                             @else
+                             <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
+                             </td>
+                          @endif
+                          @else
+                            @if(ucfirst(session('role'))==ucfirst('Agent') ) 
+                             @if(@$permissions->dealBulk!=1)
+                             <td>Not Allowed</td>
+                             @else 
+                             <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
+                             @endif
+                             @else
+                             <td><input type="checkbox" name="" class="ind_chk_box" value=""></td>
+                             @endif
+                             <td class="dealId" style="display:none;">{{$deal->id}}</td>
+                             <td class="deal_start_date">{{date('d-m-Y',strtotime($deal->deal_start_date))}}</td>
+                             <td class="contract_start_date">{{date('d-m-Y',strtotime($deal->contract_start_date))}}</td>
+                             <td class="contract_end_date">{{date('d-m-Y',strtotime($deal->contract_end_date))}}</td>
+                             <td class="building">{{$deal->building}}</td>
+                             <td class="referenceNo">{{$deal->referenceNo}}</td>
+                             <td class="broker_name">{{$deal->broker_name}}</td>
+                             <td class="unit_no">{{$deal->unit_no}}</td>
+                             <td class="client_name">{{$deal->client_name}}</td>
+                             <td class="contanct_no">{{$deal->contanct_no}}</td>
+                             <td class="email" style="display:none;">{{$deal->email}}</td>
+                             <td class="property_type" style="display:none;">{{$deal->property_type}}</td>
+                             <td class="rent_sale_value"  style="display:none;">{{$deal->rent_sale_value}}</td>
+                             <td class="rentalCheques"  style="display:none;">{{$deal->rentalCheques}}</td>
+                             <td class="deal_Status"  style="display:none;">{{$deal->dealStatus}}</td>
+                             <td class="agent_name" style="display:none;">{{$deal->agent_name}}</td>
+                             <td class="gross_commission" style="display:none;">{{$deal->gross_commission}}</td>
+                             <td class="gc_vat" style="display:none;">{{$deal->gc_vat}}</td>
+                             <td class="company_commision" style="display:none;">{{$deal->company_commision}}</td>
+                             <td class="cc_Vat" style="display:none;">{{$deal->cc_vat}}</td>
+                             <td class="efAgent_Commission" style="display:none;">{{$deal->efAgentCommission}}</td>
+                             <td class="efAgent_Vat" style="display:none;">{{$deal->efAgentVat}}</td>
+                             <td class="secondAgentName" style="display:none;">{{$deal->secondAgentName}}</td>
+                             <td class="secondAgentCompany" style="display:none;">{{$deal->secondAgentCompany}}</td>
+                             <td class="sacPhone" style="display:none;">{{$deal->sacPhone}}</td>
+                             <td class="secondAgent_Commission" style="display:none;">{{$deal->secondAgentCommission}}</td>
+                             <td class="sacAgent_Vat" style="display:none;">{{$deal->sacAgentVat}}</td>
+                             <td class="thirdAgentName" style="display:none;">{{$deal->thirdAgentName}}</td>
+                             <td class="thirdAgentCompany" style="display:none;">{{$deal->thirdAgentCompany}}</td>
+                             <td class="tacPhone" style="display:none;">{{$deal->tacPhone}}</td>
+                             <td class="thirdAgentCommission" style="display:none;">{{$deal->thirdAgentCommission}}</td>
+                             <td class="tacVat" style="display:none;">{{$deal->tacVat}}</td>
+                             <td class="paymentTerms" style="display:none;">{{$deal->paymentTerms}}</td>
+                             <td class="chequeNumber" style="display:none;">{{$deal->chequeNumber}}</td>
+                             <td class="ownerCompanyName" style="display:none;">{{$deal->ownerCompanyName}}</td>
+                             <td class="ownerName" style="display:none;">{{$deal->ownerName}}</td>
+                             <td class="ownerPhone" style="display:none;">{{$deal->ownerPhone}}</td>
+                             <td class="ownerEmail" style="display:none;">{{$deal->ownerEmail}}</td>
+                             <td class="ownerNameSecond" style="display:none;">{{$deal->ownerNameSecond}}</td>
+                             <td class="ownerPhoneSecond" style="display:none;">{{$deal->ownerPhoneSecond}}</td>
+                             <td class="ownerEmailSecond" style="display:none;">{{$deal->ownerEmailSecond}}</td>
+                             <td class="chequeAmount" style="display:none;">{{$deal->chequeAmount}}</td>
+                             <td class="note" style="display:none;">{{$deal->note}}</td>
+                             @if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent')) 
+                             @if(@$permissions->dealEdit!=1)
+                             <td>Not Allowed</td>
+                             @else 
+                             <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
+                             </td>
+                             @endif
+                             @else
+                             <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
+                             </td>
+                          @endif
                            @endif                    
                         </tr>
                         @endforeach
@@ -1182,6 +1253,7 @@ $("#name").on('input', function () {
        }
    })
 </script>
+
 <?php }  ?>
 @if(ucfirst(session('role')) == (ucfirst('Admin')))
       @include('admin_SuperAgent_reminders')

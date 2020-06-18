@@ -291,7 +291,7 @@
 </div>
 </div>
 
- @if(ucfirst(session('role'))==ucfirst('Admin')) 
+ @if(ucfirst(session('role'))==(ucfirst('Admin') || ucfirst('SuperAgent') || ucfirst('SuperDuperAdmin'))) 
 <div class="row">
     <div class="col-lg-12 col-xlg-12">
         <div class="card">

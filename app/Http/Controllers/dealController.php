@@ -71,8 +71,10 @@ class dealController extends Controller {
         // dd($deals);
         $permissions = permission::where('user_id', session('user_id'))->first();
         $dbName = DB::getDatabaseName();
+        $date = Carbon::now()->toDateString();
+        // dd($date);
         $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");
-        return view('dealsInformation', compact('getAgentName','deals', 'buildings', 'agents', 'upcomingDealId', 'permissions'));
+        return view('dealsInformation', compact('getAgentName','deals', 'buildings', 'agents', 'upcomingDealId', 'permissions', 'date'));
     }
     public function insert(Request $r) {
         $buildings = Building::all();
