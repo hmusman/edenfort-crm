@@ -270,11 +270,9 @@
 
                    <li class="three-column"> <a class="nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
                    </li>
-                   @if(ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
-                   @if(@$permissions->buildingView==1)        
+                   @if(ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))    
                       <li class="nav-item">  <a  class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
                    </li>
-                   @endif
                    @endif
                @endif
                @if(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
