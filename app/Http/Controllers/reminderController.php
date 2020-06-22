@@ -24,6 +24,8 @@ use Session;
 use Excel;
 use File;
 use Mail;
+use Carbon\Carbon;
+
 
 class reminderController extends Controller
 {
@@ -545,11 +547,13 @@ class reminderController extends Controller
                 $agents=user::where(['role'=>3])->get();
                 $deals=deal::where("id",input::get('property_id'))->paginate(25);
                 $dbName=DB::getDatabaseName();
+                $getAgentName = '';
                 $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");
                 if(input::get('status')!='viewed'){
                     Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
                 }
-              return view('dealsInformation',compact('deals','buildings','agents','upcomingDealId','permissions'));
+                $date = Carbon::now()->toDateString();
+              return view('dealsInformation',compact('deals','buildings','agents','upcomingDealId','permissions', 'date'));
           }
          }
     }

@@ -108,7 +108,8 @@ class SupervisionController extends Controller
     // dd($currentDate);
     $futureDate = Carbon::now()->addMonths(3)->format('Y-m-d');
     $deals = DB::table('deals')->select('deals.id as dealId', 'deals.contract_start_date as cStart','deals.deal_start_date as dStart', 'deals.contract_end_date as cEnd', 'deals.referenceNo as refNo', 'deals.client_name as cName', 'deals.property_type as pType', 'deals.broker_name as broker', 'deals.unit_no as unit', 'deals.contanct_no as contact', 'deals.building as build', 'deals.dealStatus as dStatus', 'users.First_name as fName', 'users.Last_name as lName')->join('users', 'users.id', '=', 'deals.agent_name')->whereBetween('deals.contract_end_date', array($currentDate, $futureDate))->orderBy('deals.contract_end_date', 'ASC')->get();
-
+    
+    // dd($deals);
     // DB::select('SELECT d.id as dealId, d.contract_start_date as cStart, d.contract_end_date as cEnd, d.referenceNo as refNo, d.client_name as cName, d.property_type as pType, d.building as build, d.dealStatus as dStatus, u.First_name, u.Last_name from deals d, users u where d.agent_name = u.id and d.contract_end_date between '+$currentDate+' and '+$futureDate+' ORDER By d.contract_end_date ASC');
     // deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
     // dd($deals);

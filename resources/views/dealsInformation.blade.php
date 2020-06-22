@@ -479,7 +479,7 @@
                             $date2 = strtotime($date);
                             $diff = ($date1 - $date2)/60/60/24;
                           @endphp
-                          @if($diff <= 90 && $diff >0)
+                          @if($diff <= 90 && $diff > 0)
                              @if(ucfirst(session('role'))==ucfirst('Agent') ) 
                              @if(@$permissions->dealBulk!=1)
                              <td>Not Allowed</td>
