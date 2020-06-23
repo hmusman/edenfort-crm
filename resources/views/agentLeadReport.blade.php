@@ -521,16 +521,16 @@ label,input,textarea{
                                     @if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
 @if(@$permissions->leadBulk==1)                 
                                                      <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$lead->id}}">
-                                                 
-                                             <img style="width: 21px;margin-top: -9px !important;" src="https://img.icons8.com/cotton/24/000000/circled-right.png" class="drop_arrow_icon pulse-effect">
+                                                 <!-- https://img.icons8.com/cotton/24/000000/circled-right.png -->
+                                             <img style="width: 21px;margin-top: -9px !important;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect">
                                          @else
                                          
                                          Not Allowed
                                          @endif
                                          @else
                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$lead->id}}">
-                                                 
-                                             <img style="width: 21px;margin-top: -9px !important;" src="https://img.icons8.com/cotton/24/000000/circled-right.png" class="drop_arrow_icon pulse-effect">
+                                                 <!-- https://img.icons8.com/cotton/24/000000/circled-right.png -->
+                                             <img style="width: 21px;margin-top: -9px !important;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect">
                                          @endif
                                           </td>
                                                <td class="lsubmissionDate">{{date('d M Y' ,strtotime($lead->created_at))}}</td>

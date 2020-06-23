@@ -482,8 +482,8 @@ label,input,textarea{
                                             <tr class="present_row">
                        @if($permissions->leadBulk!=1)<td>Not Allowed</td>  @else                                <td>
                                                      <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$lead->id}}">
-                                                 
-                                             <img style="width: 21px;margin-top: -9px !important;" src="https://img.icons8.com/cotton/24/000000/circled-right.png" class="drop_arrow_icon pulse-effect">
+                                                 <!-- https://img.icons8.com/cotton/24/000000/circled-right.png -->
+                                             <img style="width: 21px;margin-top: -9px !important;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect">
                                             
                                           </td>@endif
                                                <td class="lsubmissionDate">@if(!is_null($lead->submission_date)){{date('d M Y' ,strtotime($lead->submission_date))}} @else {{date('d M Y' ,strtotime($lead->created_at))}} @endif</td>

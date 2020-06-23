@@ -378,7 +378,8 @@
                      <div class="row">
                         <div class="col-12">
                            <h2 class="m-b-0">
-                              <img src="https://img.icons8.com/dusk/40/000000/home.png">
+                              <!-- https://img.icons8.com/dusk/40/000000/home.png -->
+                              <img src="public/assets/images/images.png" style="height: 50px;">
                               <span class="card-subtitle">DEWA</span>
                            </h2>
                            <!--<h3 class="">64</h3>-->
@@ -393,7 +394,8 @@
                      <div class="row">
                         <div class="col-12">
                            <h2 class="m-b-0">
-                              <img src="https://img.icons8.com/dusk/40/000000/skyscrapers.png">
+                              <!-- https://img.icons8.com/dusk/40/000000/skyscrapers.png -->
+                              <img src="public/assets/images/town.png" style="height: 50px;">
                               <span class="card-subtitle">Commercial</span>
                            </h2>
                            <!--<h3 class="">64</h3>-->
@@ -408,7 +410,8 @@
                      <div class="row">
                         <div class="col-12">
                            <h2 class="m-b-0">
-                              <img src="https://img.icons8.com/ultraviolet/40/000000/apartment.png">
+                              <!-- https://img.icons8.com/ultraviolet/40/000000/apartment.png -->
+                              <img src="public/assets/images/apartment.png" style="height: 50px;">
                               <span class="card-subtitle">Residential</span>
                            </h2>
                            <!--<h3 class="">64</h3>-->
@@ -456,7 +459,8 @@
                      <div class="gmail-wapper text-center hw" style="height:100%;border-radius: 0px 50px 50px 0px;">
                         <span class="gmail_span" style="margin-right:40px">Gmail</span><br>
                         <!-- gmail envelope starts-->
-                        <img src="https://img.icons8.com/color/420/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="width:40px;cursor:pointer;"/>
+                        <!-- https://img.icons8.com/color/420/gmail.png -->
+                        <img src="public/assets/images/gmail.png" data-toggle="modal" data-target="#emailmodel" class="sent-email" style="width:40px;cursor:pointer;"/>
                         <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:35px;visibility:hidden;position: relative;left: 20px;"/>
                         <!-- gmail envelope ends-->
                      </div>
