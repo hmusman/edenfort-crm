@@ -27,6 +27,7 @@ class adminPropertyController extends Controller
         $agents = $request->agents_ids;
         $agents = array_values($agents);
         $properties = array_values($properties);
+        // dd($properties);
         foreach($properties as $key => $propertyID){
             property::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
         }
@@ -38,10 +39,10 @@ class adminPropertyController extends Controller
         $agents = $request->agents_ids;
         $agents = array_values($agents);
         $properties = array_values($properties);
-        // dd($properties, $agents);
+        // dd(@$agents[0]);
 
         foreach($properties as $key => $propertyID){
-            coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
+            coldcallingModel::where('building',$propertyID)->update(["user_id"=>@$agents[0]]);
         }
         return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>Coldcalling Assigned Successfully!</div>");
     }

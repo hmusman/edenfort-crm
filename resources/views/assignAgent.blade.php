@@ -166,12 +166,12 @@
                                     <tr>
                                         <td>@if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
                                              @if(@$permissions->propertyBulk==1)
-                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$values->id}}">
+                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$values->Building}}">
                                              @else
                                              Not Allowed
                                              @endif
                                              @else
-                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$values->id}}">
+                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$values->Building}}">
                                              @endif
                                         </td>
                                         <td>{{$counter++}}</td>
@@ -302,19 +302,18 @@
             
         });
         $("#assign-property-btn").click(function(){
-            if(!$('.agents_ids:checkbox:checked').val()){
-                toastr["error"]("Please select Agent");
-            }else{
-               if($('.agents_ids:checkbox:checked').length == 2){
-                   toastr["error"]("Please select Only One Agent");
-                   // return;
-               }
-               $("#bulkForm").attr("action","{{url('assign-singlebuilding')}}");
-               $("#bulkForm").attr("method","POST");
-               $("#bulkForm").submit();
-            }
-        })
-    })
+          if(!$('.agents_ids:checkbox:checked').val()){
+                  toastr["error"]("Please select Agent");
+          }else if($('.agents_ids:checkbox:checked').length > 1){
+                  toastr["error"]("Please select Only One Agent");
+          }else{
+               // console.log($('.agents_ids:checkbox:checked').length);
+                   $("#bulkForm").attr("action","{{url('assign-singlebuilding')}}");
+                   $("#bulkForm").attr("method","POST");
+                   $("#bulkForm").submit();
+                 }
+              })
+          })
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
