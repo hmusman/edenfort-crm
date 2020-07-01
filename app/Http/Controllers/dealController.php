@@ -67,7 +67,7 @@ class dealController extends Controller {
 
             $query->where("building",$request->build);
         }
-        $deals = $query->orderBy(DB::raw('ABS(DATEDIFF(deals.contract_end_date, NOW()))', 'ASC'))->paginate(20);
+        $deals = $query->orderBy('contract_end_date', 'DESC')->paginate(10);
         // dd($deals);
         $permissions = permission::where('user_id', session('user_id'))->first();
         $dbName = DB::getDatabaseName();

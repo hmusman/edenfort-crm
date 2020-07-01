@@ -56,7 +56,7 @@ class adminColdCallingController extends Controller
                           Condition- '.$data->Conditions.'<br><br> 
 
                           Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'<br>
-                            EDEN FORT REAL ESTATE<br><br>';
+                            EDEN FORT REAL ESTATE<br><hr><br>';
                           $template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
                           $contactMessage = str_replace("{data}",$message,$template->template_date);
                           $receiverEmail = $data->email;
@@ -70,7 +70,7 @@ class adminColdCallingController extends Controller
          Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
           {   
               $message->from($contactEmail, $contactName);
-              $message->to('youcanbuyindubai.com', 'EdenFort CRM')->subject('Property Alert');
+              $message->to('crm@youcanbuyindubai.com', 'EdenFort CRM')->subject('Property Alert');
           });
         return 'true';
     }

@@ -135,7 +135,7 @@
                                            <datalist id="building">
                                               <option value="">Select building</option>
                                               @foreach($buildings as $building)
-                                              <option value="{{$building->building_name}}" >{{$building->building_name}}</option>
+                                              <option name="building" value="{{$building->building_name}}" >{{$building->building_name}}</option>
                                               @endforeach
                                            </datalist>
                                       </div>
@@ -628,7 +628,7 @@
                         </tfoot>
                   </table>
 
-                  {{$deals->appends(Request::only('start_date','end_date','agent'))->links()}}
+                  {{$deals->appends(Request::only('start_date','end_date','agent', 'building', 'unit_no'))->links()}}
                     </div>
                </div>
             </div>
