@@ -5,224 +5,224 @@
 </script>
 <?php redirect('/'); ?>
 @endif
-<link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
+<!-- Responsive Table css -->
+<link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
+
 <style>
-   .filter_input {
-   background-color: #1976D2;
-   color: #fff;
-   }
-   .filter_btn{
-   height:37px;
-   }
-   .filter_input::placeholder{
-   color:#fff;
-   }
-   .nav-link{
-   padding: .5rem 1rem !important;
-   text-align:center !important;
-   color:black;
-   }
-   .deals_tabs a {
-   padding-top: 8px !important;
-   padding-bottom: 8px !important;
-   }
-   .nav-tabs .nav-link.active{
-   color: white !important;
-   background-color: #1976D2 !important;
-   }
-   span.tab-heading{
-   display:block;
-   font-size:12px !important;
-   font-weight:400 !important;
-   }
-   .tabcontent-border{
-   background: white !important;
-   min-height: 400px;
-   padding:20px 0px !important;
+   input[type="checkbox"]{
+      font-size: 0px;
    }
    .nav-tabs {
-   border-bottom: 2px dashed #ddd !important;
-   /*margin-bottom: 15px !important;*/
-   background: white !important;
+     border-bottom: 1px solid #2fa97c;
    }
-   hr{
-   margin-bottom:3rem;
+   .nav-tabs .nav-link.active {
+      color: #ffffff;
+      background-color: #2fa97c;
+      border-color: #2fa97c #2fa97c #2fa97c;
    }
-   label,input,textarea{
-   font-size:12px !important;
-   }
-   .back_btn_row, .prop_back_btn_row, .property_tabs_row, .prop_information_link,.owner_docs_link, .tabs_row, .owner_information_link{
-   display:block;
+   #tech-companies-1 thead{
+      background: #2fa97c;
+      color: white;
    }
    .hide{
-   display: none;
+      display: none;
    }
-</style>
-<style>
-    .tab-content>.tab-pane>.row > div > p, .tab-content>.tab-pane>.row > div > input {
-        font-size: 14px !important;
-        min-height: 15px !important;
-    }
-</style>
-<div class="page-wrapper" style="margin-top: 2%;">
-   <div class="container-fluid">
-      @if(session('msg'))
-      {!! session('msg') !!}
-      @endif
-      <div class="row owner_main_row_leads" >
-         <h3 class="page_heading">Users Access</h3>
-         <div class="col-12 col-sm-12 mb-2">
-            <div class="dropdown_wrapper ">
-            </div>
+   .pagination{
+      float: right;
+      margin-top: 20px;
+   }
+</style> 
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+ <div class="page-content">
+
+     <!-- Page-Title -->
+     <div class="page-title-box">
+         <div class="container-fluid">
+             <div class="row align-items-center">
+                 <div class="col-md-8">
+                     <h4 class="page-title mb-1">Users Access</h4>
+                     <ol class="breadcrumb m-0">
+                     <li class="breadcrumb-item active">Edenfort CRM Permissions</li>
+                     </ol>
+                 </div>
+                 <!-- <div class="col-md-4">
+                     <div class="float-right d-none d-md-block">
+                         
+                     </div>
+                 </div> -->
+             </div>
+
          </div>
-         <div class="col-12 col-sm-12">
-            <div class="card">
-               <ul class="nav nav-tabs deals_tabs">
-                  <li class="nav-item">
-                     @if(@$_GET['type']=='')
-                     <a href="{{url('permission')}}" class="nav-link active py-3">Users</a>
-                     @else
-                     <a href="{{url('permission')}}" class="nav-link py-3">Users</a>
-                     @endif 
-                  </li>
-               </ul>
-               <div class="card-body table-responsive" >
-                  <div class="col-lg-12">
-                     <div class="row">
-                        <div class="col-md-12">
-                           <form action="filterPermissionUser" method="GET" class="">
-                              <div class="row mt-2 mb-2">
-                                 <div class="col-md-9">
-                                    <div class="row">
-                                       <div class="col-md-2 pl-1 pr-1">
-                                          <div class="dropdown_wrapper ">
-                                             <input type="text" class="form-control filter_input" list="userF" placeholder="Select Users" name="filterUser">
-                                             <datalist id="userF">
-                                                <option value="">Select Users</option>
-                                                @foreach($usersall as $user)
-                                                <option value="{{$user['user_name']}}"></option>
-                                                @endforeach
-                                             </datalist>
+     </div>
+     <!-- end page title end breadcrumb -->
+
+     <div class="page-content-wrapper">
+         <div class="container-fluid">
+             <div class="row">
+                 <div class="col-xl-12">
+                     <div class="card">
+                         <div class="card-body">
+                           <div class="card-header" style="background-color: white;">
+                              <ul class="nav nav-tabs" role="tablist">
+                                 @if(@$_GET['type']=='')
+                                 <li class="nav-item">
+                                     <a class="nav-link active" href="{{url('permission')}}" role="tab">
+                                         <i class="fas fa-user-lock mr-1"></i> <span class="d-none d-md-inline-block">Users</span> 
+                                     </a>
+                                 </li>
+                                 @else
+                                 <li class="nav-item">
+                                     <a class="nav-link active" href="{{url('permission')}}" role="tab">
+                                         <i class="fas fa-user-lock mr-1"></i> <span class="d-none d-md-inline-block">Users</span> 
+                                     </a>
+                                 </li>
+                                 @endif
+                             </ul>
+                             <form action="filterPermissionUser" method="GET" class="">
+                                 <div class="row mt-2 mb-2">
+                                    <div class="col-md-9">
+                                       <div class="row">
+                                          <div class="col-md-3 pl-1 pr-1">
+                                             <div class="dropdown_wrapper ">
+                                                <input type="text" class="form-control filter_input" list="userF" placeholder="Select Users" name="filterUser">
+                                                <datalist id="userF">
+                                                   <option value="">Select Users</option>
+                                                   @foreach($usersall as $user)
+                                                   <option value="{{$user['user_name']}}"></option>
+                                                   @endforeach
+                                                </datalist>
+                                             </div>
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
-                                 <div class="col-md-3 ">
-                                    <div class="filter_btn_wrapper">
-                                       <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                    <div class="col-md-3 ">
+                                       <div class="filter_btn_wrapper">
+                                          <input type="submit" class="btn btn-danger btn-block filter_btn" value="Filter" name="search">
+                                       </div>
                                     </div>
                                  </div>
-                              </div>
-                           </form>
-                        </div>
+                              </form>                                                          
+                           </div>
+                           <div class="card-body">
+                              <div class="table-rep-plugin" style="margin-top: -35px;">
+                                 <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                     <table id="tech-companies-1" class="table table-striped">
+                                         <thead>
+                                         <tr>
+                                             <th>Sno# </th>
+                                             <th>ID </th>
+                                             <th>Name </th>
+                                             <th>Refernce </th>
+                                             <th>Email </th>
+                                             <th>Role </th>
+                                             <th>Phone</th>
+                                             <th>Updated_at</th>
+                                             <th>Action</th>
+                                         </tr>
+                                         </thead>
+                                         <form id="bulkForm" class="form-inline">
+                                             <input type='hidden' value='' name='status' class='status'>
+                                             <tbody style="font-size: 12px;">
+                                                 @php  @endphp
+                                                @if(isset($users))
+                                                    @if(count($users) > 0)
+                                                        @foreach($users as $user)
+                                                            <tr class="present_row">
+                                                               <td  class="permissionEditId hide" >{{$user->permission['id']}}</td>
+                                                               <td  class="dashboardView hide" >{{$user->permission['dashboardView']}}</td>
+                                                               <td  class="propertyView hide" >{{$user->permission['propertyView']}}</td>
+                                                               <td  class="propertyAdd hide" >{{$user->permission['propertyAdd']}}</td>
+                                                               <td  class="propertyEdit hide" >{{$user->permission['propertyEdit']}}</td>
+                                                               <td  class="propertyDelete hide" >{{$user->permission['propertyDelete']}}</td>
+                                                               <td  class="propertyAssign hide" >{{$user->permission['propertyAssign']}}</td>
+                                                               <td  class="propertyBulk hide" >{{$user->permission['propertyBulk']}}</td>
+                                                               <td  class="coldcallingView hide" >{{$user->permission['coldcallingView']}}</td>
+                                                               <td  class="coldcallingAdd hide" >{{$user->permission['coldcallingAdd']}}</td>
+                                                               <td  class="coldCallingAssign hide" >{{$user->permission['coldCallingAssign']}}</td>
+                                                               <td  class="coldcallingBulk hide" >{{$user->permission['coldcallingBulk']}}</td>
+                                                               <td  class="leadView hide" >{{$user->permission['leadView']}}</td>
+                                                               <td  class="leadAdd hide" >{{$user->permission['leadAdd']}}</td>
+                                                               <td  class="leadEdit hide" >{{$user->permission['leadEdit']}}</td>
+                                                               <td  class="leadBulk hide" >{{$user->permission['leadBulk']}}</td>
+                                                               <td  class="buildingView hide" >{{$user->permission['buildingView']}}</td>
+                                                               <td  class="buildingAdd hide" >{{$user->permission['buildingAdd']}}</td>
+                                                               <td  class="supervisionView hide" >{{$user->permission['supervisionView']}}</td>
+                                                               <td  class="supervisionAdd hide" >{{$user->permission['supervisionAdd']}}</td>
+                                                               <td  class="supervisionEdit hide" >{{$user->permission['supervisionEdit']}}</td>
+                                                               <td  class="dealView hide" >{{$user->permission['dealView']}}</td>
+                                                               <td  class="dealAdd hide" >{{$user->permission['dealAdd']}}</td>
+                                                               <td  class="dealEdit hide" >{{$user->permission['dealEdit']}}</td>
+                                                               <td  class="dealBulk hide" >{{$user->permission['dealBulk']}}</td>
+                                                               <td  class="loanView hide" >{{$user->permission['loanView']}}</td>
+                                                               <td  class="loanAdd hide" >{{$user->permission['loanAdd']}}</td>
+                                                               <td  class="loanEdit hide" >{{$user->permission['loanEdit']}}</td>
+                                                               <!--hidden fields end-->
+                                                               <td>{{ (($users->currentPage() - 1 ) * $users->perPage() ) + $loop->iteration }}</td>
+                                                               <td class="uId">{{$user->id}}</td>
+                                                               <td class="name" >{{$user->user_name}}</td>
+                                                               <td class="reference">{{$user->reference}}</td>
+                                                               <td class="email">{{$user->Email}}</td>
+                                                               <td class="role">@if($user->role == 3)<label class="badge badge-success" style="padding: 5px;">AGENT</label> @else<label class="badge badge-danger" style="padding: 5px;">SUPER AGENT</label>@endif</td>
+                                                               <td class="phone">{{$user->Phone}}</td>
+                                                               <td class="updated" >{{date('d M Y',strtotime($user->updated_at))}}</td>
+                                                               <td><label data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="show_content" name="{{$user->id}}"><i class="fa fa-edit"></i> Edit</label>
+                                                               </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @else
+                                                    <tr>
+                                                       <td colspan="15" align="center">No Record Found</td>
+                                                    </tr>
+                                                    @endif
+                                                @endif
+                                             </tbody>
+                                          </form>
+                                     </table>
+                                 </div>
+                                 <div class="ml-auto pr-3">
+                                    {{$users->appends(Request::only('user'))->links()}}  
+                                 </div>
+                             </div>
+                           </div>
+                         </div>
                      </div>
-                  </div>
-                  <table  class="table">
-                     <thead>
-                        <tr>
-                            <th>Sno# </th>
-                           <th>ID </th>
-                           <th>Name </th>
-                           <th>Refernce </th>
-                           <th>Email </th>
-                           <th>Role </th>
-                           <th>Phone</th>
-                           <th>Updated_at</th>
-                           <th>Action</th>
-                        </tr>
-                     </thead>
-                     <form id="bulkForm" class="form-inline">
-                        <input type='hidden' value='' name='status' class='status'>
-                        <tbody style="font-size: 12px;">
-                            @php  @endphp
-                           @if(isset($users))
-                               @if(count($users) > 0)
-                                   @foreach($users as $user)
-                                       <tr class="present_row">
-                                          <td  class="permissionEditId hide" >{{$user->permission['id']}}</td>
-                                          <td  class="dashboardView hide" >{{$user->permission['dashboardView']}}</td>
-                                          <td  class="propertyView hide" >{{$user->permission['propertyView']}}</td>
-                                          <td  class="propertyAdd hide" >{{$user->permission['propertyAdd']}}</td>
-                                          <td  class="propertyEdit hide" >{{$user->permission['propertyEdit']}}</td>
-                                          <td  class="propertyDelete hide" >{{$user->permission['propertyDelete']}}</td>
-                                          <td  class="propertyAssign hide" >{{$user->permission['propertyAssign']}}</td>
-                                          <td  class="propertyBulk hide" >{{$user->permission['propertyBulk']}}</td>
-                                          <td  class="coldcallingView hide" >{{$user->permission['coldcallingView']}}</td>
-                                          <td  class="coldcallingAdd hide" >{{$user->permission['coldcallingAdd']}}</td>
-                                          <td  class="coldCallingAssign hide" >{{$user->permission['coldCallingAssign']}}</td>
-                                          <td  class="coldcallingBulk hide" >{{$user->permission['coldcallingBulk']}}</td>
-                                          <td  class="leadView hide" >{{$user->permission['leadView']}}</td>
-                                          <td  class="leadAdd hide" >{{$user->permission['leadAdd']}}</td>
-                                          <td  class="leadEdit hide" >{{$user->permission['leadEdit']}}</td>
-                                          <td  class="leadBulk hide" >{{$user->permission['leadBulk']}}</td>
-                                          <td  class="buildingView hide" >{{$user->permission['buildingView']}}</td>
-                                          <td  class="buildingAdd hide" >{{$user->permission['buildingAdd']}}</td>
-                                          <td  class="supervisionView hide" >{{$user->permission['supervisionView']}}</td>
-                                          <td  class="supervisionAdd hide" >{{$user->permission['supervisionAdd']}}</td>
-                                          <td  class="supervisionEdit hide" >{{$user->permission['supervisionEdit']}}</td>
-                                          <td  class="dealView hide" >{{$user->permission['dealView']}}</td>
-                                          <td  class="dealAdd hide" >{{$user->permission['dealAdd']}}</td>
-                                          <td  class="dealEdit hide" >{{$user->permission['dealEdit']}}</td>
-                                          <td  class="dealBulk hide" >{{$user->permission['dealBulk']}}</td>
-                                          <td  class="loanView hide" >{{$user->permission['loanView']}}</td>
-                                          <td  class="loanAdd hide" >{{$user->permission['loanAdd']}}</td>
-                                          <td  class="loanEdit hide" >{{$user->permission['loanEdit']}}</td>
-                                          <!--hidden fields end-->
-                                          <td>{{ (($users->currentPage() - 1 ) * $users->perPage() ) + $loop->iteration }}</td>
-                                          <td class="uId">{{$user->id}}</td>
-                                          <td class="name" >{{$user->user_name}}</td>
-                                          <td class="reference">{{$user->reference}}</td>
-                                          <td class="email">{{$user->Email}}</td>
-                                          <td class="role">@if($user->role == 3)<label class="label label-success">AGENT</label> @else<label class="label label-danger">SUPER AGENT</label>@endif</td>
-                                          <td class="phone">{{$user->Phone}}</td>
-                                          <td class="updated" >{{date('d M Y',strtotime($user->updated_at))}}</td>
-                                          <td><label data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="show_content" name="{{$user->id}}"><i class="fa fa-edit"></i> Edit</label>
-                                          </td>
-                                       </tr>
-                                   @endforeach
-                               @else
-                               <tr>
-                                  <td colspan="15" align="center">No Record Found</td>
-                               </tr>
-                               @endif
-                           @endif
-                        </tbody>
-                     </form>
-                  </table>
-               </div>
-               <div class="ml-auto pr-3">
-                  {{$users->appends(Request::only('user'))->links()}}  
-               </div>
-            </div>
+                 </div>
+             </div>
+             <!-- end row -->
+
          </div>
-      </div>
-      <!--end of assign  popup-->
-      <!--edit popup-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+         <!-- end container-fluid -->
+     </div> 
+     <!-- end page-content-wrapper -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
          <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                <div class="modal-header">
                   <h4 class="modal-title   content_model_title" id="exampleModalLabel1">Edit Permission</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                </div>
-               <div class="modal-body">
+               <div class="modal-body" style="height: 539px;">
                   <form action="{{url('permissionUpdateForm')}}" method="post" class="form-horizontal" >
                      @csrf
-                     <ul class="nav nav-tabs nav-justified" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#dasboard" role="tab"><span><i class="fa fa-dashboard"></i></span><span class="tab-heading">Dashboard</span></a> </li>
+                     <ul class="nav nav-tabs nav-justified mb-5" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#dasboard" role="tab"><span><i class="fas fa-tachometer-alt"></i></span><span class="tab-heading">Dashboard</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#properties" role="tab"><span><i class="ti-home"></i></span><span class="tab-heading"> Properties</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#coldcallings" role="tab"><span><i class="fa fa-phone"></i></span><span class="tab-heading">Coldcallings</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#leads" role="tab"><span><i class="fa fa-line-chart"></i></span><span class="tab-heading"> Leads</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#leads" role="tab"><span><i class="fas fa-chart-line"></i></span><span class="tab-heading"> Leads</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#buildings" role="tab"><span><i class="fa fa-building"></i></span><span class="tab-heading">Buildings</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Supervisions" role="tab"><span><i class="fa fa-users"></i></span><span class="tab-heading">Supervisions</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Deals" role="tab"><span><i class="fa fa-handshake-o"></i></span><span class="tab-heading">Deals</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#loans" role="tab"><span><i class="fa fa-money"></i></span><span class="tab-heading">Loans</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Deals" role="tab"><span><i class="far fa-handshake"></i></span><span class="tab-heading">Deals</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#loans" role="tab"><span><i class="fas fa-money-bill-alt"></i></span><span class="tab-heading">Loans</span></a> </li>
                      </ul>
-                     <div class="tab-content tabcontent-border">
+                     <div class="tab-content tabcontent-border pt-5" style="border: 2px dashed lightgray;height: 390px;">
                         <div class="tab-pane active p-20 " id="dasboard" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                                  <!--hidden fields for userid and userPermission Id-->
                                  <input type="hidden" name="permissionEditId" id="permissionEditId">  
                                  <input type="hidden" name="uId" id="uId"> 
@@ -239,7 +239,7 @@
                         <div class="tab-pane  p-20" id="properties" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -249,7 +249,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -259,7 +259,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Edit</p>
+                                 <p class="h6" align="center"> Edit</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -269,7 +269,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Delete</p>
+                                 <p class="h6" align="center"> Delete</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -279,7 +279,7 @@
                            </div>
                             <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Assign</p>
+                                 <p class="h6" align="center"> Assign</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -289,7 +289,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Bulk</p>
+                                 <p class="h6" align="center"> Bulk</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -302,7 +302,7 @@
                         <div class="tab-pane  p-20" id="coldcallings" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -312,7 +312,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -322,7 +322,7 @@
                            </div>
                             <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Assign</p>
+                                 <p class="h6" align="center"> Assign</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -332,7 +332,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Bulk</p>
+                                 <p class="h6" align="center"> Bulk</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -345,7 +345,7 @@
                         <div class="tab-pane  p-20" id="leads" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -355,7 +355,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -365,7 +365,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Edit</p>
+                                 <p class="h6" align="center"> Edit</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -375,7 +375,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Bulk</p>
+                                 <p class="h6" align="center"> Bulk</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -388,7 +388,7 @@
                         <div class="tab-pane  p-20" id="buildings" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -398,7 +398,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -411,7 +411,7 @@
                         <div class="tab-pane  p-20" id="Supervisions" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -421,7 +421,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -431,7 +431,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Edit</p>
+                                 <p class="h6" align="center"> Edit</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -444,7 +444,7 @@
                         <div class="tab-pane  p-20" id="Deals" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -454,7 +454,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -464,7 +464,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Edit</p>
+                                 <p class="h6" align="center"> Edit</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -474,7 +474,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Bulk</p>
+                                 <p class="h6" align="center"> Bulk</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -487,7 +487,7 @@
                          <div class="tab-pane  p-20" id="loans" role="tabpanel">
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> View</p>
+                                 <p class="h6" align="center"> View</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -497,7 +497,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Add</p>
+                                 <p class="h6" align="center"> Add</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -507,7 +507,7 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
-                                 <p class="h4" align="center"> Edit</p>
+                                 <p class="h6" align="center"> Edit</p>
                               </div>
                               <div class="form-group col-sm-1">
                               </div>
@@ -516,7 +516,7 @@
                               </div>
                            </div>
                         </div>
-                        <div class="form-group col-sm-12">
+                        <div class="form-group col-sm-12 mt-4">
                            <input type="submit" value="Submit" class="btn btn-block btn-lg btn-success" name="submitLead"> 
                         </div>
                      </div>
@@ -526,14 +526,22 @@
             </div>
          </div>
       </div>
-   </div>
-   <div class="modal-footer">
-   </div>
-</div>
-</div>
-</div>
-</div>
+ </div>
+ <!-- End Page-content -->
+
 @include('inc.footer')
+@if(session('msg'))
+<script>alertify.success("{!! session('msg') !!}")</script>
+@endif
+@if(session('error'))
+<script>alertify.error("{!! session('error') !!}")</script>
+@endif
+ <!-- Responsive Table js -->
+<script src="{{url('public/Green/assets/libs/RWD-Table-Patterns/js/rwd-table.min.js')}}"></script>
+
+<!-- Init js -->
+<script src="{{url('public/Green/assets/js/pages/table-responsive.init.js')}}"></script>
+
 <script>
    $(document).delegate('.show_content','click',function(){
      var $row = $(this).closest("tr");    // Find the row

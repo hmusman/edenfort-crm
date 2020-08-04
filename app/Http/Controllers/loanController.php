@@ -32,7 +32,7 @@ class loanController  extends Controller
             "loan_amount" => input::get('loan_amount'),
         );
         DB::table('loans')->insert($data);
-        return redirect('loans')->with('msg','<div class="alert alert-success">Loan Added Successfully!</div>');
+        return redirect('loans')->with('msg','Loan Added Successfully!');
     }
     public function editLoan($id){
         $record = loan::where('id',$id)->first();
@@ -47,7 +47,7 @@ class loanController  extends Controller
             "loan_amount" => input::get('loan_amount'),
         );
         DB::table('loans')->where("id",input::get('id'))->update($data);
-        return redirect('loans')->with('msg','<div class="alert alert-success">Loan Updated Successfully!</div>');
+        return redirect('loans')->with('msg','Loan Updated Successfully!');
     }
     public function addPaidAmount(){
         $currentMonth = date('d-m-Y');
@@ -57,6 +57,6 @@ class loanController  extends Controller
             "month" => Date('d-F-Y', strtotime($currentMonth . " last month")).','.input::get('paid_amount'),
         );
         DB::table('loans')->where("id",input::get('id'))->update($data);
-        return redirect('loans')->with('msg','<div class="alert alert-success">Loan Updated Successfully!</div>');
+        return redirect('loans')->with('msg','Loan Updated Successfully!');
     }
 }

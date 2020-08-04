@@ -43,14 +43,14 @@ class leadController extends Controller
                 $email=lead::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
                 lead::where('id',input::get('id'))->update(['email'=>$email[0]]);
-                return back()->with('msg','<div class="alerta lert-success">Email updated Successfully!</div>');
+                return back()->with('msg','Email updated Successfully!');
             
         }else if(input::get('phone')){
             
                 $phone=lead::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 lead::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
-                return back()->with('msg','<div class="alert alert-success">Phone Number updated Successfully!</div>');
+                return back()->with('msg','Phone Number updated Successfully!');
          }
     }
 
@@ -120,7 +120,7 @@ class leadController extends Controller
         DB::table('reminders')->insert(['date_time'=>$dateTime,'description'=>$description,'reminder_type'=>$reminderName,'reminder_of'=>'Leads','user_id'=>$currentUser,'add_by'=>$addby,'property_id'=>$reminderLeadId]);
     }
     //end reminder
-     return Redirect::back();
+     return Redirect::back()->with('msg','Lead Add Successfully!');
   }
   
  //update lead form
@@ -133,7 +133,7 @@ class leadController extends Controller
 	  
         $update=['client_name'=>$r->client_name,'area'=>$r->area,'building'=>$r->building,'type'=>$r->type,'priority'=>$r->priority,'rent'=>$r->rent,'buy'=>$r->buy,'view_date_time'=>$r->leadViewDate,'move_inn'=>$r->move_inn,'outcome'=>$r->outcome,'followup_date'=>$r->followup_date,'follow_up'=>$r->follow_up,'feedback'=>$r->feedback,'lead_user'=>session('user_name')];
      lead::where(['id'=>$r->leadEditId])->update($update);
-     return Redirect::back();
+     return Redirect::back()->with('msg','Lead Updated Successfully!');
   }
 
   public function agentLeads(){
@@ -159,7 +159,7 @@ class leadController extends Controller
       $update=lead::where(['id'=>$r->assignedLeadId])->update(['lead_user'=>$r->assignedAgent]); 
      
     
-	return Redirect::back();
+	return Redirect::back()->with('msg','Lead Assigned Successfully!');
 	 
   }
   

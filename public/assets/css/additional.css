@@ -80,12 +80,6 @@ input{
 
 }
 
-.btn{
-
-    font-size: 12px !important;
-
-}
-
 .actions{
 
     margin:1% 0px;
@@ -110,7 +104,7 @@ input{
 
 }
 
-.action_select{
+/*.action_select{
 
     width: 150px;
 
@@ -119,19 +113,16 @@ input{
     font-weight: 500;
 
 }
-
+*/
 .edit_supervision,.edit_supervision:hover{
 
     text-decoration: underline;
 
 }
 
-thead{
-
-    background: #1976d2;
-
+#datatable thead{
+    background-color: #2fa97c;
     color: white;
-
 }
 
 .attachments{

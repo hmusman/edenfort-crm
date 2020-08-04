@@ -1,22 +1,64 @@
-@include('../inc.header')
-<style type="text/css">
-    .dashboard-class,.logout-class{
-        visibility: hidden;
-    }
-</style>
-<body class="fix-header card-no-border logo-center">
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <section id="wrapper" class="error-page">
-        <div class="error-box">
-            <div class="error-body text-center">
-                <h1>400</h1>
-                <h3 class="text-uppercase">INTERNAL SERVER ERROR !</h3>
-                <p class="text-muted m-t-30 m-b-30">Please try after some time</p>
-                <a href="{{url('/')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Back to home</a> </div>
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>500 Error | Edenfort CRM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{url('public/logo.png')}}">
+
+        <!-- Bootstrap Css -->
+        <link href="{{url('public/Green/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{url('public/Green/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{url('public/Green/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="bg-primary bg-pattern">
+
+        <div class="account-pages pt-sm-5">
+            <div class="container">
+                
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <div class="row justify-content-center">
+                                <div class="col-md-4 col-6">
+                                    <img src="{{('public/Green/assets/images/error-img.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                </div>
+                            </div>
+    
+                            <h1 class="mt-5 text-uppercase text-white font-weight-bold mb-3">INTERNAL SERVER ERROR!</h1>
+                            <h5 class="text-white-50">PLEASE TRY AFTER SOME TIME.</h5>
+                            <div class="mt-5">
+                                @if(!session("user_id"))
+                                <a class="btn btn-success waves-effect waves-light" href="{{url('/')}}">Back to Home</a>
+                                @else
+                                <a class="btn btn-success waves-effect waves-light" href="{{url('/')}}">Back to Dashboard</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
         </div>
-    </section>
-    @include('../inc.footer')
-</body>
+        <!-- end Account pages -->
+
+        <!-- JAVASCRIPT -->
+        <script src="{{url('public/Green/assets/libs/jquery/jquery.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/node-waves/waves.min.js')}}"></script>
+
+        <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
+
+
+        <script src="assets/js/app.js"></script>
+
+    </body>
 </html>

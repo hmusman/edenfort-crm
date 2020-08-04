@@ -10,147 +10,150 @@
   <?php redirect('/'); ?>
 
 @endif
+<!-- DataTables -->
+<link href="{{url('public/Green/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{url('public/Green/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="{{url('public/Green/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />     
 <style>
-    .nav-tabs li{
-        color:white !important;
-         text-align:center !important;
-    }
-    .btn a{
-        color:white !important;
-        text-align:center !important;
-        font-size:12px !important;
-    }
-    .btn{
-        border-radius:0px !important;
-        margin-right:10px !important;
-        color:white !important;
-         text-align:center !important;
-    }
-    a.active{
-        text-decoration:underline !important;
+    #datatable-buttons_wrapper{
+        margin-top: 20px;
     }
 </style>
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
 
+    <div class="page-content">
 
-	<div class="page-wrapper">
-		<div class="container reminder-table">
-			 <div style="background:white;" class="mb-3 px-3">
-    <div class="tab-pane active p-20 " >
-      <h3 align="center">{{ $user->user_name}}'s Reminders</h3>
-       <div class="form-body">
-           <div class="row"> 
-                <table id="myTable" class="table table-bordered table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Add By</th>
-                            <th>Reminder Type</th>
-                            <th>Reminder Of</th>
-                            <th>Property ID</th>
-                            <th>Description</th>
-                            <!-- <th>Unit No.</th> -->
-                            <th>Date&Time</th>
-                            <th>Action</th>
-
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php $i=1; ?>
-            @if(isset($reminder))
-               @if(count($reminder) > 0)
-                    @foreach($reminder as $rem)
-                        
-                        <tr style="@if($rem->status=='viewed') background-color: #e2e2e2; 
-                        @endif">
-                          <td><?php echo $i; ?></td> 
-                          <td>{{ $user->user_name}}</td> 
-                          <td>{{$rem->reminder_type}}</td>  
-                          <td>{{$rem->reminder_of}} </td>
-                          <td>{{$rem->property_id}}</td>
-                          <td>{{$rem->description}}</td>
-                          <!-- <td>{{$rem->unit_no}}</td> -->
-                          <td>{{$rem->date_time}}</td>
-                          <td><div class="row" style="padding-left: 14px;">
-                            <a class="p-2" href="{{ url('get-single-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
-                            @if($rem->user_id==ucfirst(session('user_id')))
-                            <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a><br>
-                            <a class="p-2 update_reminder" href="#" property_id="{{$rem->property_id}}">Update<i class="fas fa-edit"></i></a>@endif
+        <!-- Page-Title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4 class="page-title mb-1">{{strtoupper($user->user_name)}}'s Reminders</h4>
+                        <ol class="breadcrumb m-0">
+                            <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li> -->
+                        <li class="breadcrumb-item active">Edenfort CRM > {{strtoupper($user->user_name)}}'s Reminders</li>
+                        </ol>
+                    </div><!-- 
+                    <div class="col-md-4">
+                        <div class="float-right d-none d-md-block">
+                            <div class="dropdown">
+                                <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mdi mdi-settings-outline mr-1"></i> Settings
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </div>
                         </div>
-                        </td>
-                        </tr>
+                    </div> -->
+                </div>
 
-                       <!--  <div id="create" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
             </div>
-            <div class="modal-body">
-                <form id="formadd" class="form-horizontal" role="form" method="post">
-                {{csrf_field()}}
-                <input type="hidden" name="property_id" id="property_id" class="property_id" value="{{$rem->property_id}}">
-                <input type="hidden" name="user_id" id="user_id" class="user_id" value="{{$rem->user_id}}">
-                    <div class="form-group row add">
-                        <label class="control-label col-sm-2" for="reason">Reason:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control reason" id="reason" name="reason"
-                                placeholder="Your Reason Here" required>
-                            <span class="reminder-reason-error" style="font-size: 11px;font-weight: 500;color: red;"></span>
-                            <p class="error text-center"></p>
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="datatable-buttons" class="mt-4 table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Add By</th>
+                                        <th>Reminder Type</th>
+                                        <th>Reminder Of</th>
+                                        <th>Property ID</th>
+                                        <th>Description</th>
+                                        <!-- <th>Unit No.</th> -->
+                                        <th>Date&Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                         <?php $i=1; ?>
+                                        @if(isset($reminder))
+                                           @if(count($reminder) > 0)
+                                                @foreach($reminder as $rem)
+                                                    
+                                                    <tr style="@if($rem->status=='viewed') background-color: #e2e2e2; 
+                                                    @endif">
+                                                      <td><?php echo $i; ?></td> 
+                                                      <td>{{ $user->user_name}}</td> 
+                                                      <td>{{$rem->reminder_type}}</td>  
+                                                      <td>{{$rem->reminder_of}} </td>
+                                                      <td>{{$rem->property_id}}</td>
+                                                      <td style="white-space: break-spaces;">{{$rem->description}}</td>
+                                                      <!-- <td>{{$rem->unit_no}}</td> -->
+                                                      <td>{{$rem->date_time}}</td>
+                                                      <td><div class="row" style="padding-left: 14px;">
+                                                        <a class="p-2" href="{{ url('get-single-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
+                                                        @if($rem->user_id==ucfirst(session('user_id')))
+                                                        <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a><br>
+                                                        <a class="p-2 update_reminder" href="#" property_id="{{$rem->property_id}}">Update<i class="fas fa-edit"></i></a>@endif
+                                                    </div>
+                                                    </td>
+                                                    </tr>
+                                                        
+                                                    <?php $i++;  ?>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                              <td colspan="11" align="center">No Record Found</td>
+                                            </tr>
+                                            @endif 
+                                        @endif 
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" id="add" property_id="{{$rem->property_id}}">
-                    <span class="fa fa-check"></span>Disable
-                </button>
-                <button class="btn btn-warning" type="button" data-dismiss="modal">
-                    <span class="fa fa-remove"></span>Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
- -->
-                            
-                        <?php $i++;  ?>
-                    @endforeach
-                @else
-                <tr>
-                  <td colspan="11" align="center">No Record Found</td>
-                </tr>
-                @endif 
-            @endif    
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
- </div>
-		</div>
-	</div>
-    
+                </div>
+                <!-- end row -->
 
+            </div>
+            <!-- end container-fluid -->
+        </div> 
+        <!-- end page-content-wrapper -->
+    </div>
+    <!-- End Page-content -->
 
 @include('inc.footer')
+<!-- Required datatable js -->
+<script src="{{url('public/Green/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<!-- Buttons examples -->
+<script src="{{url('public/Green/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/jszip/jszip.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+<!-- Responsive examples -->
+<script src="{{url('public/Green/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{url('public/Green/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+
+<!-- Datatable init js -->
+<script src="{{url('public/Green/assets/js/pages/datatables.init.js')}}"></script>
 
  <!--<script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>-->
   <script src="{{url('public/assets/plugins/raphael/raphael-min.js')}}"></script>
     <script src="{{url('public/assets/plugins/morrisjs/morris.min.js')}}"></script>
     <!-- Chart JS 
     <script src="{{url('public/assets/js/dashboard1.js')}}"></script>-->
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <script>
-        $(document).ready( function () {
-            $('#myTable,#myTable2,#myTable3').DataTable();
-        });
-    </script>
    <!--  <script>
         $(document).on('click', '.disable_reminder', function() {
         $('#create').modal('show');

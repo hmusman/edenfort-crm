@@ -5,12 +5,7 @@
   </script>
   <?php redirect('/'); ?>
 @endif
-<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <style>
-    .font-size{
-        font-size:12px;
-    }
     .MultiCheckBox {
             border:1px solid #e2e2e2;
             padding: 5px;
@@ -32,13 +27,13 @@
         } 
 
         .MultiCheckBoxDetail {
-            display:none;
-            position:absolute;
-            border:1px solid #e2e2e2;
-            overflow-y:hidden;
+            display: none;
+            position: static;
+            border: 1px solid #e2e2e2;
+            overflow-y: hidden;
             background-color: white;
             font-size: 12px;
-            width: 86%;
+            width: 100%;
             z-index: 9999;
         }
 
@@ -88,86 +83,138 @@
                 color:#fff;
             }
 </style>
-<div class="page-wrapper" style="margin-top: 2%;">
-<div class="container-fluid">
-    <div class="row owner_main_row">
-        <h3 class="page_heading">Direct Report</h3><br>
-        <div class="col-12">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul style="margin-bottom:0px;">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <div class="card">
-                <div class="card-body">
-                    <form action="" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <label for="agent" class="font-size">Select Agent</label>
-                                <select id="agent" name="agent" class="form-control font-size" required>
-                                    <option value="">Select Agent</option>
-                                    @foreach($agents as $agent)
-                                        <option value="{{$agent->id}}">{{$agent->user_name}}</option>
-                                    @endforeach
-                                </select>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+
+                    <!-- Page-Title -->
+                    <div class="page-title-box">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="page-title mb-1">Direct PDF Report</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li> -->
+                                    <li class="breadcrumb-item active">Edenfort CRM Generate Reports</li>
+                                    </ol>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                    <div class="float-right d-none d-md-block">
+                                        <div class="dropdown">
+                                            <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="mdi mdi-settings-outline mr-1"></i> Settings
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
-                            <div class="col-sm-2">
-                                <label for="report_type" class="font-size">Select Report Type</label>
-                                <select id="report_type" name="report_type" class="form-control font-size" required>
-                                    <option value="property">Agent Property</option>
-                                    <option value="lead">Agent Lead</option>
-                                    <option value="coldcallings">Agent ColdCallings</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2" id="selected">
-                                <label for="access_type" class="font-size">Access Type</label>
-                                 <select id="access_type" class="form-control font-size" required>
-                                    <!-- <option value="Pending">Pending</option> -->
-                                    <option value="Call Back">Call Back</option>
-                                    <option value="Not Answering">Not Answering</option>
-                                    <option value="Not Interested">Not Interested</option>
-                                    <option value="Interested">Interested</option>
-                                    <option value="For Sale">For Sale</option>
-                                    <option value="For Rent">For Rent</option>
-                                    <option value="Upcoming">Upcoming</option>
-                                    <option value="Off Plan">Off Plan</option>
-                                    <option value="Investor">Investor</option>
-                                    <option value="Check Availability">Check Availability</option>
-                                    <option value="Switch Off">Switch Off</option>
-                                    <option value="Wrong Number">Wrong Number</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Residential">Residential</option>
-                                    <option value="Follow Up">Follow Up</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="font-size">From Date</label>
-                                <input type="date" class="font-size form-control" name="from_date">
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="font-size">TO Date</label>
-                                <input type="date" class="font-size form-control" name="to_date">
-                            </div>
-                            <div class="col-sm-1" style="padding-top: 32px;">
-                                <button type="submit" class="font-size btn btn-danger"><b><span><i class="fa fa-file-pdf-o" ></i></span> Generate Report</b></button>
-                            </div>
+
                         </div>
-                    </form>
+                    </div>
+                    <!-- end page title end breadcrumb -->
+
+                    <div class="page-content-wrapper">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-header" style="background-color: white;">
+                                                <h4>Generate PDF Report</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <label for="agent" class="font-size">Select Agent</label>
+                                                            <select id="agent" name="agent" class="form-control font-size" required>
+                                                                <option value="">Select Agent</option>
+                                                                @foreach($agents as $agent)
+                                                                    <option value="{{$agent->id}}">{{$agent->user_name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label for="report_type" class="font-size">Select Report Type</label>
+                                                            <select id="report_type" name="report_type" class="form-control font-size" required>
+                                                                <option value="property">Agent Property</option>
+                                                                <option value="lead">Agent Lead</option>
+                                                                <option value="coldcallings">Agent ColdCallings</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2" id="selected">
+                                                            <label for="access_type" class="font-size">Access Type</label>
+                                                             <select id="access_type" class="form-control font-size" required>
+                                                                <!-- <option value="Pending">Pending</option> -->
+                                                                <option value="Call Back">Call Back</option>
+                                                                <option value="Not Answering">Not Answering</option>
+                                                                <option value="Not Interested">Not Interested</option>
+                                                                <option value="Interested">Interested</option>
+                                                                <option value="For Sale">For Sale</option>
+                                                                <option value="For Rent">For Rent</option>
+                                                                <option value="Upcoming">Upcoming</option>
+                                                                <option value="Off Plan">Off Plan</option>
+                                                                <option value="Investor">Investor</option>
+                                                                <option value="Check Availability">Check Availability</option>
+                                                                <option value="Switch Off">Switch Off</option>
+                                                                <option value="Wrong Number">Wrong Number</option>
+                                                                <option value="Commercial">Commercial</option>
+                                                                <option value="Residential">Residential</option>
+                                                                <option value="Follow Up">Follow Up</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label class="font-size">From Date</label>
+                                                            <input type="date" class="font-size form-control" name="from_date">
+                                                            <!-- <input type="text" placeholder="MM/DD/YYYY" class="form-control datepicker-here" data-language="en" name="from_date"> -->
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label class="font-size">To Date</label>
+                                                            <input type="date" class="font-size form-control" name="to_date">
+                                                            <!-- <input type="text" placeholder="MM/DD/YYYY" class="form-control datepicker-here" data-language="en" name="to_date"> -->
+                                                        </div>
+                                                        <div class="col-sm-2" style="padding-top: 32px;">
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light"><b><span><i class="mdi mdi-file-pdf-outline" ></i></span> Generate Report</b></button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+
+                        </div>
+                        <!-- end container-fluid -->
+                    </div> 
+                    <!-- end page-content-wrapper -->
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <!-- End Page-content -->
+
 
 @include('inc.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
- <script>
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <script>
+        alertify.error(" {{ $error }}");
+    </script>       
+    @endforeach
+@endif
+<script>
         $(document).ready(function () {
             $("#access_type").CreateMultiCheckBox({defaultText : 'Select Access Type', height:'250px' });
         });

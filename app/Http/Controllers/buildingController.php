@@ -17,7 +17,7 @@ class buildingController extends Controller
     public function index(){
     $permissions = permission::where('user_id', session('user_id'))->first();
 
-    	$value=Building::all();
+    	$value=Building::orderBy('created_at', 'DESC')->get();
     	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
     	return view('addBuildings',compact(['value','agents','permissions']));
     }
@@ -27,9 +27,9 @@ class buildingController extends Controller
 	    	$building->building_name=input::get('building_name');
 	    	$building->assigned_agent=input::get('assigned_agent');
 	    	$building->Save();
-	    	return redirect("buildings")->with('msg','<div class="alert alert-success">Building Successfully added!</div>');
+	    	return redirect("buildings")->with('msg','Building Successfully added!');
     	}catch(\Exception $e){
-			return redirect("buildings")->with('msg','<div class="alert alert-danger">Building already exist!</div>');
+			return redirect("buildings")->with('error','Building already exist!');
 		}
     }
     public function insertBuildingByAjax(){
@@ -45,9 +45,9 @@ class buildingController extends Controller
     public function deleteBuilding(){
     	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
 	    	Building::where('id',input::get('id'))->delete();
-	    	return redirect("buildings")->with('msg','<div class="alert alert-success">Building Deleted Successfully !</div>');
+	    	return redirect("buildings")->with('msg','Building Deleted Successfully!');
 	    }else{
-	    	return redirect("buildings")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("buildings")->with('error','Something went wrong!');
 	    }
     }
     public function editBuilding(){
@@ -56,7 +56,7 @@ class buildingController extends Controller
 			$record=Building::where('id',input::get('id'))->first();
 			return view("addBuildings",["record"=>$record,"Formdisplay"=>"block","Recorddisplay"=>"none",'agents'=>$agents]);
 	    }else{
-	    	return redirect("buildings")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("buildings")->with('error','Something went wrong!');
 	    }
     }
     public function updateBuilding(){
@@ -71,10 +71,10 @@ class buildingController extends Controller
                 "property_status"=>"coldCalling"
               );
               property::where('Building',$date['building_name'])->update($data);
-	    		return redirect("buildings")->with('msg','<div class="alert alert-success">Building Updated Successfully!</div>');
+	    		return redirect("buildings")->with('msg','Building Updated Successfully!');
 			
 	    }else{
-	    	return redirect("buildings")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("buildings")->with('error','Something went wrong!');
 	    }
 	}
 }

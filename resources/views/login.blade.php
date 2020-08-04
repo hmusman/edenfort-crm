@@ -1,174 +1,159 @@
 <!DOCTYPE html>
+
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------NEW LOGIN PAGE----------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/logo.png')}}">
-    <title>Edenfort Properties</title>
-    <!-- Bootstrap Core CSS -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Edenfort Properties</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{url('public/logo.png')}}">
 
-    <link href="{{url('public/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <!-- Footable CSS -->
-    <link href="{{url('public/assets/plugins/footable/css/footable.core.css')}}" rel="stylesheet">
-    <link href="{{url('public/assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
-      <link href="{{url('public/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
-    <!-- Custom CSS -->
-      <link href="{{url('public/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
-    <!-- Page plugins css -->
-    <link href="{{url('public/assets/plugins/clockpicker/dist/jquery-clockpicker.min.css')}}" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="{{url('public/assets/plugins/jquery-asColorPicker-master/css/asColorPicker.css')}}" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="{{url('public/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker plugins css -->
-    <link href="{{url('public/assets/plugins/timepicker/bootstrap-timepicker.min.css')}}" rel="stylesheet">
-    <link href="{{url('public/assets/css/style.css')}}" rel="stylesheet">
-    <link href="{{url('public/assets/css/myStyle.css')}}" rel="stylesheet" >
-    <!-- You can change the theme colors from here -->
-    <link href="{{url('public/assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+        <!-- Bootstrap Css -->
+        <link href="{{url('public/Green/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{url('public/Green/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{url('public/Green/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+    <style>
+        label[for="Email"]{
+            margin-left: 56%;
+        }
+        label[for="Password"]{
+            margin-left: 56%;
+        }
+    </style>
+    </head>
 
-<style type="text/css" media="screen">
-     @media only screen and (max-width: 600px) {
-  .topbar{
-    margin-top: -33%;
-  }
-  .login{
-    margin-top: 33% !important;
-  }
-}
-</style>
-</head>
-
-<body class="fix-header card-no-border logo-center">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <!-- <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div> -->
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-              <!--  <a class="has-arrow waves-effect waves-dark dashboard-class" href="{{url('/')}}" aria-expanded="false"><i class="fa fa-home" style="width: 20px;"></i><span class="hide-menu">Dashboard</span></a>-->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{url('/')}}">
-                        <!-- Logo icon -->
-                        <b>
-                            <!-- Dark Logo icon -->
-                            <img src="{{url('public/logo.png')}}" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="{{url('public/logo.png')}}" alt="homepage"  height="60px" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <!--<span>-->
-                             <!-- dark Logo text -->
-                        <!--     <img src="{{url('public/logo.png')}}" alt="homepage" class="dark-logo" />-->
-                             <!-- Light Logo text -->    
-                        <!--     <img src="{{url('public/logo.png')}}" class="light-logo" alt="homepage" />-->
-                        <!--</span> -->
-                    </a>
-                </div>
-             
-                
-            </nav>
-            
-            
-            
-        
-    </header>
-        @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent'))
-            <div class="">
-                <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><span class="badge notification_counter">0</span><i class="fa fa-bell text-white"></i></button>
-            </div>
+    <body class="bg-primary bg-pattern">
+        @if(session("user_id"))
+            @if(ucfirst(session('role'))==ucfirst('Admin'))
+                <script type="text/javascript">
+                    window.location='{{url("/dashboard")}}';
+                </script>
+                <?php redirect('/dashboard'); ?>
+            @endif
+            @if(ucfirst(session('role'))==ucfirst('owner'))
+                <script type="text/javascript">
+                    window.location='{{url("/ownerdashboard")}}';
+                </script>
+                <?php redirect('/ownerdashboard'); ?>
+            @endif
+             @if(ucfirst(session('role'))==ucfirst('agent'))
+                <script type="text/javascript">
+                    window.location='{{url("/agentdashboard")}}';
+                </script>
+                <?php redirect('/agentdashboard'); ?>
+            @endif
         @endif
-        </header>
+        <!-- <div class="home-btn d-none d-sm-block">
+            <a href="index.html"><i class="mdi mdi-home-variant h2 text-white"></i></a>
+        </div> -->
 
-@if(session("user_id"))
-    @if(ucfirst(session('role'))==ucfirst('Admin'))
-        <script type="text/javascript">
-            window.location='{{url("/dashboard")}}';
-        </script>
-        <?php redirect('/dashboard'); ?>
-    @endif
-    @if(ucfirst(session('role'))==ucfirst('owner'))
-        <script type="text/javascript">
-            window.location='{{url("/ownerdashboard")}}';
-        </script>
-        <?php redirect('/ownerdashboard'); ?>
-    @endif
-     @if(ucfirst(session('role'))==ucfirst('agent'))
-        <script type="text/javascript">
-            window.location='{{url("/agentdashboard")}}';
-        </script>
-        <?php redirect('/agentdashboard'); ?>
-    @endif
-@endif
-<link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additionalLogin.css')}}">
-            <div class="container-fluid login" style="margin-top: 4%;">
-                <h3>Login</h3>
-                 <form action="{{url('CheckLogin')}}" method="post" id="login_form">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            @if(session('error'))
-                                {!! session('error') !!}
-                            @endif
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Email</label>
-                                <input type="email" class="form-control" name="Email" placeholder="Email" required="" value="{{ old('Email') }}">
-                            </div>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Password</label>  
-                                <input type="password" class="form-control" name="Password" placeholder="Password" required="">
-                            </div>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                    <div class="form-actions">
-                        <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-2" style="padding:0px;">
-                                <input type="submit" name="login" class="btn btn-success" value="Login">
-                            </div>
-                            <div class="col-md-2" style="text-align:end !Important;"><strong><a href="{{url('forget-password')}}">Forget Password ?</a></strong></div>
+        <div class="account-pages my-5" style="margin-top: 0px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mb-5">
+                            <a href="#" class="logo"><img src="{{url('public/logo.png')}}" height="74" alt="logo"></a>
+                            <h5 class="font-size-16 text-white-50 mb-4">CRM Edenfort Real Estate</h5>
                         </div>
                     </div>
-                </form>                           
-            </div>    
- @include('inc.footer')
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#login_form").validate();
-    })
-</script>
+                </div>
+                <!-- end row -->
+
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 col-sm-8">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="p-2">
+                                    <h5 class="mb-5 text-center">Sign in to continue to CRM.</h5>
+                                    <form class="form-horizontal" action="{{url('CheckLogin')}}" method="post" id="login_form">
+                                        @csrf
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                @if(session('error'))
+                                                    {!! session('error') !!}
+                                                @endif
+                                                <div class="form-group form-group-custom mb-4">
+                                                    <input type="email" name="Email" class="form-control" id="Email" required value="{{ old('Email') }}">
+                                                    <label for="username" class="ulabel">User Name</label>
+                                                </div>
+
+                                                <div class="form-group form-group-custom mb-4">
+                                                    <input type="password" class="form-control" name="Password" id="Password" required>
+                                                    <label for="userpassword" class="plabel">Password</label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <!-- <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                                            <label class="custom-control-label" for="customControlInline">Remember me</label>
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="text-md-right mt-3 mt-md-0">
+                                                            <a href="{{url('forget-password')}}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <input class="btn btn-success btn-block waves-effect waves-light" type="submit" name="login" class="btn btn-success" value="Login">
+                                                </div>
+                                                <!-- <div class="mt-4 text-center">
+                                                    <a href="auth-register.html" class="text-muted"><i class="mdi mdi-account-circle mr-1"></i> Create an account</a>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+        </div>
+        <!-- end Account pages -->
+
+        <!-- JAVASCRIPT -->
+        <script src="{{url('public/Green/assets/libs/jquery/jquery.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{url('public/Green/assets/libs/node-waves/waves.min.js')}}"></script>
+
+        <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
+
+        <script src="{{url('public/Green/assets/js/app.js')}}"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+            <script type="text/javascript">
+                    //validate password//
+                    function validatePassword() {
+                        var validator = $("#chngepass").validate({
+                            rules: {
+                                password: "required",
+                                confirmpassword: {
+                                    equalTo: "#password"
+                                }
+                            },
+                            messages: {
+                                password: " Enter Password",
+                                confirmpassword: " Enter Confirm Password Same as Password"
+                            }
+                        });
+                        if (validator.form()) {
+
+                        }
+                    }
+
+            </script>
     </body>
 </html>

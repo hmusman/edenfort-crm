@@ -22,7 +22,7 @@ class permissionController extends Controller {
         $data = array('dashboardView' => $dashbordView, 'propertyView' => $r->propertyView, 'propertyAdd' => $r->propertyAdd, 'propertyEdit' => $r->propertyEdit, 'propertyDelete' => $r->propertyDelete, 'propertyAssign' => $r->propertyAssign, 'propertyBulk' => $r->propertyBulk, 'coldcallingView' => $r->coldcallingView, 'coldcallingAdd' => $r->coldcallingAdd, 'coldCallingAssign' => $r->coldCallingAssign, 'coldcallingBulk' => $r->coldcallingBulk, 'leadView' => $r->leadView, 'leadAdd' => $r->leadAdd, 'leadEdit' => $r->leadEdit, 'leadBulk' => $r->leadBulk, 'buildingView' => $r->buildingView, 'buildingAdd' => $r->buildingAdd, 'supervisionView' => $r->supervisionView, 'supervisionAdd' => $r->supervisionAdd, 'supervisionEdit' => $r->supervisionEdit, 'dealView' => $r->dealView, 'dealAdd' => $r->dealAdd, 'dealEdit' => $r->dealEdit, 'dealBulk' => $r->dealBulk,'loanView'=>$r->loanView,'loanEdit'=>$r->loanEdit,'loanAdd'=>$r->loanAdd);
         $success = permission::updateOrCreate(["id"=>$permissionEditId]);
         $success->update($data);
-        return back()->with('msg', '<div class="alert alert-success">Permissions Updated!</div>');
+        return back()->with('msg', 'Permissions Updated!');
         
     }
 }

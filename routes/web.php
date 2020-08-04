@@ -14,6 +14,9 @@ Route::post('direct-pdf-report', 'directPdfReportController@generate');
 Route::get('propertiesexport', 'adminPropertyController@propertiesexport')->name('export_properties');
 Route::get('coldcallingexport', 'adminColdCallingController@coldcallignexport')->name('export_coldcallings');
 
+// Route::get('default', function(){
+//     return view('errors.default');
+// });
 
 Route::get('backup', 'BackupController@index');
 Route::get('backup/create', 'BackupController@create');

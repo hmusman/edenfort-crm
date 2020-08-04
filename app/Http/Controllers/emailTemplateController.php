@@ -25,7 +25,7 @@ class emailTemplateController extends Controller
             "subject" => input::get('subject'),
         );
         DB::table('email_templates')->insert($data);
-        return redirect('email-templates')->with('msg','<div class="alert alert-success">Template Added Successfully!</div>');
+        return redirect('email-templates')->with('msg','Template Added Successfully!');
     }
     public function editTemplate($id){
         $record = DB::table('email_templates')->where("id",$id)->first();
@@ -39,10 +39,10 @@ class emailTemplateController extends Controller
             "template_name" => input::get('template_name'),
         );
         DB::table('email_templates')->where("id",$id)->update($data);
-        return redirect('email-templates')->with('msg','<div class="alert alert-success">Template Updated Successfully!</div>');
+        return redirect('email-templates')->with('msg','Template Updated Successfully!');
     }
     public function deleteTemplate($id){
         DB::table('email_templates')->where("id",$id)->delete();
-        return redirect('email-templates')->with('msg','<div class="alert alert-success">Template Deleted Successfully!</div>');
+        return redirect('email-templates')->with('msg','Template Deleted Successfully!');
     }
 }

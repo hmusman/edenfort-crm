@@ -44,9 +44,9 @@ class userController extends Controller
       $record=User::where("user_name",$request->input('user_name'))->get();
       $email=User::where("email",$request->input('Email'))->get();
       if(count($record) > 0){
-        return redirect("$route")->with("msg","<div class='alert alert-danger'>username already exist</div>");
+        return redirect("$route")->with("error","username already exist");
       }else if(count($email) > 0){
-        return redirect("$route")->with("msg","<div class='alert alert-danger'>Email already exist</div>");
+        return redirect("$route")->with("error","Email already exist");
       }else{
           $user_name=$request->input('user_name');
           $email=$request->input('Email');
@@ -64,7 +64,7 @@ class userController extends Controller
         $value->save();
         $lastID = DB::getPdo()->lastInsertId();
         DB::table("permissions")->insert(['user_id'=>$lastID,"dashboardView"=>1]);
-        return redirect("$route")->with("msg","<div class='alert alert-success'>Data Addedd Successfully</div>");
+        return redirect("$route")->with("msg","Data Addedd Successfully");
     }
     public function EditUser($id,Request $request){
       $record=user::find($id);
@@ -78,7 +78,7 @@ class userController extends Controller
         if($request->input('username')!=$request->input('user_name')){
           $record=User::where("user_name",$request->input('user_name'))->get();
           if(count($record) > 0){
-            return redirect("".$route."/$id?action=edit&user=".$route)->with("msg","<div class='alert alert-danger'>username already exist</div>");
+            return redirect("".$route."/$id?action=edit&user=".$route)->with("error","username already exist");
           }else{
              $user_name=$request->input('user_name');
           }
@@ -88,7 +88,7 @@ class userController extends Controller
         if($request->input('user_email')!=$request->input('Email')){
           $email=User::where("email",$request->input('Email'))->get();
           if(count($email) > 0){
-            return redirect("".$route."/$id?action=edit")->with("msg","<div class='alert alert-danger'>Email already exist</div>");
+            return redirect("".$route."/$id?action=edit")->with("error","Email already exist");
           }else{
             $email=$request->input('Email');
           }
@@ -124,7 +124,7 @@ class userController extends Controller
            'status'=>$request->input('status'),
          );
          user::where('id',$id)->update($edit);
-         return redirect(''.$route.'')->with("msg","<div class='alert alert-success'>Data Updated Successfully</div>");
+         return redirect(''.$route.'')->with("msg","Data Updated Successfully");
       }else{
           
               //password changing
@@ -154,7 +154,7 @@ class userController extends Controller
            'status'=>$request->input('status'),
          );
          user::where('id',$id)->update($edit);
-         return redirect(''.$route.'')->with("msg","<div class='alert alert-success'>Data Updated Successfully</div>");
+         return redirect(''.$route.'')->with("msg","Data Updated Successfully");
       }
   }
   public function changePassword(){

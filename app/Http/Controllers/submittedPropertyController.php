@@ -105,10 +105,10 @@ $type=$g->get('type');
   	
 
     	DB::table('submittedproperties')->where('id',$id)->update(['unit_no'=>$unit,'Building'=>$Building,'area'=>$area,'LandLord'=>$LandLord,'email'=>$email,'contact_no'=>$contact_no,'Bedroom'=>$Bedroom,'Washroom'=>$Washroom,'Conditions'=>$Conditions,'Area_Sqft'=>$Area_Sqft,'Price'=>$Price,'type'=>$type]);
-    	return back()->with('msg','<div class="alert alert-success">Property Updated Successfully!</div>');
+    	return back()->with('msg','Property Updated Successfully!');
       //  print_r($countries);
   }catch(\Exception $e){
-     return back()->with('msg','<div class="alert alert-danger">Proprty Not Updated!</div>');
+     return back()->with('error','Proprty Not Updated!');
     }
     }
 
@@ -159,7 +159,8 @@ if($access=="Transferred"){
                DB::table('properties')->insert($data);
                
                    }else{
-                       $msg[]="<div class='alert alert-danger'>Unit# ".$pUnit[$key]." with this ".$pBuilding[$key]."  Already Transferred!</div>";
+                       $msg[]="Unit# ".$pUnit[$key]." with this ".$pBuilding[$key]."  Already Transferred!";
+                       // return back()->with('error',$msg);
                    }
             }
         }

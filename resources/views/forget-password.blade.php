@@ -1,98 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/assets/images/favicon.png')}}">
-    <title>Edenfort Properties</title>
-    <!-- Bootstrap Core CSS -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Recover Password | Edenfort CRM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{url('public/logo.png')}}">
 
-    <link href="{{url('public/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <!-- Footable CSS -->
-    <link href="{{url('public/assets/plugins/footable/css/footable.core.css')}}" rel="stylesheet">
-    <link href="{{url('public/assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
-      <link href="{{url('public/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
-    <!-- Custom CSS -->
-      <link href="{{url('public/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
-    <!-- Page plugins css -->
-    <link href="{{url('public/assets/plugins/clockpicker/dist/jquery-clockpicker.min.css')}}" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="{{url('public/assets/plugins/jquery-asColorPicker-master/css/asColorPicker.css')}}" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="{{url('public/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker plugins css -->
-    <link href="{{url('public/assets/plugins/timepicker/bootstrap-timepicker.min.css')}}" rel="stylesheet">
-    <link href="{{url('public/assets/css/style.css')}}" rel="stylesheet">
-    <link href="{{url('public/assets/css/myStyle.css')}}" rel="stylesheet" >
-    <!-- You can change the theme colors from here -->
-    <link href="{{url('public/assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
+        <!-- Bootstrap Css -->
+        <link href="{{url('public/Green/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{url('public/Green/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{url('public/Green/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
-<body class="fix-header card-no-border logo-center">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <!-- <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div> -->
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-              <!--  <a class="has-arrow waves-effect waves-dark dashboard-class" href="{{url('/')}}" aria-expanded="false"><i class="fa fa-home" style="width: 20px;"></i><span class="hide-menu">Dashboard</span></a>-->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{url('/')}}">
-                        <!-- Logo icon -->
-                        <b>
-                            <!-- Dark Logo icon -->
-                            <img src="{{url('public/logo.png')}}" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="{{url('public/logo.png')}}" alt="homepage"  height="60px" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <!--<span>-->
-                             <!-- dark Logo text -->
-                        <!--     <img src="{{url('public/logo.png')}}" alt="homepage" class="dark-logo" />-->
-                             <!-- Light Logo text -->    
-                        <!--     <img src="{{url('public/logo.png')}}" class="light-logo" alt="homepage" />-->
-                        <!--</span> -->
-                    </a>
-                </div>
-             
-                
-            </nav>
-            
-            
-            
-        
-    </header>
-        @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent'))
-            <div class="">
-                <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><span class="badge notification_counter">0</span><i class="fa fa-bell text-white"></i></button>
-            </div>
-        @endif
-        </header>
+    </head>
+
+    <body class="bg-primary bg-pattern" style="overflow-y: hidden;">
 
 @if(session("user_id"))
     @if(ucfirst(session('role'))==ucfirst('Admin'))
@@ -114,42 +41,71 @@
         <?php redirect('/agentdashboard'); ?>
     @endif
 @endif
-<link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additionalLogin.css')}}">
-            <div class="container-fluid" style="margin-top: 4%;">
-                <h3>Forget Password</h3>
-                 <form action="{{url('reset-password')}}" method="post" id="reset-password-form">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            @if(session('error'))
-                                {!! session('error') !!}
-                            @endif
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Email" required="">
-                            </div>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                    <div class="form-actions">
-                        <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-1" style="padding:0px;">
-                                <input type="submit" name="login" class="btn btn-success" value="Reset Password">
-                            </div>
-                            <div class="col-md-1" style="padding:0px;margin-left:35px !important;">
-                                <a style="font-size:12px !Important;" href="{{url('/')}}" class="btn btn-success">Login</a>
-                            </div>
+        <div class="account-pages my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mb-5">
+                            <a href="index.html" class="logo"><img src="{{url('public/logo.png')}}" height="74" alt="logo"></a>
+                            <h5 class="font-size-16 text-white-50 mb-4">CRM Edenfort Real Estate</h5>
                         </div>
                     </div>
-                </form>                           
-            </div>    
- @include('inc.footer')
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#reset-password-form").validate();
-    })
-</script>
+                </div>
+                <!-- end row -->
+
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 col-sm-8">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="p-2">
+                                    <h5 class="mb-5 text-center">Forget Password</h5>
+                                    <form class="form-horizontal" action="{{url('reset-password')}}" method="post" id="reset-password-form">
+                                         @csrf
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                @if(session('error'))
+                                                    {!! session('error') !!}
+                                                @endif
+                                                <div class="alert alert-warning alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                    Enter your <b>Email</b> and instructions will be sent to you!
+                                                </div>
+
+                                                <div class="form-group form-group-custom mt-5">
+                                                    <input type="email" class="form-control" id="useremail" name="email" required>
+                                                    <label for="useremail">Email</label>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <input  class="btn btn-success btn-block waves-effect waves-light" type="submit" name="login" class="btn btn-success" value="Reset Password">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="mt-3" style="text-align: center;">
+                                        <a href="{{url('/')}}" title="">Return Back to Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+        </div>
+        <!-- end Account pages -->
+
+        <!-- JAVASCRIPT -->
+        <script src="{{url('pubic/Green/assets/libs/jquery/jquery.min.js')}}"></script>
+        <script src="{{url('pubic/Green/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url('pubic/Green/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{url('pubic/Green/assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{url('pubic/Green/assets/libs/node-waves/waves.min.js')}}"></script>
+
+        <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
+
+
+        <script src="{{url('pubic/Green/assets/js/app.js')}}"></script>
+
     </body>
 </html>

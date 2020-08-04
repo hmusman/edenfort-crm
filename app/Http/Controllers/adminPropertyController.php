@@ -31,7 +31,7 @@ class adminPropertyController extends Controller
         foreach($properties as $key => $propertyID){
             property::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
         }
-        return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>Property Assigned Successfully!</div>");
+        return back()->with("msg","Property Assigned Successfully!");
     }
 
     public function singlePersonBuilding(Request $request){
@@ -44,7 +44,7 @@ class adminPropertyController extends Controller
         foreach($properties as $key => $propertyID){
             coldcallingModel::where('building',$propertyID)->update(["user_id"=>@$agents[0]]);
         }
-        return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>Coldcalling Assigned Successfully!</div>");
+        return back()->with("msg","Coldcalling Assigned Successfully!");
     }
 
     public function sentEmails(){
@@ -160,12 +160,13 @@ EDEN FORT REAL ESTATE
                 if($request->contact_no){
                     $query->where("contact_no", 'LIKE', '%' .$request->contact_no. '%');
                 }
-                $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
+                $result_data = $query->orderBy('updated_at', 'DESC')->paginate(25);
                 $upcoming = property::where('access','Upcoming')->count();
                 return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));
     }
     public function setReminderForProperty(Request $r){
         try{
+            // dd(input::get('time_date'), input::get('description'),input::get('status'),input::get('check_boxes'));
             $timedate = date('Y-m-d H:i:s', strtotime(input::get('time_date')));
             $check_boxes=input::get('check_boxes');
             foreach($check_boxes as $key=>$value){
@@ -195,10 +196,9 @@ EDEN FORT REAL ESTATE
   
        $deleted= property::where(['id'=>$id])->delete();
        if($deleted){
-            return back()->with('msg','<div class="alert alert-warning">Property  deleted.</div>');
+            return back()->with('msg','Property deleted.');
            } else{
-               return back()->with('msg','<div class="alert alert-warning"> Something went wrong</div
-               >');
+               return back()->with('error','Something went wrong.');
            }
         
     }
@@ -261,7 +261,7 @@ EDEN FORT REAL ESTATE
 	           );
 	           DB::table('reminders')->insert($data);
 	        }
-	        return back()->with('msg','<div class="alert alert-success">Property Added Successfully!</div>');
+	        return back()->with('msg','Property Added Successfully!');
     }
     public function EditProperty(){
     	$recordID=input::get("record_id");
@@ -282,24 +282,24 @@ EDEN FORT REAL ESTATE
                 $email=coldcallingModel::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
                 coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0]]);
-                return back()->with('msg','<div class="alert alert-success">Email updated Successfully!</div>');
+                return back()->with('msg','Email updated Successfully!');
             }else{
                 $email=property::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
                 property::where('id',input::get('id'))->update(['email'=>$email[0]]);
-                return back()->with('msg','<div class="alert alert-success">Email updated Successfully!</div>');
+                return back()->with('msg','Email updated Successfully!');
             }
         }else if(input::get('phone')){
             if(isset($_GET['ref'])){
                 $phone=coldcallingModel::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
-                return back()->with('msg','<div class="alert alert-success">Phone Number updated Successfully!</div>');
+                return back()->with('msg','Phone Number updated Successfully!');
             }else{
                 $phone=property::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 property::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
-                return back()->with('msg','<div class="alert alert-success">Phone Number updated Successfully!</div>');
+                return back()->with('msg','Phone Number updated Successfully!');
             }
         }
        
@@ -367,13 +367,13 @@ EDEN FORT REAL ESTATE
         	           );
         	           DB::table('reminders')->insert($data);
         	        }
-                return redirect('property')->with('msg','<div class="alert alert-success">Record updated Successfully</div>');
+                return redirect('property')->with('msg','Property updated Successfully');
             }catch (\Exception $e) {
-               return redirect('property')->with('msg','<div class="alert alert-danger">'.$e->getMessage().'</div>');
+               return redirect('property')->with('error', $e->getMessage());
             }
         }
          else{
-                return redirect('property')->with('msg','<div class="alert alert-danger">something went wrong!</div>');
+                return redirect('property')->with('msg','something went wrong!');
             }
     }
 

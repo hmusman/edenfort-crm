@@ -20,14 +20,14 @@ class agentLeadController extends Controller
                 $email=lead::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
                 lead::where('id',input::get('id'))->update(['email'=>$email[0]]);
-                return back()->with('msg','<div class="alerta lert-success">Email updated Successfully!</div>');
+                return back()->with('msg','Email updated Successfully!');
             
         }else if(input::get('phone')){
             
                 $phone=lead::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 lead::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
-                return back()->with('msg','<div class="alert alert-success">Phone Number updated Successfully!</div>');
+                return back()->with('msg','Phone Number updated Successfully!');
          }
     }
 

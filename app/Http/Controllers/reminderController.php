@@ -472,7 +472,8 @@ class reminderController extends Controller
               $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
               // $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
               $upcoming = coldcallingModel::where('access','Upcoming')->count();
-                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming']));
+              $Formdisplay = 'none';
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay']));
             }else if(strtoupper(input::get('ref'))=='PROPERTY'){
                 $permissions = permission::where('user_id', session('user_id'))->first();
                 $areas=property::distinct('area')->pluck('area');
@@ -564,8 +565,8 @@ class reminderController extends Controller
         $permissions = permission::where('user_id', session('user_id'))->first();
         $user = user::where('id', $id)->get()->first();
         $reminder = Reminder::where('user_id', $id)->where('date_time','<=', $datetime)->where(function($q) {
-                         $q->where('status', 'viewed')
-                           ->orWhere('status', null);
+                         $q->where('status', 'viewed');
+                           // ->orWhere('status', null);
                      })->orderBy('date_time', 'DESC')
                      ->get();
         // $result=Reminder::where('status' , 'viewed')->where('user_id',session('user_id'))

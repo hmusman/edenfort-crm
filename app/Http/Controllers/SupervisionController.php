@@ -58,12 +58,16 @@ class SupervisionController extends Controller
      //Graph for countng updated_at columns according to date, property status
              $cDate=Date('Y-m-d');
            $first = date('Y-m-d', strtotime($cDate. ' -6 days'));
+           $firstDayName = date('D', strtotime($cDate. ' -6 days'));
+           // dd($fDayName);
          $firstDay=property::whereDate('updated_at', '=', $first)->count();
      //Graph secound line for cold-calling property status;
        $firstCold=coldCallingModel::whereDate('updated_at', '=', $first)->count();
-       
+       // dd($firstCold);
            //2nd day in graph
             $second = date('Y-m-d', strtotime($cDate. ' -5 days'));
+            $secondDayName = date('D', strtotime($cDate. ' -5 days'));
+            // dd($sDayName);
          $secondDay=property::whereDate('updated_at', '=', $second)->count();
 
     
@@ -71,25 +75,33 @@ class SupervisionController extends Controller
        $secondCold=coldCallingModel::whereDate('updated_at', '=', $second)->count();
      // //3rd day in graph
             $third = date('Y-m-d', strtotime($cDate. ' -4 days'));
+            $thirdDayName = date('D', strtotime($cDate. ' -4 days'));
+            // dd($tDayName);
          $thirdDay=property::whereDate('updated_at', '=', $third)->count();
     //Graph secound line cold-calling
        $thirdCold=coldCallingModel::whereDate('updated_at', '=', $third)->count();
     
             $four = date('Y-m-d', strtotime($cDate. ' -3 days'));
+            $fourDayName = date('D', strtotime($cDate. ' -3 days'));
          $fourDay=property::whereDate('updated_at', '=', $four)->count();    //Graph secound line cold-calling
        $fourCold=coldCallingModel::whereDate('updated_at', '=', $four)->count();
     
               $five = date('Y-m-d', strtotime($cDate. ' -2 days'));
+              $fiveDayName = date('D', strtotime($cDate. ' -2 days'));
          $fiveDay=property::whereDate('updated_at', '=', $five)->count();
      //Graph secound line cold-calling
        $fiveCold=coldCallingModel::whereDate('updated_at', '=', $five)->count();      
     
                $six = date('Y-m-d', strtotime($cDate. ' -1 days'));
+               $sixDayName = date('D', strtotime($cDate. ' -1 days'));
+               // dd($six);
          $sixDay=property::whereDate('updated_at', '=', $six)->count();
      //Graph secound line cold-calling
        $sixCold=coldCallingModel::whereDate('updated_at', '=', $six)->count();
-    
+       // dd($sixCold);
+        
        $current = date('Y-m-d', strtotime($cDate. ' -0 days'));
+       $currentDayName = date('D', strtotime($cDate. ' -0 days'));
          $currentDay=property::whereDate('updated_at', '=', $current)->count();
      //Graph secound line cold-calling
        $currentCold=coldCallingModel::whereDate('updated_at', '=', $current)->count();
@@ -116,14 +128,16 @@ class SupervisionController extends Controller
     $latestProperties = property::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
      return view('dashboard',compact(['contracts','users','properties','agents','owners','admins','buildings','leads','rent','sale','upcoming',
-                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery','deals','currentDate']));
+                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery','deals','currentDate','firstDayName','secondDayName','thirdDayName','fourDayName','fiveDayName','sixDayName','currentDayName',]));
     }
     public function Supervision(){
        $result_data=Supervision::all();
          $permissions = permission::where('user_id', session('user_id'))->first();
         $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
          $buildings=Building::all();
-        return view('supervision',compact(['result_data','users','buildings','permissions']));
+         $Recorddisplay = 'block';
+         $Formdisplay  = 'none';
+        return view('supervision',compact(['result_data','users','buildings','permissions','Recorddisplay','Formdisplay']));
     }
     public function AddSupervison(Request $request){
     	if(isset($_POST['add_supervison'])){

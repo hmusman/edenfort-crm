@@ -1,8 +1,8 @@
 
 <!-- showing reminders to admin, superagent-->
 <script type="text/javascript">
-    $.notify.defaults( {autoHideDelay: 10000} )
-    setInterval(function(){ 
+    // $.notify.defaults( {autoHideDelay: 10000} );
+    setTimeout(function(){ 
         $.ajax({
                 url:'<?php echo url('get-all-reminder') ?>',
                 type:'get',
@@ -11,7 +11,7 @@
                     var temp="";
                     for(var i=0; i < data.length; i++){
                         $('.notification_counter').text(data.length);
-                       temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['unam']+'</span><span><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no">('+data[i]['rid']+')</span></a></div>';
+                       temp+='<a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['uid']+'" class="notification_link"><div class="col-sm-12 notification"><span class="round bg-light mr-2 avatar" style="color: black;">'+data[i]['unam']+'</span><span class="avatar_name"><strong>'+data[i]['user_name']+'</strong></span><span class="unit_no avatar_count">('+data[i]['rid']+')</span></div></a>';
                     }
                     $('.notify').html(temp);
                 }
@@ -30,13 +30,15 @@
                     for(var i=0; i < data.length; i++){
                         audio.play();
                        if(data[i]['status']!='viewed'){
-                            var getCount = parseInt($('.notification_counter').text());
-                          $('.notification_counter').text(getCount + data.length);
-                         $.notify("Reminder Alert", "warn");
-                           temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['user_id']+'" class="notification_link"><span class="round bg-light mr-2" style="color: black;">'+data[i]['user_name'].charAt(0).toUpperCase()+'</span><span><strong>'+data[i]['user_name']+'</strong></span></a></div>';
+                            // var getCount = parseInt($('.notification_counter').text());
+                          // $('.notification_counter').text(getCount + data.length);
+                         alertify.warning("Reminder Alert");
+                         // $.notify("Reminder Alert", "warn");
+                           temp+='<a href="<?php echo url('get-single-user-reminder')  ?>/'+data[i]['user_id']+'" class="notification_link"><div class="col-sm-12 notification"><span class="round bg-light mr-2 avatar" style="color: black;">'+data[i]['user_name'].charAt(0).toUpperCase()+'</span><span class="avatar_name"><strong>'+data[i]['user_name']+'</strong></span></div></a>';
                        }
                        else{
-                         $.notify("Reminder Alert", "warn");
+                         // $.notify("Reminder Alert", "warn");
+                         alertify.warning("Reminder Alert");
                        }
                     }
                     $('.notify').html(temp);

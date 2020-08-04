@@ -39,7 +39,7 @@ class ownerController extends Controller
 		    }
 		}else{
 			$ownerDetails=user::where("id",session('user_id'))->first();
-			$result_data=supervision::where("assigned_user",session('user_name'))->get();
+			$result_data=supervision::where("assigned_user",session('user_name'))->paginate(10);
 			return view('ownerdashboard',compact(['result_data','ownerDetails','propertyData','propertyusers','propertyagents']));
 		}
 	}

@@ -34,7 +34,7 @@ class adminColdCallingController extends Controller
         foreach($properties as $key => $propertyID){
             coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
         }
-        return back()->with("msg","<div class='alert alert-success' style='position: relative;top: -22px;width: 97%;margin: auto;'>ColdCalling Assigned Successfully!</div>");
+        return back()->with("msg","ColdCalling Assigned Successfully!");
     }
     public function sentEmails(){
         $message='';
@@ -421,9 +421,11 @@ public function addOwnerByAjax(Request $request){
                 if($request->contact){
                     $query->where("contact_no","LIKE",'%'.$request->contact.'%');
                 }
+                $Formdisplay = 'none';
+                $Recorddisplay = 'block';
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
                 $upcoming = coldcallingModel::where('access','Upcoming')->count();
-                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming']));
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay','Recorddisplay']));
                 
         
     }  
@@ -502,13 +504,13 @@ public function addOwnerByAjax(Request $request){
                      );
                      DB::table('reminders')->insert($data);
                   }
-                return redirect('coldCalling')->with('msg','<div class="alert alert-success">Record updated Successfully</div>');
+                return redirect('coldCalling')->with('msg','Record updated Successfully');
             }catch (\Exception $e) {
-               return redirect('coldCalling')->with('msg','<div class="alert alert-danger">'.$e->getMessage().'</div>');
+               return redirect('coldCalling')->with('error',$e->getMessage());
             }
         }
          else{
-                return redirect('coldCalling')->with('msg','<div class="alert alert-danger">something went wrong!</div>');
+                return redirect('coldCalling')->with('error','something went wrong!');
             }
     }
 }

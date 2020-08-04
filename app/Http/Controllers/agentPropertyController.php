@@ -64,34 +64,41 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
      //Graph for countng updated_at columns according to date, property status
              $cDate=Date('Y-m-d');
            $first = date('Y-m-d', strtotime($cDate. ' -6 days'));
+            $firstDayName = date('D', strtotime($cDate. ' -6 days'));
          $firstDay=property::whereDate('updated_at', '=', $first)->where('user_id',session('user_id'))->count();
      //Graph secound line for cold-calling property status;
        $firstCold=coldCallingModel::whereDate('updated_at', '=', $first)->where('user_id',session('user_id'))->count();
             $second = date('Y-m-d', strtotime($cDate. ' -5 days'));
+            $secondDayName = date('D', strtotime($cDate. ' -5 days'));
          $secondDay=property::whereDate('updated_at', '=', $second)->where('user_id',session('user_id'))->count();
     
      //Graph secound line for cold-calling second day;
        $secondCold=coldCallingModel::whereDate('updated_at', '=', $second)->where('user_id',session('user_id'))->count();
      // //3rd day in graph
             $third = date('Y-m-d', strtotime($cDate. ' -4 days'));
+             $thirdDayName = date('D', strtotime($cDate. ' -4 days'));
          $thirdDay=property::whereDate('updated_at', '=', $third)->where('user_id',session('user_id'))->count();
     //Graph secound line cold-calling
        $thirdCold=coldCallingModel::whereDate('updated_at', '=', $third)->where('user_id',session('user_id'))->count();
             $four = date('Y-m-d', strtotime($cDate. ' -3 days'));
+            $fourDayName = date('D', strtotime($cDate. ' -3 days'));
          $fourDay=property::whereDate('updated_at', '=', $four)->where('user_id',session('user_id'))->count();
     //Graph secound line cold-calling
        $fourCold=coldCallingModel::whereDate('updated_at', '=', $four)->where('user_id',session('user_id'))->count();
               $five = date('Y-m-d', strtotime($cDate. ' -2 days'));
+               $fiveDayName = date('D', strtotime($cDate. ' -2 days'));
          $fiveDay=property::whereDate('updated_at', '=', $five)->where('user_id',session('user_id'))->count();
      //Graph secound line cold-calling
        $fiveCold=coldCallingModel::whereDate('updated_at', '=', $five)->where('user_id',session('user_id'))->count();
     
                $six = date('Y-m-d', strtotime($cDate. ' -1 days'));
+               $sixDayName = date('D', strtotime($cDate. ' -1 days'));
          $sixDay=property::whereDate('updated_at', '=', $six)->where('user_id',session('user_id'))->get();
            $sixDay=count($sixDay);
      //Graph secound line cold-calling
        $sixCold=coldCallingModel::whereDate('updated_at', '=', $six)->where('user_id',session('user_id'))->count();
        $current = date('Y-m-d', strtotime($cDate. ' -0 days'));
+       $currentDayName = date('D', strtotime($cDate. ' -0 days'));
          $currentDay=property::whereDate('updated_at', '=', $current)->where('user_id',session('user_id'))->count();
        $currentCold=coldCallingModel::whereDate('updated_at', '=', $current)->where('user_id',session('user_id'))->count();
        $cDateTime=date('Y-m-d H:i:s');
@@ -103,7 +110,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     $latestProperties = property::whereDate("created_at",$todayDate->format('Y-m-d'))->where('user_id',session('user_id'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->where('lead_user',$fname)->get();
 		return view('agentDashboard',compact(['properties','leads',
-                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','coldCallings','permissions',"reminders","latestProperties","latestLeads"]));
+                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','coldCallings','permissions',"reminders","latestProperties","latestLeads","firstDayName","secondDayName","thirdDayName","fourDayName","fiveDayName","sixDayName","currentDayName"]));
     }
     public function allAddedProperties(Request $request){
         
@@ -140,7 +147,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                     $query->where("unit_no",$request->unit_no);
                 }
                 $result_data = $query->where(['user_id'=>session('user_id')])->orderBy('updated_at', 'DESC')->paginate(20);
-                return view('agentProperties',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions']));
+                $Recorddisplay = 'block'; $Formdisplay = 'none';
+                return view('agentProperties',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions','Recorddisplay', 'Formdisplay']));
             
     }
    
@@ -226,10 +234,10 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         $sale_status=NULL;
         $rented_date=NULL;
         $rented_price=NULL;
-        $checkUnitNo=property::where(["unit_no"=>input::get("unit_no"),"Building"=>input::get("building")])->get();
-        if(count($checkUnitNo) > 0){
-            return back()->with('msg','<div class="alert alert-danger">Unit# already exit against this Building!</div>');
-        }
+        // $checkUnitNo=property::where(["unit_no"=>input::get("unit_no"),"Building"=>input::get("building")])->get();
+        // if(count($checkUnitNo) > 0){
+        //     return back()->with('error','Unit# already exit against this Building!');
+        // }
         // $checkdewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
         // if(count($checkdewaNo) > 0){
         //     return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
@@ -279,9 +287,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 	           );
 	           DB::table('reminders')->insert($data);
 	        }
-	        return redirect("allAddedProperties")->with('msg','<div class="alert alert-success">Property Added Successfully!</div>');
+	        return redirect("allAddedProperties")->with('msg','Property Added Successfully!');
 	    }else{
-	    	return redirect("allAddedProperties")->with('msg','<div class="alert alert-danger">something went wrong</div>');
+	    	return redirect("allAddedProperties")->with('error','something went wrong');
 	    }
     }
        public function agentBuildings(){
@@ -340,21 +348,21 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
             $building_name=DB::select("select building_name from buildings where building_name='$name'");
              if(count($building_name) > 0)
              {
-             return redirect("agent-buildings")->with('msg','<div class="alert alert-danger">Building already exist!</div>');
+             return redirect("agent-buildings")->with('error','Building already exist!');
              }
              else{
             $building->save();     
             $building=DB::table('buildings')->where('user_id',session('user_id'))->get();
-            return redirect("agent-buildings")->with('msg','<div class="alert alert-success">Building Successfully added!</div>');
+            return redirect("agent-buildings")->with('msg','Building Successfully added!');
              }
      }
      
      public function deleteBuilding(){
     	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
 	    	Building::where('id',input::get('id'))->delete();
-	    	return redirect("agent-buildings")->with('msg','<div class="alert alert-success">Building Deleted Successfully !</div>');
+	    	return redirect("agent-buildings")->with('msg','Building Deleted Successfully!');
 	    }else{
-	    	return redirect("agent-buildings")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("agent-buildings")->with('error','Something went wrong!');
 	    }
     }
     
@@ -395,9 +403,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 	    	$building->building_name=input::get('building_name');
 	    	$building->assigned_agent=input::get('assigned_agent');
 	    	$building->Save();
-	    	return redirect("assignAgent")->with('msg','<div class="alert alert-success">Building Successfully added!</div>');
+	    	return redirect("assignAgent")->with('msg','Building Successfully added!');
     	}catch(\Exception $e){
-			return redirect("assignAgent")->with('msg','<div class="alert alert-danger">Building already exist!</div>');
+			return redirect("assignAgent")->with('error','Building already exist!');
 		}
     }
     public function updateBuilding($id){
@@ -405,15 +413,15 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 		    		'building_name'=>input::get('building_name'),
 	    		);
 	    		Building::where('id',$id)->update($data);
-	    		return redirect("agent-buildings")->with('msg','<div class="alert alert-success">Building Updated Successfully!</div>');
+	    		return redirect("agent-buildings")->with('msg','Building Updated Successfully!');
 	}
     
     public function deleteBuildingAssign(){
     	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
 	    	coldcallingModel::where('Building',input::get('id'))->delete();
-	    	return redirect("assignAgent")->with('msg','<div class="alert alert-success">Building Deleted Successfully !</div>');
+	    	return redirect("assignAgent")->with('msg','Building Deleted Successfully!');
 	    }else{
-	    	return redirect("assignAgent")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("assignAgent")->with('error','Something went wrong!');
 	    }
     }
     
@@ -429,7 +437,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 			 $record=coldcallingModel::where('id',input::get('id'))->first();
 			return view("assignAgent",["record"=>$record,"Formdisplay"=>"block","Recorddisplay"=>"none",'agents'=>$agents]);
 	    }else{
-	    	return redirect("assignAgent")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("assignAgent")->with('error','Something went wrong!!');
 	    }
     }
     
@@ -446,10 +454,10 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
               //  "property_status"=>"coldCalling"
              // );
               //	coldcallingModel::where('Building',$date['building_name'])->update($data);
-	    		return redirect("assignAgent")->with('msg','<div class="alert alert-success">Building Updated Successfully!</div>');
+	    		return redirect("assignAgent")->with('msg','Building Updated Successfully!');
 			
 	    }else{
-	    	return redirect("assignAgent")->with('msg','<div class="alert alert-danger">Something went wrong!!</div>');
+	    	return redirect("assignAgent")->with('error','Something went wrong!!');
 	    }
 	}
 	
@@ -522,24 +530,24 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $email=coldcallingModel::where('id',input::get('id'))->pluck('email');
                 $email[0].=','.input::get('email');
                 coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0]]);
-                return back()->with('msg','<div class="alert alert-success">Email updated Successfully!</div>');
+                return back()->with('msg','Email updated Successfully!');
             }else{
                 $email=property::where('id',input::get('id'))->pluck('email');
                 $email[0].=','.input::get('email');
                 property::where('id',input::get('id'))->update(['email'=>$email[0]]);
-                return back()->with('msg','<div class="alert alert-success">Email updated Successfully!</div>');
+                return back()->with('msg','Email updated Successfully!');
             }
         }else if(input::get('phone')){
             if(isset($_GET['ref'])){
                 $phone=coldcallingModel::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
-                return back()->with('msg','<div class="alert alert-success">Phone Number updated Successfully!</div>');
+                return back()->with('msg','Phone Number updated Successfully!');
             }else{
                 $phone=property::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 property::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
-                return back()->with('msg','<div class="alert alert-success">Phone Number updated Successfully!</div>');
+                return back()->with('msg','Phone Number updated Successfully!');
             }
         }
        
@@ -684,7 +692,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                        }else{
                             property::where("id",$check_boxes[$key])->update(["access"=>$updated_access[$key]]);
                        }
-                       $message='<div class="alert alert-success">Record Updated Successfully</div>';
+                       $message='Record Updated Successfully';
                      }  
                 }
             }else if($action=='Delete'){
@@ -698,10 +706,10 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                         }else{
                             $check=property::where(["id"=>$check_boxes[$key],'add_by'=>session('user_id')])->delete();
                             if(!$check){
-                                return back()->with('msg','<div class="alert alert-success">You Cannot Delete this Property</div>');
+                                return back()->with('error','You Cannot Delete this Property');
                             }
                         }
-                        $message='<div class="alert alert-success">Record Deleted Successfully</div>';  
+                        $message='Record Deleted Successfully';  
                 }
             }
         }
@@ -762,13 +770,13 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         	           );
         	           DB::table('reminders')->insert($data);
         	        }
-               return redirect("allAddedProperties")->with('msg','<div class="alert alert-success">Record updated Successfully</div>');
+               return redirect("allAddedProperties")->with('msg','Record updated Successfully');
             }catch (\Exception $e) {
-                return redirect("allAddedProperties")->with('msg','<div class="alert alert-danger">'.$e->getMessage().'</div>');
+                return redirect("allAddedProperties")->with('error',$e->getMessage());
             }
         }
          else{
-                return redirect("allAddedProperties")->with('msg','<div class="alert alert-danger">something went wrong!</div>');
+                return redirect("allAddedProperties")->with('error','something went wrong!');
             }
     }
     public function whatsAppMsgsForProperty(){

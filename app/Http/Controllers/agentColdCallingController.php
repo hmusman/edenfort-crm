@@ -1712,8 +1712,9 @@ $result_data=coldcallingModel::where('access', null)->where(['user_id'=>$current
 
       }//end Else of proprty as Commercial or Residential    
         
-        
-       return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions']));
+        $Recorddisplay = 'block';
+        $Formdisplay = 'none';
+       return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions', 'Recorddisplay', 'Formdisplay']));
 
   
 

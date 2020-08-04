@@ -1,405 +1,470 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- Tell the browser to be responsive to screen width -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- Favicon icon -->
-      <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/logo.png')}}">
-      <title>Edenfort Properties</title>
-      <!-- Bootstrap Core CSS -->
-      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link href="{{url('public/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-      <!-- Footable CSS -->
-      <link href="{{url('public/assets/plugins/footable/css/footable.core.css')}}" rel="stylesheet">
-      <link href="{{url('public/assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
-      <link href="{{url('public/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
-      <!-- Custom CSS -->
-      <link href="{{url('public/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
-      <!-- Page plugins css -->
-      <link href="{{url('public/assets/plugins/clockpicker/dist/jquery-clockpicker.min.css')}}" rel="stylesheet">
-      <!-- Color picker plugins css -->
-      <link href="{{url('public/assets/plugins/jquery-asColorPicker-master/css/asColorPicker.css')}}" rel="stylesheet">
-      <!-- Date picker plugins css -->
-      <link href="{{url('public/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
-      <!-- Daterange picker plugins css -->
-      <link href="{{url('public/assets/plugins/timepicker/bootstrap-timepicker.min.css')}}" rel="stylesheet">
-      <link href="{{url('public/assets/css/style.css')}}" rel="stylesheet">
-      <link href="{{url('public/assets/css/myStyle.css')}}" rel="stylesheet" >
-      <!-- You can change the theme colors from here -->
-      <link href="{{url('public/assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
-      <link rel="stylesheet" href="{{url('public/choosen//prism.css')}}">
-      <link rel="stylesheet" href="{{url('public/choosen/chosen.css')}}">
-      <link href="{{url('public/assets/css/coldCalling.css')}}" rel="stylesheet" >
-      <!-- morris CSS -->
-      <link href="{{url('public/assets/plugins/morrisjs/morris.css')}}" rel="stylesheet">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
-      <!--
-         <link href="{{url('public/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-         Custom CSS 
-         <link href="{{url('public/assets/css/style.css')}}" rel="stylesheet">
-         You can change the theme colors from here 
-         <link href="{{url('public/assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">-->
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <style>
-        @if(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
-        #sidebarnav{
-            margin-left: -50px !important;
-        }
-        .sidebar-nav ul li a {
-            padding: 0px 10px;
-            /*font-size: 13px;*/
-        }
-        @endif
-        .hide-menu{
-          color: #000000b8 !important;
-        }
-         .sidebar-nav #sidebarnav > li{
-         text-align:center;
-         }
-         .sidebar-nav ul li a{
-         padding:0px 10px;
-         }
+    <head>
+        <meta charset="utf-8" />
+        <title>CRM Edenfort Properties</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{url('public/logo.png')}}">
 
-         .scroll-sidebar{
-         padding:15px 0px 0px 0px;
-         }
-         .sidebar-nav ul li ul{
-         top:45px;
-         }
-         .sidebar-nav #sidebarnav>li>ul{
-         text-align:start;
-         }
-         .hide-menu{
-          color: #1976d2;
-         }
-         @media (min-width: 320px) and (max-width: 768px) {
+        <!-- datepicker -->
+        <link href="{{url('public/Green/assets/libs/air-datepicker/css/datepicker.min.css')}}" rel="stylesheet" type="text/css" />
 
-         .scroll-sidebar {
-    padding: 69px 0px 0px 0px !important;
-}
- @media only screen and (max-width: 600px) {
-  .nav-justified{
-    width: 100% !important;
-    margin-left: -1px !important;
-  }
-  .deals_tabs{
-        width: 98% !important;
-        margin-left: 1px !important;
-      }
-  .profile{
-    position: absolute;
-    right: 20px !important;
-    top: 5px;
-  }
-  .topbar .top-navbar .navbar-nav .dropdown-menu {
-    position: absolute;
-    margin-left: -800%;
-  }
-  .sidebar-nav{
-    padding: 10px !important;
-  }
-  .cold-nav{
-    width: 120% !important;
-    margin-left: -14px !important;
-    margin-right: -8%;
-  }
-  .cold-card{
-    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2) !important;
-    width: 121%!important;
-    margin-left: -29px !important;
-    margin-right: -5%;
-  }
-  .nav.nav-tabs{
-    width: 120%;
-    margin-left: -30px;
-  }
-  .card-no-border .card {
-    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
-    width: 121%;
-    margin-left: -29px;
-}
-.redirect_card_group{
-  margin-left: 29% !important;
-}
-.reminder-table{
-  width: 115%;
-  margin-left: -4%;
-}
-.agent-report{
-  margin-left: -30px;
-  margin-right: -26px;
-}
-}
-}
-      </style>
-   </head>
-   <body class=" card-no-border logo-center">
-      <div id="main-wrapper" >
-      <header class="topbar"  >
-         <nav class="navbar  navbar  top-navbar navbar-expand-md navbar-light" style="
-            height: 20px !important; ">
-            <div class="navbar-header">
-               <a class="navbar-brand" href="{{url('/')}}">
-                  <img src="{{url('public/logo.png')}}" alt="homepage" class="dark-logo"/>
-                  <img src="{{url('public/logo.png')}}" alt="homepage"  height="60px" />
-               </a>
-            </div>
-            <ul class="navbar-nav my-lg-0">
-               <li class="profile" style="position: absolute;right: 0px;top: 5px;">
-                  <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{url('public/assets/images/users/dumy.jpg'
-                     )}}" alt="user" class="profile-pic" />
-                  </a> 
+        <!-- jvectormap -->
+        <link href="{{url('public/Green/assets/libs/jqvmap/jqvmap.min.css')}}" rel="stylesheet" />
 
-                  <div class="dropdown-menu dropdown-menu-right scale-up">
-                     <ul class="dropdown-user">
-                        <li>
-                           <div class="dw-user-box">
-                              <div class="u-img"><img src="{{url('public/assets/images/users/dumy.jpg'
-                                 )}}" alt="user" class="profile-pic" /></div>
-                              <div class="u-text">
-                                 <h4>{{@session('user_name')}}</h4>
-                                 <p class="text-muted">
-                                    {{@session('email')}}
-                                 </p>
-                              </div>
-                           </div>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#" data-toggle="modal" data-target="#exampleModalPassword" data-whatever="@mdo"><i class="ti-settings"></i> Change Password</a></li>
-                        <li><a href="{{url('logout')}}"><i class="fa fa-power-off"></i> Logout</a></li>
-                     </ul>
-                  </div>
-               </li>
+        <!-- Bootstrap Css -->
+        <link href="{{url('public/Green/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{url('public/Green/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{url('public/Green/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+         <!-- DataTables -->
+        <link href="{{url('public/Green/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('public/Green/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- alertifyjs Css -->
+        <link href="{{url('public/Green/assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
 
-            </ul>
-         </nav>
-           
-      </header>
-       @if(ucfirst(session('role'))!=ucfirst('owner'))  
-      <div class="scroll-sidebar row" >
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sidebar-nav "  style="background: white !important; float: none;  margin: 0 auto;width: 100%;">
+        <!-- alertifyjs default themes  Css -->
+        <link href="{{url('public/Green/assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="{{url('public/Green/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        
+        @yield('extra-links')
+        <style>
+          @if(isset($ownerDetails))
+          .owner-nav-item{
+            padding:  0px 92px 0px 92px;
+          }
+          .owner-nav-link i{
+            margin-top: 11px;
+            font-size: 24px;
+            background: #97d4be;
+            padding: 14px 16px;
+            border-radius: 50%;
+            color: #2fa97c;
+          }
+          @endif
+          .notification_link{
+            color: white;
+          }
+          .close_noti{
+            float: right;
+            margin-top: -10px;
+          }
+          .right-bar{
+            width: 350px;
+            right: -350px;
+          }
+          .notification{
+                background-color: #2fa97c;
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 4px;
+          }
+          .avatar{
+              line-height: 48px;
+              color: black;
+              width: 52px;
+              height: 52px;
+              display: inline-block;
+              font-weight: 700;
+              text-align: center;
+              border-radius: 100%;
+              /*background: #2fa97c;*/
+              font-size: 13px;
+          }
+          .avatar_name{
+                color: white;
+          }
+          .avatar_count{
+            color: white;
+            padding-left: 10px;
+            font-weight: bold;
+          }
+          .topnav .navbar-nav .nav-link {
+            font-size: 14.7px;
+            position: relative;
+            padding: 0 10px;
+            color: #7c8a96;
+            line-height: 70px;
+          }
+          body[data-layout=horizontal] .navbar-brand-box {
+              float: left;
+              background-color: transparent;
+              padding-left: 0;
+               padding-right: 30px;
+          }
+          .arrow-down {
+              display: inline-block;
+              margin-left: -6px;
+          }
+          .right-navPart-setting {
+              float: right!important;
+              margin-right: -25px;
+          }
+          .right-bar .rightbar-nav-tab .nav-item .nav-link {
+              background-color: #fff;
+              border: none;
+              text-decoration: none !important;
+              text-align: left;
+          }
+          .reminders{
+              height: 2rem;
+              width: 2rem;
+              line-height: calc(2rem - 2px);
+              display: block;
+              border: 1px solid #ffffff;
+              border-radius: 50%;
+              color: #ffffff;
+              text-align: center;
+              margin-right: -3px;
+          }
+        </style>
+    </head>
 
-                <a class="navbar-brand" href="#" style="visibility: hidden;">EDENFORD</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul id="sidebarnav"  class="navbar-nav mr-auto" style="margin-left: 15px;">
-               @if(ucfirst(session('role'))==ucfirst('Agent'))         
-                   <li class="nav-item"> 
-                      <a class="nav-link nav-link" href="{{url('/agentdashboard')}}" aria-expanded="false">
-                          <i class="mdi mdi-gauge"></i><b><span class="hide-menu">Dashboard</span></b>
-                        </a>
-                  </li>
-                    @if(@$permissions->propertyView==1)        
-                      <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Properties</span>
-                      </a> 
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{url('allAddedProperties')}}">
-                                        Registrations</a>
-                      <a class="dropdown-item" href="{{url('allAddedProperties')}}?type=For Sale">Sale</a>
-                      <a   class="dropdown-item"  href="{{url('allAddedProperties')}}?type=For Rent">Rent</a>
-                      <a class="dropdown-item"href="{{url('allAddedProperties')}}?type=upcoming">Upcoming
-                      </a>
-                    </div>
+    <body data-topbar="colored" data-layout="horizontal" data-layout-size="boxed">
 
-                    </li> 
-                    @endif
-                   @if(@$permissions->buildingView==1)        
-                      <li class="nav-item">  <a  class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
-                   </li>
-                   @endif
-                   @if(@$permissions->coldcallingView==1) 
-                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('agentColdCalling')}}" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Cold Calling</span></a>
-                   </li>
-                   @endif
-                   @if(@$permissions->leadView==1) 
-                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/leads')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Leads</span></a>
-                   </li>
-                   @endif
-                   @if(@$permissions->supervisionView==1)
-                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
-                   </li>
-                   @endif
-                   @if(@$permissions->dealView==1) 
-                   <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/dealsInfo')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Deals</span></a>
-                   </li>
-                   @endif
-                   @if(@\App\Models\permission::permissions()->loanView == 1) 
-                        <li class="three-column nav-item"> <a class=" nav-link nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
-                        </li>
-                    @endif
-               @elseif(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))          
-                   <li class="nav-item"> <a class="nav-link nav-link" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
-                   </li>
-                   <li class="nav-item dropdown">
-                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"href="{{url('property')}}">
-                                        Registrations</a>
-                      <a class="dropdown-item" href="{{url('property')}}?type=For Rent">Rent</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{url('property')}}?type=For Sale">Sale</a>
-                      <a class="dropdown-item" href="{{url('property')}}?type=upcoming">Upcoming</a>
-                  </div>
-                   </li>
+        <!-- Begin page -->
+        <div id="layout-wrapper">
 
-                  <li class="nav-item dropdown">
-                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-window-open"></i><span class="hide-menu">Add & Assign</span></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{url('assignAgent')}}">Assign Coldcalling</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item"></a> <a href="{{url('buildings')}}">Building</a>
-                  </div>
-                   </li>
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="container-fluid">
+                        <div class="float-right right-navPart-setting">
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                                  @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent')  || ucwords(session('role'))==ucwords('SuperAgent') || ucwords(session('role'))==ucfirst('SuperDuperAdmin'))
+                                    <div>
+                                        <i class="mdi mdi-bell-outline reminders"></i>
+                                        <span class="badge badge-pill badge-success notification_counter">0</span>
+                                    </div>
+                                    @endif
+                                </button>
+                            </div>
 
 
-                   <li class="three-column"> <a class="nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
-                   </li>
-                   @if(ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))    
-                      <li class="nav-item">  <a  class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
-                   </li>
-                   @endif
-               @endif
-               @if(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
-                   <li class="nav-item dropdown">
-                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Users</span></a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{url('admins')}}">Users</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{url('AgentActivity')}}?type=For Rent">Agent Activities</a>
+
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="rounded-circle header-profile-user" src="{{url('public/assets/images/users/dumy.jpg')}}" alt="Header Avatar">
+                                    <span class="d-none d-sm-inline-block ml-1">{{@session('user_name')}}</span>
+                                    <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <div class="dropdown-item">
+                                      <h4>{{strtoupper(@session('user_name'))}}</h4>
+                                      <p>{{@session('email')}}</p>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalPassword" data-whatever="@mdo"><i class="mdi mdi-face-profile font-size-16 align-middle mr-1"></i>Change Password</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{url('logout')}}"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
+                                </div>
+                            </div>
                         </div>
-                   </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
-                   </li>
 
-                   <li class="nav-item dropdown">
-                      <a class=" nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Deals</span></a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item"  href="{{url('dealsInfo')}}">Deals</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{url('get-months-deals')}}?type=For Rent">Recent Deals</a>
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box">
+                            <a href="{{url('/')}}" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="{{url('public/logo.png')}}" alt="" height="20">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="{{url('public/logo.png')}}" alt="" height="40">
+                                </span>
+                            </a>
                         </div>
-                   </li>
 
-                   <li class="three-column"> <a class="nav-link" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Leads</span></a>
-                   </li>
-                   </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">Loans</span></a>
-                   </li>
+                        <button type="button" class="btn btn-sm mr-2 font-size-16 d-lg-none header-item waves-effect waves-light" data-toggle="collapse" data-target="#topnav-menu-content">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
 
-                   <li class="nav-item dropdown">
+                        <div class="topnav">
+                            <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 
-                      <a class="nav-link" href="#" aria-expanded="false"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Setup</span></a>
-
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="{{url('submittedProperties')}}">Requests</a>
-                      <a class="dropdown-item" href="{{url('permission')}}?type=For Rent">Permission</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{url('months')}}?type=For Rent">Months</a>
-                      <a class="dropdown-item"  href="{{url('email-templates')}}?type=For Rent">Email Templates</a>
+                                <div class="collapse navbar-collapse" id="topnav-menu-content">
+                                    <ul class="navbar-nav">
+                                    @if(ucfirst(session('role'))==ucfirst('Agent'))
+                                    @if(@$permissions->propertyView==1)
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{url('/agentdashboard')}}">
+                                                Dashboard
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if(@$permissions->propertyView==1)
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Properties <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu px-2" aria-labelledby="topnav-uielement">
+                                          <div class="row">
+                                            <div class="col-lg-8">
+                                              <a href="{{url('allAddedProperties')}}" class="dropdown-item">Registrations</a>
+                                              <a href="{{url('allAddedProperties')}}?type=For Sale" class="dropdown-item">Sale</a>
+                                              <a href="{{url('allAddedProperties')}}?type=For Rent" class="dropdown-item">Rent</a>
+                                              <a href="{{url('allAddedProperties')}}?type=upcoming" class="dropdown-item">Upcoming</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    @endif
+                                    @if(@$permissions->buildingView==1)
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="{{url('agent-buildings')}}">
+                                              Buildings
+                                          </a>
+                                      </li>
+                                    @endif
+                                    @if(@$permissions->coldcallingView==1)
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="{{url('agentColdCalling')}}">
+                                              Cold Calling
+                                          </a>
+                                      </li>
+                                    @endif
+                                    @if(@$permissions->leadView==1)
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="{{url('/leads')}}">
+                                              Leads
+                                          </a>
+                                      </li>
+                                    @endif
+                                    @if(@$permissions->supervisionView==1)
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="{{url('/supervision')}}">
+                                              Supervisions
+                                          </a>
+                                      </li>
+                                    @endif
+                                    @if(@$permissions->dealView==1)
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="{{url('/dealsInfo')}}">
+                                              Deals
+                                          </a>
+                                      </li>
+                                    @endif
+                                    @if(@\App\Models\permission::permissions()->loanView == 1) 
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="{{url('/loans')}}">
+                                              Loans
+                                          </a>
+                                      </li>
+                                    @endif
+                                    @elseif(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('/dashboard')}}">
+                                                Dashboard
+                                            </a>
+                                      </li>
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Properties <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a href="{{url('property')}}" class="dropdown-item">Registrations</a>
+                                              <a href="{{url('property')}}?type=For Sale" class="dropdown-item">Sale</a>
+                                              <a href="{{url('property')}}?type=For Rent" class="dropdown-item">Rent</a>
+                                              <a href="{{url('property')}}?type=upcoming" class="dropdown-item">Upcoming</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Add & Assign <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a href="{{url('assignAgent')}}" class="dropdown-item">Assign Coldcalling</a>
+                                              <a href="{{url('buildings')}}" class="dropdown-item">Building</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('coldCalling')}}">
+                                                Cold Calling
+                                            </a>
+                                      </li>
+                                    @if(ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('agent-buildings')}}">
+                                                Buildings
+                                            </a>
+                                      </li>
+                                    @endif
+                                    @endif
+                                    @if(ucfirst(session('role'))==ucfirst('admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Users <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a href="{{url('admins')}}" class="dropdown-item">Users</a>
+                                              <a href="{{url('AgentActivity')}}?type=For Rent" class="dropdown-item">Agent Activities</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('/supervision')}}">
+                                                Supervisions
+                                            </a>
+                                      </li>
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Deals <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a href="{{url('dealsInfo')}}" class="dropdown-item">Deals</a>
+                                              <a href="{{url('get-months-deals')}}?type=For Rent" class="dropdown-item">Recent Deals</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('/agentLead')}}">
+                                                Leads
+                                            </a>
+                                      </li>
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('/loans')}}">
+                                                Loans
+                                            </a>
+                                      </li>
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Setup <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a href="{{url('submittedProperties')}}" class="dropdown-item">Requests</a>
+                                              <a href="{{url('permission')}}?type=For Rent" class="dropdown-item">Permission</a>
+                                              <a href="{{url('months')}}?type=For Rent" class="dropdown-item">Months</a>
+                                              <a href="{{url('email-templates')}}?type=For Rent" class="dropdown-item">Email Templates</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('/backup')}}">
+                                                Backups
+                                            </a>
+                                      </li>
+                                      <li class="nav-item">
+                                            <a class="nav-link" href="{{url('direct-pdf-report')}}">
+                                                Direct Report
+                                            </a>
+                                      </li>
+                                    @endif
+                                    @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url('/dashboard')}}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    @if(@$permissions->propertyView==1)
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Properties <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a href="{{url('property')}}" class="dropdown-item">Registrations</a>
+                                              <a href="{{url('property')}}?type=For Sale" class="dropdown-item">Sale</a>
+                                              <a href="{{url('property')}}?type=For Rent" class="dropdown-item">Rent</a>
+                                              <a href="{{url('property')}}?type=upcoming" class="dropdown-item">Upcoming</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    @endif
+                                    @if(@$permissions->coldcallingView==1)
+                                     <li class="nav-item">
+                                        <a class="nav-link" href="{{url('coldCalling')}}">
+                                            Cold Calling
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if(@$permissions->buildingView==1)
+                                     <li class="nav-item">
+                                        <a class="nav-link" href="{{url('agent-buildings')}}">
+                                            Buildings
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if(@$permissions->supervisionView==1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url('/supervision')}}">
+                                            Supervisions
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if(@$permissions->dealView==1) 
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url('/dealsInfo')}}">
+                                            Deals
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if(@$permissions->leadView==1) 
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url('/agentLead')}}">
+                                            Leads
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if(@\App\Models\permission::permissions()->loanView == 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url('/loans')}}">
+                                            Loans
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @endif
+                                    @if(isset($ownerDetails))
+                                    <li class="nav-item owner-nav-item">
+                                      <a class="nav-link owner-nav-link active" href="#">
+                                        <i class="fa fa-user details-icons" style="font-size:24px"></i>
+                                        <label>&nbsp;{{$ownerDetails->First_name}} {{$ownerDetails->Last_name}}</label>
+                                      </a>
+                                    </li>
+                                    <li class="nav-item owner-nav-item">
+                                      <a class="nav-link owner-nav-link active" href="#">
+                                        <i class="fa fa-envelope details-icons" style="font-size:24px"></i>
+                                        <label>&nbsp;{{$ownerDetails->Email}}</label>
+                                      </a>
+                                    </li>
+                                    <li class="nav-item owner-nav-item">
+                                      <a class="nav-link owner-nav-link active" href="#">
+                                       <i class="fa fa-phone details-icons" style="font-size:24px"></i>
+                                       <label>&nbsp;{{$ownerDetails->Phone}}</label>
+                                      </a>
+                                    </li>
+                                    @endif
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
-                   </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('/backup')}}" aria-expanded="false"><i class="mdi mdi-disk"></i><span class="hide-menu">Backups</span></a>
-                   </li>
-                   <li class="three-column"> <a class="nav-link" href="{{url('direct-pdf-report')}}" aria-expanded="false"><i style="padding-bottom: 5px;padding-top: 8px;font-size: 15px;font-weight: bold;" class="fa fa-file-pdf-o"></i><span class="hide-menu">Direct Report</span></a>
-                   </li>
-               @endif
-               <!--superAgent-->
-               @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
-                       <li class="nav-item" > <a class="nav-link nav-link" href="{{url('/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
-                       </li>
-                   @if(@$permissions->propertyView==1)               
-                     <li class="nav-item dropdown">
-                          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home-outline"></i><span class="hide-menu">Properties</span></a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{url('property')}}">
-                                                      Registrations</a>
-                                <a class="dropdown-item" href="{{url('property')}}?type=For Rent">Rent</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{url('property')}}?type=For Sale">Sale</a>
-                                   <a class="dropdown-item"href="{{url('property')}}?type=upcoming">Upcoming</a>
-                           </div>
-                      </li>
-                   @endif
-                   @if(@$permissions->coldcallingView==1) 
-                       <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('coldCalling')}}" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Cold Calling</span></a>
-                       </li>
-                   @endif
-                   @if(@$permissions->buildingView==1)        
-                       <li class="nav-item" > <a class="nav-link nav-link" href="{{url('agent-buildings')}}" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Buildings</span></a>
-                       </li>
-                   @endif
-                   @if(@$permissions->supervisionView==1)
-                       <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('/supervision')}}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Supervisions</span></a>
-                       </li>
-                   @endif
-                    @if(@$permissions->dealView==1) 
-                        <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('/dealsInfo')}}" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Deals</span></a>
-                        </li>
-                    @endif
-                    @if(@$permissions->leadView==1) 
-                       <li class="three-column  nav-item"> <a class="nav-link nav-link" href="{{url('/agentLead')}}" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Leads</span></a>
-                       </li>
-                    @endif
-                    @if(@\App\Models\permission::permissions()->loanView == 1)
-                        <li class="three-column nav-item"> <a class="nav-link nav-link" href="{{url('/loans')}}" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu"> Loans</span></a>
-                        </li>
-                    @endif
-               @endif
-            </ul>
-         </nav>
-      </div>
-      @if(ucwords(session('role'))==ucwords('admin') || ucwords(session('role'))==ucwords('agent')  || ucwords(session('role'))==ucwords('SuperAgent') || ucwords(session('role'))==ucfirst('SuperDuperAdmin'))
-      <div>
-         <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><span class="badge notification_counter">0</span><i class="fa fa-bell text-white"></i></button>
-      </div>
-      @endif
-   
-      <div class="modal fade" id="exampleModalPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel1">Change your Password</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-               </div>
-               <div class="modal-body">
-                  <form id="chngepass" method="post" action="{{url('change-password')}}">
-                     {{ csrf_field() }}
-                     <input type="hidden" name="" id="user_id" value="{{@session('user_id')}}">
-                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">Current Password</label>
-                        <input type="password" name="currentPassword" class="form-control" required="" id="current_Password">
-                     </div>
-                     <div class="form-group">
-                        <label for="message-text" class="control-label">New Password</label>
-                        <input type="password"  id="password" name="newPassword" class="form-control" required="">
-                     </div>
-                     <div class="form-group">
-                        <label for="message-text" class="control-label">Confirm Password</label>
-                        <input type="password"  name="confirmpassword" id="confirmpassword" class="form-control" required="">
-                     </div>
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                     <input type="submit" value="Update" name="changePassword" class="btn btn-primary" onclick="validatePassword()">
-                  </form>
-               </div>
-               <div class="modal-footer">
-               </div>
-            </div>
-         </div>
-      </div>
-      @endif
+                </div>
+
+            
+            </header>
