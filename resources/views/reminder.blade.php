@@ -74,12 +74,14 @@
                                     success:function(data){
                                       console.log(data);
                                         if($.trim(data)=="false"){
-                                            $.notify("something Went Wrong", "warn",{
-                                                globalPosition: 'top right',
-                                            });
+                                            // $.notify("something Went Wrong", "warn",{
+                                                // globalPosition: 'top right',
+                                            // });
+                                            alertify.success("something Went Wrong");
                                         }else{
-                                            $.notify("Reminder Disable Successfully", "warn",{elementPosition: 'bottom left',
-                                                globalPosition: 'top left'});
+                                            // $.notify("Reminder Disable Successfully", "warn",{elementPosition: 'bottom left',
+                                                // globalPosition: 'top left'});
+                                            alertify.success("Reminder Disable Successfully");
                                             $('.ti-close').trigger('click');
                                             $('.notification_counter').text(data);
                                             notification.parent().remove();
