@@ -49,6 +49,11 @@
             color: #2fa97c;
           }
           @endif
+          @if(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+            .nav-link{
+              font-size: 13px !important;
+            }
+          @endif
           .notification_link{
             color: white;
           }

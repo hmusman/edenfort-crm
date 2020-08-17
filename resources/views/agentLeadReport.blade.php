@@ -375,7 +375,7 @@
                                                 <td class="lBuilding" style="display:none;">{{$lead->building}}</td>
                                                 <td class="lRent" >{{$lead->rent}}</td> 
                                                 <td class="lBuy" >{{$lead->buy}}</td> 
-                                                <td class="lBuy" >{{$lead->status}}</td>
+                                                <td class="lBuy" ><span class="badge badge-primary" style="padding: 5px;border-radius: 50px;">{{$lead->status}}</span></td>
                                                 <td class="lMovein" style="display:none;">{{$lead->move_inn}}</td> 
                                                 <td class="lOutcome" style="display:none;">{{$lead->outcome}}</td> 
                                                 <td class="lFollowup" style="display:none;"><?php $counterr= 1; ?>
@@ -410,11 +410,11 @@
                                                       <div class="row">
                                                          <div class="form-group col-sm-3">
                                                             <label>Follow Up Date <i class="mdi mdi-clock-outline ml-5 watchReminderFollowupDate" aria-hidden="true"></i></label>
-                                                            <input type="text" class="form-control datepicker-here" data-language="en"  name="followup_dateoutside[{{$counter}}]" value="{{$lead->followup_date}}" value="{{$lead->followup_date}}">
+                                                            <input type="date" class="form-control" name="followup_dateoutside[{{$counter}}]" value="{{$lead->followup_date}}">
                                                          </div>
                                                          <div class="form-group col-sm-3">
                                                             <label>VIEWING DATE/TIME<i class="mdi mdi-clock-outline ml-4 watchReminderViewDate" aria-hidden="true"></i></label>
-                                                            <input type="text" class="form-control datepicker-here" data-language="en" name="leadViewDateoutside[{{$counter}}]" value="{{$lead->view_date_time}}">
+                                                            <input type="date" class="form-control" name="leadViewDateoutside[{{$counter}}]" value="{{$lead->view_date_time}}">
                                                          </div>
                                                          <div class="form-group col-sm-3">
                                                             <label>FOLLOW UP</label>
@@ -683,7 +683,7 @@
                           <div class="row">
                              <div class="form-group col-sm-3">
                                 <label>Follow Up Date <i class="mdi mdi-clock-outline ml-5 watchReminderFollowupDate" aria-hidden="true"></i></label>
-                                <input type="text" class="form-control datepicker-here" data-language="en" placeholder=" " name="followup_date" id="lFollowupDate" >
+                                <input type="datetime-local" class="form-control datepicker-here" data-language="en" placeholder=" " name="followup_date" id="lFollowupDate" >
                              </div>
                              <div class="form-group col-sm-3">
                                 <label>VIEWING DATE/TIME<i class="mdi mdi-clock-outline ml-4 watchReminderViewDate" aria-hidden="true"></i></label>
