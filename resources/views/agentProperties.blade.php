@@ -12,6 +12,23 @@
   <?php redirect('/'); ?>
 @endif
 <style>
+  .tgl_row {
+      display: table-row !important;
+  }
+  .toggleable_row {
+    display: none;
+}
+.rotate_icon {
+    transition: 0.5s;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    transform: rotate(90deg);
+}
+.drop_arrow_icon {
+    cursor: pointer;
+}
   .add_property_card{
     display: none;
   }
@@ -551,12 +568,12 @@
                                                @if(count($result_data) > 0)
                                                <?php $counter=0; ?>
                                                @foreach($result_data as $record)
-                                               <tr>
+                                               <tr class="present_row">
                                                  @if(@$permissions->propertyBulk!=1  )
                                                   <td> Not Allowed </td>  
                                                   @else             
                                                   <td>
-                                                    <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}">
+                                                    <img style="width: 21px;margin-top: -9px !important;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect"><input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}">
                                                   </td>
                                                   @endif
                                                   <td>{{$record->unit_no}}</td>
@@ -612,6 +629,19 @@
                                                     </td>
                                                 @endif
                                                </tr>
+                                               <!--TOGGLE ROW START FROM HERE-->
+                                                <tr class="toggleable_row">
+                                                   <td colspan="19">
+                                                      <div class="row">
+                                                         <div class="col-sm-8">
+                                                            <label style="float: left;text-align: start">Comment</label>
+                                                            <!-- <input type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control"> -->
+                                                            <textarea type="text" name="comment[{{$counter}}]" class="form-control" style="width: 100%">{{@$record->comment}}</textarea>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                                <!--TOGGLE ROW END HERE-->
                                                <?php $counter++; ?>     
                                                @endforeach
                                                @else
@@ -1248,6 +1278,11 @@ $('body').delegate('.add_phone','click',function(){
            $('.below').remove();
        }
    })
+
+   $('.present_row .drop_arrow_icon').click(function(){
+    $(this).parents('.present_row').next('.toggleable_row').toggleClass('tgl_row');
+    $(this).toggleClass('rotate_icon');
+  });
 </script>
 @if(ucfirst(session('role')) == (ucfirst('Admin')))
       @include('admin_SuperAgent_reminders')

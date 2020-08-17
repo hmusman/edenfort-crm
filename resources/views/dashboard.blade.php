@@ -15,6 +15,19 @@
 
 @endsection
 <style>
+    @media screen and (min-width: 1600px) {
+        .right-navPart-setting {
+            float: right !important;
+            margin-right: -140px !important;
+        }
+        body[data-layout=horizontal] .navbar-brand-box {
+            float: left;
+            background-color: transparent;
+            padding-left: 0;
+            padding-right: 0px;
+            margin-left: -80px;
+        }
+    }
     #datatable{
         font-weight: bold;
     }
@@ -38,6 +51,9 @@
   }
   #tabsdatatable1_wrapper{
     font-size: 12px;
+  }
+  .dataTable-rem td {
+      white-space: break-spaces;
   }
 </style>
             <!-- ============================================================== -->
@@ -403,8 +419,6 @@
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
-            
-            
                                                 <tbody>
                                                 @php  $counter = 1; @endphp
                                                   @foreach($deals as $deal)
@@ -417,37 +431,37 @@
                                                       //print_r($deal->cEnd);
 
                                                   @endphp
-                                        <tr>
-                                          <td class="text-center" style="color: <?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">
-                                            {{$counter++}}<br> 
-                                            <small style="font-size: 63%;font-weight: 400;background-color:<?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important;color: white;padding: 3px 2px 3px 1px;border-radius: 50px;">{{$days}} days Left
-                                            </small>
-                                          </td> 
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->dStart))}}</td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->cStart))}}</td>  
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->cEnd))}}
-                                          </td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->build}}
-                                          </td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->refNo}}
-                                          </td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->broker}}
-                                          </td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->unit}}
-                                          </td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->cName}}
-                                          </td>
-                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->contact}}
-                                          </td>
-                                          <td class="text-center">
-                                            <div class="btn-group" role="group">
-                                                <a target="_blank" href="{{url('get-single-reminder-record')}}?property_id={{$deal->dealId}}&ref=Deals&active=ADMIN" type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" aria-describedby="tooltip401307">
-                                                    <i class="mdi mdi-eye"></i>
-                                                </a>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                @endforeach
+                                                  <tr>
+                                                          <td data-order="{{$days}}" class="text-center" style="color: <?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">
+                                                            {{$counter++}}<br> 
+                                                            <small style="font-size: 63%;font-weight: 400;background-color:<?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important;color: white;padding: 3px 2px 3px 1px;border-radius: 50px;">{{$days}} days Left
+                                                            </small>
+                                                          </td> 
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->dStart))}}</td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->cStart))}}</td>  
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->cEnd))}}
+                                                          </td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->build}}
+                                                          </td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->refNo}}
+                                                          </td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->broker}}
+                                                          </td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->unit}}
+                                                          </td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->cName}}
+                                                          </td>
+                                                          <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{$deal->contact}}
+                                                          </td>
+                                                          <td class="text-center">
+                                                            <div class="btn-group" role="group">
+                                                                <a target="_blank" href="{{url('get-single-reminder-record')}}?property_id={{$deal->dealId}}&ref=Deals&active=ADMIN" type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" aria-describedby="tooltip401307">
+                                                                    <i class="mdi mdi-eye"></i>
+                                                                </a>
+                                                            </div>
+                                                          </td>
+                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                             </div>
@@ -490,7 +504,7 @@
                                                           <td class="text-center;"> {{$reminder->reminder_of}}</td>  
                                                           <td class="text-center;">{{$reminder->reminder_type}} </td>
                                                           <td class="text-center;"> {{date("Y-m-d",strtotime($reminder->date_time))}}</td>
-                                                          <td class="text-center;"> {{$reminder->description}}</td>
+                                                          <td style="white-space: break-spaces;"> {{$reminder->description}}</td>
                                                           <td class="text-center;"> {{$reminder->reason}}</td>
                                                           <td class="text-center;"> <a target="_blank" href="{{url('get-reminder-record')}}?property_id={{$reminder->property_id}}&ref={{$reminder->reminder_of}}&active={{$reminder->add_by}}" type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" aria-describedby="tooltip401307"> <i class="mdi mdi-eye"></i></a></td>
                                                         </tr>

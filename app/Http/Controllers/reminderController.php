@@ -168,8 +168,8 @@ class reminderController extends Controller
 
             ];
         }
-            $emails = [$receiverEmail, 'upcoming@edenfort.ae'];
-            Mail::to($emails)->send(new reminderMails($massage, $subject));
+            // $emails = [, ];
+            Mail::to($receiverEmail)->cc(['upcoming@edenfort.ae'])->send(new reminderMails($massage, $subject));
             
         }
         
@@ -359,8 +359,8 @@ class reminderController extends Controller
             ];
             }
             
-            $emails = [$receiverEmail,'upcoming@edenfort.ae'];
-            Mail::to($emails)->send(new reminderMails($massage, $subject));
+            // $emails = [$receiverEmail,'upcoming@edenfort.ae'];
+            Mail::to($receiverEmail)->cc('upcoming@edenfort.ae')->send(new reminderMails($massage, $subject));
             // Mail::to('')->send(new reminderMails($massage));
             
         }

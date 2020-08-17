@@ -127,7 +127,8 @@ EDEN FORT REAL ESTATE
                 $areas=property::distinct('area')->pluck('area');
                 $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-                $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
+                $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND (b.Rule_type='agent' || b.Rule_type='SuperAgent' || b.Rule_type='SuperDuperAdmin')");
+                // dd($agents);
                  $buildings=Building::all();
                  $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
                 //  
@@ -165,14 +166,17 @@ EDEN FORT REAL ESTATE
                 return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));
     }
     public function setReminderForProperty(Request $r){
+        // dd( $r-comment);
         try{
             // dd(input::get('time_date'), input::get('description'),input::get('status'),input::get('check_boxes'));
             $timedate = date('Y-m-d H:i:s', strtotime(input::get('time_date')));
             $check_boxes=input::get('check_boxes');
+            $comment = $r->comment;
             foreach($check_boxes as $key=>$value){
                 if(isset($check_boxes[$key])){
                   $data=array(
                         'access' => input::get('status'),
+                        'comment' => $comment[$key],
                     );
                    property::where("id",$check_boxes[$key])->update($data);
                    $reminder= new Reminder();
@@ -307,10 +311,12 @@ EDEN FORT REAL ESTATE
       public function bulkUpdateStatusProperty(Request $r){
         $status=$r->status;
         $check_boxes=$r->check_boxes;
+        $comment = $r->comment;
        foreach($check_boxes as $key=>$value){
             if(isset($check_boxes[$key])){
                 $data=array(
                    'access' => $status,
+                   'comment' => $comment[$key],
                 );
                property::where("id",$check_boxes[$key])->update($data);
               

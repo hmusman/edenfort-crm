@@ -165,7 +165,7 @@ class leadController extends Controller
   
     public function index(Request $request){
     $permissions = permission::where('user_id', session('user_id'))->first();
-    $agents=user::where(['role'=>3])->get();
+    $agents=user::whereIn('role',[3,4,5])->get();
     $buildings=Building::distinct('building_name')->get();
     $sources=lead::distinct('lead_source')->pluck('lead_source');
 	$dbName=DB::getDatabaseName();

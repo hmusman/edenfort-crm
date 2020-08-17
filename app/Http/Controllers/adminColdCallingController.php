@@ -386,8 +386,8 @@ public function addOwnerByAjax(Request $request){
       $permissions = permission::where('user_id', session('user_id'))->first();
           $areas=coldcallingModel::distinct('area')->pluck('area');
           $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
-          $agents=user::where(['role'=>3,"status"=>1])->orWhere(['role'=>1])->get();
-          $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
+          $agents=user::where(['role'=>3,"status"=>1])->orWhere(['role'=>5])->get();
+          $agentss=user::where(["status"=>1])->whereIn("role",[3,4,5])->get(["user_name","id"]);
           $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
           $buildings=coldcallingModel::distinct('Building')->pluck('Building');
           $buildingss=Building::all();  

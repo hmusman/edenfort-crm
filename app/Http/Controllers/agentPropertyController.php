@@ -192,10 +192,12 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     public function bulkUpdateStatusProperty(Request $r){
         $status=$r->status;
         $check_boxes=$r->check_boxes;
+        $comment = $r->comment;
        foreach($check_boxes as $key=>$value){
             if(isset($check_boxes[$key])){
                 $data=array(
                    'access' => $status,
+                   'comment' => $comment[$key],
                 );
                property::where("id",$check_boxes[$key])->update($data);
               
@@ -207,10 +209,12 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         try{
             $timedate = date('Y-m-d H:i:s', strtotime(input::get('time_date')));
             $check_boxes=input::get('check_boxes');
+            $comment = $r->comment;
             foreach($check_boxes as $key=>$value){
                 if(isset($check_boxes[$key])){
                   $data=array(
                         'access' => input::get('status'),
+                        'comment' => $comment[$key],
                     );
                    property::where("id",$check_boxes[$key])->update($data);
                    $reminder= new Reminder();
@@ -376,7 +380,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     public function assignAgent(Request $request){
     $permissions = permission::where('user_id', session('user_id'))->first();
 
-    $agents=user::where(['role'=>3])->orWhere(['role'=>1])->get();
+    $agents=user::whereIn('role',[3,5])->get();
     $building=coldcallingModel::distinct('Building')->pluck('Building');
     
        if($request->building!='' and $request->agent!='')

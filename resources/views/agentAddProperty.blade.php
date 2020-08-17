@@ -270,7 +270,7 @@
                         <?php $counter=0; ?>
                             @foreach($result_data as $record)
                                             <tr>
-                                                <td><input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}"></td>
+                                                <td><img style="width: 21px; margin-top: -9px !important;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect"><input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}"></td>
                                                 <td class="unit_no">{{$record->unit_no}}</td>
                                                 <td class="building">{{$record->Building}}</td>
                                                 <td class="area">{{$record->area}}</td>

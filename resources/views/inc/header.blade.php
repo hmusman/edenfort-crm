@@ -125,9 +125,6 @@
               text-align: center;
               margin-right: -3px;
           }
-          table.dataTable.nowrap td {
-              white-space: break-spaces;
-          }
         </style>
     </head>
 

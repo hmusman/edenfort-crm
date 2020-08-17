@@ -6,6 +6,23 @@
 <?php redirect('/'); ?>
 @endif
 <style>
+  .rotate_icon {
+      transition: 0.5s;
+      transition-property: all;
+      transition-duration: 0.5s;
+      transition-timing-function: ease;
+      transition-delay: 0s;
+      transform: rotate(90deg);
+  }
+  .drop_arrow_icon {
+      cursor: pointer;
+  }
+  .toggleable_row {
+      display: none;
+  }
+  .tgl_row {
+      display: table-row !important;
+  }
   .btn-outline-dark:not(:disabled):not(.disabled).active{
     color: #fff;
     background-color: #47b38b;
@@ -483,16 +500,16 @@
                                        @if(count($result_data) > 0)
                                        <?php $counter=0; ?>
                                        @foreach($result_data as $record)
-                                       <tr>
+                                       <tr class="present_row">
                                            <td>
                                              @if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
                                              @if(@$permissions->propertyBulk==1)
-                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}">
+                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}"><img style="width: 21px;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect">
                                              @else
                                              Not Allowed
                                              @endif
                                              @else
-                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}">
+                                             <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}"><img style="width: 21px;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect">
                                              @endif
                                           </td>
                                            <td>{{$record->unit_no}}</td>
@@ -552,6 +569,19 @@
                                                    @endif
                                            </td>
                                        </tr>
+                                       <!--TOGGLE ROW START FROM HERE-->
+                                        <tr class="toggleable_row">
+                                           <td colspan="19">
+                                              <div class="row">
+                                                 <div class="col-sm-4">
+                                                    <label style="text-align: start">Comment</label>
+                                                    <!-- <input type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control"> -->
+                                                    <textarea type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control">{{@$record->comment}}</textarea>
+                                                 </div>
+                                              </div>
+                                           </td>
+                                        </tr>
+                                        <!--TOGGLE ROW END HERE-->
                                        <?php $counter++; ?>     
                                        @endforeach
                                        @else
@@ -1195,6 +1225,11 @@
      $('.add_model_body').empty();
      $('.modal-header').append('<h5 class="modal-title" id="exampleModalLabel">Add Email</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
      $('.add_model_body').append('<label>Email</label><input type="email" name="email" class="form-control"><input type="hidden" name="id" class="form-control" value="'+id+'">');
+  });
+
+  $('.present_row .drop_arrow_icon').click(function(){
+    $(this).parents('.present_row').next('.toggleable_row').toggleClass('tgl_row');
+    $(this).toggleClass('rotate_icon');
   });
 </script>
 <script type="text/javascript">

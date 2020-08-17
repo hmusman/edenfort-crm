@@ -22,7 +22,7 @@ class ActivityController extends Controller
     public function agentsAll(){
     $permissions = permission::where('user_id', session('user_id'))->first();
 
-		$agents = user::where('role',3)->get();
+		$agents = user::whereIn('role',[3,5])->get();
         $selectedAgent=input::get('agent');
         $previousDate=date("Y-m-d h:i:s",strtotime("-1 days"));
         $todayDate=date("Y-m-d h:i:s");
