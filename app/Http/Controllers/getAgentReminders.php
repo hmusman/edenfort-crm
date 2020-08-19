@@ -36,13 +36,13 @@ class getAgentReminders extends Controller
                     $message ='<h3>Reminder Alert</h3><a href="'.url("get-reminder-record").'?property_id='.$value->property_id.'&ref='.$value->reminder_of.'&active='.$value->add_by.'">See Reminder</a>';
                     $contactMessage = $message;
                     $data = array('data'=>$contactMessage);
-                    Mail::send('reminder-email', $data, function($message) use ($agentEmail)
-                    {   
-                        $message->from('adnan@youcanbuyindubai.com', 'EdenFort CRM');
-                        $message->to($agentEmail, 'EdenFort CRM')->subject('Reminder Alert');
-                    });
+                    // Mail::send('reminder-email', $data, function($message) use ($agentEmail)
+                    // {   
+                    //     $message->from('adnan@youcanbuyindubai.com', 'EdenFort CRM');
+                    //     $message->to($agentEmail, 'EdenFort CRM')->subject('Reminder Alert');
+                    // });
                 }
-               Reminder::where("id",$value->id)->update(["email_notification"=>1]);     
+               // Reminder::where("id",$value->id)->update(["email_notification"=>1]);     
             }
             
         }

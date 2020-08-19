@@ -54,10 +54,14 @@
       width: 140% !important;
     }
     .table-responsive{
+      display: block !important;
       overflow-x: auto !important;
       margin-left: -47px !important;
       padding-left: 14px !important;
     }
+  }
+  .table-responsive {
+    display: inline-table;
   }
   .tgl_row {
       display: table-row !important;

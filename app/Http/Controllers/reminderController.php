@@ -165,6 +165,7 @@ class reminderController extends Controller
                 'Landloard' => $property->Landlord,
                 'email' => $property->email,
                 'contact_no' => $property->contact_no,
+                'comment' => $property->comment,
 
             ];
         }
