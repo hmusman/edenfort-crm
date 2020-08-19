@@ -16,6 +16,12 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+    @media (max-width: 550px){
+        .mobility{
+            width: 122%;
+            margin-left: -30px;
+        }
+    }
     .owner_information_link{display: none;}
     #back_to_owner{
         font-size: 45px;
@@ -72,22 +78,6 @@
                         <li class="breadcrumb-item active">Edenfort CRM Users</li>
                         </ol>
                     </div>
-                    <!-- <div class="col-md-4">
-                        <div class="float-right d-none d-md-block">
-                            <div class="dropdown">
-                                <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="mdi mdi-settings-outline mr-1"></i> Settings
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
 
             </div>
@@ -106,39 +96,39 @@
                                         <li class="nav-item">
                                             @if(@$_GET['type']=='')
                                             <a href="{{url('admins')}}" class="nav-link active" role="tab">
-                                                <span class="d-none d-md-inline-block">Admins</span> 
+                                                <span class="d-md-inline-block">Admins</span> 
                                             </a>
                                             @else
                                             <a href="{{url('admins')}}" class="nav-link" role="tab">
-                                                <span class="d-none d-md-inline-block">Admins</span> 
+                                                <span class="d-md-inline-block">Admins</span> 
                                             </a>
                                             @endif
                                         </li>
                                         <li class="nav-item">
                                             @if(@$_GET['type']=='Owners')
                                             <a href="{{url('owners')}}?type=Owners" class="nav-link active" role="tab">
-                                                <span class="d-none d-md-inline-block">Owners</span>
+                                                <span class="d-md-inline-block">Owners</span>
                                             </a>
                                             @else
                                             <a href="{{url('owners')}}?type=Owners" class="nav-link" role="tab">
-                                                <span class="d-none d-md-inline-block">Owners</span>
+                                                <span class="d-md-inline-block">Owners</span>
                                             </a>
                                             @endif
                                         </li>
                                         <li class="nav-item">
                                             @if(@$_GET['type']=='Agents')
                                             <a href="{{url('agents')}}?type=Agents" class="nav-link active" role="tab">
-                                                <span class="d-none d-md-inline-block">Agents</span>
+                                                <span class="d-md-inline-block">Agents</span>
                                             </a>
                                             @else
                                             <a href="{{url('agents')}}?type=Agents" class="nav-link" role="tab">
-                                                <span class="d-none d-md-inline-block">Agents</span>
+                                                <span class="d-md-inline-block">Agents</span>
                                             </a>
                                             @endif
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body mobility">
                                     <div class="d-flex">
                                         <a class="btn btn-success btn-rounded waves-effect waves-light" style="cursor: pointer" id="add-new-owne-link"><span><i class="fa fa-plus"></i></span></a>
                                     </div>

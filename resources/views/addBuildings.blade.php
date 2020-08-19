@@ -78,22 +78,6 @@
                     @endif
                     </ol>
                 </div>
-                <!-- <div class="col-md-4">
-                    <div class="float-right d-none d-md-block">
-                        <div class="dropdown">
-                            <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="mdi mdi-settings-outline mr-1"></i> Settings
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
         </div>
@@ -111,26 +95,26 @@
                                   @if(basename(url()->current())=='buildings')
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{url('buildings')}}">
-                                          <span class="d-none d-md-inline-block">Add Building</span> 
+                                          <span class="d-md-inline-block">Add Building</span> 
                                         </a>
                                     </li>
                                   @else
                                   <li class="nav-item">
                                         <a class="nav-link" href="{{url('buildings')}}">
-                                          <span class="d-none d-md-inline-block">Add Building</span> 
+                                          <span class="d-md-inline-block">Add Building</span> 
                                         </a>
                                     </li>
                                   @endif
                                    @if(basename(url()->current())=='assignAgent')
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{url('assignAgent')}}">
-                                          <span class="d-none d-md-inline-block">Assign Coldcalling</span>
+                                          <span class="d-md-inline-block">Assign Coldcalling</span>
                                         </a>
                                     </li>
                                   @else
                                   <li class="nav-item">
                                         <a class="nav-link" href="{{url('assignAgent')}}">
-                                          <span class="d-none d-md-inline-block">Assign Coldcalling</span>
+                                          <span class="d-md-inline-block">Assign Coldcalling</span>
                                         </a>
                                     </li>
                                   @endif

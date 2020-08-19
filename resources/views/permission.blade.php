@@ -9,6 +9,14 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+  @media (max-width: 550px){
+    .modal-body{
+      height: 915px !important;
+    }
+    .tabcontent-border{
+      height: 671px !important;
+    }
+  }
    input[type="checkbox"]{
       font-size: 0px;
    }

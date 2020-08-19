@@ -55,6 +55,18 @@
   .dataTable-rem td {
       white-space: break-spaces;
   }
+  @media (max-width: 550px){
+    
+    .apexcharts-xaxis-title{
+        display: none;
+    }
+    #mytable{
+        margin-left: -7px;
+    }
+
+
+
+}
 </style>
             <!-- ============================================================== -->
             <!-- Start right Content here -->
@@ -257,17 +269,17 @@
                                             <ul class="nav nav-tabs" role="tablist" style="border-bottom: 1px solid #2fa97c;">
                                                 <li class="nav-item">
                                                     <a class="tab1 nav-link active" data-toggle="tab" href="#home" role="tab">
-                                                        <i class="mdi mdi-phone-incoming"></i> <span class="d-none d-md-inline-block">Upcoming Reminders</span> 
+                                                        <i class="mdi mdi-phone-incoming"></i> <span class="d-md-inline-block">Upcoming Reminders</span> 
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="tab2 nav-link" data-toggle="tab" href="#profile" role="tab">
-                                                        <i class="mdi mdi-new-box"></i> <span class="d-none d-md-inline-block">Latest Properties</span>
+                                                        <i class="mdi mdi-new-box"></i> <span class="d-md-inline-block">Latest Properties</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="tab3 nav-link" data-toggle="tab" href="#messages" role="tab">
-                                                        <i class="mdi mdi-new-box"></i> <span class="d-none d-md-inline-block">Latest Leads</span>
+                                                        <i class="mdi mdi-new-box"></i> <span class="d-md-inline-block">Latest Leads</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -314,7 +326,7 @@
                                             </table>
                                             </div>
                                             <div class="tab-pane" id="profile" role="tabpanel">
-                                               <table id="tabsdatatable1" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                               <table id="tabsdatatable1" class="table table-bordered dt-responsive nowrap table-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                 <tr>
                                                    <th>Unit No </th>
@@ -356,7 +368,7 @@
                                             </table>
                                             </div>
                                             <div class="tab-pane" id="messages" role="tabpanel">
-                                                  <table id="tabsdatatable2" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                  <table id="tabsdatatable2" class="table table-bordered dt-responsive nowrap table-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                 <tr>
                                                     <th>Sno#</th>
@@ -661,64 +673,64 @@ options = {
         }
     }
 };
-(chart = new ApexCharts(document.querySelector("#activity-chart"), options)).render();
-var chart;
-options = {
-    chart: {
-        height: 270,
-        type: "radialBar"
-    },
-    plotOptions: {
-        radialBar: {
-            hollow: {
-                margin: 5,
-                size: "38%"
-            },
-            track: {
-                margin: 12
-            },
-            dataLabels: {
-                name: {
-                    fontSize: "18px",
-                    offsetY: "-10"
-                },
-                value: {
-                    fontSize: "16px",
-                    offsetY: "5"
-                },
-                total: {
-                    show: !0,
-                    label: "Total",
-                    formatter: function(e) {
-                        return 166
-                    }
-                }
-            }
-        }
-    },
-    colors: ["#2fa97c", "#e4cc37", "#f06543"],
-    series: [44, 55, 67],
-    labels: ["Facebook", "Twitter", "Instagram"]
-};
-(chart = new ApexCharts(document.querySelector("#radial-chart"), options)).render(), $("#usa-map").vectorMap({
-    map: "usa_en",
-    enableZoom: !0,
-    showTooltip: !0,
-    selectedColor: null,
-    hoverColor: "#eaf0f1",
-    backgroundColor: "transparent",
-    color: "#f4f8f9",
-    borderColor: "#7c8a96",
-    colors: {
-        ca: "#2fa97c",
-        tx: "#2fa97c",
-        mt: "#2fa97c",
-        ny: "#2fa97c"
-    },
-    onRegionClick: function(e, t, a) {
-        e.preventDefault()
-    }
-});
+// (chart = new ApexCharts(document.querySelector("#activity-chart"), options)).render();
+// var chart;
+// options = {
+//     chart: {
+//         height: 270,
+//         type: "radialBar"
+//     },
+//     plotOptions: {
+//         radialBar: {
+//             hollow: {
+//                 margin: 5,
+//                 size: "38%"
+//             },
+//             track: {
+//                 margin: 12
+//             },
+//             dataLabels: {
+//                 name: {
+//                     fontSize: "18px",
+//                     offsetY: "-10"
+//                 },
+//                 value: {
+//                     fontSize: "16px",
+//                     offsetY: "5"
+//                 },
+//                 total: {
+//                     show: !0,
+//                     label: "Total",
+//                     formatter: function(e) {
+//                         return 166
+//                     }
+//                 }
+//             }
+//         }
+//     },
+//     colors: ["#2fa97c", "#e4cc37", "#f06543"],
+//     series: [44, 55, 67],
+//     labels: ["Facebook", "Twitter", "Instagram"]
+// };
+// (chart = new ApexCharts(document.querySelector("#radial-chart"), options)).render(), $("#usa-map").vectorMap({
+//     map: "usa_en",
+//     enableZoom: !0,
+//     showTooltip: !0,
+//     selectedColor: null,
+//     hoverColor: "#eaf0f1",
+//     backgroundColor: "transparent",
+//     color: "#f4f8f9",
+//     borderColor: "#7c8a96",
+//     colors: {
+//         ca: "#2fa97c",
+//         tx: "#2fa97c",
+//         mt: "#2fa97c",
+//         ny: "#2fa97c"
+//     },
+//     onRegionClick: function(e, t, a) {
+//         e.preventDefault()
+//     }
+// });
 </script>
 <script>
   $(document).ready(function(){

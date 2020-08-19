@@ -15,6 +15,20 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+  @media (max-width: 550px){
+    .d-md-block{
+      margin-top: 35px;
+    }
+    #add-new-owne-link{
+      margin-top: -68px;
+    }
+    .pagination{
+      overflow-x: auto;
+    }
+    .ml-auto{
+      float: none !important;
+    }
+  }
   #tech-companies-1{
       font-size: 12px;
   }
@@ -88,7 +102,7 @@
                         </ol>
                     </div>
                     <div class="col-md-4">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right d-md-block">
                             <select  class="form-control access_select" name="accessStatus" style="width:180px; float:right; font-size: 11px;font-weight: 500;">
                                <option  value="">Select Option</option>
                                <option  value="upcoming">upcoming</option>
@@ -123,52 +137,52 @@
                                     @if(@$_GET['type']=='')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('leads')}}" role="tab">
-                                      <span class="d-none d-md-inline-block">All Leads</span> 
+                                      <span class="d-md-inline-block">All Leads</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('leads')}}" role="tab">
-                                      <span class="d-none d-md-inline-block">All Leads</span> 
+                                      <span class="d-md-inline-block">All Leads</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='Rent' )
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('leads')}}?type=Rent" role="tab">
-                                      <span class="d-none d-md-inline-block">Rent</span> 
+                                      <span class="d-md-inline-block">Rent</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('leads')}}?type=Rent" role="tab">
-                                      <span class="d-none d-md-inline-block">Rent</span> 
+                                      <span class="d-md-inline-block">Rent</span> 
                                       </a>
                                     </li>
                                     @endif
                                     @if(@$_GET['type']=='Sale' )
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('leads')}}?type=Sale" role="tab">
-                                      <span class="d-none d-md-inline-block">Sale</span> 
+                                      <span class="d-md-inline-block">Sale</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('leads')}}?type=Sale" role="tab">
-                                      <span class="d-none d-md-inline-block">Sale</span> 
+                                      <span class="d-md-inline-block">Sale</span> 
                                       </a>
                                     </li>
                                     @endif
                                     @if(@$_GET['type']=='Reminder' )
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('leads')}}?type=Reminder" role="tab">
-                                      <span class="d-none d-md-inline-block">Reminder</span> 
+                                      <span class="d-md-inline-block">Reminder</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('leads')}}?type=Reminder" role="tab">
-                                      <span class="d-none d-md-inline-block">Reminder</span> 
+                                      <span class="d-md-inline-block">Reminder</span> 
                                       </a>
                                     </li>
                                     @endif

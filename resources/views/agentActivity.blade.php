@@ -6,6 +6,12 @@
 <!-- Responsive datatable examples -->
 <link href="{{url('public/Green/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />     
 <style>
+  @media (max-width: 550px){
+    #datatable-buttons{
+    width: 125% !important;
+    margin-left: -30px;
+    }
+  }
   #datatable-buttons{
     font-size: 11px;
     font-weight: bold;
@@ -89,7 +95,7 @@
                                   </form>
                                 </div>
                                 <div class="card-body">
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap table-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                       <thead>
                                       <tr>
                                         <th>Unit No </th>

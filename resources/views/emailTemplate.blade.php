@@ -115,7 +115,7 @@
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <div class="form-group row">
-                                                        <label class="control-label text-right col-md-2">Template Name</label>
+                                                        <label class="control-label  col-md-2">Template Name</label>
                                                         <div class="col-md-9">
                                                             <input type="text" class="form-control" name="template_name" value="{{@$record->template_name}}" required="">
                                                             <input type="hidden" name="id"  value="{{@$record->id}}">
@@ -128,7 +128,7 @@
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <div class="form-group row">
-                                                        <label class="control-label text-right col-md-2">Subject</label>
+                                                        <label class="control-label  col-md-2">Subject</label>
                                                         <div class="col-md-9">
                                                             <input type="text" class="form-control" name="subject" value="{{@$record->subject}}" required="">
                                                         </div>
@@ -140,7 +140,7 @@
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <div class="form-group row">
-                                                        <label class="control-label text-right col-md-2">Template Name</label>
+                                                        <label class="control-label  col-md-2">Template Name</label>
                                                         <div class="col-md-9">
                                                             <textarea name="template_date" class="template_date" id="template_date" required="">{{@$record->template_date}}</textarea>
                                                         </div>

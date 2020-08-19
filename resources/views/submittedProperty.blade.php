@@ -3,6 +3,11 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+  @media (max-width: 550px){
+    .d-md-block{
+        margin-top: 20px;
+    }
+  }
   .nav-tabs .nav-link.active {
     color: #ffffff;
     background-color: #2fa97c;
@@ -45,7 +50,7 @@
                       <div class="message alert alert-danger" style="display: none;"> </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right  d-md-block">
                             <select  class="form-control access_select" name="accessStatus" style="width:180px; float:right; font-size: 11px;font-weight: 500;">
                                <option  value="">Select Option</option>
                                <option  value="Transferred">Pick</option>
@@ -74,117 +79,117 @@
                                     @if(@$_GET['type']=='')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}" role="tab">
-                                          <span class="d-none d-md-inline-block">Properties</span> 
+                                          <span class=" d-md-inline-block">Properties</span> 
                                       </a>
                                     </li>
                                     @else 
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}" role="tab">
-                                          <span class="d-none d-md-inline-block">Properties</span> 
+                                          <span class=" d-md-inline-block">Properties</span> 
                                       </a>
                                     </li>
                                     @endif
                                     @if(@$_GET['type']=='Transferred')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=Transferred" role="tab">
-                                          <span class="d-none d-md-inline-block">Transferred</span> 
+                                          <span class=" d-md-inline-block">Transferred</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=Transferred" role="tab">
-                                          <span class="d-none d-md-inline-block">Transferred</span> 
+                                          <span class=" d-md-inline-block">Transferred</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='Call Back')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=Call Back" role="tab">
-                                          <span class="d-none d-md-inline-block">Call Back</span> 
+                                          <span class=" d-md-inline-block">Call Back</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=Call Back" role="tab">
-                                          <span class="d-none d-md-inline-block">Call Back</span> 
+                                          <span class=" d-md-inline-block">Call Back</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='Check Availability')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=Check Availability" role="tab">
-                                          <span class="d-none d-md-inline-block">Check Availability</span> 
+                                          <span class=" d-md-inline-block">Check Availability</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=Check Availability" role="tab">
-                                          <span class="d-none d-md-inline-block">Check Availability</span> 
+                                          <span class=" d-md-inline-block">Check Availability</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='Wrong Number')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=Wrong Number" role="tab">
-                                          <span class="d-none d-md-inline-block">Wrong Number</span> 
+                                          <span class=" d-md-inline-block">Wrong Number</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=Wrong Number" role="tab">
-                                          <span class="d-none d-md-inline-block">Wrong Number</span> 
+                                          <span class=" d-md-inline-block">Wrong Number</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='Switch Off')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=Switch Off" role="tab">
-                                          <span class="d-none d-md-inline-block">Switch Off</span> 
+                                          <span class=" d-md-inline-block">Switch Off</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=Switch Off" role="tab">
-                                          <span class="d-none d-md-inline-block">Switch Off</span> 
+                                          <span class=" d-md-inline-block">Switch Off</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='Not answering')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=Not answering" role="tab">
-                                          <span class="d-none d-md-inline-block">Not answering</span> 
+                                          <span class=" d-md-inline-block">Not answering</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=Not answering" role="tab">
-                                          <span class="d-none d-md-inline-block">Not answering</span> 
+                                          <span class=" d-md-inline-block">Not answering</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='For Rent')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=For Rent" role="tab">
-                                          <span class="d-none d-md-inline-block">For Rent</span> 
+                                          <span class=" d-md-inline-block">For Rent</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=For Rent" role="tab">
-                                          <span class="d-none d-md-inline-block">For Rent</span> 
+                                          <span class=" d-md-inline-block">For Rent</span> 
                                       </a>
                                     </li>
                                     @endif 
                                     @if(@$_GET['type']=='For Sale')
                                     <li class="nav-item">
                                       <a class="nav-link active" href="{{url('submittedProperties')}}?type=For Sale" role="tab">
-                                          <span class="d-none d-md-inline-block">For Sale</span> 
+                                          <span class=" d-md-inline-block">For Sale</span> 
                                       </a>
                                     </li>
                                     @else
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{url('submittedProperties')}}?type=For Sale" role="tab">
-                                          <span class="d-none d-md-inline-block">For Sale</span> 
+                                          <span class=" d-md-inline-block">For Sale</span> 
                                       </a>
                                     </li>
                                     @endif 

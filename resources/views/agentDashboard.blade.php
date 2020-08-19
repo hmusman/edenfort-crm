@@ -49,7 +49,7 @@
                         </ol>
                     </div>
                     <div class="col-md-4">
-                        <!-- <div class="float-right d-none d-md-block">
+                        <!-- <div class="float-right d-md-block">
                             <div class="dropdown">
                                 <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-settings-outline mr-1"></i> Settings
@@ -170,17 +170,17 @@
                               <ul class="nav nav-tabs mt-3" role="tablist">
                                   <li class="nav-item">
                                       <a class="nav-link active" data-toggle="tab" href="#home" role="tab">
-                                        <span class="d-none d-md-inline-block">Upcoming Reminders</span> 
+                                        <span class="d-md-inline-block">Upcoming Reminders</span> 
                                       </a>
                                   </li>
                                   <li class="nav-item">
                                       <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
-                                        <span class="d-none d-md-inline-block">Latest Properties</span>
+                                        <span class="d-md-inline-block">Latest Properties</span>
                                       </a>
                                   </li>
                                   <li class="nav-item">
                                       <a class="nav-link" data-toggle="tab" href="#messages" role="tab">
-                                        <span class="d-none d-md-inline-block">Latest Leads</span>
+                                        <span class="d-md-inline-block">Latest Leads</span>
                                       </a>
                                   </li>
                               </ul>
@@ -217,7 +217,7 @@
                                   </table>
                                 </div>
                                 <div class="tab-pane" id="profile" role="tabpanel">
-                                    <table id="datatable1" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="datatable1" class="table table-bordered dt-responsive nowrap table-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                       <thead>
                                       <tr>
                                         <th>Unit No </th>
@@ -259,7 +259,7 @@
                                   </table>
                                 </div>
                                 <div class="tab-pane" id="messages" role="tabpanel">
-                                    <table id="datatable2" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="datatable2" class="table table-bordered dt-responsive nowrap table-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                       <thead>
                                       <tr>
                                         <th>Sno#</th>

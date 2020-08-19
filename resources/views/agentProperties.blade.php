@@ -12,6 +12,53 @@
   <?php redirect('/'); ?>
 @endif
 <style>
+   @media (max-width: 550px){
+    .top-buttons .row img{
+      height: 36px !important;
+    }
+    .top-buttons .row p{
+      padding-top: 10px;
+      font-size: 13px;
+    }
+    .btn-group{
+      height: 90px !important;
+    }
+    .whatsapp .row p, .whatsapp_2 .row p, .gmail .row p{
+      font-size: 10px !important;
+    }
+    .msg-status, .msg-status-2{
+      font-size: 8px !important;
+      font-weight: 500;
+      position: absolute;
+      margin-top: 0px !important;
+      margin-left: 37px;
+    }
+    .email-loader{
+      height: 20px !important;
+      visibility: hidden;
+      position: relative;
+      left: 36px !important;
+      margin-top: -56px !important;
+    }
+    .whatsapp .row, .gmail .row{
+      padding: 0px 50px 0px 20px !important;
+    }
+    .small-btns{
+      height: 65px !important;
+    }
+    .all_property_card {
+        width: 110% !important;
+        margin-left: -14px !important;
+    }
+    #bulkForm{
+      width: 140% !important;
+    }
+    .table-responsive{
+      overflow-x: auto !important;
+      margin-left: -47px !important;
+      padding-left: 14px !important;
+    }
+  }
   .tgl_row {
       display: table-row !important;
   }
@@ -44,9 +91,9 @@
   .dt-buttons{
     margin-left: -8px;
   }
-  .table-responsive{
+  /*.table-responsive{
     overflow-x: inherit !important;
-  }
+  }*/
   .table-striped{
     border-spacing: 0px;
     width: 104% !important;
@@ -304,21 +351,14 @@
                            @endif
                        </div><br><br>
                        <ol class="breadcrumb ml-3">
-                           <div class="btn-group" role="group" aria-label="Basic example">
+                           <div class="btn-group small-btns" role="group" aria-label="Basic example">
                               <a target="_blank" type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light whatsapp" style="border-radius: 50px 0px 0px 50px;">
                                  <div class="row" style="padding: 0px 80px 0px 80px;">
-                                    <img src="{{url('public/Green/assets/images/icons/whatsapp.png')}}" style="height: 40px;padding-left: 20px;">&nbsp;&nbsp;
-                                    <!-- <p style="padding-top: 10px;font-size: 16px;">Without Owner</p> --> <br>
+                                    <img src="{{url('public/Green/assets/images/icons/whatsapp.png')}}" style="height: 40px;padding-left: 20px;">&nbsp;&nbsp; <br>
                                     <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute;margin-top: 7px;margin-left: 59px;"></span>
                                  </div>
                               </a>
-                              <!-- <a target="_blank" type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light whatsapp_2">
-                                 <div class="row" style="padding: 0px 9px 0px 9px;">
-                                    <img src="{{url('public/Green/assets/images/icons/whatsapp.png')}}" style="height:40px;">&nbsp;&nbsp;<p style="padding-top: 10px;font-size: 16px;">With Owner</p> <br>
-                                    <span class="msg-status-2" style="font-size:10px;font-weight:500;position:absolute;margin-top: 40px;margin-left: 37px;"></span>
-                                 </div>
-                              </a> -->
-                              <a type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light" data-toggle="modal" data-target="#emailmodel" style="border-radius: 0px 50px 50px 0px;">
+                              <a type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light gmail" data-toggle="modal" data-target="#emailmodel" style="border-radius: 0px 50px 50px 0px;">
                                  <div class="row" style="padding: 0px 80px 0px 80px;">
                                     <img src="{{url('public/Green/assets/images/icons/gmail.png')}}" style="height: 40px;">&nbsp;&nbsp;
                                     <!-- <p style="padding-top: 10px;font-size: 16px;">Gmail</p>  -->
@@ -330,7 +370,7 @@
                         </ol>
                     </div>
                     <div class="col-md-3">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right d-md-block">
                            <select class="form-control access_select" name="accessStatus">
                              <option  value="">Select Option</option>
                              <option  value="For Sale">For Sale</option>
@@ -397,87 +437,87 @@
                                   <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                       @if(@$_GET['type']=='')
-                                       <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}<?php if(isset($_GET['p'])){ echo '?p='.$_GET['p'];} ?>" role="tab"><span class="d-none d-md-inline-block">All property</span> 
+                                       <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}<?php if(isset($_GET['p'])){ echo '?p='.$_GET['p'];} ?>" role="tab"><span class="d-md-inline-block">All property</span> 
                                        </a>
                                        @else
-                                       <a class="property-tab nav-link" href="{{url('allAddedProperties')}}<?php if(isset($_GET['p'])){ echo "?p=".$_GET['p'];} ?>" role="tab"><span class="d-none d-md-inline-block">All property</span> 
+                                       <a class="property-tab nav-link" href="{{url('allAddedProperties')}}<?php if(isset($_GET['p'])){ echo "?p=".$_GET['p'];} ?>" role="tab"><span class="d-md-inline-block">All property</span> 
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                        @if(@$_GET['type']=='For Rent')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo 'p='.$_GET['p'].'&';} ?>type=For Rent" role="tab">
-                                         <span class="d-none d-md-inline-block">For Rent</span>
+                                         <span class="d-md-inline-block">For Rent</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=For Rent"role="tab">
-                                         <span class="d-none d-md-inline-block">For Rent</span>
+                                         <span class="d-md-inline-block">For Rent</span>
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                       @if(@$_GET['type']=='For Sale')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=For Sale" role="tab">
-                                         <span class="d-none d-md-inline-block">For Sale</span>
+                                         <span class="d-md-inline-block">For Sale</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=For Sale" role="tab">
-                                         <span class="d-none d-md-inline-block">For Sale</span>
+                                         <span class="d-md-inline-block">For Sale</span>
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                       @if(@$_GET['type']=='upcoming')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=upcoming" role="tab">
-                                         <span class="d-none d-md-inline-block">Upcoming</span>
+                                         <span class="d-md-inline-block">Upcoming</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=upcoming" role="tab">
-                                         <span class="d-none d-md-inline-block">Upcoming</span>
+                                         <span class="d-md-inline-block">Upcoming</span>
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                       @if(@$_GET['type']=='Call back')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Call back" role="tab">
-                                         <span class="d-none d-md-inline-block">Callback</span>
+                                         <span class="d-md-inline-block">Callback</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Call back" role="tab">
-                                         <span class="d-none d-md-inline-block">Callback</span>
+                                         <span class="d-md-inline-block">Callback</span>
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                       @if(@$_GET['type']=='Not Answering')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Not Answering" role="tab">
-                                         <span class="d-none d-md-inline-block">Not Answering</span>
+                                         <span class="d-md-inline-block">Not Answering</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Not Answering" role="tab">
-                                         <span class="d-none d-md-inline-block">Not Answering</span>
+                                         <span class="d-md-inline-block">Not Answering</span>
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                       @if(@$_GET['type']=='Not Interested')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Not Interested" role="tab">
-                                         <span class="d-none d-md-inline-block">Not Interested</span>
+                                         <span class="d-md-inline-block">Not Interested</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Not Interested" role="tab">
-                                         <span class="d-none d-md-inline-block">Not Interested</span>
+                                         <span class="d-md-inline-block">Not Interested</span>
                                        </a>
                                        @endif
                                    </li>
                                    <li class="nav-item">
                                       @if(@$_GET['type']=='Interested')
                                        <a class="property-tab nav-link active" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Interested" role="tab">
-                                         <span class="d-none d-md-inline-block">Interested</span>
+                                         <span class="d-md-inline-block">Interested</span>
                                        </a>
                                        @else
                                        <a class="property-tab nav-link" href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=Interested" role="tab">
-                                         <span class="d-none d-md-inline-block">Interested</span>
+                                         <span class="d-md-inline-block">Interested</span>
                                        </a>
                                        @endif
                                    </li>
@@ -683,7 +723,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Unit No</label>
+                                                   <label class="control-label  col-md-3">Unit No</label>
                                                    <div class="col-md-9">
                                                       <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
                                                       <!-- <small class="form-control-feedback"> This is inline help </small>  -->
@@ -693,7 +733,7 @@
                                              <!--/span-->
                                              <div class="col-md-6">
                                                 <div class="form-group has-danger row">
-                                                   <label class="control-label text-right col-md-3">Building</label>
+                                                   <label class="control-label  col-md-3">Building</label>
                                                    <div class="col-md-8 building_input" style="padding-left: 15px;">
                                                     <input type="text" class="form-control filter_input_name" list="buildings" placeholder="select Building" name="building" value="">
                                                        <datalist id="buildings">
@@ -713,7 +753,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Dewa No</label>
+                                                   <label class="control-label  col-md-3">Dewa No</label>
                                                    <div class="col-md-9">
                                                       <input type="text" class="form-control" name="dewa_no" value="{{@$result[0]['dewa_no']}}">
                                                       <!-- <small class="form-control-feedback"> This is inline help </small>  -->
@@ -722,7 +762,7 @@
                                              </div>
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Bedroom</label>
+                                                   <label class="control-label  col-md-3">Bedroom</label>
                                                    <div class="col-md-9">
                                                       <select style="font-size: 12px;" name="Bedroom" class="form-control">
                                                          <option value="{{@$result[0]['Bedroom']}}">{{@$result[0]['Bedroom']}}</option>
@@ -747,7 +787,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Area</label>
+                                                   <label class="control-label  col-md-3">Area</label>
                                                    <div class="col-md-9">
                                                       <input  type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
                                                       <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
@@ -757,7 +797,7 @@
                                              
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Washroom</label>
+                                                   <label class="control-label  col-md-3">Washroom</label>
                                                    <div class="col-md-9">
                                                       <select name="Washroom" class="form-control" style="font-size: 12px; " >
                                                          <option value="{{@$result[0]['Washroom']}}">{{@$result[0]['Washroom']}}</option>
@@ -780,7 +820,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Conditions</label>
+                                                   <label class="control-label  col-md-3">Conditions</label>
                                                    <div class="col-md-9">
                                                       <select name="Conditions"  class="form-control" style="font-size: 12px;">
                                                          <option value="{{@$result[0]['Conditions']}}">{{@$result[0]['Conditions']}}</option>
@@ -798,7 +838,7 @@
 
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Email</label>
+                                                   <label class="control-label  col-md-3">Email</label>
                                                    <div class="col-md-9">
                                                       <?php $temp=explode(',', @$result[0]['email']); if(count($temp) > 1){ foreach ($temp as $value) {?>
                                                       <input  type="email" class="form-control" name="email[]" value="{{$value}}" style="margin-bottom: 1%">
@@ -815,7 +855,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">LandLord</label>
+                                                   <label class="control-label  col-md-3">LandLord</label>
                                                    <div class="col-md-9">
                                                       <input  type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
                                                    </div>
@@ -824,7 +864,7 @@
 
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Access</label>
+                                                   <label class="control-label  col-md-3">Access</label>
                                                    <div class="col-md-9">
                                                       <select class="form-control access" name="access" style="font-size: 12px;"> 
                                                          <option value="">Select option</option>
@@ -869,7 +909,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Phone Number</label>
+                                                   <label class="control-label  col-md-3">Phone Number</label>
                                                    <div class="col-md-9">
                                                       <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
                                                       <input  type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
@@ -882,7 +922,7 @@
 
                                               <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Area Sqft</label>
+                                                   <label class="control-label  col-md-3">Area Sqft</label>
                                                    <div class="col-md-9">
                                                       <input  type="number" class="form-control" name="Area_Sqft" value="{{@$result[0]['Area_Sqft']}}">
                                                    </div>
@@ -894,7 +934,7 @@
                                           <div class="row">
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Price</label>
+                                                   <label class="control-label  col-md-3">Price</label>
                                                    <div class="col-md-9">
                                                       <input  type="number" class="form-control" name="Price" value="{{@$result[0]['Price']}}">
                                                    </div>
@@ -903,7 +943,7 @@
 
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Property Type</label>
+                                                   <label class="control-label  col-md-3">Property Type</label>
                                                    <div class="col-md-9">
                                                       <select class="form-control" style="font-size:12px !important;" name="property_type">
                                                           <option value="">Please Select Type</option>
@@ -919,7 +959,7 @@
                                               
                                              <div class="col-md-6">
                                                 <div class="form-group row">
-                                                   <label class="control-label text-right col-md-3">Add Comment</label>
+                                                   <label class="control-label  col-md-3">Add Comment</label>
                                                    <div class="col-md-9">
                                                       <textarea class="form-control" name="comment" cols="4" rows="6">{{@$result[0]['comment']}}</textarea>
                                                    </div>

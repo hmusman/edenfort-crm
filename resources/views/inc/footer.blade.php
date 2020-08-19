@@ -109,8 +109,8 @@
         <script src="{{url('public/Green/assets/libs/jquery-knob/jquery.knob.min.js')}}"></script> 
 
         <!-- Jq vector map -->
-        <script src="{{url('public/Green/assets/libs/jqvmap/jquery.vmap.min.js')}}"></script>
-        <script src="{{url('public/Green/assets/libs/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+        <!-- <script src="{{url('public/Green/assets/libs/jqvmap/jquery.vmap.min.js')}}"></script> -->
+        <!-- <script src="{{url('public/Green/assets/libs/jqvmap/maps/jquery.vmap.usa.js')}}"></script> -->
         <!-- alertifyjs js -->
         <script src="{{url('public/Green/assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
 

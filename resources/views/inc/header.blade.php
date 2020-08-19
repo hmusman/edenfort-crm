@@ -36,6 +36,11 @@
         
         @yield('extra-links')
         <style>
+          @media (max-width: 550px){
+            .right-bar {
+                width: 286px !important;
+            }
+          }
           @if(isset($ownerDetails))
           .owner-nav-item{
             padding:  0px 92px 0px 92px;

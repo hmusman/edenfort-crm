@@ -9,6 +9,20 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+  @media (max-width: 550px){
+    .filter_btn{
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+    .pagination {
+        float: none !important;
+        overflow-x: auto;
+    }
+    .mobility{
+      width: 123% !important;
+      margin-left: -30px !important;
+    }
+  }
  .modal-body .row .data{
     padding:10px 0px;
     border: 1px solid #ccc;
@@ -74,7 +88,7 @@
                         </ol>
                     </div>
                     <!-- <div class="col-md-4">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right d-md-block">
                             <div class="dropdown">
                                 <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-settings-outline mr-1"></i> Settings
@@ -106,32 +120,32 @@
                                   @if(basename(url()->current())=='buildings')
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{url('buildings')}}">
-                                          <span class="d-none d-md-inline-block">Add Building</span> 
+                                          <span class="d-md-inline-block">Add Building</span> 
                                         </a>
                                     </li>
                                   @else
                                   <li class="nav-item">
                                         <a class="nav-link" href="{{url('buildings')}}">
-                                          <span class="d-none d-md-inline-block">Add Building</span> 
+                                          <span class="d-md-inline-block">Add Building</span> 
                                         </a>
                                     </li>
                                   @endif
                                    @if(basename(url()->current())=='assignAgent')
                                     <li class="nav-item">
                                         <a class="nav-link active" href="{{url('assignAgent')}}">
-                                          <span class="d-none d-md-inline-block">Assign Coldcalling</span>
+                                          <span class="d-md-inline-block">Assign Coldcalling</span>
                                         </a>
                                     </li>
                                   @else
                                   <li class="nav-item">
                                         <a class="nav-link" href="{{url('assignAgent')}}">
-                                          <span class="d-none d-md-inline-block">Assign Coldcalling</span>
+                                          <span class="d-md-inline-block">Assign Coldcalling</span>
                                         </a>
                                     </li>
                                   @endif
                                 </ul>
                               </div>
-                              <div class="card-body">
+                              <div class="card-body mobility">
                                 <div class="row">
                                   <div class="col-md-12">
                                    <div class=" mt-2 mb-2">
@@ -286,18 +300,16 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
                                                             <label class="control-label text-right col-md-3">Assign Agent</label>
-                                                         
-                                                                
                                                            <div class="col-md-9">
-                                                                            <select class="form-control" required="" style="font-size: 12px;" name="assigned_agent" id="building">
-                                                                                <option value="">Select option</option>
-                                                                                @if(isset($_GET['action']))
-                                                                                 @foreach($agents as $agent)
-                                                                      <option value="{{$agent->id}}">{{$agent->user_name}}</option>
-                                                                                       @endforeach   
-                                                                                       @endif
-                                                                          </select>
-                                                                        </div>
+                                                              <select class="form-control" required="" style="font-size: 12px;" name="assigned_agent" id="building">
+                                                                <option value="">Select option</option>
+                                                                @if(isset($_GET['action']))
+                                                                @foreach($agents as $agent)
+                                                                <option value="{{$agent->id}}">{{$agent->user_name}}</option>
+                                                                @endforeach   
+                                                                @endif
+                                                              </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <!--/span-->
@@ -414,7 +426,7 @@ $("#name").on('input', function () {
     }
 });
     
-    $("#user_form").validate();
+    // $("#user_form").validate();
     // var counter=0;
     // $("#user_form").submit(function(e){
     //     if($("#user_name").val()==""){
@@ -441,11 +453,11 @@ $("#name").on('input', function () {
     //         e.preventDefault();
     //     }
     // })
-     $('#building').click(function(){
-  $('owner_main_row').hide();
-  $('.owner_information_link').show();
-  $('.back_btn_row').show();
-   });
+    $('#building').click(function(){
+      $('owner_main_row').hide();
+      $('.owner_information_link').show();
+      $('.back_btn_row').show();
+    });
 });
 </script>
 @if(ucfirst(session('role')) == (ucfirst('Admin')))

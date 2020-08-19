@@ -11,6 +11,30 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+  @media (max-width: 550px){
+    .select-option{
+       margin-top: 25px !important;
+    }
+    #add-new-owne-link{
+      margin-top: -65px !important;
+      margin-left: -40px !important;
+    }
+    .mobile_filter{
+      margin-top: 4px !important;
+    }
+    .moblitiy{
+      width: 112% !important;
+      margin-left: -20px !important;
+    }
+    .table-responsive[data-pattern="priority-columns"] {
+        margin-left: -25px !important;
+        width: 119% !important;
+    }
+    .pagination {
+        float: none !important;
+        overflow: auto !important;
+    }
+  }
   .datepickers-container{
     z-index: 1100;
   }
@@ -90,7 +114,7 @@
                         </ol>
                     </div>
                     <div class="col-md-4">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right d-md-block select-option">
                             <div class="dropdown">
                                 <select  class="form-control access_select" name="accessStatus" style="width:180px; float:right; font-size: 11px;font-weight: 500;">
                                    <option  value="">Select Option</option>
@@ -124,51 +148,51 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="card" style="width: 103%;margin-left: -20px;">
+                        <div class="card moblitiy" style="width: 103%;margin-left: -20px;">
                             <div class="card-body">
                                 <div class="card-header">
                                   <ul class="nav nav-tabs" role="tablist" style="margin-left: -20px;">
                                       <li class="nav-item">
                                          @if(@$_GET['type']=='')
                                           <a class="nav-link active" href="{{url('agentLead')}}" role="tab">
-                                            <span class="d-none d-md-inline-block">All Leads</span> 
+                                            <span class=" d-md-inline-block">All Leads</span> 
                                           </a>
                                           @else
                                           <a class="nav-link" href="{{url('agentLead')}}" role="tab">
-                                            <span class="d-none d-md-inline-block">All Leads</span> 
+                                            <span class=" d-md-inline-block">All Leads</span> 
                                           </a>
                                           @endif
                                       </li>
                                       <li class="nav-item">
                                          @if(@$_GET['type']=='Rent' )
                                           <a class="nav-link active" href="{{url('agentLead')}}?type=Rent" role="tab">
-                                              <span class="d-none d-md-inline-block">Rent</span>
+                                              <span class=" d-md-inline-block">Rent</span>
                                           </a>
                                          @else
                                          <a class="nav-link" href="{{url('agentLead')}}?type=Rent" role="tab">
-                                              <span class="d-none d-md-inline-block">Rent</span>
+                                              <span class=" d-md-inline-block">Rent</span>
                                           </a>
                                          @endif
                                       </li>
                                       <li class="nav-item">
                                           @if(@$_GET['type']=='Sale' )
                                           <a class="nav-link active" href="{{url('agentLead')}}?type=Sale"role="tab">
-                                              <span class="d-none d-md-inline-block">Sale</span>
+                                              <span class=" d-md-inline-block">Sale</span>
                                           </a>
                                           @else
                                           <a class="nav-link" href="{{url('agentLead')}}?type=Sale"role="tab">
-                                              <span class="d-none d-md-inline-block">Sale</span>
+                                              <span class=" d-md-inline-block">Sale</span>
                                           </a>
                                           @endif
                                       </li>
                                       <li class="nav-item">
                                           @if(@$_GET['type']=='Reminder' )
                                           <a class="nav-link active" href="{{url('agentLead')}}?type=Reminder" role="tab">
-                                              <span class="d-none d-md-inline-block">Reminder</span>
+                                              <span class=" d-md-inline-block">Reminder</span>
                                           </a>
                                           @else
                                           <a class="nav-link" href="{{url('agentLead')}}?type=Reminder" role="tab">
-                                              <span class="d-none d-md-inline-block">Reminder</span>
+                                              <span class=" d-md-inline-block">Reminder</span>
                                           </a>
                                           @endif
                                       </li>
@@ -286,7 +310,7 @@
                                                    </div>
                                                    
                                                 </div>
-                                                <div class="row" style="margin-top: -36px;">
+                                                <div class="row mobile_filter" style="margin-top: -36px;">
                                                   <div class="col-md-8"></div>
                                                   <div class="col-md-4 pl-1 pr-1">
                                                    <div class="filter_btn_wrapper">

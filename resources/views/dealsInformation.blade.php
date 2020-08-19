@@ -20,6 +20,18 @@
 <link href="{{url('public/Green/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />     
 
 <style>
+  @media (max-width: 550px){
+    .pagination {
+        margin-top: 25px !important;
+        float: none !important;
+        overflow-x: auto !important;
+    }
+    .mobility{
+      margin-top: -28px !important;
+      width: 125% !important;
+      margin-left: -9px !important;
+    }
+  }
   .pagination{
     margin-top: 25px;
     float: right;
@@ -111,10 +123,10 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                   <li class="nav-item">
                                     @if(basename(url()->current())=='dealsInfo')
-                                      <a href="{{url('/dealsInfo')}}" class="nav-link active" role="tab"><span class="d-none d-md-inline-block">Deals Renewal</span> 
+                                      <a href="{{url('/dealsInfo')}}" class="nav-link active" role="tab"><span class=" d-md-inline-block">Deals Renewal</span> 
                                       </a>
                                     @else
-                                    <a class="nav-link" data-toggle="tab" href="#home" role="tab"><span class="d-none d-md-inline-block">Deals Renewal</span> 
+                                    <a class="nav-link" data-toggle="tab" href="#home" role="tab"><span class=" d-md-inline-block">Deals Renewal</span> 
                                       </a>
                                     @endif
                                   </li>
@@ -123,11 +135,11 @@
                                   @if(ucfirst(session('role'))!==ucfirst('Agent')) 
                                   @if(basename(url()->current())=='dealsAccountStatement')
                                   <a href="{{url('/dealsAccountStatement')}}" class="nav-link active" role="tab">
-                                      </i> <span class="d-none d-md-inline-block">Account Statement</span>
+                                      </i> <span class=" d-md-inline-block">Account Statement</span>
                                   </a>
                                   @else
                                   <a href="{{url('/dealsAccountStatement')}}" class="nav-link" role="tab">
-                                      </i> <span class="d-none d-md-inline-block">Account Statement</span>
+                                      </i> <span class=" d-md-inline-block">Account Statement</span>
                                   </a>
                                   @endif
                                   @endif
@@ -199,7 +211,7 @@
                                       </div>
                                     </form>
                                   </div>
-                                  <div class="card-body" style="margin-top: -68px;width: 102%;margin-left: -9px;">
+                                  <div class="card-body mobility" style="margin-top: -68px;width: 102%;margin-left: -9px;">
                                     <div class="table-rep-plugin">
                                       <div class="table-responsive mb-0">
                                           <table id="tech-companies-1" class="table table-striped">

@@ -107,11 +107,65 @@
    </div>
 </div>
 
-<!--ADD ADDITIONAL EMAIL AND PHONE MODEL END HERE-->
-
-<!-- <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}"> -->
-
 <style>
+  @media (max-width: 550px){
+    .top-buttons .row img{
+      height: 36px !important;
+    }
+    .top-buttons .row p{
+      padding-top: 10px;
+      font-size: 13px;
+    }
+    .btn-group{
+      height: 90px !important;
+    }
+    .whatsapp .row p, .whatsapp_2 .row p, .gmail .row p{
+      font-size: 10px !important;
+    }
+    .msg-status, .msg-status-2{
+      font-size: 8px !important;
+      font-weight: 500;
+      position: absolute;
+      margin-top: 0px !important;
+      margin-left: 37px;
+    }
+    .email-loader{
+      height: 20px !important;
+      visibility: hidden;
+      position: relative;
+      left: 36px !important;
+      margin-top: -56px !important;
+    }
+    .whatsapp .row, .gmail .row{
+      padding: 0px 50px 0px 20px !important;
+    }
+    .small-btns{
+      height: 65px !important;
+    }
+    .small-btns .row p{
+      display: none !important;
+    }
+    .add-prop {
+      margin-top: -69px !important;
+    }
+    .all_property_card {
+      width: 109% !important;
+      margin-left: -15px !important;
+    }
+    .bttn{
+      margin-left: 0px !important;
+    }
+    .focus-btn-group{
+      height: 38px !important;
+      margin-top: 0px !important;
+      margin-bottom: 24px;
+    }
+    .table-responsive[data-pattern="priority-columns"] {
+        margin-top: -39px;
+        margin-left: -27px !important;
+        width: 120% !important;
+    }
+  }
   .add_property_card{
     display: none;
   }
@@ -330,20 +384,14 @@
                            @endif
                        </div><br><br>
                        <ol class="breadcrumb ml-3">
-                           <div class="btn-group" role="group" aria-label="Basic example">
+                           <div class="btn-group small-btns" role="group" aria-label="Basic example">
                               <a target="_blank" type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light whatsapp" style="border-radius: 50px 0px 0px 50px;">
                                  <div class="row" style="padding: 0px 70px 0px 32px;">
                                     <img src="{{url('public/Green/assets/images/icons/whatsapp.png')}}" style="height: 40px;">&nbsp;&nbsp;<p style="padding-top: 10px;font-size: 16px;">WhatsApp</p> <br>
                                     <span class="msg-status" style="font-size:10px;font-weight:500;position:absolute;margin-top: 40px;margin-left: 37px;"></span>
                                  </div>
                               </a>
-                              <!-- <a target="_blank" type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light whatsapp_2">
-                                 <div class="row" style="padding: 0px 70px 0px 32px;">
-                                    <img src="{{url('public/Green/assets/images/icons/whatsapp.png')}}" style="height:40px;">&nbsp;&nbsp;<p style="padding-top: 10px;font-size: 16px;">With Owner</p> <br>
-                                    <span class="msg-status-2" style="font-size:10px;font-weight:500;position:absolute;margin-top: 40px;margin-left: 37px;"></span>
-                                 </div>
-                              </a> -->
-                              <a type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light" data-toggle="modal" data-target="#emailmodel" style="border-radius: 0px 50px 50px 0px;">
+                              <a type="button" class="top-buttons btn btn-outline-dark waves-effect waves-light gmail" data-toggle="modal" data-target="#emailmodel" style="border-radius: 0px 50px 50px 0px;">
                                  <div class="row" style="padding: 0px 70px 0px 32px;">
                                     <img src="{{url('public/Green/assets/images/icons/gmail.png')}}" style="height: 40px;">&nbsp;&nbsp;<p style="padding-top: 10px;font-size: 16px;">Gmail</p> <br>
                                     <img src="https://thumbs.gfycat.com/UnitedSmartBinturong-small.gif" class="email-loader" style="height:27px;visibility:hidden;position: relative;left: 15px;margin-top: 10px;">
@@ -353,7 +401,7 @@
                         </ol>
                     </div>
                     <div class="col-md-3">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right  d-md-block">
                           <select class="form-control access_select repo" name="accessStatus">
                             <option value="">Select Option</option>
                             <option value="Call Back">Call Back</option>
@@ -427,43 +475,43 @@
                             <ul class="nav nav-tabs" role="tablist">
                                <li class="nav-item">
                                   @if(@$_GET['type']=='')
-                                   <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}@if(isset($_GET['p']))?p={{$_GET['p']}} @endif" role="tab"><span class="d-none d-md-inline-block">All property</span> 
+                                   <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}@if(isset($_GET['p']))?p={{$_GET['p']}} @endif" role="tab"><span class=" d-md-inline-block">All property</span> 
                                    </a>
                                    @else
-                                   <a class="property-tab nav-link" href="{{url('agentColdCalling')}}" role="tab"><span class="d-none d-md-inline-block">All property</span> 
+                                   <a class="property-tab nav-link" href="{{url('agentColdCalling')}}" role="tab"><span class=" d-md-inline-block">All property</span> 
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                    @if(@$_GET['type']=='For Rent')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=For Rent" role="tab">
-                                     <span class="d-none d-md-inline-block">For Rent</span>
+                                     <span class=" d-md-inline-block">For Rent</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=For Rent"role="tab">
-                                     <span class="d-none d-md-inline-block">For Rent</span>
+                                     <span class=" d-md-inline-block">For Rent</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='For Sale')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=For Sale" role="tab">
-                                     <span class="d-none d-md-inline-block">For Sale</span>
+                                     <span class=" d-md-inline-block">For Sale</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=For Sale" role="tab">
-                                     <span class="d-none d-md-inline-block">For Sale</span>
+                                     <span class=" d-md-inline-block">For Sale</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='upcoming')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=upcoming" role="tab">
-                                     <span class="d-none d-md-inline-block">Upcoming</span>
+                                     <span class=" d-md-inline-block">Upcoming</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=upcoming" role="tab">
-                                     <span class="d-none d-md-inline-block">Upcoming</span>
+                                     <span class=" d-md-inline-block">Upcoming</span>
                                      
                                    </a>
                                    @endif
@@ -471,88 +519,88 @@
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Off Plan')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Off Plan" role="tab">
-                                     <span class="d-none d-md-inline-block">Off Plan</span>
+                                     <span class=" d-md-inline-block">Off Plan</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Off Plan" role="tab">
-                                     <span class="d-none d-md-inline-block">Off Plan</span>
+                                     <span class=" d-md-inline-block">Off Plan</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Investor')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Investor" role="tab">
-                                     <span class="d-none d-md-inline-block">Investor</span>
+                                     <span class=" d-md-inline-block">Investor</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Investor" role="tab">
-                                     <span class="d-none d-md-inline-block">Investor</span>
+                                     <span class=" d-md-inline-block">Investor</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Check Availability')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Check Availability" role="tab">
-                                     <span class="d-none d-md-inline-block">Check Availability</span>
+                                     <span class=" d-md-inline-block">Check Availability</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Check Availability" role="tab">
-                                     <span class="d-none d-md-inline-block">Check Availability</span>
+                                     <span class=" d-md-inline-block">Check Availability</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Not Interested')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Not Interested" role="tab">
-                                     <span class="d-none d-md-inline-block">Not Interested</span>
+                                     <span class=" d-md-inline-block">Not Interested</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Not Interested" role="tab">
-                                     <span class="d-none d-md-inline-block">Not Interested</span>
+                                     <span class=" d-md-inline-block">Not Interested</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Interested')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Interested" role="tab">
-                                     <span class="d-none d-md-inline-block">Interested</span>
+                                     <span class=" d-md-inline-block">Interested</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Interested" role="tab">
-                                     <span class="d-none d-md-inline-block">Interested</span>
+                                     <span class=" d-md-inline-block">Interested</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Not Answering')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Not answering" role="tab">
-                                     <span class="d-none d-md-inline-block">Not Answering</span>
+                                     <span class=" d-md-inline-block">Not Answering</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Not answering" role="tab">
-                                     <span class="d-none d-md-inline-block">Not Answering</span>
+                                     <span class=" d-md-inline-block">Not Answering</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Switch Off')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Switch Off" role="tab">
-                                     <span class="d-none d-md-inline-block">Switch Off</span>
+                                     <span class=" d-md-inline-block">Switch Off</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Switch Off" role="tab">
-                                     <span class="d-none d-md-inline-block">Switch Off</span>
+                                     <span class=" d-md-inline-block">Switch Off</span>
                                    </a>
                                    @endif
                                </li>
                                <li class="nav-item">
                                   @if(@$_GET['type']=='Wrong Number')
                                    <a class="property-tab nav-link active" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Wrong Number" role="tab">
-                                     <span class="d-none d-md-inline-block">Wrong Number</span>
+                                     <span class=" d-md-inline-block">Wrong Number</span>
                                    </a>
                                    @else
                                    <a class="property-tab nav-link" href="{{url('agentColdCalling')}}?<?php if(isset($_GET['p'])){ echo'p='.@$_GET['p'].'&'; }?>type=Wrong Number" role="tab">
-                                     <span class="d-none d-md-inline-block">Wrong Number</span>
+                                     <span class=" d-md-inline-block">Wrong Number</span>
                                    </a>
                                    @endif
                                </li>

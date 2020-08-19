@@ -17,6 +17,15 @@
 <link href="{{url('public/Green/assets/libs/RWD-Table-Patterns/css/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
+    @media (max-width: 550px){
+        .btn-toolbar {
+            width: 100% !important;
+            margin-top: -5px !important;
+            margin-left: 0% !important;
+            position: unset !important;
+            margin-bottom: 10% !important;
+        }
+    }
     #back_to_owner{
         font-size: 35px;
     }
@@ -193,7 +202,7 @@
                                                 
                                                  <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="control-label text-right col-md-3">Agent</label>
+                                                        <label class="control-label  col-md-3">Agent</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" name="agent_id" style="font-size: 12px;" required="">
                                                                 <option value="">Select Agent</option>
@@ -207,7 +216,7 @@
                                                 <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="control-label text-right col-md-3">Loan Type</label>
+                                                        <label class="control-label  col-md-3">Loan Type</label>
                                                         <div class="col-md-9">
                                                             <input type="text" class="form-control" placeholder="Loan Type" name="advance_type" value="{{@$record->advance_type}}">
                                                             <input type="hidden" name="id"  value="{{@$record->id}}">
@@ -222,7 +231,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-danger row">
-                                                        <label class="control-label text-right col-md-3">Loan Amount</label>
+                                                        <label class="control-label  col-md-3">Loan Amount</label>
                                                         <div class="col-md-9">
                                                             <input type="text" class="form-control form-control-danger" placeholder="Loan Amount" name="loan_amount" required="" value="{{@$record->loan_amount}}">
                                                         </div>
