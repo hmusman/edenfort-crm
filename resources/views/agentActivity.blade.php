@@ -11,6 +11,12 @@
     width: 125% !important;
     margin-left: -30px;
     }
+    .table-responsive {
+      display: block !important;
+    }
+  }
+  .table-responsive {
+    display: inline-table;
   }
   #datatable-buttons{
     font-size: 11px;

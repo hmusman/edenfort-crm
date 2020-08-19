@@ -8,6 +8,14 @@
 @endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/additional.css')}}">
 <style>
+  @media (max-width: 550px){
+    .table-responsive {
+      display: block !important;
+    }
+  }
+  .table-responsive {
+    display: inline-table;
+  }
   .pagination{
     float: right;
   }
@@ -87,7 +95,7 @@
                         </ol>
                     </div>
                     <div class="col-md-4">
-                        <!-- <div class="float-right d-none d-md-block">
+                        <!-- <div class="float-right  d-md-block">
                             <div class="dropdown">
                                 <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-settings-outline mr-1"></i> Settings
@@ -118,10 +126,10 @@
                                     <ul class="nav nav-tabs" role="tablist">
                                       <li class="nav-item">
                                         @if(basename(url()->current())=='dealsInfo')
-                                          <a href="{{url('/dealsInfo')}}" class="nav-link active" role="tab"><span class="d-none d-md-inline-block">Deals Renewal</span> 
+                                          <a href="{{url('/dealsInfo')}}" class="nav-link active" role="tab"><span class=" d-md-inline-block">Deals Renewal</span> 
                                           </a>
                                         @else
-                                        <a href="{{url('/dealsInfo')}}" class="nav-link" role="tab"><span class="d-none d-md-inline-block">Deals Renewal</span> 
+                                        <a href="{{url('/dealsInfo')}}" class="nav-link" role="tab"><span class=" d-md-inline-block">Deals Renewal</span> 
                                           </a>
                                         @endif
                                       </li>
@@ -130,11 +138,11 @@
                                       @if(ucfirst(session('role'))!==ucfirst('Agent')) 
                                       @if(basename(url()->current())=='dealsAccountStatement')
                                       <a href="{{url('/dealsAccountStatement')}}" class="nav-link active" role="tab">
-                                          </i> <span class="d-none d-md-inline-block">Account Statement</span>
+                                          </i> <span class=" d-md-inline-block">Account Statement</span>
                                       </a>
                                       @else
                                       <a href="{{url('/dealsAccountStatement')}}" class="nav-link" role="tab">
-                                          </i> <span class="d-none d-md-inline-block">Account Statement</span>
+                                          </i> <span class=" d-md-inline-block">Account Statement</span>
                                       </a>
                                       @endif
                                       @endif
@@ -171,7 +179,7 @@
                                      </div>
                                     </div>
                                   </div>
-                                  <table class="table stylish-table deals_table mt-3">
+                                  <table class="table stylish-table deals_table mt-3 table-responsive">
                                     <thead >
                                         <tr >
                                             <th>Agent</th>
