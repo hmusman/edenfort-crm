@@ -318,7 +318,7 @@
                                                                   <td> {{date("Y-m-d",strtotime($reminder->date_time))}}</td>
                                                                   <td style="white-space: break-spaces;"> {{$reminder->description}}</td>
                                                                   <td>
-                                                                    <a target="_blank" href="{{url('get-reminder-record')}}?property_id={{$reminder->property_id}}&ref={{$reminder->reminder_of}}&active={{@$reminder->add_by}}" type="button" class="btn btn-outline-secondary btn-sm"data-toggle="tooltip" data-placement="top" title="" data-original-title="View">
+                                                                    <a target="_blank" href="{{url('get-reminder-record')}}?property_id={{$reminder->property_id}}&ref={{$reminder->reminder_of}}&active=ADMIN" type="button" class="btn btn-outline-secondary btn-sm"data-toggle="tooltip" data-placement="top" title="" data-original-title="View">
                                                                     <i class="mdi mdi-eye"></i>
                                                                     </a>
                                                                   </td>

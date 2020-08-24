@@ -100,7 +100,7 @@
                                                       <td><div class="row" style="padding-left: 14px;">
                                                         <a class="p-2" href="{{ url('get-single-reminder-record')}}?property_id={{$rem->property_id}}&ref={{$rem->reminder_of}}&status={{$rem->status}}&active={{$rem->add_by}}">View<i class="fas fa-info-circle"></i></a>
                                                         @if($rem->user_id==ucfirst(session('user_id')))
-                                                        <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-close"></i></a><br>
+                                                        <a id="property_id" class="p-2 disable_reminder" href="#" property_id="{{$rem->property_id}}">Disable<i class="fas fa-times-circle"></i></a><br>
                                                         <a class="p-2 update_reminder" href="#" property_id="{{$rem->property_id}}">Update<i class="fas fa-edit"></i></a>@endif
                                                     </div>
                                                     </td>
