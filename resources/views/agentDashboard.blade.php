@@ -30,6 +30,14 @@
   .nav-tabs {
       border-bottom: 1px solid #2fa97c;
   }
+  @media (max-width: 550px){
+    .table-responsive {
+      display: block !important;
+    }
+  }
+  .table-responsive {
+      display: inline-table;
+    }
 </style>
 <!-- ============================================================== -->
 <!-- Start right Content here -->

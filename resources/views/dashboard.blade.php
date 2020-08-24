@@ -63,10 +63,13 @@
     #mytable{
         margin-left: -7px;
     }
-
-
-
+    .table-responsive {
+        display: block !important;
+    }
 }
+.table-responsive {
+        display: inline-table;
+    }
 </style>
             <!-- ============================================================== -->
             <!-- Start right Content here -->

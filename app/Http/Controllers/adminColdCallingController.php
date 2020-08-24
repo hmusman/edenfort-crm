@@ -32,7 +32,7 @@ class adminColdCallingController extends Controller
         $agents = array_values($agents);
         $properties = array_values($properties);
         foreach($properties as $key => $propertyID){
-            coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
+            coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key],"update_from"=>'coldcalling']);
         }
         return back()->with("msg","ColdCalling Assigned Successfully!");
     }
@@ -154,6 +154,7 @@ EDEN FORT REAL ESTATE
                             'property_type' => input::get('status'),
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }else{
                           $data=array(
@@ -168,16 +169,17 @@ EDEN FORT REAL ESTATE
                             'access' => input::get('status'),
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }
                    coldCallingModel::where("id",$check_boxes[$key])->update($data);
                    $row = coldCallingModel::where('id',$check_boxes[$key])->first();
                   
-                   $checkPropertyFromPropertyTable = property::where(['Building'=>$row->Building,'unit_no'=>$row->unit_no])->get();
-                   if(count($checkPropertyFromPropertyTable) == 0){
-                        $row = json_decode(json_encode($row),true);
-                        DB::table('properties')->insert($row);  
-                   }
+                   // $checkPropertyFromPropertyTable = property::where(['Building'=>$row->Building,'unit_no'=>$row->unit_no])->get();
+                   // if(count($checkPropertyFromPropertyTable) == 0){
+                   //      $row = json_decode(json_encode($row),true);
+                   //      DB::table('properties')->insert($row);  
+                   // }
                    $reminder= new Reminder();
                    $reminder->property_id=$check_boxes[$key];
                    $reminder->date_time=$timedate;
@@ -191,7 +193,7 @@ EDEN FORT REAL ESTATE
                 return "true";
             }catch(\Exception $e){
                 return '<div class="alert alert-danger" style="font-size: 11px;
-        margin-top: 2%;">something went wrong</div>';
+        margin-top: 2%;">something went wrong '.$e.'</div>';
             }
         }
     // 
@@ -206,7 +208,7 @@ EDEN FORT REAL ESTATE
          $reminder->user_id=session('user_id');
          $reminder->reminder_of="COLDCALLING";
          $reminder->save();
-         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access'))]);
+         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access')),"update_from"=>'coldcalling']);
          $row = coldCallingModel::where('id',input::get('property_id'))->first();
         
          $checkPropertyFromPropertyTable = property::where(['Building'=>$row->Building,'unit_no'=>$row->unit_no])->get();
@@ -218,7 +220,7 @@ EDEN FORT REAL ESTATE
     }
     // 
     public function updateColdCallingRow(){
-         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access'))]);
+         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access')),"update_from"=>'coldcalling']);
          $row = coldCallingModel::where('id',input::get('property_id'))->first();
          $checkPropertyFromPropertyTable = property::where(['Building'=>$row->Building,'unit_no'=>$row->unit_no])->get();
          if(count($checkPropertyFromPropertyTable) == 0){
@@ -261,6 +263,7 @@ EDEN FORT REAL ESTATE
                             'property_type' => $status,
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }else{
                           $data=array(
@@ -275,6 +278,7 @@ EDEN FORT REAL ESTATE
                             'access' => $status,
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }
                coldCallingModel::where("id",$check_boxes[$key])->update($data);
@@ -424,8 +428,13 @@ public function addOwnerByAjax(Request $request){
                 $Formdisplay = 'none';
                 $Recorddisplay = 'block';
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(20);
+                // dd($result_data);
+                $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+                // dd($reminders);
+                $current_date = date('Y-m-d H:i:s');
+                // dd($current_date);
                 $upcoming = coldcallingModel::where('access','Upcoming')->count();
-                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay','Recorddisplay']));
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay','Recorddisplay','reminders','current_date']));
                 
         
     }  
@@ -488,6 +497,7 @@ public function addOwnerByAjax(Request $request){
                  'sale_status'=>$sale_status,
                   'rented_date'=>$rented_date,
                   'rented_price'=>$rented_price,
+                  'update_from' => 'coldcalling'
                 );
                 $property_id=input::get("property_id");
                 coldcallingModel::where("id",$property_id)->update($data);

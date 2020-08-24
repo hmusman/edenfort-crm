@@ -147,6 +147,7 @@
    }
    .pagination{
       float: right;
+      margin-top: 12px;
    }
    .all_property_card{
       width: 104%;
@@ -599,6 +600,7 @@
                                                    <th>Rented Date</th>
                                                    <th>Rented Price</th>
                                                    @endif
+                                                   <th>Access</th>
                                                    <th>Updated_at</th>
                                                    <th colspan="2">Action</th>
                                                 </tr>
@@ -659,6 +661,7 @@
                                                   <td>{{$record->rented_price}}</td>
                                                   @endif
                                                   @endif
+                                                  <td>{{$record->access}}</td>
                                                    <td>{{date('Y-m-d',strtotime($record->updated_at))}}</td>
                                                @if(@$permissions->propertyEdit!=1  )
                                                    <td>Not Allowed</td>  
@@ -677,11 +680,23 @@
                                                 <tr class="toggleable_row">
                                                    <td colspan="19">
                                                       <div class="row">
-                                                         <div class="col-sm-8">
+                                                         <div class="col-sm-4">
                                                             <label style="float: left;text-align: start">Comment</label>
                                                             <!-- <input type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control"> -->
-                                                            <textarea type="text" name="comment[{{$counter}}]" class="form-control" style="width: 100%">{{@$record->comment}}</textarea>
+                                                            <textarea type="text" name="comment[{{$counter}}]" class="form-control" rows="4" style="width: 100%">{{@$record->comment}}</textarea>
                                                          </div>
+                                                         <div class="col-sm-4">
+                                                          <label style="float: left;text-align: start">Upcoming Dates</label><br>
+                                                          <div style="padding-top: 5px;border: 1px solid lightgray;height: 100px;overflow-y: auto;border-radius: 5px;">
+                                                            @php $i = 1; @endphp
+                                                            @foreach($reminders as $reminder)
+                                                            @if($reminder->property_id == $record->id)
+                                                            <span style="font-size: 14px;margin-left: 3%; @if($reminder->date_time < $current_date) text-decoration: line-through;     color: lightgray; @endif">{{$i}}) {{$reminder->date_time}}</span><br><br>
+                                                            @php $i++; @endphp
+                                                            @endif
+                                                            @endforeach
+                                                          </div>
+                                                       </div>
                                                       </div>
                                                    </td>
                                                 </tr>

@@ -81,7 +81,7 @@ class reminderController extends Controller
             $formatDate = date("Y-m-d G:i:s", $futureDate);
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
             $rem = Reminder::where('id',$value->id)->first();
-            $property = property::where('id', $rem->property_id)->first();
+            $property = coldcallingModel::where('id', $rem->property_id)->first();
             if(empty($property)){
                 $property = coldcallingModel::where('id', $rem->property_id)->first();
             }
@@ -273,7 +273,7 @@ class reminderController extends Controller
             Reminder::where('id',$value->rid)->update(["status"=>'viewed']);
 
             $rem = Reminder::where('id',$value->rid)->first();
-            $property = property::where('id', $rem->property_id)->first();
+            $property = coldcallingModel::where('id', $rem->property_id)->first();
             $deal = deal::where('id', $rem->property_id)->first();
             $lead = lead::where('id', $rem->property_id)->first();
             $user = user::where('id', session('user_id'))->first();
@@ -361,7 +361,7 @@ class reminderController extends Controller
             }
             
             // $emails = [$receiverEmail,'upcoming@edenfort.ae'];
-            Mail::to($receiverEmail)->cc('upcoming@edenfort.ae')->send(new reminderMails($massage, $subject));
+            Mail::to($receiverEmail)->cc(['upcoming@edenfort.ae'])->send(new reminderMails($massage, $subject));
             // Mail::to('')->send(new reminderMails($massage));
             
         }
@@ -428,7 +428,7 @@ class reminderController extends Controller
           $allBuildings=Building::select("building_name")->orderBy("building_name","ASC")->get();
             if(strtoupper(input::get('ref'))=='COLDCALLING'){
 
-              $buildings = property::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
+              $buildings = coldcallingModel::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
               $areas=coldcallingModel::whereIn('Building',$buildings)->distinct('area')->pluck('area');
               $agents=user::where(['role'=>3])->get();
               $bedrooms=coldcallingModel::whereIn('Building',$buildings)->distinct('Bedroom')->pluck('Bedroom');
@@ -436,16 +436,23 @@ class reminderController extends Controller
               $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
               $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
               $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
-                return view('agentcoldcalling',compact('result_data','buildings','areas','bedrooms','agents','agentss', 'buildingss','permissions', 'allBuildings'));
+              $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+                // dd($reminders);
+                $current_date = date('Y-m-d H:i:s');
+                $Formdisplay = 'none';
+                return view('agentcoldcalling',compact('result_data','buildings','areas','bedrooms','agents','agentss', 'buildingss','permissions', 'allBuildings','reminders','current_date','Formdisplay'));
             }else if(strtoupper(input::get('ref'))=='PROPERTY'){
-                $buildings = property::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
-                $areas=property::whereIn('Building',$buildings)->distinct('area')->pluck('area');
+                $buildings = coldcallingModel::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
+                $areas=coldcallingModel::whereIn('Building',$buildings)->distinct('area')->pluck('area');
                  $agents=user::where(['role'=>3])->get();
-                $bedrooms=property::whereIn('Building',$buildings)->distinct('Bedroom')->pluck('Bedroom');   
+                $bedrooms=coldcallingModel::whereIn('Building',$buildings)->distinct('Bedroom')->pluck('Bedroom');   
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-                $result_data=property::where("id",input::get('property_id'))->paginate(20);
+                $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
                 $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
-                return view('agentProperties',compact('result_data','buildings','areas','bedrooms','agents','buildingss','permissions','allBuildings'));
+                $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+                // dd($reminders);
+                $current_date = date('Y-m-d H:i:s');
+                return view('agentProperties',compact('result_data','buildings','areas','bedrooms','agents','buildingss','permissions','allBuildings','reminders','current_date'));
             }
             else{
          	    $agents=lead::distinct('lead_user')->pluck('lead_user'); 
@@ -474,19 +481,25 @@ class reminderController extends Controller
               // $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
               $upcoming = coldcallingModel::where('access','Upcoming')->count();
               $Formdisplay = 'none';
-                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay']));
+              $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+                // dd($reminders);
+                $current_date = date('Y-m-d H:i:s');
+                return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay','reminders','current_date']));
             }else if(strtoupper(input::get('ref'))=='PROPERTY'){
                 $permissions = permission::where('user_id', session('user_id'))->first();
-                $areas=property::distinct('area')->pluck('area');
-                $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');
+                $areas=coldcallingModel::distinct('area')->pluck('area');
+                $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
                  $buildings=Building::all();
                  $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
-                $result_data=property::where("id",input::get('property_id'))->paginate(20);
+                $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
                 $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
-                $upcoming = property::where('access','Upcoming')->count();
-                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));            }
+                $upcoming = coldcallingModel::where('access','Upcoming')->count();
+                $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+                // dd($reminders);
+                $current_date = date('Y-m-d H:i:s');
+                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming','reminders','current_date']));            }
             else{
                 $agents=lead::distinct('lead_user')->pluck('lead_user'); 
                 $buildings=Building::distinct('building_name')->get();
@@ -515,23 +528,30 @@ class reminderController extends Controller
                 if(input::get('status')!='viewed'){
                     Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
                 }
-            $upcoming = property::where('access','Upcoming')->count();
-            return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming'));
+            $upcoming = coldcallingModel::where('access','Upcoming')->count();
+            $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+            // dd($reminders);
+            $current_date = date('Y-m-d H:i:s');
+            $Formdisplay = 'none';
+            return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming','reminders','current_date','Formdisplay'));
           }else if(strtoupper(input::get('ref'))=='PROPERTY'){
-            $areas=property::distinct('area')->pluck('area');
-                $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');   
+            $areas=coldcallingModel::distinct('area')->pluck('area');
+                $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');   
                 $agents=user::where(['role'=>3])->get();
                 $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
                 $buildingss = coldcallingModel::distinct('Building')->pluck('Building');
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-                 $upcoming = property::where('access','Upcoming')->count();
-                // $buildings=property::distinct('Building')->pluck('Building');
+                 $upcoming = coldcallingModel::where('access','Upcoming')->count();
+                // $buildings=coldcallingModel::distinct('Building')->pluck('Building');
                  $buildings=Building::all();
-            $result_data=property::where("id",input::get('property_id'))->paginate(20);
+            $result_data=coldcallingModel::where("id",input::get('property_id'))->paginate(20);
                 if(input::get('status')!='viewed'){
                     Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
                 }
-            return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming'));
+            $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+            // dd($reminders);
+            $current_date = date('Y-m-d H:i:s');
+            return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming','reminders','current_date'));
           }else if(strtoupper(input::get('ref'))=='LEADS'){
               $agents=lead::distinct('lead_user')->get(); 
                 $buildings=Building::distinct('building_name')->get();

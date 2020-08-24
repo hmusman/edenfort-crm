@@ -132,6 +132,7 @@ EDEN FORT REAL ESTATE
                             'property_type' => input::get('status'),
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }else{
                           $data=array(
@@ -146,6 +147,7 @@ EDEN FORT REAL ESTATE
                             'access' => input::get('status'),
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }
                    coldCallingModel::where("id",$check_boxes[$key])->update($data);
@@ -187,7 +189,7 @@ EDEN FORT REAL ESTATE
          $reminder->add_by="AGENT";
          $reminder->user_id=session('user_id');
          $reminder->save();
-         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access'))]);
+         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access')),'update_from'=>'coldcalling']);
          $row = coldCallingModel::where('id',input::get('property_id'))->first();
          $row = json_decode(json_encode($row),true);
          unset($row['updated_at']);
@@ -200,7 +202,7 @@ EDEN FORT REAL ESTATE
     }
     // 
     public function updateColdCallingRow(){
-         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access'))]);
+         coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access')),'update_from'=>'coldcalling']);
          $row = coldCallingModel::where('id',input::get('property_id'))->first();
          $row = json_decode(json_encode($row),true);
          unset($row['updated_at']);
@@ -245,6 +247,7 @@ EDEN FORT REAL ESTATE
                             'property_type' => input::get('status'),
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }else{
                           $data=array(
@@ -259,6 +262,7 @@ EDEN FORT REAL ESTATE
                             'access' => input::get('status'),
                             'Area_Sqft' => $AreaSqft[$key],
                             'comment' => $comment[$key],
+                            'update_from' => 'coldcalling',
                         );
                       }
                coldCallingModel::where("id",$check_boxes[$key])->update($data);
@@ -1714,7 +1718,11 @@ $result_data=coldcallingModel::where('access', null)->where(['user_id'=>$current
         
         $Recorddisplay = 'block';
         $Formdisplay = 'none';
-       return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions', 'Recorddisplay', 'Formdisplay']));
+        $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+        // dd($reminders);
+        $current_date = date('Y-m-d H:i:s');
+        // dd($current_date);
+       return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions', 'Recorddisplay', 'Formdisplay','reminders','current_date']));
 
   
 

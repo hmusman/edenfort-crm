@@ -7,6 +7,9 @@
 @endif
 <style>
   @media (max-width: 550px){
+    .table-responsive {
+      display: block !important;
+    }
     .top-buttons .row img{
       height: 36px !important;
     }
@@ -54,6 +57,9 @@
         overflow-x: auto !important;
     }
     
+  }
+  .table-responsive {
+    display: inline-table; 
   }
   .rotate_icon {
       transition: 0.5s;
@@ -502,6 +508,7 @@
                                             <th>R.Price</th>
                                             <th>S.Price</th>
                                             <th>Added By</th>
+                                            <th>Access</th>
                                             <th>Registered</th>
                                             <th colspan="2">Actions</th>
 
@@ -594,6 +601,7 @@
                                            @else
                                            <td>{{ucfirst($record->Agent['user_name'])}}</td>
                                            @endif
+                                           <td>{{$record->access}}</td>
                                            <td>{{date('d-m-Y',strtotime($record->updated_at))}}</td>
                                            <td>
                                               @if(ucfirst(session('role'))==ucfirst('SuperAgent')) 
@@ -625,7 +633,19 @@
                                                  <div class="col-sm-4">
                                                     <label style="text-align: start">Comment</label>
                                                     <!-- <input type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control"> -->
-                                                    <textarea type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" class="form-control">{{@$record->comment}}</textarea>
+                                                    <textarea type="text" name="comment[{{$counter}}]" value="{{@$record->comment}}" rows="4" class="form-control">{{@$record->comment}}</textarea>
+                                                 </div>
+                                                 <div class="col-sm-4">
+                                                    <label style="text-align: start">Upcoming Dates</label>
+                                                    <div style="padding-top: 5px;border: 1px solid lightgray;height: 100px;overflow-y: auto;border-radius: 5px;">
+                                                      @php $i = 1; @endphp
+                                                      @foreach($reminders as $reminder)
+                                                      @if($reminder->property_id == $record->id)
+                                                      <span style="font-size: 14px;margin-left: 3%; @if($reminder->date_time < $current_date) text-decoration: line-through;     color: lightgray; @endif">{{$i}}) {{$reminder->date_time}}</span><br><br>
+                                                      @php $i++; @endphp
+                                                      @endif
+                                                      @endforeach
+                                                    </div>
                                                  </div>
                                               </div>
                                            </td>

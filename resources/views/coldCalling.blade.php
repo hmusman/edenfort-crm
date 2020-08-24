@@ -8,6 +8,11 @@
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/coldCalling.css')}}">
 <style>
   @media (max-width: 550px){
+    .tab-pane-coldcalling{
+        margin-left: 0px !important;
+        width: 100% !important;
+        font-size: 13px;
+    }
     .top-buttons .row img{
       height: 36px !important;
     }
@@ -62,8 +67,10 @@
       width: 119%;
       margin-left: -28px;
       overflow-x: auto !important;
+      display: block !important;
 
     }
+
   }
   #back_to_owner{
     font-size: 42px;
@@ -72,6 +79,7 @@
   }
   .table-responsive{
     overflow-x: hidden;
+    display: inline-table;
   }
   .table td{
       padding: .75rem;
@@ -184,6 +192,12 @@
     padding: 17px 22px 17px 22px;
     margin-top: -40px;
 }
+.tab-pane-coldcalling{
+    margin-left: -25px;
+    width: 104%;
+    font-size: 10px;
+}
+
 </style>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -478,7 +492,7 @@
                                  </li>
                           </ul>
                           <div class="tab-content p-3">
-                            <div class="tab-pane active" id="home" role="tabpanel">
+                            <div class="tab-pane active tab-pane-coldcalling" id="home" role="tabpanel">
                               <!--COLDCALLING FILTERS AND SEARCH START FROM HERE-->  
                               <div class="col-lg-12">
                                   <div class="row">
@@ -622,6 +636,7 @@
                                         <th>Off Plan</th>
                                         <th>Investor</th>
                                         <th>Email</th>
+                                        <th>Access</th>
                                         <th>Action</th>
                                         @else
                                         <th class="checkall" style="cursor:pointer">Select All</th>
@@ -639,6 +654,7 @@
                                         <th>Type</th>
                                         <th>Sale Price</th>
                                         <th>Rent Price</th>
+                                        <th>Access</th>
                                         @endif
                                     </tr>
                                 </thead>
@@ -691,11 +707,10 @@
                                         @foreach($chunks as $record)
                                         <tr class="present_row">
                                            <td>
-                                            <!-- https://img.icons8.com/cotton/24/000000/circled-right.png -->
                                               <img style="width: 21px;margin-top: -9px !important;" src="public/assets/images/next.png" class="drop_arrow_icon pulse-effect">
                                               <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}">
                                            </td>
-                                           <td style="padding: 0px !important">{{$record->unit_no}}</td>
+                                           <td style="padding: 0px !important">       {{$record->unit_no}}</td>
                                            <td>{{$record->Building}}</td>
                                            <td>{{$record->area}}</td>
                                            <td>{{strtoupper($record->LandLord)}}</td>
@@ -737,6 +752,7 @@
                                               <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;display: table-cell;position: relative;right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                                               <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_email">Add</label>
                                            </td>
+                                           <td>{{$record->access}}</td>
                                            <td>
                                              <a href="{{url('EditColdcalling')}}?record_id={{$record->id}}&coldcalling-action=edit" class="edit_supervision">Edit <i class="fa fa-edit"></i></a>
                                            </td>
@@ -833,6 +849,18 @@
                                                        </div>
                                                     </div>
                                                  </div>
+                                                 <div class="col-sm-4">
+                                                    <label style="text-align: start">Upcoming Dates</label>
+                                                    <div style="padding-top: 5px;border: 1px solid lightgray;height: 100px;overflow-y: auto;border-radius: 5px;">
+                                                      @php $i = 1; @endphp
+                                                      @foreach($reminders as $reminder)
+                                                      @if($reminder->property_id == $record->id)
+                                                      <span style="font-size: 14px;margin-left: 3%; @if($reminder->date_time < $current_date) text-decoration: line-through;     color: lightgray; @endif">{{$i}}) {{$reminder->date_time}}</span><br><br>
+                                                      @php $i++; @endphp
+                                                      @endif
+                                                      @endforeach
+                                                    </div>
+                                                 </div>
                                               </div>
                                            </td>
                                         </tr>
@@ -886,6 +914,7 @@
                                            <td>@if(!is_null($record->type)){{$record->type}}@else N/A @endif</td>
                                            <td>@if(!is_null($record->sale_price)){{$record->sale_price}}@else N/A @endif</td>
                                            <td>@if(!is_null($record->rented_price)){{$record->rented_price}}@else N/A @endif</td>
+                                           <td>{{$record->access}}</td>
                                         </tr>
                                         <!--TOGGLE ROW START FROM HERE-->
                                         <tr class="toggleable_row">
@@ -985,6 +1014,18 @@
                                                              <input type="number" value="{{@$record->sale_price}}" class="form-control"  name="salePrice[{{$counter++}}]">
                                                           </div>
                                                        </div>
+                                                    </div>
+                                                 </div>
+                                                 <div class="col-sm-4">
+                                                    <label style="text-align: start">Upcoming Dates</label>
+                                                    <div style="padding-top: 5px;border: 1px solid lightgray;height: 100px;overflow-y: auto;border-radius: 5px;">
+                                                      @php $i = 1; @endphp
+                                                      @foreach($reminders as $reminder)
+                                                      @if($reminder->property_id == $record->id)
+                                                      <span style="font-size: 14px;margin-left: 3%; @if($reminder->date_time < $current_date) text-decoration: line-through;     color: lightgray; @endif">{{$i}}) {{$reminder->date_time}}</span><br><br>
+                                                      @php $i++; @endphp
+                                                      @endif
+                                                      @endforeach
                                                     </div>
                                                  </div>
                                               </div>

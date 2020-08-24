@@ -29,7 +29,8 @@
                        if(data[i]['status']!='viewed'){
                             var getCount = parseInt($('.notification_counter').text());
                           $('.notification_counter').text(getCount + data.length);
-                         $.notify("Reminder Alert", "warn");
+                         // $.notify("Reminder Alert", "warn");
+                         alertify.warning("Reminder Alert");
                            temp+='<div class="col-sm-12 notification"><a href="<?php echo url('get-reminder-record')  ?>?property_id='+data[i]['property_id']+'&ref='+data[i]['reminder_of']+'&active='+data[i]['add_by']+'" class="notification_link"><span><strong>'+data[i]['reminder_type']+'</strong></span><span class="unit_no">('+data[i]['reminder_of']+')</span><span style="float: right;"><a id="property_id" property_id="'+data[i]['property_id']+'"  class="close-notification property_id"><i class="fa fa-close"></i></a></span><p>'+data[i]['description']+'</p></a></div>';
                        }else{
                          // $.notify("Reminder Alert", "warn");

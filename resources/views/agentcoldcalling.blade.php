@@ -451,7 +451,7 @@
                                                 <div class="row">
                                                     <div class='col-sm-12'>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control datepicker-here" data-timepicker="true" data-language="en" placeholder="set min date" id="min-date"> 
+                                                            <input type="datetime-local" class="form-control date-time" placeholder="set min date" id="min-date"> 
                                                             <span class="date_time_error" style="font-size: 11px;font-weight: 500;color: red;"></span>
                                                         </div>
                                                     </div>
@@ -706,6 +706,7 @@
                                              <th>Off Plan</th>
                                              <th>Investor</th>
                                              <th>Email</th>
+                                             <th>Access</th>
                                           @else
                                              <th class="checkall" style="cursor:pointer">Select All</th>
                                              <th>Unit No </th>
@@ -721,6 +722,7 @@
                                              <th>Type</th>
                                              <th>Sale Price</th>
                                              <th>Rent Price</th>
+                                             <th>Access</th>
                                           @endif
                                         </tr>
                                         </thead>
@@ -784,6 +786,7 @@
                                                     <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer; display: table-cell; position: relative; right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                                                     <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer; display: table-cell;" class="label label-primary add_email">Add</label>
                                                 </td>
+                                                <td style="white-space: break-spaces;">{{$record->access}}</td>
                                             </tr>
                                             <!--TOGGLE ROW START FROM HERE-->
                                             <tr class="toggleable_row">
@@ -877,6 +880,18 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-4 mt-2">
+                                                          <label style="text-align: start">Upcoming Dates</label>
+                                                          <div style="padding-top: 5px;border: 1px solid lightgray;height: 100px;overflow-y: auto;border-radius: 5px;">
+                                                            @php $i = 1; @endphp
+                                                            @foreach($reminders as $reminder)
+                                                            @if($reminder->property_id == $record->id)
+                                                            <span style="font-size: 14px;margin-left: 3%; @if($reminder->date_time < $current_date) text-decoration: line-through;     color: lightgray; @endif">{{$i}}) {{$reminder->date_time}}</span><br><br>
+                                                            @php $i++; @endphp
+                                                            @endif
+                                                            @endforeach
+                                                          </div>
+                                                       </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -898,9 +913,9 @@
                                                     <input type="checkbox" name="check_boxes[{{$counter}}]" class="ind_chk_box" value="{{$record->id}}" />
                                                 </td>
                                                 <td style="padding: 0px !important;">{{$record->unit_no}}</td>
-                                                <td>{{$record->Building}}</td>
-                                                <td>{{$record->area}}</td>
-                                                <td>{{strtoupper($record->LandLord)}}</td>
+                                                <td style="white-space: break-spaces;">{{$record->Building}}</td>
+                                                <td style="white-space: break-spaces;">{{$record->area}}</td>
+                                                <td style="white-space: break-spaces;">{{strtoupper($record->LandLord)}}</td>
                                                 <td>
                                                     <div class="content" style="display: none;">
                                                         <?php $temp=explode(',', $record->contact_no); foreach ($temp as $key=>$value) { ?>
@@ -926,6 +941,7 @@
                                                 <td>@if(!is_null($record->type)){{$record->type}}@else N/A @endif</td>
                                                 <td>@if(!is_null($record->sale_price)){{$record->sale_price}}@else N/A @endif</td>
                                                 <td>@if(!is_null($record->rented_price)){{$record->rented_price}}@else N/A @endif</td>
+                                                <td style="white-space: break-spaces;">{{$record->access}}</td>
                                             </tr>
                                             <!--TOGGLE ROW START FROM HERE-->
                                             <tr class="toggleable_row">
@@ -1027,6 +1043,18 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-4 mt-2">
+                                                          <label style="text-align: start">Upcoming Dates</label>
+                                                          <div style="padding-top: 5px;border: 1px solid lightgray;height: 100px;overflow-y: auto;border-radius: 5px;">
+                                                            @php $i = 1; @endphp
+                                                            @foreach($reminders as $reminder)
+                                                            @if($reminder->property_id == $record->id)
+                                                            <span style="font-size: 14px;margin-left: 3%; @if($reminder->date_time < $current_date) text-decoration: line-through;     color: lightgray; @endif">{{$i}}) {{$reminder->date_time}}</span><br><br>
+                                                            @php $i++; @endphp
+                                                            @endif
+                                                            @endforeach
+                                                          </div>
+                                                       </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1675,7 +1703,7 @@ $(document).delegate('.show_content','click',function(){
             $('.reminder_description-error').text('This field is required!');
            return; 
         }
-        var time_date=$('.datepicker-here').val();
+        var time_date=$('.date-time').val();
         var description=$('.reminder_description').val();
         $('.time_date_input').val(time_date);
         $('.description_input').val(description);

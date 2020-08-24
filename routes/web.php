@@ -366,3 +366,8 @@ Route::post('permissionUpdateForm','permissionController@permissionUpdateForm');
 //permission Filter Form
 Route::get('filterPermissionUser','permissionController@index');
 Route::post('filterPermissionUser','permissionController@index');
+
+
+
+
+Route::get('move-data-from-property-to-coldcalling','MoveDataController@MoveData');

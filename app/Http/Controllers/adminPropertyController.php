@@ -29,7 +29,7 @@ class adminPropertyController extends Controller
         $properties = array_values($properties);
         // dd($properties);
         foreach($properties as $key => $propertyID){
-            property::where("id",$propertyID)->update(["user_id"=>@$agents[$key]]);
+            coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key],'update_from'=>'property']);
         }
         return back()->with("msg","Property Assigned Successfully!");
     }
@@ -42,7 +42,7 @@ class adminPropertyController extends Controller
         // dd(@$agents[0]);
 
         foreach($properties as $key => $propertyID){
-            coldcallingModel::where('building',$propertyID)->update(["user_id"=>@$agents[0]]);
+            coldcallingModel::where('building',$propertyID)->update(["user_id"=>@$agents[0],'update_from'=>'coldcalling']);
         }
         return back()->with("msg","Coldcalling Assigned Successfully!");
     }
@@ -51,7 +51,7 @@ class adminPropertyController extends Controller
         $message='';
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
-            $data = property::where('id',$value)->first();
+            $data = coldcallingModel::where('id',$value)->first();
 if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
             $message .='
 Building : '.$data->Building.' <br> 
@@ -83,7 +83,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         $message='';
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
-            $data = property::where('id',$value)->first();
+            $data = coldcallingModel::where('id',$value)->first();
             $message .='
 Building : '.$data->Building.'  
 Size - '.$data->Area_Sqft.'
@@ -103,7 +103,7 @@ EDEN FORT REAL ESTATE
         $message='';
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
-            $data = property::where('id',$value)->first();
+            $data = coldcallingModel::where('id',$value)->first();
             $message .='
 Owner Name : '.$data->LandLord.'
 Owner Email : '.$data->email.'
@@ -124,15 +124,15 @@ EDEN FORT REAL ESTATE
     }
        public function index(Request $request){
            $permissions = permission::where('user_id', session('user_id'))->first();
-                $areas=property::distinct('area')->pluck('area');
-                $bedrooms=property::distinct('Bedroom')->pluck('Bedroom');
+                $areas=coldcallingModel::distinct('area')->pluck('area');
+                $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND (b.Rule_type='agent' || b.Rule_type='SuperAgent' || b.Rule_type='SuperDuperAdmin')");
                 // dd($agents);
                  $buildings=Building::all();
                  $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
                 //  
-                $query = property::query();
+                $query = coldcallingModel::query();
                 if($request->p){
                     $query->where("property_type",$request->p);
                 }
@@ -162,8 +162,13 @@ EDEN FORT REAL ESTATE
                     $query->where("contact_no", 'LIKE', '%' .$request->contact_no. '%');
                 }
                 $result_data = $query->orderBy('updated_at', 'DESC')->paginate(25);
-                $upcoming = property::where('access','Upcoming')->count();
-                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming']));
+                // dd($result_data);
+                $reminders = Reminder::orderBy('date_time', 'DESC')->get();
+                // dd($reminders);
+                $current_date = date('Y-m-d H:i:s');
+                // dd($current_date);
+                $upcoming = coldcallingModel::where('access','Upcoming')->count();
+                return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming','reminders','current_date']));
     }
     public function setReminderForProperty(Request $r){
         // dd( $r-comment);
@@ -177,8 +182,9 @@ EDEN FORT REAL ESTATE
                   $data=array(
                         'access' => input::get('status'),
                         'comment' => $comment[$key],
+                        'update_from' => 'property',
                     );
-                   property::where("id",$check_boxes[$key])->update($data);
+                   coldcallingModel::where("id",$check_boxes[$key])->update($data);
                    $reminder= new Reminder();
                    $reminder->property_id=$check_boxes[$key];
                    $reminder->date_time=$timedate;
@@ -198,7 +204,7 @@ EDEN FORT REAL ESTATE
         //delete Property
     public function DeleteProperty($id){
   
-       $deleted= property::where(['id'=>$id])->delete();
+       $deleted= coldcallingModel::where(['id'=>$id])->delete();
        if($deleted){
             return back()->with('msg','Property deleted.');
            } else{
@@ -210,11 +216,11 @@ EDEN FORT REAL ESTATE
         $sale_status=NULL;
         $rented_date=NULL;
         $rented_price=NULL;
-        $checkUnitNo=property::where(["unit_no"=>input::get("unit_no"),"Building"=>input::get("building")])->get();
+        $checkUnitNo=coldcallingModel::where(["unit_no"=>input::get("unit_no"),"Building"=>input::get("building")])->get();
         if(count($checkUnitNo) > 0){
             return back()->with('msg','<div class="alert alert-danger">Unit# already exit against this Building!</div>');
         }
-        // $checkDewaNo=property::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
+        // $checkDewaNo=coldcallingModel::where(["dewa_no"=>input::get("dewa_no"),"Building"=>input::get("building")])->get();
         // if(count($checkDewaNo) > 0){
         //     return back()->with('msg','<div class="alert alert-danger">Dewa# already exit against this Building!</div>');
         // }
@@ -229,7 +235,7 @@ EDEN FORT REAL ESTATE
           $building=input::get("building");
     	    $email=array_filter(input::get("email"));
             $contact_no=array_filter(input::get("contact_no"));
-	    	$property=new property();
+	    	$property=new coldcallingModel();
 			$property->unit_no=input::get("unit_no");
             $property->dewa_no=input::get("dewa_no");
 	        $property->LandLord=input::get("LandLord");
@@ -250,7 +256,8 @@ EDEN FORT REAL ESTATE
             $property->property_status='edenfort_property';
 	        $property->sale_status=$sale_status;
 	        $property->rented_date=$rented_date;
-	        $property->rented_price=$rented_price;
+            $property->rented_price=$rented_price;
+	        $property->update_from='property';
 	        $property->save();
 	         $property_id = DB::getPdo()->lastInsertId();
 	        if(input::get('add_property_date_time')){
@@ -269,14 +276,14 @@ EDEN FORT REAL ESTATE
     }
     public function EditProperty(){
     	$recordID=input::get("record_id");
-        $result=property::where("id",$recordID)->get();
+        $result=coldcallingModel::where("id",$recordID)->get();
         $result=json_decode(json_encode($result),true);
     	$buildings=Building::select(["building_name","id"])->get();
-        $areas=property::select('area')->orderBy('updated_at', 'DESC')->get();
-        $bedrooms=property::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
+        $areas=coldcallingModel::select('area')->orderBy('updated_at', 'DESC')->get();
+        $bedrooms=coldcallingModel::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
     	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
         $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
-        $upcoming = property::where('access','Upcoming')->count();
+        $upcoming = coldcallingModel::where('access','Upcoming')->count();
 
         return view("addproperties",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'buildings'=>$buildings,'reminders'=>$reminders,'areas'=>$areas,'bedrooms'=>$bedrooms,'agentss'=>$agentss,'upcoming'=>$upcoming]);
     }
@@ -285,24 +292,24 @@ EDEN FORT REAL ESTATE
             if(isset($_GET['ref'])){
                 $email=coldcallingModel::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
-                coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0]]);
+                coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0],'update_from'=>'property']);
                 return back()->with('msg','Email updated Successfully!');
             }else{
-                $email=property::where('id',input::get('id'))->pluck('email');
+                $email=coldcallingModel::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
-                property::where('id',input::get('id'))->update(['email'=>$email[0]]);
+                coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0],'update_from'=>'property']);
                 return back()->with('msg','Email updated Successfully!');
             }
         }else if(input::get('phone')){
             if(isset($_GET['ref'])){
                 $phone=coldcallingModel::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
-                coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
+                coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0],'update_from'=>'property']);
                 return back()->with('msg','Phone Number updated Successfully!');
             }else{
-                $phone=property::where('id',input::get('id'))->pluck('contact_no');
+                $phone=coldcallingModel::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
-                property::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
+                coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0],'update_from'=>'property']);
                 return back()->with('msg','Phone Number updated Successfully!');
             }
         }
@@ -317,8 +324,9 @@ EDEN FORT REAL ESTATE
                 $data=array(
                    'access' => $status,
                    'comment' => $comment[$key],
+                   'update_from' => 'property',
                 );
-               property::where("id",$check_boxes[$key])->update($data);
+               coldcallingModel::where("id",$check_boxes[$key])->update($data);
               
             }
         }
@@ -357,9 +365,10 @@ EDEN FORT REAL ESTATE
     		         'sale_status'=>$sale_status,
         	        'rented_date'=>$rented_date,
         	        'rented_price'=>$rented_price,
+                    'update_from' => 'property'
                 );
                 $property_id=input::get("property_id");
-                property::where("id",$property_id)->update($data);
+                coldcallingModel::where("id",$property_id)->update($data);
                 Reminder::where('property_id',$property_id)->delete();
                 if(input::get('add_property_date_time')){
         	            $data=array(
@@ -384,7 +393,7 @@ EDEN FORT REAL ESTATE
     }
 
     public function propertydetail($id){
-        $data = property::where('id',$id)->first();
+        $data = coldcallingModel::where('id',$id)->first();
         if(session('role') == 'Agent'){
             Reminder::where('property_id',$id)->where(['add_by' => 'AGENT','user_id'=>session('user_id')])->update(["status"=>'viewed']);
         }else if(session('role') == 'Admin'){

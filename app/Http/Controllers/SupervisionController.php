@@ -27,7 +27,7 @@ class SupervisionController extends Controller
 {
         public function dashboard(){
                 $contracts=Supervision::count();
-                $properties=property::count();
+                $properties=coldCallingModel::count();
                 $coldCallings=coldCallingModel::count();
                 $coldCallingsSuperAgent=coldCallingModel::where('user_id',session('user_id'))->count();        
                 $owners=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
@@ -38,9 +38,9 @@ class SupervisionController extends Controller
                 $admins=count($admins);
                 $users = user::all();
                 $users = count($users);
-                $rent=property::where(['access'=>'For Rent','property_status'=>'edenfort_property'])->count();
-                $upcoming=property::where(['access'=>'UPCOMING','property_status'=>'edenfort_property'])->get();
-                $sale=property::where(['access'=>'For Sale','property_status'=>'edenfort_property'])->count();
+                $rent=coldCallingModel::where(['access'=>'For Rent','property_status'=>'edenfort_property'])->count();
+                $upcoming=coldCallingModel::where(['access'=>'UPCOMING','property_status'=>'edenfort_property'])->get();
+                $sale=coldCallingModel::where(['access'=>'For Sale','property_status'=>'edenfort_property'])->count();
                 $buildings=Building::count();
                
                 $leads=lead::count();
@@ -60,56 +60,56 @@ class SupervisionController extends Controller
            $first = date('Y-m-d', strtotime($cDate. ' -6 days'));
            $firstDayName = date('D', strtotime($cDate. ' -6 days'));
            // dd($fDayName);
-         $firstDay=property::whereDate('updated_at', '=', $first)->count();
+         $firstDay=coldCallingModel::whereDate('updated_at', '=', $first)->where('update_from','property')->count();
      //Graph secound line for cold-calling property status;
-       $firstCold=coldCallingModel::whereDate('updated_at', '=', $first)->count();
+       $firstCold=coldCallingModel::whereDate('updated_at', '=', $first)->where('update_from','coldcalling')->count();
        // dd($firstCold);
            //2nd day in graph
             $second = date('Y-m-d', strtotime($cDate. ' -5 days'));
             $secondDayName = date('D', strtotime($cDate. ' -5 days'));
             // dd($sDayName);
-         $secondDay=property::whereDate('updated_at', '=', $second)->count();
+         $secondDay=coldCallingModel::whereDate('updated_at', '=', $second)->where('update_from','property')->count();
 
     
      //Graph secound line for cold-calling second day;
-       $secondCold=coldCallingModel::whereDate('updated_at', '=', $second)->count();
+       $secondCold=coldCallingModel::whereDate('updated_at', '=', $second)->where('update_from','coldcalling')->count();
      // //3rd day in graph
             $third = date('Y-m-d', strtotime($cDate. ' -4 days'));
             $thirdDayName = date('D', strtotime($cDate. ' -4 days'));
             // dd($tDayName);
-         $thirdDay=property::whereDate('updated_at', '=', $third)->count();
+         $thirdDay=coldCallingModel::whereDate('updated_at', '=', $third)->where('update_from','property')->count();
     //Graph secound line cold-calling
-       $thirdCold=coldCallingModel::whereDate('updated_at', '=', $third)->count();
+       $thirdCold=coldCallingModel::whereDate('updated_at', '=', $third)->where('update_from','coldcalling')->count();
     
             $four = date('Y-m-d', strtotime($cDate. ' -3 days'));
             $fourDayName = date('D', strtotime($cDate. ' -3 days'));
-         $fourDay=property::whereDate('updated_at', '=', $four)->count();    //Graph secound line cold-calling
-       $fourCold=coldCallingModel::whereDate('updated_at', '=', $four)->count();
+         $fourDay=coldCallingModel::whereDate('updated_at', '=', $four)->where('update_from','property')->count();    //Graph secound line cold-calling
+       $fourCold=coldCallingModel::whereDate('updated_at', '=', $four)->where('update_from','coldcalling')->count();
     
               $five = date('Y-m-d', strtotime($cDate. ' -2 days'));
               $fiveDayName = date('D', strtotime($cDate. ' -2 days'));
-         $fiveDay=property::whereDate('updated_at', '=', $five)->count();
+         $fiveDay=coldCallingModel::whereDate('updated_at', '=', $five)->where('update_from','property')->count();
      //Graph secound line cold-calling
-       $fiveCold=coldCallingModel::whereDate('updated_at', '=', $five)->count();      
+       $fiveCold=coldCallingModel::whereDate('updated_at', '=', $five)->where('update_from','coldcalling')->count();      
     
                $six = date('Y-m-d', strtotime($cDate. ' -1 days'));
                $sixDayName = date('D', strtotime($cDate. ' -1 days'));
                // dd($six);
-         $sixDay=property::whereDate('updated_at', '=', $six)->count();
+         $sixDay=coldCallingModel::whereDate('updated_at', '=', $six)->where('update_from','property')->count();
      //Graph secound line cold-calling
-       $sixCold=coldCallingModel::whereDate('updated_at', '=', $six)->count();
+       $sixCold=coldCallingModel::whereDate('updated_at', '=', $six)->where('update_from','coldcalling')->count();
        // dd($sixCold);
         
        $current = date('Y-m-d', strtotime($cDate. ' -0 days'));
        $currentDayName = date('D', strtotime($cDate. ' -0 days'));
-         $currentDay=property::whereDate('updated_at', '=', $current)->count();
+         $currentDay=coldCallingModel::whereDate('updated_at', '=', $current)->where('update_from','property')->count();
      //Graph secound line cold-calling
-       $currentCold=coldCallingModel::whereDate('updated_at', '=', $current)->count();
+       $currentCold=coldCallingModel::whereDate('updated_at', '=', $current)->where('update_from','coldcalling')->count();
     
       //latest 24 hour's agent activites
            $cDateTime=date('Y-m-d H:i:s');
        $activity = date('Y-m-d H:i:s', strtotime($cDateTime. '-24 hours'));
-          $totalAgentActivity=property::whereDate('updated_at', '>=', $activity)->latest()->count();
+          $totalAgentActivity=coldCallingModel::whereDate('updated_at', '>=', $activity)->latest()->count();
        
          $permissions = permission::where('user_id', session('user_id'))->first();
     $todayDate = new DateTime('today');
@@ -125,7 +125,7 @@ class SupervisionController extends Controller
     // DB::select('SELECT d.id as dealId, d.contract_start_date as cStart, d.contract_end_date as cEnd, d.referenceNo as refNo, d.client_name as cName, d.property_type as pType, d.building as build, d.dealStatus as dStatus, u.First_name, u.Last_name from deals d, users u where d.agent_name = u.id and d.contract_end_date between '+$currentDate+' and '+$futureDate+' ORDER By d.contract_end_date ASC');
     // deal::whereBetween('contract_end_date', array($currentDate, $futureDate))->orderBy('contract_end_date', 'ASC')->get();
     // dd($deals);
-    $latestProperties = property::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
+    $latestProperties = coldCallingModel::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
      return view('dashboard',compact(['contracts','users','properties','agents','owners','admins','buildings','leads','rent','sale','upcoming',
                 'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery','deals','currentDate','firstDayName','secondDayName','thirdDayName','fourDayName','fiveDayName','sixDayName','currentDayName',]));

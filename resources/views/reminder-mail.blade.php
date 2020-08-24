@@ -7,14 +7,7 @@
 </head>
 <body>
   <div class="container">
-    <!-- <div class="card text-white bg-primary mb-3" style="border-radius: 20px; ">
-      <div class="card-header" style="background: #1976d2;">
-        <div class="row"> -->
-          <!-- <img src="{{asset ('public/assets/images/logo.png')}}" alt="Logo" style="height: 40px; margin-top: 16px; margin-left: 20px; position: absolute;"> -->
-          <h2 class="mt-2 ml-5 mb-0" style="color: black; margin-top: -8px; padding-top: 24px; padding-bottom: 26px;">Edenfort Real Estate</h2>
-        <!-- </div>  
-      </div>
-    </div> -->
+    <h2 class="mt-2 ml-5 mb-0" style="color: black; margin-top: -8px; padding-top: 24px; padding-bottom: 26px;">Edenfort Real Estate</h2>
     @if($massage['reminder_of']=='Deals_without_reminder')
     <p><strong>Reminder Of : </strong> {{$massage['reminder_of-1']}}</p>
     <p><strong>Reminder Type : </strong>{{$massage['reminder_type']}}</p>
@@ -126,14 +119,12 @@
       <p><strong>Building : </strong>{{$massage['Building']}}</p>
       <p><strong>Area : </strong>{{$massage['area']}}</p>
       <p><strong>LandLoard : </strong>{{$massage['Landloard']}}</p>
+      <p><strong>Comment : </strong>{{$massage['comment']}}</p>
       <p><strong>Email : </strong>{{$massage['email']}}</p>
       <p><strong>Contact No : </strong><span itemprop="telephone"><a href="tel:+{{$massage['contact_no']}}">{{$massage['contact_no']}}</a></span></p><br>
       <p><strong>Edenfort Real Estate</strong></p>
       
     @endif
-</div>
-</div>
-</div>
 </div>
 </body>
 </html>
