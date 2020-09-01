@@ -171,6 +171,31 @@
                 <!-- end row -->
 
                 <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card card-body">
+                            <h4 class="card-title font-size-16 mt-0">Rent</h4>
+                            <p class="card-text">Total: {{$properties_rent}}</p>
+                            <a href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo 'p='.$_GET['p'].'&';} ?>type=For Rent" class="btn btn-primary waves-effect waves-light">Go to Rent</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 ">
+                        <div class="card card-body">
+                            <h4 class="card-title font-size-16 mt-0">Sale</h4>
+                            <p class="card-text">Total: {{$properties_sale}}</p>
+                            <a href="{{url('allAddedProperties')}}?<?php if(isset($_GET['p'])){ echo "p=".$_GET['p']."&";} ?>type=For Sale" class="btn btn-primary waves-effect waves-light">Go to Sale</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="card card-body">
+                            <h4 class="card-title font-size-16 mt-0">ColdCalling</h4>
+                            <p class="card-text">Total: {{$coldCallings}}</p>
+                            <a href="{{url('agentColdCalling')}}" class="btn btn-primary waves-effect waves-light">Go to ColdCalling</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">

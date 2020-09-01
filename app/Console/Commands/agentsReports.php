@@ -53,8 +53,8 @@ class agentsReports extends Command
      */
     public function handle()
     {
-         Reminder::where('property_id',22729)->delete();
-         return;
+         // Reminder::where('property_id',22729)->delete();
+         // return;
        $allAegnts=user::select(['id','user_name','First_name','Last_name','Email'])->where('role',3)->get();
         $content='';
         foreach($allAegnts as $agent){
@@ -125,13 +125,13 @@ class agentsReports extends Command
         }
         $data = array('name'=>"EdenFort CRM");
             $contactName = 'EdenFort CRM';
-            $contactEmail = 'adnansunny821@gmail.com';
+            $contactEmail = 'fat32aa@gmail.com';
             $contactMessage = $content;
              $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
             Mail::send('mail', $data, function($message) use ($contactEmail, $contactName)
             {   
                 $message->from($contactEmail, $contactName);
-                $message->to('adnansunny821@gmail.com', 'Adnan')->subject('Daily Agents Report');
+                $message->to('fat32aa@gmail.com', 'AbdulRehman')->subject('Daily Agents Report');
             });
         //  echo "HTML Email Sent. Check your inbox.";
     }

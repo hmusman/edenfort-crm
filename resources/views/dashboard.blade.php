@@ -443,13 +443,13 @@
 
                                                       $days = (strtotime($date2) - strtotime($date1))/60/60/24;
 
-                                                      //print_r($deal->cEnd);
+                                                      //print_r($days);
 
                                                   @endphp
                                                   <tr>
-                                                          <td data-order="{{$days}}" class="text-center" style="color: <?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">
+                                                          <td data-order="{{$days}}" class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">
                                                             {{$counter++}}<br> 
-                                                            <small style="font-size: 63%;font-weight: 400;background-color:<?php if($days < 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important;color: white;padding: 3px 2px 3px 1px;border-radius: 50px;">{{$days}} days Left
+                                                            <small style="font-size: 63%;font-weight: 400;background-color:<?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important;color: white;padding: 3px 2px 3px 1px;border-radius: 50px;">{{$days}} days Left
                                                             </small>
                                                           </td> 
                                                           <td class="text-center" style="color: <?php if($days <= 7) echo "red"; if($days > 7 && $days <= 14) echo "red"; if($days > 14 && $days <= 21) echo "orange"; if($days > 21 && $days <= 31) echo "green"; if($days > 31) echo "black";?>!important">{{date('d-m-Y',strtotime($deal->dStart))}}</td>

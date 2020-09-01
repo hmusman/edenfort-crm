@@ -58,6 +58,12 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         
         $coldCallings=coldCallingModel::where('user_id',session('user_id'))->count();
         $properties=coldcallingModel::where('user_id',session('user_id'))->count();
+        
+        $properties_rent=coldcallingModel::where('user_id',session('user_id'))->where('access','for rent')->count();
+        // dd($properties_rent);
+        $properties_sale=coldcallingModel::where('user_id',session('user_id'))->where('access','for sale')->count();
+        // dd($properties_sale);
+        
         $fname=session('user_name');
         $leads=lead::where('lead_user',$fname)->count();
    
@@ -120,7 +126,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     $latestProperties = coldcallingModel::whereDate("created_at",$todayDate->format('Y-m-d'))->where('user_id',session('user_id'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->where('lead_user',$fname)->get();
 		return view('agentDashboard',compact(['properties','leads',
-                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','coldCallings','permissions',"reminders","latestProperties","latestLeads","firstDayName","secondDayName","thirdDayName","fourDayName","fiveDayName","sixDayName","currentDayName"]));
+                'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','coldCallings','permissions',"reminders","latestProperties","latestLeads","firstDayName","secondDayName","thirdDayName","fourDayName","fiveDayName","sixDayName","currentDayName","properties_rent","properties_sale"]));
     }
     public function allAddedProperties(Request $request){
         

@@ -84,12 +84,20 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
+            if($data->rented_status == "on"){
+              $price = $data->rented_price;
+            }else if($data->sale_status == "on"){
+              $price = $data->sale_price;
+            }else{
+              $price = $data->price;
+            }
             $message .='
 Building : '.$data->Building.'  
 Size - '.$data->Area_Sqft.'
-Price -'.$data->Price.'
+Price -'.$price.'
 Bedroom- '.$data->Bedroom.'
 Condition- '.$data->Conditions.' 
+Access- '.$data->access.'
 
 Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
 EDEN FORT REAL ESTATE
@@ -104,14 +112,22 @@ EDEN FORT REAL ESTATE
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
+            if($data->rented_status == "on"){
+              $price = $data->rented_price;
+            }else if($data->sale_status == "on"){
+              $price = $data->sale_price;
+            }else{
+              $price = $data->price;
+            }
             $message .='
 Owner Name : '.$data->LandLord.'
 Owner Email : '.$data->email.'
 Owner Phone : '.$data->contact_no.'
 Building : '.$data->Building.'  
 Size - '.$data->Area_Sqft.'
-Price -'.$data->Price.'
+Price -'.$price.'
 Type- '.$data->type.'
+Access- '.$data->access.'
 Condition- '.$data->Conditions.' 
 
 Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
@@ -127,10 +143,10 @@ EDEN FORT REAL ESTATE
                 $areas=coldcallingModel::distinct('area')->pluck('area');
                 $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');
                 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-                $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND (b.Rule_type='agent' || b.Rule_type='SuperAgent' || b.Rule_type='SuperDuperAdmin')");
+                $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND (b.Rule_type='agent' OR b.Rule_type='SuperAgent' OR b.Rule_type='SuperDuperAdmin')");
                 // dd($agents);
                  $buildings=Building::all();
-                 $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
+                 $agentss=user::where(["status"=>1])->whereIn("role",[3,4,5])->get(["user_name","id"]);
                 //  
                 $query = coldcallingModel::query();
                 if($request->p){

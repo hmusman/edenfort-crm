@@ -559,7 +559,7 @@
                                                           </datalist>
                                                        </div>
                                                     </div>
-                                                    <div class="col-md-2 pl-1 pr-1 mt-2">
+                                                    <div class="col-md-2 pl-1 pr-1 mt-2"style="z-index: 9;">
                                                        <div class="dropdown_wrapper ">
                                                           <input type="text" class="form-control filter_input" list="unit_no" placeholder="contact" name="contact" @if(@$_GET[contact]) value="{{@$_GET['contact']}}" @endif>
                                                           <datalist id="contact">

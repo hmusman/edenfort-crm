@@ -247,6 +247,7 @@
    }
    .pagination{
       float: right;
+      margin-top: 15px;
    }
    .all_property_card{
       width: 104%;
@@ -321,6 +322,9 @@
 #back_to_owner_text{
       margin-left: 47px;
     font-size: 22px;
+}
+.table td {
+    font-size: 12px;
 }
 </style>
 <!-- ============================================================== -->
@@ -1069,20 +1073,20 @@
                                         @endif
                                         </form>
                                     </table>
+                                  @if(isset($_GET['p'])) @if(isset($_GET['type'])) 
+                                  {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}} 
+                                  @else
+                                  {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','radioSearch','filterContact','unit','contact'))->links()}} 
+                                  @endif
+                                  @else 
+                                  @if(isset($_GET['type']))
+                                  {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}} 
+                                  @else 
+                                  {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}} 
+                                  @endif
+                                  @endif
                                 </div>
 
-                                @if(isset($_GET['p'])) @if(isset($_GET['type'])) 
-                                {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}} 
-                                @else
-                                {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','radioSearch','filterContact','unit','contact'))->links()}} 
-                                @endif
-                                @else 
-                                @if(isset($_GET['type']))
-                                {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}} 
-                                @else 
-                                {{$result_data->appends(Request::only('p','type','build','area','bedroom','agent','unit','contact'))->links()}} 
-                                @endif
-                                @endif
           
                             </div>
                               

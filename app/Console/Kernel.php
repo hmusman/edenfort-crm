@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\agentsReports::class
+        Commands\agentsReports::class,
+        Commands\AgentsWeeklyReport::class
     ];
 
     /**
@@ -27,7 +28,10 @@ class Kernel extends ConsoleKernel
         //   Reminder::where('property_id',7)->delete();
         // })->everyMinute();
         $schedule->command('agents:reports')
-                ->everyMinute();
+                ->daily();
+
+        $schedule->command('agents:weeklyreport')
+                ->weekly();
     }
 
     /**

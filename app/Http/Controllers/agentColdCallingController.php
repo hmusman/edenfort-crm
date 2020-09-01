@@ -1708,7 +1708,7 @@ $result_data=coldcallingModel::where(['Building'=>$request->build])->where(['are
 $result_data=coldcallingModel::where(['Building'=>$request->build])->where(['user_id'=>$currentUser])->where('access', null)->paginate(25);
 
 }else{
-$result_data=coldcallingModel::where('access', null)->where(['user_id'=>$currentUser])->paginate(25);
+$result_data=coldcallingModel::where(['user_id'=>$currentUser])->paginate(25);
 
 }
 

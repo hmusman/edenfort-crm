@@ -79,12 +79,20 @@ class adminColdCallingController extends Controller
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
+            if($data->rented_status == "on"){
+              $price = $data->rented_price;
+            }else if($data->sale_status == "on"){
+              $price = $data->sale_price;
+            }else{
+              $price = $data->price;
+            }
             $message .='
 Building : '.$data->Building.'  
 Size - '.$data->Area_Sqft.'
-Price -'.$data->Price.'
+Price -'.$price.'
 Bedroom- '.$data->Bedroom.'
 Condition- '.$data->Conditions.' 
+Access- '.$data->access.'
 
 Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
 EDEN FORT REAL ESTATE
@@ -99,14 +107,24 @@ EDEN FORT REAL ESTATE
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
+            // dd($data);
+            if($data->rented_status == "on"){
+              $price = $data->rented_price;
+            }else if($data->sale_status == "on"){
+              $price = $data->sale_price;
+            }else{
+              $price = $data->price;
+            }
+
             $message .='
 Owner Name : '.$data->LandLord.'
 Owner Email : '.$data->email.'
 Owner Phone : '.$data->contact_no.'
 Building : '.$data->Building.'  
 Size - '.$data->Area_Sqft.'
-Price -'.$data->Price.'
+Price -'.$price.'
 Type- '.$data->type.'
+Access- '.$data->access.'
 Condition- '.$data->Conditions.' 
 
 Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
@@ -283,11 +301,11 @@ EDEN FORT REAL ESTATE
                       }
                coldCallingModel::where("id",$check_boxes[$key])->update($data);
                $row = coldCallingModel::where('id',$check_boxes[$key])->first();
-              $checkPropertyFromPropertyTable = property::where(['Building'=>$row->Building,'unit_no'=>$row->unit_no])->get();
-                 if(count($checkPropertyFromPropertyTable) == 0){
-                      $row = json_decode(json_encode($row),true);
-                      DB::table('properties')->insert($row);  
-                 }
+              // $checkPropertyFromPropertyTable = property::where(['Building'=>$row->Building,'unit_no'=>$row->unit_no])->get();
+              //    if(count($checkPropertyFromPropertyTable) == 0){
+              //         $row = json_decode(json_encode($row),true);
+              //         // DB::table('properties')->insert($row);  
+              //    }
             }
         }
          return 'true';
