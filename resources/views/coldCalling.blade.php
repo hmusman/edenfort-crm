@@ -630,12 +630,18 @@
                                         <th>Agent</th>
                                         <th>Upcoming </th>
                                         <th>C.A </th>
+                                        @if(session('role') == 'SuperAgent')
+                                        @else
                                         <th>Call</th>
+                                        @endif
                                         <th>Interested</th>
                                         <th>Not Interested</th>
                                         <th>Off Plan</th>
                                         <th>Investor</th>
+                                        @if(session('role') == 'SuperAgent')
+                                        @else
                                         <th>Email</th>
+                                        @endif
                                         <th>Access</th>
                                         <th>Action</th>
                                         @else
@@ -721,6 +727,8 @@
                                            <td>
                                               <label data-toggle="modal" data-target=".bs-example-modal-sm" id="{{$record->id}}" value="Check Availability" style="cursor: pointer;display: table-cell;" class="label label-primary update-status-row">Register</label>
                                            </td>
+                                           @if(session('role') == 'SuperAgent')
+                                           @else
                                            <td>
                                               <div class="content" style="display: none;">
                                                  <?php $temp=explode(',', $record->contact_no);
@@ -731,6 +739,7 @@
                                               <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="label label-success show_content" name="Phone Number">Show</label>
                                               <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_phone">Add</label>
                                            </td>
+                                           @endif
                                            <td>
                                               <label data-toggle="modal" data-target=".bs-example-modal-sm" id="{{$record->id}}" value="Interested" style="cursor: pointer;display: table-cell;" class="label label-primary update-status-row">Register</label>
                                            </td>
@@ -743,6 +752,8 @@
                                            <td>
                                               <label data-toggle="modal" data-target=".bs-example-modal-sm" id="{{$record->id}}" value="Investor" style="cursor: pointer;display: table-cell;" class="label label-primary update-status-row">Register</label>
                                            </td>
+                                           @if(session('role') == 'SuperAgent')
+                                           @else
                                            <td>
                                               <div class="content" style="display: none;">
                                                  <?php $temp=explode(',', $record->email);foreach ($temp as $key=>$value) { ?>
@@ -752,6 +763,7 @@
                                               <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;display: table-cell;position: relative;right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                                               <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_email">Add</label>
                                            </td>
+                                           @endif
                                            <td>{{$record->access}}</td>
                                            <td>
                                              <a href="{{url('EditColdcalling')}}?record_id={{$record->id}}&coldcalling-action=edit" class="edit_supervision">Edit <i class="fa fa-edit"></i></a>
