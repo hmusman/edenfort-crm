@@ -366,7 +366,9 @@ Route::post('permissionUpdateForm','permissionController@permissionUpdateForm');
 //permission Filter Form
 Route::get('filterPermissionUser','permissionController@index');
 Route::post('filterPermissionUser','permissionController@index');
+Route::resource('troubleshooting','TroubleShootingController');
 
+Route::get('agent_troubleshoot','TroubleShootingController@AgentTroubleShoot');
 
 
 

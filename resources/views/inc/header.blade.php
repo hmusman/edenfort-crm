@@ -98,7 +98,7 @@
             font-weight: bold;
           }
           .topnav .navbar-nav .nav-link {
-            font-size: 14.7px;
+            font-size: 13px;
             position: relative;
             padding: 0 10px;
             color: #7c8a96;
@@ -108,7 +108,8 @@
               float: left;
               background-color: transparent;
               padding-left: 0;
-               padding-right: 30px;
+              padding-right: 0px;
+              margin-left: -20px;
           }
           .arrow-down {
               display: inline-block;
@@ -116,7 +117,7 @@
           }
           .right-navPart-setting {
               float: right!important;
-              margin-right: -25px;
+              margin-right: -30px;
           }
           .right-bar .rightbar-nav-tab .nav-item .nav-link {
               background-color: #fff;
@@ -134,6 +135,11 @@
               color: #ffffff;
               text-align: center;
               margin-right: -3px;
+          }
+          @media (min-width: 1900px){
+            body[data-layout=horizontal] .container-fluid {
+                  margin-left: auto;
+            }
           }
         </style>
     </head>
@@ -368,6 +374,7 @@
                                               <a href="{{url('permission')}}?type=For Rent" class="dropdown-item">Permission</a>
                                               <a href="{{url('months')}}?type=For Rent" class="dropdown-item">Months</a>
                                               <a href="{{url('email-templates')}}?type=For Rent" class="dropdown-item">Email Templates</a>
+                                              <a href="{{route('troubleshooting.index')}}" class="dropdown-item">TroubleShooting</a>
                                             </div>
                                           </div>
                                         </div>
@@ -469,6 +476,11 @@
                                       </a>
                                     </li>
                                     @endif
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url('/agent_troubleshoot')}}">
+                                            TroubleShooting
+                                        </a>
+                                    </li>
                                     </ul>
                                 </div>
                             </nav>

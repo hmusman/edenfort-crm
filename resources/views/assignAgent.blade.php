@@ -247,7 +247,7 @@
                                             </td>
                                             <td>{{$counter++}}</td>
                                             <td>{{ucwords($values->Building)}}  <label class="badge badge-info">{{count($values->buildingCount)}} </label></td>
-                                            <td>{{$values->user->user_name}}</td>
+                                            <td>@if(!empty($values->user)) {{$values->user->user_name}} @endif</td>
                                             <td><a class="edit_supervision" href='{{url("edit-buildingAssign")}}?action=edit&id={{$values->id}}'><i class="fa fa-edit"></i> Edit</a></td>
                                             </tr>
                                             <?php  } 
