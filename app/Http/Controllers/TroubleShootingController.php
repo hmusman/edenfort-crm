@@ -166,7 +166,7 @@ class TroubleShootingController extends Controller
 
     public function AgentTroubleShoot(){
         $permissions = permission::where('user_id', session('user_id'))->first();
-        $troubleshooting = TroubleShoot::all();
+        $troubleshooting = \App\Models\TroubleShoot::all();
         return view('agent-troubleshoot',compact('permissions','troubleshooting'));
     }
 }
