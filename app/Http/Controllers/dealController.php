@@ -9,17 +9,24 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\permission;
+use App\Models\Clicks;
 class dealController extends Controller {
     public function months() {
         $permissions = permission::where('user_id', session('user_id'))->first();
 
         $month = DB::table('months')->first();
+
+        $description = 'Months page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Open Close Months','description'=>$description]);
         return view('open-close-months', compact('month', 'permissions'));
     }
     public function closeMonth() {
         $month = DB::table('months')->first();
         $nextMonth = date('Y-m-d', strtotime('first day of +1 month'));
         $month = DB::table('months')->update(["month" => $nextMonth]);
+
+        $description = 'Months is updated.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Open Close Months','description'=>$description]);
         return back()->with('msg', "Month Closed Successfully! Next Month Opened Automatically");
     }
     public function getRecentDeals() {
@@ -34,6 +41,9 @@ class dealController extends Controller {
             $currentYear = Carbon::now()->year;
         }
         $agents = user::where(['role' => 3])->paginate(10);
+
+        $description = 'Recent dela page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Recent Deals','description'=>$description]);
         return view('previous-deals', compact('agents', 'currentMonth', 'currentYear','permissions'));
     }
     public function getDeals() {
@@ -41,6 +51,9 @@ class dealController extends Controller {
 
         $month = DB::table('months')->select('month')->where('status', 'open')->first();
         $agents = user::where(['role' => 3])->paginate(10);
+
+        $description = 'Deals Account Statement page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Deals Account Statement','description'=>$description]);
         return view('dealsAccountStatement', compact('agents', 'month', 'permissions'));
     }
     public function index(Request $request) {
@@ -74,12 +87,18 @@ class dealController extends Controller {
         $date = Carbon::now()->toDateString();
         // dd($date);
         $upcomingDealId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'deals'");
+
+        $description = 'Deals page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Deals','description'=>$description]);
         return view('dealsInformation', compact('getAgentName','deals', 'buildings', 'agents', 'upcomingDealId', 'permissions', 'date'));
     }
     public function insert(Request $r) {
         $buildings = Building::all();
         $agents = user::where(['role' => 3])->get();
         $created = deal::create(['deal_start_date' => $r->deal_start_date,'contract_start_date' => $r->startDate, 'contract_end_date' => $r->endDate, 'unit_no' => $r->unitNo, 'referenceNo' => $r->referenceNo, 'broker_name' => $r->brokerName, 'client_name' => $r->clientName, 'contanct_no' => $r->contactNo, 'email' => $r->email, 'ownerName' => $r->owner_name, 'ownerPhone' => $r->owner_phone, 'ownerEmail' => $r->owner_email, 'ownerNameSecond' => $r->owner_name_second, 'ownerPhoneSecond' => $r->owner_phone_second, 'ownerEmailSecond' => $r->owner_email_second, 'property_type' => $r->propertyType, 'rent_sale_value' => $r->rentSale, 'rentalCheques' => $r->rentalCheques, 'building' => $r->building, 'dealStatus' => $r->dealStatus, 'agent_name' => $r->agentName, 'gross_commission' => $r->grossCommission, 'gc_vat' => $r->gcVat, 'company_commision' => $r->companyCommission, 'cc_vat' => $r->ccVat, 'efAgentCommission' => $r->efAgentCommission, 'efAgentVat' => $r->efAgentVat, 'secondAgentName' => $r->secondAgentName, 'secondAgentCompany' => $r->secondAgentCompany, 'sacPhone' => $r->sacPhone, 'secondAgentCommission' => $r->secondAgentCommission, 'sacAgentVat' => $r->sacAgentVat, 'thirdAgentName' => $r->thirdAgentName, 'thirdAgentCompany' => $r->thirdAgentCompany, 'tacPhone' => $r->tacPhone, 'thirdAgentCommission' => $r->thirdAgentCommission, 'tacVat' => $r->tacVat, 'paymentTerms' => $r->paymentTerms, 'chequeNumber' => $r->chequeNumber, 'ownerCompanyName' => $r->ownerCompanyName, 'chequeAmount' => $r->chequeAmount, 'note' => $r->note, 'user_id' => session('user_id') ]);
+
+        $description = 'New Deal is created';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Create Deals','description'=>$description]);
         //reminder insertion if some person add reminder on add Deal Popup Contract Date
         if ($r->reminderAddPopupDateInput != '') {
             $dateTime = $r->reminderAddPopupDateInput;
@@ -89,24 +108,35 @@ class dealController extends Controller {
             $addby = strtoupper(session('role'));
             $reminderLeadId = $r->reminderLeadId;
             DB::table('reminders')->insert(['date_time' => $dateTime, 'description' => $description, 'reminder_type' => $reminderName, 'reminder_of' => 'Leads', 'user_id' => $currentUser, 'add_by' => $addby, 'property_id' => $reminderLeadId]);
+
+            $description = 'Remidner added on deal.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Create Deals','description'=>$description]);
         }
         return back()->with('msg','Deal Add Successfully!');
     }
     public function update(Request $r) {
         $update = (['deal_start_date' => $r->deal_start_date,'contract_start_date' => $r->startDate, 'contract_end_date' => $r->endDate, 'unit_no' => $r->unitNo, 'referenceNo' => $r->referenceNo, 'broker_name' => $r->brokerName, 'client_name' => $r->clientName, 'contanct_no' => $r->contactNo, 'email' => $r->email, 'ownerName' => $r->owner_name, 'ownerPhone' => $r->owner_phone, 'ownerEmail' => $r->owner_email, 'ownerNameSecond' => $r->owner_name_second, 'ownerPhoneSecond' => $r->owner_phone_second, 'ownerEmailSecond' => $r->owner_email_second, 'property_type' => $r->propertyType, 'rent_sale_value' => $r->rentSale, 'rentalCheques' => $r->rentalCheques, 'building' => $r->building, 'dealStatus' => $r->dealStatus, 'agent_name' => $r->agentName, 'gross_commission' => $r->grossCommission, 'gc_vat' => $r->gcVat, 'company_commision' => $r->companyCommission, 'cc_vat' => $r->ccVat, 'efAgentCommission' => $r->efAgentCommission, 'efAgentVat' => $r->efAgentVat, 'secondAgentName' => $r->secondAgentName, 'secondAgentCompany' => $r->secondAgentCompany, 'sacPhone' => $r->sacPhone, 'secondAgentCommission' => $r->secondAgentCommission, 'sacAgentVat' => $r->sacAgentVat, 'thirdAgentName' => $r->thirdAgentName, 'thirdAgentCompany' => $r->thirdAgentCompany, 'tacPhone' => $r->tacPhone, 'thirdAgentCommission' => $r->thirdAgentCommission, 'tacVat' => $r->tacVat, 'paymentTerms' => $r->paymentTerms, 'chequeNumber' => $r->chequeNumber, 'ownerCompanyName' => $r->ownerCompanyName, 'chequeAmount' => $r->chequeAmount, 'note' => $r->note, 'user_id' => session('user_id') ]);
         deal::where(['id' => $r->dealId])->update($update);
+
+        $description = 'Deal with id => '.$r->dealId.' is updated.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Deals','description'=>$description]);
         return back()->with('msg','Deal Updated Successfully!');
     }
     public function addSalary() {
         $month = DB::table('months')->select('month')->where('status', 'open')->first();
         $data = array('agent_id' => input::get('agent_id'), 'total_company_commission' => input::get('monthly_balance'), 'gross_commission' => input::get('monthly_balance') * input::get('agent_percentage') / 100, 'percentage' => input::get('agent_percentage'), 'created_at' => $month->month, 'updated_at' => $month->month,);
         DB::table('agent_accounts')->insert($data);
+
+        $description = 'Add salary in agent account.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add Salary','description'=>$description]);
         return back()->with('msg', 'Salaray Added Successfully!');
     }
     public function updatePercentage() {
         $total_commission = DB::table('agent_accounts')->where('agent_id', input::get('agent_id'))->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->first();
         $data = array('gross_commission' => $total_commission->gross_commission + input::get('new_percentage'), 'relief' => input::get('new_percentage'),);
         DB::table('agent_accounts')->where('agent_id', input::get('agent_id'))->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->update($data);
+        $description = 'Update salary in agent account.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update salary','description'=>$description]);
         return back()->with('msg', 'Salaray Updated Successfully!');
     }
 }

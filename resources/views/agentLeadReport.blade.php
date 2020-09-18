@@ -332,9 +332,16 @@
                                                <th>Date</th>
                                                <th>Client </th> 
                                                <th>Building </th> 
-                                               <th>Agent </th> 
+                                               <th>Agent </th>
+                                               @if(session('role') == 'SuperAgent')
+                                               @if($permissions->lead_show_contact_info == '1') 
                                                <th>Contact </th>
                                                <th>Email </th>
+                                               @endif
+                                               @else
+                                               <th>Contact </th>
+                                               <th>Email </th>
+                                               @endif
                                                <th>Source </th>
                                                <th>Type </th>
                                                <th>Rent </th>
@@ -373,17 +380,18 @@
                                                   <td class="lClient" >{{$lead->client_name}}</td>
                                                   <td class="lUser" style="white-space: break-spaces;">{{$lead->building}}</td>
                                                   <td class="lUser">{{str_replace('</p>', '',$lead->lead_user)}}</td>
+                                                  @if(session('role') == 'SuperAgent')
+                                                  @if($permissions->lead_show_contact_info == '1')
                                                   <td>
                                                     <div>
                                                     <?php $temp=explode(',', $lead->contact_no);
                                                     foreach ($temp as $key=>$value) { ?>
                                                             <span>{{$value}}<br></span>
                                                     <?php  }  ?>
-                                                    </div> 
-                                                    <!-- <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;position: relative;right: 5px;display: none;" class="label label-success show_EmailPhone" name="Phone Number">Show</label> -->
+                                                    </div>
                                                     <label data-toggle="modal" data-target="#addPhoneEmail" id="{{$lead->id}}" style="font-size: 11px;cursor: pointer;display: table-cell;" class="badge badge-success add_phone">Add</label>
-                                                    </td> 
-                                                    <td>
+                                                  </td> 
+                                                  <td>
                                                     <div class="content" style="display: none;">
                                                     <?php $temp=explode(',', $lead->email);foreach ($temp as $key=>$value) { ?>
                                                         <span style="display: block;width: 100%;">{{$value}}</span>
@@ -392,6 +400,27 @@
                                                     <label data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 11px;cursor: pointer;display: table-cell;position: relative;right: 5px;" class="badge badge-primary show_EmailPhone" name="Email Address">Show</label>
                                                     <label data-toggle="modal" data-target="#addPhoneEmail" id="{{$lead->id}}" style="font-size: 11px;cursor: pointer;display: table-cell;" class="badge badge-success add_email">Add</label>
                                                 </td>
+                                                @endif
+                                                @else
+                                                <td>
+                                                    <div>
+                                                    <?php $temp=explode(',', $lead->contact_no);
+                                                    foreach ($temp as $key=>$value) { ?>
+                                                            <span>{{$value}}<br></span>
+                                                    <?php  }  ?>
+                                                    </div>
+                                                    <label data-toggle="modal" data-target="#addPhoneEmail" id="{{$lead->id}}" style="font-size: 11px;cursor: pointer;display: table-cell;" class="badge badge-success add_phone">Add</label>
+                                                  </td> 
+                                                  <td>
+                                                    <div class="content" style="display: none;">
+                                                    <?php $temp=explode(',', $lead->email);foreach ($temp as $key=>$value) { ?>
+                                                        <span style="display: block;width: 100%;">{{$value}}</span>
+                                                    <?php  }  ?>
+                                                    </div>
+                                                    <label data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 11px;cursor: pointer;display: table-cell;position: relative;right: 5px;" class="badge badge-primary show_EmailPhone" name="Email Address">Show</label>
+                                                    <label data-toggle="modal" data-target="#addPhoneEmail" id="{{$lead->id}}" style="font-size: 11px;cursor: pointer;display: table-cell;" class="badge badge-success add_email">Add</label>
+                                                </td>
+                                                @endif
                                                 <td class="lSource">{{$lead->lead_source}}</td>
                                                 <td class="lType">{{$lead->type}}</td>
                                                 <td class="lPriority" style="display:none;">{{$lead->priority}}</td>

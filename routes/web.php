@@ -10,6 +10,10 @@ Route::post('assign-singlebuilding','adminPropertyController@singlePersonBuildin
 Route::get('direct-pdf-report', 'directPdfReportController@index');
 Route::post('direct-pdf-report', 'directPdfReportController@generate');
 
+Route::get('click_report', 'directPdfReportController@ClicksReport');
+Route::post('SearchClicksReport', 'directPdfReportController@SearchClicksReport');
+
+
 //Excel report
 Route::get('propertiesexport', 'adminPropertyController@propertiesexport')->name('export_properties');
 Route::get('coldcallingexport', 'adminColdCallingController@coldcallignexport')->name('export_coldcallings');

@@ -14,6 +14,7 @@ use App\Models\user;
 use App\Models\userFiles;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\Clicks;
 use Session;
 use Excel;
 use File;
@@ -102,6 +103,8 @@ class getAgentsReportsController extends Controller
                 $message->from($contactEmail, $contactName);
                 $message->to('wasif@edenfort.ae', 'EdenFort CRM')->subject('Daily Agents Report');
             });
+        $description = 'Daily agents report is sent on mail.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Lead Mail','description'=>$description]);
          echo "HTML Email Sent. Check your inbox.";
     } 
 }

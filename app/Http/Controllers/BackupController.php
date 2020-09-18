@@ -9,6 +9,7 @@ use Log;
 use Response;
 use Storage;
 use App\Models\permission;
+use App\Models\Clicks;
 use Request;
 
 
@@ -45,6 +46,8 @@ class BackupController extends Controller
         $this->data['backups'] = array_reverse($this->data['backups']);
         $this->data['title'] = 'Backups';
 
+        $description = 'backup page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Backups','description'=>$description]);
         return view('backup', $this->data, compact('permissions'));
     }
 
@@ -61,7 +64,8 @@ class BackupController extends Controller
         } catch (Exception $e) {
             Response::make($e->getMessage(), 500);
         }
-
+        $description = 'Backup created by '.session('user_name');
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Backups','description'=>$description]);
         return back()->with("msg","<div class='alert alert-success'>Backup Created Successfully!</div>");
     }
 
@@ -78,6 +82,8 @@ class BackupController extends Controller
             $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
             if ($disk->exists($file_name)) {
+                $description = 'Backup downloaded by '.session('user_name');
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Backups','description'=>$description]);
                 return response()->download($storage_path.$file_name);
             } else {
                 return back()->with("msg","<div class='alert alert-danger'>Backup not Found!</div>");
@@ -96,6 +102,8 @@ class BackupController extends Controller
 
         if ($disk->exists($file_name)) {
             $disk->delete($file_name);
+            $description = 'Backup deleted by '.session('user_name');
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Backups','description'=>$description]);
             return back()->with("msg","<div class='alert alert-success'>Backup Deleted Successfully!</div>");
         } else {
              return back()->with("msg","<div class='alert alert-danger'>Backup not Found!</div>");

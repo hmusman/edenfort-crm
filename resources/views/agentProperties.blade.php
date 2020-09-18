@@ -587,8 +587,10 @@
                                                    <th>Building Name </th>
                                                    <th>Area </th>
                                                    <th>LandLord </th>
+                                                   @if(@$permissions->prop_show_contact_info == '1')
                                                    <th>Contact No</th>
                                                    <th>Email</th>
+                                                   @endif
                                                    <th>Area Sqft</th>
                                                    <th>Beds</th>
                                                    <th>Price</th>
@@ -626,6 +628,7 @@
                                                   <td>{{$record->Building}}</td>
                                                   <td>{{$record->area}}</td>
                                                   <td>{{strtoupper($record->LandLord)}}</td>
+                                                  @if(@$permissions->prop_show_contact_info == '1')
                                                   <td>
                                                      <div class="content" style="display: none;">
                                                         <?php $temp=explode(',', $record->contact_no);
@@ -645,6 +648,7 @@
                                                      <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;display: table-cell;position: relative;right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                                                      <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_email">Add</label>
                                                   </td>
+                                                  @endif
                                                   <td>{{$record->Area_Sqft}}</td>
                                                   <td>{{$record->Bedroom}}</td>
                                                   <td>{{$record->Price}}</td>

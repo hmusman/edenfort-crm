@@ -14,7 +14,7 @@ class menuController extends Controller
       $agent=User::where(['role'=>'3'])->get();
 
 
-    	return view('inc.header',compact(['owner','admin','agent']));
+       return view('inc.header',compact(['owner','admin','agent']));
     }
 
 }

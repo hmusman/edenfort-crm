@@ -35,26 +35,9 @@
                     <div class="col-md-8">
                         <h4 class="page-title mb-1">{{strtoupper($user->user_name)}}'s Reminders</h4>
                         <ol class="breadcrumb m-0">
-                            <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li> -->
                         <li class="breadcrumb-item active">Edenfort CRM > {{strtoupper($user->user_name)}}'s Reminders</li>
                         </ol>
-                    </div><!-- 
-                    <div class="col-md-4">
-                        <div class="float-right d-none d-md-block">
-                            <div class="dropdown">
-                                <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="mdi mdi-settings-outline mr-1"></i> Settings
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                    </div>
                 </div>
 
             </div>
@@ -149,46 +132,10 @@
 <!-- Datatable init js -->
 <script src="{{url('public/Green/assets/js/pages/datatables.init.js')}}"></script>
 
- <!--<script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>-->
-  <script src="{{url('public/assets/plugins/raphael/raphael-min.js')}}"></script>
-    <script src="{{url('public/assets/plugins/morrisjs/morris.min.js')}}"></script>
-    <!-- Chart JS 
-    <script src="{{url('public/assets/js/dashboard1.js')}}"></script>-->
-   <!--  <script>
-        $(document).on('click', '.disable_reminder', function() {
-        $('#create').modal('show');
-        $('.form-horizontal').show();
-        $('.modal-title').text('Disable Reminder');
-    });
-        $("#add").click(function() {
-            var reason=$('#reason').val();
-            var property_id=$('#property_id').val();
-            var user_id=$('#user_id').val();
-            $('.reason').val(reason);
-            $('.property_id').val(property_id);
-            $('.user_id').val(user_id);
-
-            $.ajax({
-                 type: 'get',
-                 url: 
-                 data: $('#formadd').serialize(),
-
-                 success: function(data){
-                    if(data=="true"){
-                        location.reload();
-                    }
-                    if(data=="no"){
-                        alert('Sorry! You can not disable other users reminders.');
-                    }
-                    else{
-                        alert('Plaease enter the valid reason.');
-                         // $('.reminder-reason-error').html(data);
-                    }
-                 }
-            });
-        });
-    </script> -->
-    
+<!--<script src="{{url('public/assets/plugins/jquery/jquery.min.js')}}"></script>-->
+<script src="{{url('public/assets/plugins/raphael/raphael-min.js')}}"></script>
+<script src="{{url('public/assets/plugins/morrisjs/morris.min.js')}}"></script>
+   
     <script>
         $('body').delegate('.disable_reminder','click',function(){
         var property_id=$(this).attr('property_id');
@@ -234,28 +181,17 @@
                                             $('.notification_counter').text(data);
                                             notification.parent().remove();
                                             location.reload();
-                                            // $('.notification_bucket').html("");
                                         }
                                     }
                                 });
                                 // });
                         }
-                        // $.alert('Reminder Disable Successfully!');
                     }
                 },
                 cancel: function () {
                     //close
                 },
             },
-            // onContentReady: function () {
-            //     // bind to events
-            //     var jc = this;
-            //     this.$content.find('form').on('submit', function (e) {
-            //         // if the user submits the form by pressing enter in the field.
-            //         e.preventDefault();
-            //         // jc.$$formSubmit.trigger('click'); // reference the button and click it
-            //     });
-            // }
         });
       })
 
@@ -327,15 +263,6 @@
                     //close
                 },
             },
-            // onContentReady: function () {
-            //     // bind to events
-            //     var jc = this;
-            //     this.$content.find('form').on('submit', function (e) {
-            //         // if the user submits the form by pressing enter in the field.
-            //         e.preventDefault();
-            //         // jc.$$formSubmit.trigger('click'); // reference the button and click it
-            //     });
-            // }
         });
       })
     </script>

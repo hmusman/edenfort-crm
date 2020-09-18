@@ -704,12 +704,16 @@
                                              <th>LandLord </th>
                                              <th>Upcoming </th>
                                              <th>C.A </th>
+                                             @if(@$permissions->cold_show_contact_info == '1')
                                              <th>Call</th>
+                                             @endif
                                              <th>Interested</th>
                                              <th>Not Interested</th>
                                              <th>Off Plan</th>
                                              <th>Investor</th>
+                                             @if(@$permissions->cold_show_contact_info == '1')
                                              <th>Email</th>
+                                             @endif
                                              <th>Access</th>
                                           @else
                                              <th class="checkall" style="cursor:pointer">Select All</th>
@@ -717,8 +721,10 @@
                                              <th>Building</th>
                                              <th>Area </th>
                                              <th>LandLord</th>
+                                             @if(@$permissions->cold_show_contact_info == '1')
                                              <th>Phone</th>
                                              <th>Email</th>
+                                             @endif
                                              <th>Area Sqft</th>
                                              <th>Bedroom</th>
                                              <th>Washroom</th>
@@ -760,6 +766,7 @@
                                                 <td>
                                                     <label data-toggle="modal" data-target=".bs-example-modal-sm" id="{{$record->id}}" value="Check Availability" style="cursor: pointer; display: table-cell;" class="badge badge-success update-status-row">Register</label>
                                                 </td>
+                                                @if(@$permissions->cold_show_contact_info == '1')
                                                 <td>
                                                     <div class="content" style="display: none;">
                                                         <?php $temp=explode(',', $record->contact_no); foreach ($temp as $key=>$value) { ?>
@@ -769,6 +776,7 @@
                                                     <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer; position: relative; right: 5px; display: table-cell;" class="label label-success show_content" name="Phone Number">Show</label>
                                                     <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer; display: table-cell;" class="label label-primary add_phone">Add</label>
                                                 </td>
+                                                @endif
                                                 <td>
                                                     <label data-toggle="modal" data-target=".bs-example-modal-sm" id="{{$record->id}}" value="Interested" style="cursor: pointer; display: table-cell;" class="badge badge-success update-status-row">Register</label>
                                                 </td>
@@ -781,6 +789,7 @@
                                                 <td>
                                                     <label data-toggle="modal" data-target=".bs-example-modal-sm" id="{{$record->id}}" value="Investor" style="cursor: pointer; display: table-cell;" class="badge badge-success update-status-row">Register</label>
                                                 </td>
+                                                @if(@$permissions->cold_show_contact_info == '1')
                                                 <td>
                                                     <div class="content" style="display: none;">
                                                         <?php $temp=explode(',', $record->email);foreach ($temp as $key=>$value) { ?>
@@ -790,6 +799,7 @@
                                                     <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer; display: table-cell; position: relative; right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                                                     <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer; display: table-cell;" class="label label-primary add_email">Add</label>
                                                 </td>
+                                                @endif
                                                 <td style="white-space: break-spaces;">{{$record->access}}</td>
                                             </tr>
                                             <!--TOGGLE ROW START FROM HERE-->
@@ -920,6 +930,7 @@
                                                 <td style="white-space: break-spaces;">{{$record->Building}}</td>
                                                 <td style="white-space: break-spaces;">{{$record->area}}</td>
                                                 <td style="white-space: break-spaces;">{{strtoupper($record->LandLord)}}</td>
+                                                @if(@$permissions->cold_show_contact_info == '1')
                                                 <td>
                                                     <div class="content" style="display: none;">
                                                         <?php $temp=explode(',', $record->contact_no); foreach ($temp as $key=>$value) { ?>
@@ -938,6 +949,7 @@
                                                     <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer; display: table-cell; position: relative; right: 5px;" class="label label-success show_content" name="Email Address">Show</label>
                                                     <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer; display: table-cell;" class="label label-primary add_email">Add</label>
                                                 </td>
+                                                @endif
                                                 <td>{{$record->Area_Sqft}}</td>
                                                 <td>@if(!is_null($record->Bedroom)){{$record->Bedroom}}@else N/A @endif</td>
                                                 <td>@if(!is_null($record->Washroom)){{$record->Washroom}}@else N/A @endif</td>

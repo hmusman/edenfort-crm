@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use App\Models\user;
 use App\Models\role;
+use App\Models\Clicks;
 use App\Models\permission;
 use App\Models\Supervision;
 use DB;
@@ -23,6 +24,9 @@ class userController extends Controller
 
           $Role=role::all();
           $value=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
+
+          $description = 'Owner page is visited';
+          Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Owners','description'=>$description]);
           return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'owners', 'permissions'=>$permissions]);
     }
     public function agents(Request $request){
@@ -30,6 +34,9 @@ class userController extends Controller
 
           $Role=role::all();
           $value=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='Agent'");
+
+          $description = 'Agents page is visited';
+          Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agents','description'=>$description]);
           return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'agents', 'permissions'=>$permissions]);
     }
      public function admins(Request $request){
@@ -37,6 +44,9 @@ class userController extends Controller
 
           $Role=role::all();
           $value=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='admin'");
+
+          $description = 'Admins page is visited';
+          Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Admins','description'=>$description]);
           return view('user',["Role"=>$Role,"value"=>$value,'heading'=>'admins', 'permissions'=>$permissions]);
     }
     public function insertUser(Request $request){
@@ -64,12 +74,18 @@ class userController extends Controller
         $value->save();
         $lastID = DB::getPdo()->lastInsertId();
         DB::table("permissions")->insert(['user_id'=>$lastID,"dashboardView"=>1]);
+
+        $description = 'New user with name => '.$request->input('user_name').', email => '.$request->input('Email').' is added.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add User','description'=>$description]);
         return redirect("$route")->with("msg","Data Addedd Successfully");
     }
     public function EditUser($id,Request $request){
       $record=user::find($id);
       $Role=role::all();
       $user=$request->input('user');
+
+      $description = 'User edited.';
+      Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Edit User','description'=>$description]);
       return view('user',compact(['record','Role','user']));
     }
     public function updateUser($id,Request $request){
@@ -124,6 +140,8 @@ class userController extends Controller
            'status'=>$request->input('status'),
          );
          user::where('id',$id)->update($edit);
+         $description = 'User updated.';
+         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update User','description'=>$description]);
          return redirect(''.$route.'')->with("msg","Data Updated Successfully");
       }else{
           
@@ -154,6 +172,8 @@ class userController extends Controller
            'status'=>$request->input('status'),
          );
          user::where('id',$id)->update($edit);
+         $description = 'User updated.';
+         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update User','description'=>$description]);
          return redirect(''.$route.'')->with("msg","Data Updated Successfully");
       }
   }
@@ -163,6 +183,8 @@ class userController extends Controller
           if(count($currentPassword) > 0){
             user::where("id",session('user_id'))->update(["Password"=>md5(input::get('newPassword'))]);
             session()->put('user_password',md5(input::get('newPassword')));
+            $description = 'User updated password.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Change Password','description'=>$description]);
             return redirect("/")->with("success","Password Change Successfully!");
           }else{
             return redirect("/")->with("error","Current Password incorrect!");

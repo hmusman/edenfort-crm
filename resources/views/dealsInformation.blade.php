@@ -226,7 +226,13 @@
                                                   <th>Broker</th>
                                                   <th>Unit</th>
                                                   <th>Client</th>
+                                                  @if(session('role') == 'SuperAgent')
+                                                  @if($permissions->deal_show_contact_info == '1')
                                                   <th>Contact</th>
+                                                  @endif
+                                                  @else
+                                                  <th>Contact</th>
+                                                  @endif
                                                   <th>Access</th>
                                               </tr>
                                               </thead>
@@ -261,7 +267,13 @@
                                                      <td class="broker_name">{{$deal->broker_name}}</td>
                                                      <td class="unit_no">{{$deal->unit_no}}</td>
                                                      <td class="client_name">{{$deal->client_name}}</td>
+                                                     @if(session('role') == 'SuperAgent')
+                                                     @if($permissions->deal_show_contact_info == '1')
                                                      <td class="contanct_no">{{$deal->contanct_no}}</td>
+                                                     @endif
+                                                     @else
+                                                     <td class="contanct_no">{{$deal->contanct_no}}</td>
+                                                     @endif
                                                      <td class="email" style="display:none;">{{$deal->email}}</td>
                                                      <td class="property_type" style="display:none;">{{$deal->property_type}}</td>
                                                      <td class="rent_sale_value"  style="display:none;">{{$deal->rent_sale_value}}</td>

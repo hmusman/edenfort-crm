@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\submittedProperty;
 use DB;
 use App\Models\property;
+use App\Models\Clicks;
 use App\Models\permission;
+use App\Models\coldcallingModel;
 class submittedPropertyController extends Controller
 {
     public function index(Request $r){
@@ -82,6 +84,9 @@ class submittedPropertyController extends Controller
 }//end else of get type
 
 $properties=$result;
+      
+       $description = 'Submitted property page is visited.' ;
+       Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
     	return view('submittedProperty',compact('properties', 'permissions'));
     }
 
@@ -105,6 +110,8 @@ $type=$g->get('type');
   	
 
     	DB::table('submittedproperties')->where('id',$id)->update(['unit_no'=>$unit,'Building'=>$Building,'area'=>$area,'LandLord'=>$LandLord,'email'=>$email,'contact_no'=>$contact_no,'Bedroom'=>$Bedroom,'Washroom'=>$Washroom,'Conditions'=>$Conditions,'Area_Sqft'=>$Area_Sqft,'Price'=>$Price,'type'=>$type]);
+      $description = 'Submitted property with id => '.$id.' is updated.' ;
+      Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Submitted Property','description'=>$description]);
     	return back()->with('msg','Property Updated Successfully!');
       //  print_r($countries);
   }catch(\Exception $e){
@@ -124,6 +131,9 @@ public function bulkUpdateSubmittedProperty(Request $r){
                    'access' => $access,
                  );
                DB::table('submittedproperties')->where("id",$check_boxes[$key])->update($data);
+
+               $description = 'Submitted property with id => '.$check_boxes[$key].' is updated.' ;
+               Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Submitted Property','description'=>$description]);
               
             }
         }//end of changing status
@@ -151,12 +161,12 @@ if($access=="Transferred"){
       foreach($check_boxes as $key=>$value){
             if(isset($check_boxes[$key])){
                 
-                $allowInsert=property::where('unit_no',$pUnit[$key])->where('Building',$pBuilding[$key])->get();
+                $allowInsert=coldcallingModel::where('unit_no',$pUnit[$key])->where('Building',$pBuilding[$key])->get();
                 
                 $data=array(
                   'unit_no'=>$pUnit[$key],'Building'=>$pBuilding[$key],'area'=>$pArea[$key],'LandLord'=>$pLandlord[$key],'email'=>$pEmail[$key],'contact_no'=>$pContact[$key],'Bedroom'=>$pBedrooms[$key],'Washroom'=>$pWashrooms[$key],'Conditions'=>$pCondition[$key],'Area_Sqft'=>$pArea_Sqft[$key],'Price'=>$pPrice[$key],'access'=>$pType[$key]);
                   if($allowInsert->isEmpty()){               
-               DB::table('properties')->insert($data);
+                      DB::table('coldcalling')->insert($data);
                
                    }else{
                        $msg[]="Unit# ".$pUnit[$key]." with this ".$pBuilding[$key]."  Already Transferred!";

@@ -501,6 +501,10 @@
                                             <th>Area </th>
                                             <th>LandLord </th>
                                             @if(session('role') == 'SuperAgent')
+                                            @if($permissions->prop_show_contact_info == '1')
+                                            <th>Contact No</th>
+                                            <th>Email</th>
+                                            @endif
                                             @else
                                             <th>Contact No</th>
                                             <th>Email</th>
@@ -576,6 +580,27 @@
                                            <td>{{$record->area}}</td>
                                            <td>{{strtoupper($record->LandLord)}}</td>
                                            @if(session('role') == 'SuperAgent')
+                                           @if($permissions->prop_show_contact_info == '1')
+                                           <td>
+                                              <div class="content" style="display: none;">
+                                                <?php $temp=explode(',', $record->contact_no);
+                                                   foreach ($temp as $key=>$value) { ?>
+                                                <span style="display: block;width: 100%;">{{$value}}</span>
+                                                <?php  }  ?>
+                                             </div>
+                                             <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="label label-success show_content" name="Phone Number">Show</label>
+                                             <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_phone">Add</label>
+                                           </td>
+                                           <td>
+                                              <div class="content" style="display: none;">
+                                                <?php $temp=explode(',', $record->email);foreach ($temp as $key=>$value) { ?>
+                                                <span style="display: block;width: 100%;">{{$value}}</span>
+                                                <?php  }  ?>
+                                             </div>
+                                             <label data-toggle="modal" data-target="#exampleModalCenter" class="label label-success show_content show_email" name="Email Address">Show</label>
+                                             <label data-toggle="modal" data-target="#exampleModal" id="{{$record->id}}" style="cursor: pointer;display: table-cell;" class="label label-primary add_email">Add</label>
+                                           </td>
+                                           @endif
                                            @else
                                            <td>
                                               <div class="content" style="display: none;">

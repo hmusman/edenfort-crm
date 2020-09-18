@@ -478,9 +478,11 @@
                                                 <th>Date</th>
                                                 <th>Client </th> 
                                                 <th>Building </th> 
-                                                <th>Agent </th> 
+                                                <th>Agent </th>
+                                                @if(@$permissions->lead_show_contact_info == '1') 
                                                 <th>Contact </th>
                                                 <th>Email </th>
+                                                @endif
                                                 <th>Source </th>
                                                 <th>Type </th>
                                                 <th>Rent </th>
@@ -519,6 +521,7 @@
                                                   <td class="lUser">{{$lead->building}}</td>
                                                   <td class="lUser">{{str_replace("</p>","",$lead->lead_user)}}
                                                   </td>
+                                                  @if(@$permissions->lead_show_contact_info == '1') 
                                                   <td>
                                                     <div>
                                                     <?php $temp=explode(',', $lead->contact_no);
@@ -531,6 +534,7 @@
                                                     <label data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;display: table-cell;position: relative;right: 5px;" class="badge badge-primary show_EmailPhone" name="Email Address">Show</label>
                                                     <label data-toggle="modal" data-target="#addPhoneEmail" id="{{$lead->id}}" style="cursor: pointer;display: table-cell;" class="badge badge-success add_email">Add</label>
                                                   </td>  
+                                                  @endif
                                                   <td class="lSource">{{$lead->lead_source}}</td>
                                                   <td class="lType">{{$lead->type}}</td>
                                                   <td class="lPriority" style="display:none;">{{$lead->priority}}</td> 

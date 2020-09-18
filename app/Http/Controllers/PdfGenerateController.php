@@ -6,6 +6,7 @@ use DB;
 use PDF;
 use App\Models\agentAccounts;
 use App\Models\deal;
+use App\Models\Clicks;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 class PdfGenerateController extends Controller
@@ -18,6 +19,8 @@ class PdfGenerateController extends Controller
         view()->share(['supervision'=>$supervision,"maintenance"=>$maintenance,"total"=>$total]);
         	PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
             $pdf = PDF::loadView('pdfview');
+            $description = 'PDF generated.' ;
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
             return $pdf->download('pdfview.pdf');
     }
     public function exportSalary(Request $request)
@@ -29,6 +32,9 @@ class PdfGenerateController extends Controller
         view()->share(['account'=>$account,"getAgentsDeals"=>$getAgentsDeals,'open_month'=>$month,"loan"=>$loan]);
         	PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
             $pdf = PDF::loadView('salarypdf');
+
+            $description = 'Salary Exported.' ;
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Export Salary','description'=>$description]);
             return $pdf->download(rand('11111','999999').'-salary.pdf');
     }
 }

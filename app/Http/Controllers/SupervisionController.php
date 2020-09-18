@@ -16,6 +16,7 @@ use App\Models\user;
 use App\Models\userFiles;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\Clicks;
 use App\Models\deal;
 use Session;
 use Excel;
@@ -127,6 +128,9 @@ class SupervisionController extends Controller
     // dd($deals);
     $latestProperties = coldCallingModel::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->get();
+
+    $description = 'Dashboard is visited.' ;
+    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Dashboard','description'=>$description]);
      return view('dashboard',compact(['contracts','users','properties','agents','owners','admins','buildings','leads','rent','sale','upcoming',
                 'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','totalAgentActivity','coldCallings','allusers','permissions','coldCallingsSuperAgent',"reminders","latestProperties","latestLeads",'remSummery','deals','currentDate','firstDayName','secondDayName','thirdDayName','fourDayName','fiveDayName','sixDayName','currentDayName',]));
     }
@@ -137,6 +141,9 @@ class SupervisionController extends Controller
          $buildings=Building::all();
          $Recorddisplay = 'block';
          $Formdisplay  = 'none';
+
+        $description = 'Supervision page is visited.' ;
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Supervision','description'=>$description]);
         return view('supervision',compact(['result_data','users','buildings','permissions','Recorddisplay','Formdisplay']));
     }
     public function AddSupervison(Request $request){
@@ -183,6 +190,8 @@ class SupervisionController extends Controller
     		$supervison->tenant_number=input::get("tenant_number");
     		$supervison->tenant_email=input::get("tenant_email");
     		$supervison->save();
+            $description = 'New supervision is added';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add Supervision','description'=>$description]);
     		$supervision_id=DB::getPdo()->lastInsertId();
             $documents_files=array();
             $documents=input::file('documents');
@@ -272,12 +281,16 @@ class SupervisionController extends Controller
             if($action=='Update'){
                 if(isset($check_boxes[$key])){
                   Supervision::where("id",$check_boxes[$key])->update(["access"=>$updated_access[$key]]);
-                    $message='<div class="alert alert-success">Record Updated Successfully</div>';  
+                    $message='<div class="alert alert-success">Record Updated Successfully</div>'; 
+                     $description = 'Supervision is updated.';
+                     Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Supervision','description'=>$description]); 
                 }
             }else if($action=='Delete'){
                 if(isset($check_boxes[$key])){
                   Supervision::where("id",$check_boxes[$key])->delete();
-                  $message='<div class="alert alert-success">Record Deleted Successfully</div>';  
+                  $message='<div class="alert alert-success">Record Deleted Successfully</div>';
+                  $description = 'Supervision is deleted.';
+                  Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Delete Supervision','description'=>$description]);  
                 }
             }
         }
@@ -301,6 +314,8 @@ class SupervisionController extends Controller
         $total=json_decode(json_encode($total),true);
         $buildings=Building::all();
         $permissions = permission::where('user_id', session('user_id'))->first();
+        $description = 'Supervision is edited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Edit Supervision','description'=>$description]);
         return view("supervision",["buildings"=>$buildings,"result"=>$result,"maintenanceRecord"=>$maintenanceRecord,"complainRecord"=>$complainRecord,"cheaqueRecord"=>$cheaqueRecord,"Formdisplay"=>"block","Recorddisplay"=>"none","total"=>$total,'users'=>$owners,'documents' => $documents,"permissions"=>$permissions]);
     }
     public function UpdateSupervision(){
@@ -405,6 +420,8 @@ class SupervisionController extends Controller
                 }
                  SupervisionMaintenance::insert($maintenance_Array);
             }
+            $description = 'Supervision is updated.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Supervision','description'=>$description]);
             return redirect("/supervision")->with("msg","<div class='alert alert-success'>Data Updated Successfully</div>");
         }else{
             return redirect("/supervision")->with("msg","<div class='alert alert-danger'>Something Went Wrong</div>");
@@ -414,6 +431,9 @@ class SupervisionController extends Controller
         $mytime = \Carbon\Carbon::now();
         $date=$mytime->format('Y-m-d G:i').':00';
         $result=Reminder::where('status','viewed')->get();
+
+        $description = 'Det agents reminders.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
         return json_decode(json_encode($result),true);
     }
      public function getReminders(){
@@ -478,6 +498,8 @@ class SupervisionController extends Controller
                 DB::table('user_files')->insert($documents_files);
             }
         }
+        $description = 'New owner => '.$request->input('user_name').' with email => '.$request->input('Email').' is added.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add Owner','description'=>$description]);
         return 'true';
         
     }

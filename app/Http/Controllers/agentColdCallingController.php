@@ -14,6 +14,7 @@ use App\Models\user;
 use App\Models\userFiles;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\Clicks;
 use Session;
 use Excel;
 use File;
@@ -26,73 +27,83 @@ class agentColdCallingController extends Controller
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
-if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
-            $message .='
-Building : '.$data->Building.' <br> 
-Size - '.$data->Area_Sqft.'<br>
-Price -'.$data->Price.'<br>
-Type- '.$data->type.'<br>
-Condition- '.$data->Conditions.'<br><br> 
+            if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
+                        $message .='
+                            Building : '.$data->Building.' <br> 
+                            Size - '.$data->Area_Sqft.'<br>
+                            Price -'.$data->Price.'<br>
+                            Type- '.$data->type.'<br>
+                            Condition- '.$data->Conditions.'<br><br> 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
-EDEN FORT REAL ESTATE<br><br><br>
-';
-$receiverEmail = $data->email;
-$data = array('name'=>"EdenFort CRM");
-$contactName = 'EdenFort CRM';
-$contactEmail = input::get('sending_email');
-$template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
-$contactMessage = str_replace("{data}",$message,$template->template_date);
- $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-{   
-    $message->from(str_replace(" ","",$contactEmail), $contactName);
-    $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Property Alert');
-});
-}
+                            Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
+                            EDEN FORT REAL ESTATE<br><br><br>
+                            ';
+                        $receiverEmail = $data->email;
+                        $data = array('name'=>"EdenFort CRM");
+                        $contactName = 'EdenFort CRM';
+                        $contactEmail = input::get('sending_email');
+                        $template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
+                        $contactMessage = str_replace("{data}",$message,$template->template_date);
+                        $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
+                        
+                        Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
+                        {   
+                            $message->from(str_replace(" ","",$contactEmail), $contactName);
+                            $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Property Alert');
+                        });
+            }
+
+            $description = $data->Building .' with Unit No => '. $data->unit_no .' and Area => '. $data->area .' send at email.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent ColdCalling','description'=>$description]);
         }
         return 'true';
     }
-        public function whatsAppMsgsForProperty(){
+    public function whatsAppMsgsForProperty(){
         $message='';
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
             $message .='
-Building : '.$data->Building.'  
-Size - '.$data->Area_Sqft.'
-Price -'.$data->sale_price.'
-Type- '.$data->type.'
-Condition- '.$data->Conditions.' 
+                Building : '.$data->Building.'  
+                Size - '.$data->Area_Sqft.'
+                Price -'.$data->sale_price.'
+                Type- '.$data->type.'
+                Condition- '.$data->Conditions.' 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
-EDEN FORT REAL ESTATE
+                Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
+                EDEN FORT REAL ESTATE
 
 
-';
+                ';
+
+                $description = $data->Building .' with Unit No => '. $data->unit_no .' and Area => '. $data->area .' send at whatsApp.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent ColdCalling','description'=>$description]);
         }
          echo $message;
     }
-        public function whatsAppOwnerMsgsForProperty(){
+    public function whatsAppOwnerMsgsForProperty(){
         $message='';
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
             $message .='
-Owner Name : '.$data->LandLord.'
-Owner Email : '.$data->email.'
-Owner Phone : '.$data->contact_no.'
-Building : '.$data->Building.'  
-Size - '.$data->Area_Sqft.'
-Price -'.$data->Price.'
-Type- '.$data->type.'
-Condition- '.$data->Conditions.' 
+                Owner Name : '.$data->LandLord.'
+                Owner Email : '.$data->email.'
+                Owner Phone : '.$data->contact_no.'
+                Building : '.$data->Building.'  
+                Size - '.$data->Area_Sqft.'
+                Price -'.$data->Price.'
+                Type- '.$data->type.'
+                Condition- '.$data->Conditions.' 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
-EDEN FORT REAL ESTATE
+                Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
+                EDEN FORT REAL ESTATE
 
 
-';
+                ';
+
+                $description = $data->Building .' with Unit No => '. $data->unit_no .' and Area => '. $data->area .' send at whatsApp with owner information.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent ColdCalling','description'=>$description]);
         }
          echo $message;
     }
@@ -156,9 +167,9 @@ EDEN FORT REAL ESTATE
                    unset($row['updated_at']);
                    unset($row['id']);
                    unset($row['access']);
-                   $checkProperty=property::where($row)->delete();
+                   // $checkProperty=property::where($row)->delete();
                    $row['access']=strip_tags(input::get('status'));
-                   DB::table('properties')->insert($row);
+                   // DB::table('properties')->insert($row);
                    $reminder= new Reminder();
                    $reminder->property_id=$check_boxes[$key];
                    $reminder->date_time=$timedate;
@@ -168,12 +179,15 @@ EDEN FORT REAL ESTATE
                    $reminder->add_by="AGENT";
                    $reminder->user_id=session('user_id');
                    $reminder->save();
+
+                   $description = 'Set reminder of type '.strip_tags(input::get('status')).' on Building name => '. $row->Building .' with Unit No => '. $row->unit_no .'and Area => '. $row->area;
+                   Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Set Coldcalling Reminder','description'=>$description]);
+
                 }
             }
                 return "true";
             }catch(\Exception $e){
-                return '<div class="alert alert-danger" style="font-size: 11px;
-        margin-top: 2%;">something went wrong</div>';
+                return '<div class="alert alert-danger" style="font-size: 11px; margin-top: 2%;">something went wrong</div>';
             }
         }
     // 
@@ -195,9 +209,11 @@ EDEN FORT REAL ESTATE
          unset($row['updated_at']);
          unset($row['id']);
          unset($row['access']);
-         $checkProperty=property::where($row)->delete();
+         // $checkProperty=property::where($row)->delete();
          $row['access']=strip_tags(input::get('access'));
-         DB::table('properties')->insert($row);
+         // DB::table('properties')->insert($row);
+         $description = 'Set reminder of type '.strip_tags(input::get('status')).' on Building name => '. $row->Building .' with Unit No => '. $row->unit_no .'and Area => '. $row->area;
+         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Set Coldcalling Reminder','description'=>$description]);
          return 'true';
     }
     // 
@@ -208,9 +224,11 @@ EDEN FORT REAL ESTATE
          unset($row['updated_at']);
          unset($row['id']);
          unset($row['access']);
-         $checkProperty=property::where($row)->delete();
+         // $checkProperty=property::where($row)->delete();
          $row['access']=strip_tags(input::get('access'));
-         DB::table('properties')->insert($row);
+         // DB::table('properties')->insert($row);
+         $description = 'Update Building name => '. $row->Building .' with Unit No => '. $row->unit_no .'and Area => '. $row->area .' and status => '.strip_tags(input::get('access'));
+         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Coldcalling Property','description'=>$description]);
         return 'true';
     }
     // 
@@ -271,9 +289,12 @@ EDEN FORT REAL ESTATE
                unset($row['updated_at']);
                unset($row['id']);
                unset($row['access']);
-               $checkProperty=property::where($row)->delete();
+               // $checkProperty=property::where($row)->delete();
                $row['access']=$status;
-               DB::table('properties')->insert($row);
+               // DB::table('properties')->insert($row);
+
+               $description = 'Update status for building name => '. $row->Building .' with Unit No => '. $row->unit_no .'and Area => '. $row->area .' and status => '. $status;
+               Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Coldcalling Property','description'=>$description]);
             }
         }
          return 'true';
@@ -1722,10 +1743,9 @@ $result_data=coldcallingModel::where(['user_id'=>$currentUser])->paginate(25);
         // dd($reminders);
         $current_date = date('Y-m-d H:i:s');
         // dd($current_date);
+        $description = 'ColdCalling page visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Coldcalling Property','description'=>$description]);
        return view('agentcoldcalling',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions', 'Recorddisplay', 'Formdisplay','reminders','current_date']));
 
-  
-
-        
     }  
 }

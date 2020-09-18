@@ -384,10 +384,18 @@
                                                 Backups
                                             </a>
                                       </li>
-                                      <li class="nav-item">
-                                            <a class="nav-link" href="{{url('direct-pdf-report')}}">
-                                                Direct Report
-                                            </a>
+                                      <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Reports <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-mega-menu-xl px-2" aria-labelledby="topnav-uielement" style="width: auto;">
+                                          <div class="row">
+                                            <div class="col-lg-4">
+                                              <a class="dropdown-item" href="{{url('direct-pdf-report')}}">Direct PDF Report</a>
+                                              <a href="{{url('click_report')}}" class="dropdown-item">Clicks Report</a>
+                                            </div>
+                                          </div>
+                                        </div>
                                       </li>
                                     @endif
                                     @if(ucfirst(session('role'))==ucfirst('SuperAgent'))

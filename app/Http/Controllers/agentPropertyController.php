@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Input;
 use DB;
 use Mail;
 use App\Models\user;
+use App\Models\Clicks;
 use App\Models\Reminder;
 use App\Models\role;
 use App\Models\permission;
@@ -26,30 +27,34 @@ class agentPropertyController extends Controller
         $check_boxes=input::get('check_boxes');
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
-if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
-            $message .='
-Building : '.$data->Building.' <br> 
-Size - '.$data->Area_Sqft.'<br>
-Price -'.$data->Price.'<br>
-Type- '.$data->type.'<br>
-Condition- '.$data->Conditions.'<br><br> 
+            if(!is_null(str_replace(" ","",$data->email)) && str_replace(" ","",$data->email) != "" && str_replace(" ","",$data->email) != " "){
+                        $message .='
+            Building : '.$data->Building.' <br> 
+            Size - '.$data->Area_Sqft.'<br>
+            Price -'.$data->Price.'<br>
+            Type- '.$data->type.'<br>
+            Condition- '.$data->Conditions.'<br><br> 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
-EDEN FORT REAL ESTATE<br><br><br>
-';
-$receiverEmail = $data->email;
-$data = array('name'=>"EdenFort CRM");
-$contactName = 'EdenFort CRM';
-$contactEmail = input::get('sending_email');
-$template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
-$contactMessage = str_replace("{data}",$message,$template->template_date);
- $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
-Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
-{   
-    $message->from(str_replace(" ","",$contactEmail), $contactName);
-    $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Property Alert');
-});
-}
+            Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
+            EDEN FORT REAL ESTATE<br><br><br>
+            ';
+
+            $receiverEmail = $data->email;
+            $data = array('name'=>"EdenFort CRM");
+            $contactName = 'EdenFort CRM';
+            $contactEmail = input::get('sending_email');
+            $template = DB::table('email_templates')->where('template_name',"coldcalling_and_property_email_template")->first();
+            $contactMessage = str_replace("{data}",$message,$template->template_date);
+             $data = array('name'=>$contactName, 'email'=>$contactEmail, 'data'=>$contactMessage);
+            Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$receiverEmail)
+            {   
+                $message->from(str_replace(" ","",$contactEmail), $contactName);
+                $message->to(str_replace(" ","",$receiverEmail), 'EdenFort CRM')->subject('Property Alert');
+            });
+            }
+
+            $description = $data->Building .' with Unit No => '. $data->unit_no .' and Area => '. $data->area .' send at whatsapp.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
         }
         return 'true';
     }
@@ -125,7 +130,10 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     // dd($reminders);
     $latestProperties = coldcallingModel::whereDate("created_at",$todayDate->format('Y-m-d'))->where('user_id',session('user_id'))->get();
     $latestLeads = lead::whereDate("created_at",$todayDate->format('Y-m-d'))->where('lead_user',$fname)->get();
-		return view('agentDashboard',compact(['properties','leads',
+
+    $description = 'Dashboard page visited.';
+    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
+	return view('agentDashboard',compact(['properties','leads',
                 'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','coldCallings','permissions',"reminders","latestProperties","latestLeads","firstDayName","secondDayName","thirdDayName","fourDayName","fiveDayName","sixDayName","currentDayName","properties_rent","properties_sale"]));
     }
     public function allAddedProperties(Request $request){
@@ -168,6 +176,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 // dd($reminders);
                 $current_date = date('Y-m-d H:i:s');
                 // dd($current_date);
+
+                $description = 'Properties page visited';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
                 return view('agentProperties',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions','Recorddisplay', 'Formdisplay','reminders','current_date']));
             
     }
@@ -181,6 +192,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
                  $buildings=Building::all();
                  $allPropertiesArea = coldcallingModel::all();
+
+                 $description = 'Sale Properties page visited';
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
                 return view('agentProperties',compact(['result_data','users','agents','buildings','allPropertiesArea']));
             }else if($_GET['type']=='rent'){
                  $properties=Building::where('assigned_agent',session('user_name'))->pluck('building_name');
@@ -189,6 +203,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
                  $buildings=Building::all();
                  $allPropertiesArea = coldcallingModel::all();
+
+                $description = 'Rent Properties page visited';
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
                 return view('agentProperties',compact(['result_data','users','agents','buildings','allPropertiesArea']));
             }
             else if($_GET['type']=='upcoming'){
@@ -198,6 +215,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
                  $buildings=Building::all();
                  $allPropertiesArea = coldcallingModel::all();
+
+                  $description = 'Upcoming Properties page visited';
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
                 return view('agentProperties',compact(['result_data','users','agents','buildings','allPropertiesArea']));
             }
         }else{
@@ -206,6 +226,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                  $result_data=coldcallingModel::where(["property_status"=>'edenfort_property','add_by'=>session('user_id')])->get();
                 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
                 $allPropertiesArea = coldcallingModel::all();
+
+                 $description = 'Properties page visited';
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
                 return view('agentProperties',compact(['result_data','buildings','agents','allPropertiesArea']));
             }
     }
@@ -214,6 +237,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         $check_boxes=$r->check_boxes;
         $comment = $r->comment;
        foreach($check_boxes as $key=>$value){
+           $data = coldcallingModel::where("id",$check_boxes[$key])->first();
             if(isset($check_boxes[$key])){
                 $data=array(
                    'access' => $status,
@@ -223,6 +247,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                coldcallingModel::where("id",$check_boxes[$key])->update($data);
               
             }
+
+            $description = 'Status and access updated for property => '.$data->Building. ', Unit No => '.$data->unit_no. ', Area => '.$data->area;
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
         }
          return 'true';
     }
@@ -232,6 +259,7 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
             $check_boxes=input::get('check_boxes');
             $comment = $r->comment;
             foreach($check_boxes as $key=>$value){
+                $data = coldcallingModel::where("id",$check_boxes[$key])->first();
                 if(isset($check_boxes[$key])){
                   $data=array(
                         'access' => input::get('status'),
@@ -250,6 +278,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                    $reminder->user_id=session('user_id');
                    $reminder->save();
                 }
+                $description = 'Set remidner for property => '.$data->Building. ', Unit No => '.$data->unit_no. ', Area => '.$data->area;
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
             }
                 return "true";
             }catch(\Exception $e){
@@ -302,6 +332,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
             $property->rented_price=$rented_price;
 	        $property->update_from='property';
 	        $property->save();
+            
+            $description = 'New property => '.input::get("building").',Unit No => '.input::get("unit_no").', Area => '.input::get("area").' is added.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
 	        $id = DB::getPdo()->lastInsertId();
 	        if(input::get('add_property_date_time')){
 	            $data=array(
@@ -314,6 +347,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 	                'user_id' => session('user_id'),
 	           );
 	           DB::table('reminders')->insert($data);
+               $description = 'Reminder added for '.input::get("building").',Unit No => '.input::get("unit_no").', Area => '.input::get("area");
+               Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
 	        }
 	        return redirect("allAddedProperties")->with('msg','Property Added Successfully!');
 	    }else{
@@ -328,6 +363,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     	$result_data=Building::where('assigned_agent',session('user_name'))->get();
         $building=Building::where('user_id',session('user_id'))->get();
 
+         $description = 'Building page visited.';
+         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
         return view('agentBuildings',['result_data'=>$result_data,'building'=>$building,'permissions'=>$permissions]);
     }
      public function viewAgentProperties(){
@@ -340,7 +377,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         $agent_id = $_GET['agentId'];
         $properties =coldcallingModel::where('add_by',$agent_id)->get();
         $properties = json_encode($properties, true);
-            return $properties;
+        $description = 'Get agent properties.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'properties','description'=>$description]);
+        return $properties;
         
     }
     public function buildingProperties(){
@@ -381,6 +420,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
              else{
             $building->save();     
             $building=DB::table('buildings')->where('user_id',session('user_id'))->get();
+            $description = 'New building => '.input::get('building_name').' is added.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
             return redirect("agent-buildings")->with('msg','Building Successfully added!');
              }
      }
@@ -388,6 +429,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
      public function deleteBuilding(){
     	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
 	    	Building::where('id',input::get('id'))->delete();
+            $description = 'Building deleted.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
 	    	return redirect("agent-buildings")->with('msg','Building Deleted Successfully!');
 	    }else{
 	    	return redirect("agent-buildings")->with('error','Something went wrong!');
@@ -397,7 +440,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     public function editBuilding($id){
     	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
 			$record=Building::where('id',$id)->first();
-            
+
+            $description = 'Building => '.$record->building_name.' is edited.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
 			return view("editagentBuildings",["record"=>$record]);
 	   
     }
@@ -420,7 +465,10 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
        {
           $value=coldcallingModel::select('Building','id','user_id')->groupBy('Building')->orderBy(\DB::raw('count(Building)'), 'DESC')->paginate(50);
        }
-    
+        
+        $description = 'Assign coldcalling page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Coldcalling','description'=>$description]);
+        
     	return view('assignAgent',compact(['value','agents','building','permissions']));
     }
     
@@ -431,22 +479,30 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 	    	$building->building_name=input::get('building_name');
 	    	$building->assigned_agent=input::get('assigned_agent');
 	    	$building->Save();
+            $description = 'new building name => '.input::get('building_name').', assigned agent => '.input::get('assigned_agent').' added.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
 	    	return redirect("assignAgent")->with('msg','Building Successfully added!');
     	}catch(\Exception $e){
 			return redirect("assignAgent")->with('error','Building already exist!');
 		}
     }
     public function updateBuilding($id){
-	    		$data=array(
-		    		'building_name'=>input::get('building_name'),
-	    		);
-	    		Building::where('id',$id)->update($data);
-	    		return redirect("agent-buildings")->with('msg','Building Updated Successfully!');
+		$data=array(
+    		'building_name'=>input::get('building_name'),
+		);
+		Building::where('id',$id)->update($data);
+
+        $description = 'Building => '.input::get('building_name').' is updated.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
+		return redirect("agent-buildings")->with('msg','Building Updated Successfully!');
 	}
     
     public function deleteBuildingAssign(){
     	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
 	    	coldcallingModel::where('Building',input::get('id'))->delete();
+
+            $description = 'Building Deleted.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Agent','description'=>$description]);
 	    	return redirect("assignAgent")->with('msg','Building Deleted Successfully!');
 	    }else{
 	    	return redirect("assignAgent")->with('error','Something went wrong!');
@@ -463,6 +519,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
 		/*	$record=Building::where('id',input::get('id'))->first();*/
 			 $record=coldcallingModel::where('id',input::get('id'))->first();
+
+             $description = 'Building name => '.$record->Building.' is edited.';
+             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Agent','description'=>$description]);
 			return view("assignAgent",["record"=>$record,"Formdisplay"=>"block","Recorddisplay"=>"none",'agents'=>$agents]);
 	    }else{
 	    	return redirect("assignAgent")->with('error','Something went wrong!!');
@@ -483,6 +542,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
               //  "property_status"=>"coldCalling"
              // );
               //	coldcallingModel::where('Building',$date['building_name'])->update($data);
+                $description = 'Building name => '.input::get('name').' is updated.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Agent','description'=>$description]);
 	    		return redirect("assignAgent")->with('msg','Building Updated Successfully!');
 			
 	    }else{
@@ -500,6 +561,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $Bedroom=input::get('Bedroom');
                 $area=input::get('area');
            $result_data=coldcallingModel::where(["area"=>input::get('area'),'Building'=>input::get('building'),'Bedroom'=>input::get('Bedroom'),'add_by'=>session('user_id')])->get();
+           $description = 'Search for property Building => '.$building.', bedrooms => '.$Bedroom.'and area => '.$area;
+           Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
            return view('agentAddProperty',compact(['result_data','buildings','agents','allPropertiesArea','building','Bedroom','area']));
         }else{
             return back();
@@ -516,6 +579,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $Bedroom=input::get('Bedroom');
                 $area=input::get('area');
            $result_data=coldcallingModel::where(["area"=>input::get('area'),'Building'=>input::get('building'),'Bedroom'=>input::get('Bedroom'),'property_status'=>'cold_calling'])->get();
+           $description = 'Search for property Building => '.$building.', bedrooms => '.$Bedroom.'and area => '.$area;
+           Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Coldcalling','description'=>$description]);
            return view('agentcoldcalling',compact(['result_data','buildings','agents','allPropertiesArea','building','Bedroom','area']));
         }else{
             return back();
@@ -525,17 +590,24 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     public function agentProperty(){
         $properties=Building::where('assigned_agent',session('user_name'))->pluck('building_name');
         $result_data=coldcallingModel::where(["property_status"=>'edenfort_property','add_by'=>session('user_id')])->get();
+
+        $description = 'View agent property.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view('agentProperties',compact(['result_data','property']));
     } 
     public function getAgentReminderRecord(){
         $result_data=coldcallingModel::where("unit_no",input::get('unit_no'))->get();
          $property='Properties';
+         $description = 'View agent remidner record.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view('agentProperties',compact(['result_data','property']));
     }
     public function rentProperty(){
        $properties=Building::where('assigned_agent',session('user_name'))->pluck('building_name');
         $result_data=coldcallingModel::where(['access'=>'For Rent','property_status'=>'edenfort_property','add_by'=>session('user_id')])->get();
          $property='For Rent Properties';
+         $description = 'View agent rent properties.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view('agentProperties',compact(['result_data','property']));
     }
     public function upcomingProperty(){
@@ -544,6 +616,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
    
         $property='Upcoming Properties';
          $typeOfProperty="upcoming";
+         $description = 'View agent upcoming property.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view('agentProperties',compact(['result_data','property','typeOfProperty']));
     }
       public function saleProperty(){
@@ -551,6 +625,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
        $result_data=coldcallingModel::where(['access'=>'For Sale','property_status'=>'edenfort_property','add_by'=>session('user_id')])->get();
         $property='For Sale Properties';
         $sale_status="SALE";
+        $description = 'Get agent sale property.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view('agentProperties',compact(['result_data','property','sale_status']));
     }
     public function addLandlordEmailPass(){
@@ -559,11 +635,16 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $email=coldcallingModel::where('id',input::get('id'))->pluck('email');
                 $email[0].=','.input::get('email');
                 coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0],'update_from'=>'property']);
+
+                $description = 'Update landloard email.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                 return back()->with('msg','Email updated Successfully!');
             }else{
                 $email=coldcallingModel::where('id',input::get('id'))->pluck('email');
                 $email[0].=','.input::get('email');
                 coldcallingModel::where('id',input::get('id'))->update(['email'=>$email[0],'update_from'=>'property']);
+                $description = 'Update landloard email.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                 return back()->with('msg','Email updated Successfully!');
             }
         }else if(input::get('phone')){
@@ -571,11 +652,15 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 $phone=coldcallingModel::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0],'update_from'=>'property']);
+                $description = 'Update landloard contact no.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                 return back()->with('msg','Phone Number updated Successfully!');
             }else{
                 $phone=coldcallingModel::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 coldcallingModel::where('id',input::get('id'))->update(['contact_no'=>$phone[0],'update_from'=>'property']);
+                $description = 'Update landloard contact no.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                 return back()->with('msg','Phone Number updated Successfully!');
             }
         }
@@ -681,7 +766,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
 
               $result_data= coldcallingModel::where('user_id',session('user_id'))->paginate(25);
            } 
-       
+        $description = 'Coldcalling page visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view('agentcoldcalling',compact('result_data','allPropertiesArea','buildings','areas','bedrooms','agents'));
     }
     
@@ -698,6 +784,9 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
     	$bedrooms=coldcallingModel::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
     	$permissions = permission::where('user_id', session('user_id'))->first();
     	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
+
+        $description = 'Property => '.$result[0]['Building'].', unit_no => '.$result[0]['unit_no'].', area => '.$result[0]['area'].' is edited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         return view("agentProperties",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'users'=>$users,'agents'=>$agents,'buildings'=>$buildings,'areas'=>$areas,'bedrooms'=>$bedrooms,'reminders'=>$reminders,'allBuildings'=>$allBuildings,"permissions"=>$permissions]);
     }
     
@@ -716,10 +805,16 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                         if(strtoupper($updated_access[$key])==strtoupper('For Rent') || strtoupper($updated_access[$key])==strtoupper('For Sale')){
                             $unit_no=coldcallingModel::where("id",$check_boxes[$key])->pluck('unit_no');
                             Reminder::where('unit_no',$unit_no[0])->delete();
+
                             coldcallingModel::where("id",$check_boxes[$key])->update(["access"=>$updated_access[$key],"property_status"=>'edenfort_property',"add_by"=>session("user_id"),'update_from'=>'property']);
+
+                            $description = 'Property with id => '.$check_boxes[$key].', update status => '.$updated_access[$key];
+                            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                            
                        }else{
                             coldcallingModel::where("id",$check_boxes[$key])->update(["access"=>$updated_access[$key],'update_from'=>'property']);
+                            $description = 'Property with id => '.$check_boxes[$key].', update status => '.$updated_access[$key];
+                            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                        }
                        $message='Record Updated Successfully';
                      }  
@@ -731,11 +826,16 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                     if(isset($_GET['ref'])){
                         if(strtoupper($_GET['ref'])==strtoupper('coldcalling')){
                             coldcallingModel::where("id",$check_boxes[$key])->delete();
+                            $description = 'Property with id => '.$check_boxes[$key].' is deleted.';
+                            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                         }
                         }else{
                             $check=coldcallingModel::where(["id"=>$check_boxes[$key],'add_by'=>session('user_id')])->delete();
                             if(!$check){
                                 return back()->with('error','You Cannot Delete this Property');
+                            }else{
+                                $description = 'Property with id => '.$check_boxes[$key].' is deleted.';
+                                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                             }
                         }
                         $message='Record Deleted Successfully';  
@@ -787,6 +887,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
                 );
                 $property_id=input::get("property_id");
                 coldcallingModel::where("id",$property_id)->update($data);
+                $description = 'Property with unit_no => '.input::get("unit_no").', building => '.input::get("building").', area => '.input::get("area").' is updated.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                 Reminder::where('property_id',input::get('id'))->delete();
                 if(input::get('add_property_date_time')){
         	            $data=array(
@@ -799,6 +901,8 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         	                'description'=>input::get('add_property_reminder_description'),
         	           );
         	           DB::table('reminders')->insert($data);
+                        $description = 'Reminder set for property with unit_no => '.input::get("unit_no").', building => '.input::get("building").', area => '.input::get("area").' is updated.';
+                        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         	        }
                return redirect("allAddedProperties")->with('msg','Record updated Successfully');
             }catch (\Exception $e) {
@@ -815,17 +919,20 @@ Mail::send('email', $data, function($message) use ($contactEmail, $contactName,$
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
             $message .='
-Building : '.$data->Building.'  
-Size - '.$data->Area_Sqft.'
-Price -'.$data->sale_price.'
-Type- '.$data->type.'
-Condition- '.$data->Conditions.' 
+                Building : '.$data->Building.'  
+                Size - '.$data->Area_Sqft.'
+                Price -'.$data->sale_price.'
+                Type- '.$data->type.'
+                Condition- '.$data->Conditions.' 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
-EDEN FORT REAL ESTATE
+                Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
+                EDEN FORT REAL ESTATE
 
 
-';
+                ';
+
+            $description = 'Property with unit_no => '.$data->unit_no.', building => '.$data->Building.', area => '.$data->area.' sent on whatsapp.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         }
          echo $message;
     }
@@ -835,20 +942,23 @@ EDEN FORT REAL ESTATE
         foreach($check_boxes as $key=>$value){
             $data = coldcallingModel::where('id',$value)->first();
             $message .='
-Owner Name : '.$data->LandLord.'
-Owner Email : '.$data->email.'
-Owner Phone : '.$data->contact_no.'
-Building : '.$data->Building.'  
-Size - '.$data->Area_Sqft.'
-Price -'.$data->Price.'
-Type- '.$data->type.'
-Condition- '.$data->Conditions.' 
+                Owner Name : '.$data->LandLord.'
+                Owner Email : '.$data->email.'
+                Owner Phone : '.$data->contact_no.'
+                Building : '.$data->Building.'  
+                Size - '.$data->Area_Sqft.'
+                Price -'.$data->Price.'
+                Type- '.$data->type.'
+                Condition- '.$data->Conditions.' 
 
-Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
-EDEN FORT REAL ESTATE
+                Agent - '.$data->user->First_name.' '.$data->user->Last_name.'- '.$data->user->Phone.'
+                EDEN FORT REAL ESTATE
 
 
-';
+                ';
+
+            $description = 'Property with unit_no => '.$data->unit_no.', building => '.$data->Building.', area => '.$data->area.' sent on whatsapp with owner information.';
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
         }
          echo $message;
     }

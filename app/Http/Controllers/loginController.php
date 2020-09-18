@@ -10,6 +10,7 @@ use DB;
 use Mail;
 use Illuminate\Support\Facades\Input;
 use App\Models\permission;
+use App\Models\Clicks;
 class loginController extends Controller
 {
     public function CheckLogin(Request $request){
@@ -48,12 +49,17 @@ if(isset($validate_user->id)){
                     session()->put("user_name",$validate_user->user_name);
                     session()->put("email",$validate_user->Email);
                     // return redirect('supervision');
+                    $description = 'User => '. $validate_user->user_name .' and email =>'. $validate_user->Email .' with Role => '.$role[0].' is login in CRM.' ;
+                    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Login','description'=>$description]);
                     return redirect('dashboard');
                 }else if(strtoupper($role[0])==strtoupper("owner")){
                     session()->put("role",$role[0]);
                     session()->put("user_id",$validate_user->id);
                     session()->put("user_name",$validate_user->user_name);
                     session()->put("email",$validate_user->Email);
+
+                    $description = 'User => '. $validate_user->user_name .' and email =>'. $validate_user->Email .' with Role => '.$role[0].' is login in CRM.' ;
+                    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Login','description'=>$description]);
                      return redirect('ownerdashboard');
                 }else if(strtoupper($role[0])==strtoupper("agent")){
                     session()->put("role",$role[0]);
@@ -62,6 +68,8 @@ if(isset($validate_user->id)){
                     session()->put("email",$validate_user->Email);
                     session()->put("fname",$validate_user->First_name);
                     
+                    $description = 'User => '. $validate_user->user_name .' and email =>'. $validate_user->Email .' with Role => '.$role[0].' is login in CRM.' ;
+                    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Login','description'=>$description]);
                      return redirect('agentdashboard');
                  }else if(strtoupper($role[0])==strtoupper("SuperDuperAdmin")){
                     session()->put("role",$role[0]);
@@ -70,6 +78,8 @@ if(isset($validate_user->id)){
                     session()->put("email",$validate_user->Email);
                     session()->put("fname",$validate_user->First_name);
                     // dd($role[0]);
+                    $description = 'User => '. $validate_user->user_name .' and email =>'. $validate_user->Email .' with Role => '.$role[0].' is login in CRM.' ;
+                    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Login','description'=>$description]);
                      return redirect('dashboard');
                  }else if(strtoupper($role[0])==strtoupper("superAgent")){
                     session()->put("role",$role[0]);
@@ -78,6 +88,8 @@ if(isset($validate_user->id)){
                     session()->put("email",$validate_user->Email);
                     session()->put("fname",$validate_user->First_name);
                     
+                    $description = 'User => '. $validate_user->user_name .' and email =>'. $validate_user->Email .' with Role => '.$role[0].' is login in CRM.' ;
+                    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Login','description'=>$description]);
                      return redirect('dashboard');
                  }else{
                      return redirect('/')->with('error','<div class="alert alert-danger">invalid Email or Password</div>');
@@ -88,6 +100,8 @@ if(isset($validate_user->id)){
          }
     }
     public function logout(){
+        $description = 'User => '. session('user_name') .' and email =>'. session('email') .' with Role => '.session('role').' is logout of CRM.' ;
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Logout','description'=>$description]);
         session()->forget(["role","user_name","email","user_id"]);
         return redirect("/");
     }
@@ -102,12 +116,14 @@ if(isset($validate_user->id)){
             $contactEmail = 'crm@edenfort.ae';
             $contactMessage = 'Your new Password is '.$password;
             $toName = $user->First_name.' '.$user->Last_name;
-             $data = array('data'=>$contactMessage);
+            $data = array('data'=>$contactMessage);
             Mail::send('mail', $data, function($message) use ($contactEmail, $contactName,$toName)
             {   
                 $message->from($contactEmail, $contactName);
                 $message->to(input::get("email"), $toName)->subject('Password Reset');
             });
+            $description = 'User => '. session('user_name') .' and email =>'. session('email') .' with Role => '.session('role').' reset his/her password of CRM.' ;
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Password Reset','description'=>$description]);
              return back()->with("error",'<div class="alert alert-success">New Password has been sent to your Provided Email Address.</div>');
         }else{
             return back()->with("error",'<div class="alert alert-danger">Email does not exist!</div>');

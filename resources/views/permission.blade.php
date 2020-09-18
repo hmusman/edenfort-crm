@@ -148,6 +148,12 @@
                                                                <td  class="propertyDelete hide" >{{$user->permission['propertyDelete']}}</td>
                                                                <td  class="propertyAssign hide" >{{$user->permission['propertyAssign']}}</td>
                                                                <td  class="propertyBulk hide" >{{$user->permission['propertyBulk']}}</td>
+
+                                                               <td  class="cold_show_contact_info hide" >{{$user->permission['cold_show_contact_info']}}</td>
+                                                               <td  class="prop_show_contact_info hide" >{{$user->permission['prop_show_contact_info']}}</td>
+                                                               <td  class="lead_show_contact_info hide" >{{$user->permission['lead_show_contact_info']}}</td>
+                                                               <td  class="deal_show_contact_info hide" >{{$user->permission['deal_show_contact_info']}}</td>
+
                                                                <td  class="coldcallingView hide" >{{$user->permission['coldcallingView']}}</td>
                                                                <td  class="coldcallingAdd hide" >{{$user->permission['coldcallingAdd']}}</td>
                                                                <td  class="coldCallingAssign hide" >{{$user->permission['coldCallingAssign']}}</td>
@@ -305,6 +311,17 @@
                                  <input type="checkbox" class="form-control"   name="propertyBulk" id="propertyBulk" value="1" >
                               </div>
                            </div>
+                           <div class="row">
+                              <div class="form-group col-sm-2">
+                                 <p class="h6" align="center">Owner Email and Number</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="prop_show_contact_info" id="prop_show_contact_info" value="1" >
+                              </div>
+                           </div>
+
                         </div>
                         <!--end second tab-->
                         <div class="tab-pane  p-20" id="coldcallings" role="tabpanel">
@@ -348,6 +365,16 @@
                                  <input type="checkbox" class="form-control"   name="coldcallingBulk" id="coldcallingBulk" value="1" >
                               </div>
                            </div>
+                           <div class="row">
+                              <div class="form-group col-sm-2">
+                                 <p class="h6" align="center">Owner Email and Number</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="cold_show_contact_info" id="cold_show_contact_info" value="1" >
+                              </div>
+                           </div>
                         </div>
                         <!--end of 3rd tab-->
                         <div class="tab-pane  p-20" id="leads" role="tabpanel">
@@ -389,6 +416,16 @@
                               </div>
                               <div class="form-group col-sm-3">
                                  <input type="checkbox" class="form-control"   name="leadBulk" id="leadBulk" value="1" >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="form-group col-sm-2">
+                                 <p class="h6" align="center">Owner Email and Number</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="lead_show_contact_info" id="lead_show_contact_info" value="1" >
                               </div>
                            </div>
                         </div>
@@ -490,6 +527,16 @@
                                  <input type="checkbox" class="form-control"   name="dealBulk" id="dealBulk" value="1" >
                               </div>
                            </div>
+                           <div class="row">
+                              <div class="form-group col-sm-2">
+                                 <p class="h6" align="center">Owner Email and Number</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="deal_show_contact_info" id="deal_show_contact_info" value="1" >
+                              </div>
+                           </div>
                         </div>
                         <!-- Deals End-->
                          <div class="tab-pane  p-20" id="loans" role="tabpanel">
@@ -561,16 +608,23 @@
       var propertyAdd=$row.find(".propertyAdd").text();
       var propertyEdit=$row.find(".propertyEdit").text();
       var propertyDelete=$row.find(".propertyDelete").text();
-       var propertyAssign=$row.find(".propertyAssign").text();
+      var propertyAssign=$row.find(".propertyAssign").text();
       var propertyBulk=$row.find(".propertyBulk").text();
+      var prop_show_contact_info=$row.find(".prop_show_contact_info").text();
+
       var coldcallingView=$row.find(".coldcallingView").text();
       var coldcallingAdd=$row.find(".coldcallingAdd").text();
       var coldCallingAssign=$row.find(".coldCallingAssign").text();
       var coldcallingBulk=$row.find(".coldcallingBulk").text();
+      var cold_show_contact_info=$row.find(".cold_show_contact_info").text();
+
       var leadView=$row.find(".leadView").text();
       var leadAdd=$row.find(".leadAdd").text();
       var leadEdit=$row.find(".leadEdit").text();
       var leadBulk=$row.find(".leadBulk").text();
+      var lead_show_contact_info=$row.find(".lead_show_contact_info").text();
+
+
       var buildingView=$row.find(".buildingView").text();
       var buildingAdd=$row.find(".buildingAdd").text();
       
@@ -582,6 +636,8 @@
        var dealAdd=$row.find(".dealAdd").text();
        var dealEdit=$row.find(".dealEdit").text();
        var dealBulk=$row.find(".dealBulk").text();
+      var deal_show_contact_info=$row.find(".deal_show_contact_info").text();
+
         
     var loanView=$row.find(".loanView").text();
     var loanAdd=$row.find(".loanAdd").text();
@@ -637,6 +693,12 @@
     }else{
       $("#propertyBulk").prop('checked', false);
     }
+
+    if( prop_show_contact_info=='1'){
+      $("#prop_show_contact_info").prop('checked', true);
+    }else{
+      $("#prop_show_contact_info").prop('checked', false);
+    }
    
     if( coldcallingView=='1'){
       $("#coldcallingView").prop('checked', true);
@@ -661,7 +723,14 @@
     }else{
       $("#coldcallingBulk").prop('checked', false);
     }
-   
+    
+    if( cold_show_contact_info=='1'){
+      $("#cold_show_contact_info").prop('checked', true);
+    }else{
+      $("#cold_show_contact_info").prop('checked', false);
+    }
+
+
     if( leadView=='1'){
       $("#leadView").prop('checked', true);
     }else{
@@ -690,6 +759,12 @@
       $("#leadBulk").prop('checked', true);
     }else{
       $("#leadBulk").prop('checked', false);
+    }
+
+    if( lead_show_contact_info=='1'){
+      $("#lead_show_contact_info").prop('checked', true);
+    }else{
+      $("#lead_show_contact_info").prop('checked', false);
     }
    
     if( buildingView=='1'){
@@ -743,6 +818,14 @@
     }else{
       $("#dealEdit").prop('checked', false);
     }
+
+    if( deal_show_contact_info=='1'){
+      $("#deal_show_contact_info").prop('checked', true);
+    }else{
+      $("#deal_show_contact_info").prop('checked', false);
+    }
+
+
     // 
     if( loanView=='1'){
       $("#loanView").prop('checked', true);

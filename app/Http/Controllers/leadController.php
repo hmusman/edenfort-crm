@@ -9,6 +9,7 @@ use App\Models\lead;
 use App\Models\Building;
 use App\Models\user;
 use App\Models\Reminder;
+use App\Models\Clicks;
 use DB;
 use Mail;
 use App\Models\permission;
@@ -30,6 +31,8 @@ class leadController extends Controller
 
             $m->to($to)->subject($subject);
       });
+      $description = 'Daily agents report is sent on mail.';
+      Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Lead Mail','description'=>$description]);
 	  echo 'Mail Send';
           }catch(\Exception $e)
             {
@@ -43,6 +46,9 @@ class leadController extends Controller
                 $email=lead::where('id',input::get('id'))->pluck('email');
                 if($email[0]!=""){$email[0].=','.input::get('email');}else{$email[0]=input::get('email');}
                 lead::where('id',input::get('id'))->update(['email'=>$email[0]]);
+
+                $description = 'lead mail is added.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add Lead Mail','description'=>$description]);
                 return back()->with('msg','Email updated Successfully!');
             
         }else if(input::get('phone')){
@@ -50,6 +56,9 @@ class leadController extends Controller
                 $phone=lead::where('id',input::get('id'))->pluck('contact_no');
                 $phone[0].=','.input::get('phone');
                 lead::where('id',input::get('id'))->update(['contact_no'=>$phone[0]]);
+
+                $description = 'lead contact no. is added.';
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add Lead contactNo','description'=>$description]);
                 return back()->with('msg','Phone Number updated Successfully!');
          }
     }
@@ -60,7 +69,8 @@ class leadController extends Controller
         $phone=lead::where('id',input::get('leadId'))->pluck('contact_no');
          $phone[0].=','.input::get('contactNo');
                 lead::where('id',input::get('leadId'))->update(['contact_no'=>$phone[0]]);
-
+        $description = 'lead contact no. is added.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>' Add Lead contactNo','description'=>$description]);
         return 'true';
       }catch(\Exception $e){
       return 'false';
@@ -88,6 +98,9 @@ class leadController extends Controller
                lead::where("id",$check_boxes[$key])->update($data);
               
             }
+
+        $description = 'lead with is id => '.$check_boxes[$key].' is updated.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Lead','description'=>$description]);
         }
          return 'true';
     }
@@ -99,6 +112,9 @@ class leadController extends Controller
 	 $leads=lead::paginate(25);
   
         $created=lead::create(['submission_date'=>$r->submission_date,'client_name'=>$r->client_name,'contact_no'=>$r->contact_no,'email'=>$r->email,'lead_source'=>$r->source,'area'=>$r->area,'building'=>$r->building,'type'=>$r->type,'priority'=>$r->priority,'rent'=>$r->rent,'buy'=>$r->buy,'view_date_time'=>$r->view_date_time,'move_inn'=>$r->move_inn,'outcome'=>$r->outcome,'followup_date'=>$r->followup_date,'follow_up'=>$r->follow_up,'feedback'=>$r->feedback,'lead_user'=>session('user_name')]);
+
+        $description = 'New lead is added.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Create Lead','description'=>$description]);
         
     //reminder insertion if some person add reminder on add Lead Popup folow up or viewdate
     if($r->reminderAddPopupDateInput!=''){
@@ -109,6 +125,9 @@ class leadController extends Controller
         $addby=strtoupper(session('role'));
         $reminderLeadId=$r->reminderLeadId;
         DB::table('reminders')->insert(['date_time'=>$dateTime,'description'=>$description,'reminder_type'=>$reminderName,'reminder_of'=>'Leads','user_id'=>$currentUser,'add_by'=>$addby,'property_id'=>$reminderLeadId]);
+
+        $description = 'lead reminder is added.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Lead Reminder','description'=>$description]);
     }
     if($r->reminderAddPopupDateInputViewDate!=''){
         $dateTime=$r->reminderAddPopupDateInputViewDate;
@@ -118,6 +137,9 @@ class leadController extends Controller
         $addby=strtoupper(session('role'));
         $reminderLeadId=$r->reminderLeadId;
         DB::table('reminders')->insert(['date_time'=>$dateTime,'description'=>$description,'reminder_type'=>$reminderName,'reminder_of'=>'Leads','user_id'=>$currentUser,'add_by'=>$addby,'property_id'=>$reminderLeadId]);
+
+        $description = 'lead reminder is added.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Lead Reminder','description'=>$description]);
     }
     //end reminder
      return Redirect::back()->with('msg','Lead Add Successfully!');
@@ -133,6 +155,9 @@ class leadController extends Controller
 	  
         $update=['client_name'=>$r->client_name,'area'=>$r->area,'building'=>$r->building,'type'=>$r->type,'priority'=>$r->priority,'rent'=>$r->rent,'buy'=>$r->buy,'view_date_time'=>$r->leadViewDate,'move_inn'=>$r->move_inn,'outcome'=>$r->outcome,'followup_date'=>$r->followup_date,'follow_up'=>$r->follow_up,'feedback'=>$r->feedback,'lead_user'=>session('user_name')];
      lead::where(['id'=>$r->leadEditId])->update($update);
+
+     $description = 'lead with id => '.$r->leadEditId.' is updated.';
+    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Leads update','description'=>$description]);
      return Redirect::back()->with('msg','Lead Updated Successfully!');
   }
 
@@ -143,7 +168,8 @@ class leadController extends Controller
     // dd($string);
     $u=session('fname');
        $leads=lead::where('lead_user', 'LIKE', "%{$u}%")->get();
- 
+    $description = 'leads page is visited.';
+    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Leads','description'=>$description]);
       return view('leads',['leads'=>$leads]);
   }
 
@@ -158,12 +184,13 @@ class leadController extends Controller
     // dd($r->assignedLeadId,$r->assignedAgent); 
       $update=lead::where(['id'=>$r->assignedLeadId])->update(['lead_user'=>$r->assignedAgent]); 
      
-    
+    $description = 'leads with id => '.$r->assignedLeadId.' is assigned to => '.$r->assignedAgent;
+    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Leads Assign','description'=>$description]);
 	return Redirect::back()->with('msg','Lead Assigned Successfully!');
 	 
   }
   
-    public function index(Request $request){
+  public function index(Request $request){
     $permissions = permission::where('user_id', session('user_id'))->first();
     $agents=user::whereIn('role',[3,4,5])->get();
     $buildings=Building::distinct('building_name')->get();
@@ -218,6 +245,9 @@ class leadController extends Controller
         $query->where('updated_at', '<=', $request->to_date);
     }
     $leads = $query->orderBy('created_at','DESC')->paginate(25);
+
+    $description = 'Agent Lead report page is visited.';
+    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Leads Report','description'=>$description]);
     return view('agentLeadReport',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
     
     

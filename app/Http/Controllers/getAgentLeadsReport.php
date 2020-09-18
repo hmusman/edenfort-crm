@@ -14,6 +14,7 @@ use App\Models\user;
 use App\Models\userFiles;
 use App\Models\Reminder;
 use App\Models\role;
+use App\Models\Clicks;
 use App\Models\lead;
 use Session;
 use Excel;
@@ -61,6 +62,9 @@ class getAgentLeadsReport extends Controller
                     }
                     $content .='</table>
                         </div><br><br><br>';
+
+                    $description = 'Lead mail of user '.$agent->user_name.' is sent on mail.';
+                    Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Lead Mail','description'=>$description]);
                 }else{
                    $content .='
                                <tr>

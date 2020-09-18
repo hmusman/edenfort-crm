@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\permission;
 use App\Models\TroubleShoot;
+use App\Models\Clicks;
 use Session;
 
 class TroubleShootingController extends Controller
@@ -18,6 +19,8 @@ class TroubleShootingController extends Controller
     public function index()
     {
         $troublshooting = TroubleShoot::all();
+        $description = 'Troubleshooting page is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'TroubleShooting','description'=>$description]);
         return view('troublshooting',compact('troublshooting'));
     }
 
@@ -59,7 +62,8 @@ class TroubleShootingController extends Controller
              }
 
              TroubleShoot::create(['heading'=>$heading,'description'=>$description,'video'=>$troubleVideo]);
-
+             $description = 'New troubleshooting added.';
+             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'TroubleShooting','description'=>$description]);
              return response()->json([
                'message'   => 'Entry Added Successfully!'
               ]);
@@ -96,6 +100,8 @@ class TroubleShootingController extends Controller
 
         $trouble = TroubleShoot::where('id',$id)->first();
         // dd($trouble);
+        $description = 'Troubleshooting is edited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'TroubleShooting','description'=>$description]);
         return view('troubleshootEdit',compact('trouble'));
     }
 
@@ -130,6 +136,8 @@ class TroubleShootingController extends Controller
 
              TroubleShoot::where('id',$id)->update(['heading'=>$heading,'description'=>$description,'video'=>$troubleVideo]);
 
+             $description = 'Troubleshooting is updated.';
+             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'TroubleShooting','description'=>$description]);
             Session::flash('msg','Entry Updated Successfully.');
             return redirect()->route('troubleshooting.index');
         }else{
@@ -159,6 +167,9 @@ class TroubleShootingController extends Controller
         }
 
         $trouble->delete();
+        $description = 'Troubleshooting is deleted.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'TroubleShooting','description'=>$description]);
+
         Session::flash('msg','Entry Deleted Successfully.');
         return redirect()->back();
     }
@@ -167,6 +178,8 @@ class TroubleShootingController extends Controller
     public function AgentTroubleShoot(){
         $permissions = permission::where('user_id', session('user_id'))->first();
         $troubleshooting = \App\Models\TroubleShoot::all();
+        $description = 'Troubleshooting is visited.';
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'TroubleShooting','description'=>$description]);
         return view('agent-troubleshoot',compact('permissions','troubleshooting'));
     }
 }

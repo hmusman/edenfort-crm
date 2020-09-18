@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Input;
 use DB;
 use App\Models\user;
 use App\Models\role;
+use App\Models\Clicks;
 class ownerController extends Controller
 {
 	public function ownerDashboard(){
@@ -33,13 +34,19 @@ class ownerController extends Controller
 		        $total=json_decode(json_encode($total),true);
 		        
 		        $maintenances=SupervisionMaintenance::where("supervision_id",input::get('contract_id'))->get();
+		        $description = 'View contact.' ;
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Owner Dashboard','description'=>$description]);
 		        return view("ownerdashboard",["result"=>$result,"complainRecord"=>$complainRecord,"cheaqueRecord"=>$cheaqueRecord,"total"=>$total,"recordID"=>input::get('contract_id'),'propertyData'=>$propertyData,'propertyusers'=>$propertyusers,'propertyagents'=>$propertyagents,'maintenances'=>$maintenances,'ownerDetails'=>$ownerDetails]);
 		    }else{
+		    	$description = 'Owner dashboard is visited.' ;
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Owner Dashboard','description'=>$description]);
 		    	return view('ownerdashboard');
 		    }
 		}else{
 			$ownerDetails=user::where("id",session('user_id'))->first();
 			$result_data=supervision::where("assigned_user",session('user_name'))->paginate(10);
+			$description = 'Owner dashboard is visited.' ;
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Owner Dashboard','description'=>$description]);
 			return view('ownerdashboard',compact(['result_data','ownerDetails','propertyData','propertyusers','propertyagents']));
 		}
 	}
