@@ -377,13 +377,13 @@ class reminderController extends Controller
                  Reminder::where("property_id",input::get('property_id'))->where(['add_by','ADMIN', 'status'=>'viewed'])->update(['status'=>'disable']);
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'ADMIN','user_id'=>session('user_id')])->get();
                  $description = 'Disable remidner.' ;
-                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 echo count($result);
             }else if(session('role') == 'Agent' || session('role') == 'SuperDuperAdmin'){
                 Reminder::where("property_id",input::get('property_id'))->where('user_id',session('user_id'))->update(['status'=>"disable",'reason'=>input::get('name')]);
                 $result=Reminder::where(['status'=>'viewed','add_by' => 'AGENT','user_id'=>session('user_id')])->get();
                 $description = 'Disable remidner.' ;
-                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 echo count($result);
             } else if(session('role') == 'SuperAgent'){
                 Reminder::where("property_id",input::get('property_id'))->where(['add_by','SUPERAGENT', 'status'=>'viewed'])->update(['status'=>'disable']);
@@ -394,7 +394,7 @@ class reminderController extends Controller
                      })
                      ->get();
                 $description = 'Disable remidner.' ;
-                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 echo count($result);
             } 
         }else{
@@ -414,7 +414,7 @@ class reminderController extends Controller
         DB::table('leads_record')->insert(['description'=>$description,'user_id'=>$currentUser,'lead_id'=>$reminderLeadId]);
 
         $description = 'Lead remidner added.' ;
-        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
         return 'true';
     
 }
@@ -430,7 +430,7 @@ class reminderController extends Controller
         DB::table('reminders')->insert(['date_time'=>$dateTime,'description'=>$description,'reminder_type'=>$reminderName,'reminder_of'=>'Deals','user_id'=>$currentUser,'add_by'=>$addby,'property_id'=>$reminderDealId]);
 
         $description = 'Deal remidner added.' ;
-        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
       return 'true';
     
 }
@@ -454,7 +454,7 @@ class reminderController extends Controller
                 $current_date = date('Y-m-d H:i:s');
                 $Formdisplay = 'none';
                 $description = 'View agent coldcalling remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 return view('agentcoldcalling',compact('result_data','buildings','areas','bedrooms','agents','agentss', 'buildingss','permissions', 'allBuildings','reminders','current_date','Formdisplay'));
             }else if(strtoupper(input::get('ref'))=='PROPERTY'){
                 $buildings = coldcallingModel::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');        
@@ -468,7 +468,7 @@ class reminderController extends Controller
                 // dd($reminders);
                 $current_date = date('Y-m-d H:i:s');
                 $description = 'View agent property remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 return view('agentProperties',compact('result_data','buildings','areas','bedrooms','agents','buildingss','permissions','allBuildings','reminders','current_date'));
             }
             else{
@@ -480,7 +480,7 @@ class reminderController extends Controller
 	
 	            $upcomingLeadId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'leads'");
                 $description = 'View agent lead remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
          	    return view('leads',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
          	}
          }
@@ -504,7 +504,7 @@ class reminderController extends Controller
                 // dd($reminders);
                 $current_date = date('Y-m-d H:i:s');
                 $description = 'View agent coldcalling remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 return view('coldCalling',compact(['result_data','users','agentss','agents','areas','bedrooms','buildings','buildingss','permissions','upcoming','Formdisplay','reminders','current_date']));
             }else if(strtoupper(input::get('ref'))=='PROPERTY'){
                 $permissions = permission::where('user_id', session('user_id'))->first();
@@ -521,7 +521,7 @@ class reminderController extends Controller
                 // dd($reminders);
                 $current_date = date('Y-m-d H:i:s');
                 $description = 'View property coldcalling remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 return view('addproperties',compact(['result_data','users','agents','areas','bedrooms','buildings','permissions','agentss','upcoming','reminders','current_date']));            }
             else{
                 $agents=lead::distinct('lead_user')->pluck('lead_user'); 
@@ -532,7 +532,7 @@ class reminderController extends Controller
     
                 $upcomingLeadId = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = 'leads'");
                 $description = 'View agent lead remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 return view('leads',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
             }
          }
@@ -559,7 +559,7 @@ class reminderController extends Controller
             $current_date = date('Y-m-d H:i:s');
             $Formdisplay = 'none';
             $description = 'View agent coldcalling remidner detail.' ;
-            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
             return view('coldCalling',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming','reminders','current_date','Formdisplay'));
           }else if(strtoupper(input::get('ref'))=='PROPERTY'){
             $areas=coldcallingModel::distinct('area')->pluck('area');
@@ -579,7 +579,7 @@ class reminderController extends Controller
             // dd($reminders);
             $current_date = date('Y-m-d H:i:s');
             $description = 'View agent property remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
             return view('addproperties',compact('permissions','result_data','buildings','areas','bedrooms','agents','agentss','buildingss','upcoming','reminders','current_date'));
           }else if(strtoupper(input::get('ref'))=='LEADS'){
               $agents=lead::distinct('lead_user')->get(); 
@@ -593,7 +593,7 @@ class reminderController extends Controller
                     Reminder::where('property_id',input::get('property_id'))->where('user_id', session('user_id'))->update(['status'=>'viewed']);
                         }
                 $description = 'View agent lead remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
               return view('agentLeadReport',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
           }else{
               $buildings=Building::all();
@@ -607,7 +607,7 @@ class reminderController extends Controller
                 }
                 $date = Carbon::now()->toDateString();
                 $description = 'View agent deal remidner detail.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
               return view('dealsInformation',compact('deals','buildings','agents','upcomingDealId','permissions', 'date'));
           }
          }
@@ -630,7 +630,7 @@ class reminderController extends Controller
         //              })
         //              ->get();
         $description = 'View single agent remidners.' ;
-        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+        Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
         return view('single-user-reminder', compact('reminder','user','permissions'));
     }
 
@@ -652,17 +652,17 @@ class reminderController extends Controller
             if(session('role') == 'Agent'){
                 Reminder::where('property_id',$id)->where(['add_by' => 'AGENT', 'status' => 'viewed' ,'user_id'=>session('user_id')])->update(["status"=>'disable']);
                 $description = 'Disable remidners.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
             }else if(session('role') == 'Admin'){
                 Reminder::where('property_id',input::get('property_id'))->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable', 'reason'=>input::get('name')]);
                 $description = 'Disable remidners.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
             }
             else if(session('role') == 'SuperDuperAdmin'){
                 Reminder::where('property_id',input::get('property_id'))->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'disable', 'reason'=>input::get('name')]);
                 $description = 'Disable remidners.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
                 // Reminder::where('property_id',$property_id)->where(['add_by' => 'ADMIN','user_id'=>session('user_id')])->update(["status"=>'viewed']);
             }
             else if(session('role') == 'SuperAgent'){
@@ -673,7 +673,7 @@ class reminderController extends Controller
                                ->orWhere('add_by', 'Agent');
                          })->update(["status"=>'disable', 'reason'=>input::get('name')]);
                 $description = 'Disable remidners.' ;
-                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
             }
             return "true";
         }else{
@@ -696,7 +696,7 @@ class reminderController extends Controller
             Reminder::where('property_id', input::get('property_id'))->where('user_id', session('user_id'))->update(['description' => input::get('description'), 'date_time' => $timedate, 'status' => NULL]);
 
             $description = 'Update remidners.' ;
-            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
 
             ReminderHistory::updateOrCreate(
               ['property_id' => $property_id],
@@ -714,7 +714,7 @@ class reminderController extends Controller
             Reminder::where('property_id', input::get('property_id'))->where('user_id', session('user_id'))->update(['description' => input::get('description'), 'date_time' => $timedate, 'status' => NULL]);
 
             $description = 'Update remidners.' ;
-            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
 
             ReminderHistory::updateOrCreate(
               ['property_id' => $property_id],
@@ -732,7 +732,7 @@ class reminderController extends Controller
             Reminder::where('property_id', input::get('property_id'))->where('user_id', session('user_id'))->update(['description' => input::get('description'), 'date_time' => $timedate, 'status' => NULL]);
 
             $description = 'Update remidners.' ;
-            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'supervision','description'=>$description]);
+            Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
 
             ReminderHistory::updateOrCreate(
               ['property_id' => $property_id],
