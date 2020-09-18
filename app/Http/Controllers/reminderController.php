@@ -629,7 +629,7 @@ class reminderController extends Controller
         //                    ->orWhere('add_by', 'SuperAgent');
         //              })
         //              ->get();
-        $description = 'View single agent remidners.' ;
+        $description = 'Open '.$user->user_name.' remidners.' ;
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Reminders','description'=>$description]);
         return view('single-user-reminder', compact('reminder','user','permissions'));
     }
