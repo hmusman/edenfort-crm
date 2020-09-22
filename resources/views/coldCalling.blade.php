@@ -160,7 +160,7 @@
    }
     .nav-tabs .nav-link.active {
        color: #ffffff;
-       background-color: #2fa97c;
+       background-color: #2fa97c !important;
        border-color: #2fa97c #2fa97c #2fa97c;
    }
   .top-buttons{

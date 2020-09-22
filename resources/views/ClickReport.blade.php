@@ -85,7 +85,7 @@
                                                 <input type="date" class="font-size form-control" name="to_date">
                                             </div>
                                             <div class="col-sm-2" style="padding-top: 32px;">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light"><b><span><i class="mdi mdi-file-pdf-outline" ></i></span> View Clicks Report</b></button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light"><b><span><i class="mdi mdi-file-pdf-outline" ></i></span> Export Clicks Report</b></button>
                                             </div>
                                         </div>
                                     </form>

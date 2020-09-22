@@ -141,6 +141,15 @@
                   margin-left: auto;
             }
           }
+          .access_select {
+              background-color: white !important;
+              color: #000 !important;
+              border-radius: 20px;
+          }
+          thead {
+              background: #47b38b !important;
+              color: white !important;
+          }
         </style>
     </head>
 
