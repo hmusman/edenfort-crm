@@ -21,7 +21,6 @@ use File;
 use Mail;
 use Maatwebsite\Excel\Concerns\Exportable;
 use App\Exports\ColdCallingExport;
-use App\Models\user;
 use App\Models\Clicks;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 class adminColdCallingController extends Controller
