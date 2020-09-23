@@ -323,6 +323,7 @@ class adminPropertyController extends Controller
 	        return back()->with('msg','Property Added Successfully!');
     }
     public function EditProperty(){
+        $permissions = permission::where('user_id', session('user_id'))->first();
     	$recordID=input::get("record_id");
         $result=coldcallingModel::where("id",$recordID)->get();
         $result=json_decode(json_encode($result),true);
@@ -332,10 +333,10 @@ class adminPropertyController extends Controller
     	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
         $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
         $upcoming = coldcallingModel::where('access','Upcoming')->count();
-        $row = coldcallingModel::where("id",$property_id)->first();
+        $row = coldcallingModel::where("id",$recordID)->first();
         $description = 'Property '. $row->Building .' with Unit No => '. $row->unit_no .'and Area => '. $row->area .'is edited.';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Edit Property','description'=>$description]);
-        return view("addproperties",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'buildings'=>$buildings,'reminders'=>$reminders,'areas'=>$areas,'bedrooms'=>$bedrooms,'agentss'=>$agentss,'upcoming'=>$upcoming]);
+        return view("addproperties",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'buildings'=>$buildings,'reminders'=>$reminders,'areas'=>$areas,'bedrooms'=>$bedrooms,'agentss'=>$agentss,'upcoming'=>$upcoming,'permissions'=>$permissions]);
     }
     public function addLandlordEmailPass(){
         if(input::get('email')){
