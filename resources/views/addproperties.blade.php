@@ -467,8 +467,13 @@
                                   @endif
                                   @if(ucfirst(session('role'))==ucfirst('SuperAgent'))
                                   <div class="row">
+                                     @if(@$permissions->propertyAssign==1) 
                                       <div class="col-md-8">
                                       </div>
+                                      @else
+                                      <div class="col-md-10">
+                                      </div>
+                                      @endif
                                       @if(@$permissions->propertyAssign==NULL)
                                          <div class="col-md-2 pl-1 pr-1 superAgentFilter">
                                             <div class="filter_btn_wrapper">
@@ -624,9 +629,9 @@
                                            @endif
                                            <td>{{$record->Area_Sqft}}</td>
                                            <td>{{$record->Bedroom}}</td>
-                                           <td>{{$record->Price}}</td>
-                                           <td>{{$record->sale_price}}</td>
+                                           <td>{{$record->price}}</td>
                                            <td>{{$record->rented_price}}</td>
+                                           <td>{{$record->sale_price}}</td>
                                            @if($record->getAddBy['user_name'])
                                            <td>{{ucfirst($record->getAddBy['user_name'])}}</td>
                                            @else
