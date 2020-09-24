@@ -501,13 +501,13 @@ public function addOwnerByAjax(Request $request){
         $recordID=input::get("record_id");
           $result=coldcallingModel::where("id",$recordID)->get();
           $result=json_decode(json_encode($result),true);
-        $buildingss=Building::select(["building_name","id"])->get();
-          $areas=coldcallingModel::select('area')->orderBy('updated_at', 'DESC')->get();
-          $bedrooms=coldcallingModel::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
+        $buildingss=Building::select(["building_name","id"])->distinct('building_name')->get();
+          $areas=coldcallingModel::select('area')->distinct('area')->orderBy('updated_at', 'DESC')->get();
+          $bedrooms=coldcallingModel::select('Bedroom')->distinct('area')->orderBy('updated_at', 'DESC')->get();
         $reminders=Reminder::where('property_id',input::get('property_id'))->first();
         $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
         $upcoming = coldcallingModel::where('access','Upcoming')->count();
-        $data = coldcallingModel::where('property_id',input::get('property_id'))->first();
+        $data = coldcallingModel::where('id',input::get('record_id'))->first();
           $description = 'Coldcalling property name '. $data->Building .'Unit No => '. $data->unit_no .'area => '. $data->area .'edited.';
           Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Coldcalling Edit','description'=>$description]);
           return view("coldCalling",["result"=>$result,"Formdisplay"=>"block","Recorddisplay"=>"none",'buildingss'=>$buildingss,'reminders'=>$reminders,'areas'=>$areas,'bedrooms'=>$bedrooms,'agentss'=>$agentss,'upcoming'=>$upcoming, 'permissions'=>$permissions]);

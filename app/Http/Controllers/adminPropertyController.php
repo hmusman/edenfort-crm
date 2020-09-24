@@ -323,14 +323,22 @@ class adminPropertyController extends Controller
 	        return back()->with('msg','Property Added Successfully!');
     }
     public function EditProperty(){
+        
         $permissions = permission::where('user_id', session('user_id'))->first();
-    	$recordID=input::get("record_id");
+        
+        $recordID=input::get("record_id");
+        
         $result=coldcallingModel::where("id",$recordID)->get();
+        
         $result=json_decode(json_encode($result),true);
-    	$buildings=Building::select(["building_name","id"])->get();
-        $areas=coldcallingModel::select('area')->orderBy('updated_at', 'DESC')->get();
-        $bedrooms=coldcallingModel::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
-    	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
+        
+        $buildings=Building::select(["building_name","id"])->distinct('building_name')->get();
+        
+        $areas=coldcallingModel::select('area')->distinct('area')->orderBy('updated_at', 'DESC')->get();
+        
+        $bedrooms=coldcallingModel::select('Bedroom')->distinct('Bedroom')->orderBy('updated_at', 'DESC')->get();
+        
+        $reminders=Reminder::where('property_id',$result[0]['id'])->first();
         $agentss=user::where(["status"=>1])->whereIn("role",[3,4])->get(["user_name","id"]);
         $upcoming = coldcallingModel::where('access','Upcoming')->count();
         $row = coldcallingModel::where("id",$recordID)->first();
