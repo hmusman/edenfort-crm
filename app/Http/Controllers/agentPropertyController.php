@@ -780,8 +780,8 @@ class agentPropertyController extends Controller
     	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
     	$buildings=Building::all();
         $allBuildings=Building::all();
-    	$areas=coldcallingModel::select('area')->orderBy('updated_at', 'DESC')->get();
-    	$bedrooms=coldcallingModel::select('Bedroom')->orderBy('updated_at', 'DESC')->get();
+    	$areas=coldcallingModel::distinct('area')->orderBy('updated_at', 'DESC')->get();
+    	$bedrooms=coldcallingModel::distinct('Bedroom')->orderBy('updated_at', 'DESC')->get();
     	$permissions = permission::where('user_id', session('user_id'))->first();
     	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
 

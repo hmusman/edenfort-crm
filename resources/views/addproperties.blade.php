@@ -441,7 +441,7 @@
                                           </div>
                                        </div>
                                     </div>
-                                  </form>
+                                 
                                   <br>
                                   @if(ucfirst(session('role'))==ucfirst('Admin') || ucfirst(session('role'))==ucfirst('SuperDuperAdmin'))
                                     <div class="row mt-4">
@@ -497,6 +497,7 @@
                                     </div>
                                     @endif
                                     </div>
+                                     </form>
                                     <table class="table table-striped property_table table-responsive" style="border-collapse: collapse; border-spacing: 0;">
                                        <thead>
                                          <tr style="background-color: #2fa97c;color: white;">
