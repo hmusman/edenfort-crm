@@ -31,8 +31,8 @@ class adminColdCallingController extends Controller
         $agents = $request->agents_ids;
         $agents = array_values($agents);
         $properties = array_values($properties);
-        $user = user::where('id',@$agents[$key])->first();
         foreach($properties as $key => $propertyID){
+            $user = user::where('id',@$agents[$key])->first();
             coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key],"update_from"=>'coldcalling']);
             $property = coldcallingModel::where("id",$propertyID)->first();
             $description = $property->Building .' with Unit No => '. $property->unit_no .'and Area => '. $property->area .'assigned to '. $user->user_name;

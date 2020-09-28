@@ -24,17 +24,20 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class adminPropertyController extends Controller
 {
     public function singlePersonProperty(Request $request){
+
         $properties = $request->check_boxes;
         $agents = $request->agents_ids;
         $agents = array_values($agents);
         $properties = array_values($properties);
         // dd($properties);
-        $user = user::where('id',@$agents[$key])->first();
         foreach($properties as $key => $propertyID){
+            $user = user::where('id',@$agents[$key])->first();
+            // dd($user);
             coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key],'update_from'=>'property']);
 
             $property = coldcallingModel::where("id",$propertyID)->first();
             $description = $property->Building .' with Unit No => '. $property->unit_no .'and Area => '. $property->area .'assigned to '. $user->user_name;
+            // dd($user->user_name);
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Property','description'=>$description]);
         }
         return back()->with("msg","Property Assigned Successfully!");

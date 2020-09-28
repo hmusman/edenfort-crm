@@ -367,11 +367,6 @@
                                                 Leads
                                             </a>
                                       </li>
-                                      <li class="nav-item">
-                                            <a class="nav-link" href="{{url('/loans')}}">
-                                                Loans
-                                            </a>
-                                      </li>
                                       <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Setup <div class="arrow-down"></div>
@@ -380,18 +375,16 @@
                                           <div class="row">
                                             <div class="col-lg-4">
                                               <a href="{{url('submittedProperties')}}" class="dropdown-item">Requests</a>
+                                              <a href="{{url('/loans')}}" class="dropdown-item">Loans</a>
+
                                               <a href="{{url('permission')}}?type=For Rent" class="dropdown-item">Permission</a>
                                               <a href="{{url('months')}}?type=For Rent" class="dropdown-item">Months</a>
                                               <a href="{{url('email-templates')}}?type=For Rent" class="dropdown-item">Email Templates</a>
                                               <a href="{{route('troubleshooting.index')}}" class="dropdown-item">TroubleShooting</a>
+                                              <a href="{{url('/backup')}}" class="dropdown-item">Backups</a>
                                             </div>
                                           </div>
                                         </div>
-                                      </li>
-                                      <li class="nav-item">
-                                            <a class="nav-link" href="{{url('/backup')}}">
-                                                Backups
-                                            </a>
                                       </li>
                                       <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
