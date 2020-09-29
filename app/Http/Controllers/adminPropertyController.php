@@ -53,10 +53,12 @@ class adminPropertyController extends Controller
         foreach($properties as $key => $propertyID){
             coldcallingModel::where('building',$propertyID)->update(["user_id"=>@$agents[0],'update_from'=>'coldcalling']);
 
-            $property = coldcallingModel::where("id",$propertyID)->first();
-            $description = $property->Building .' with Unit No => '. $property->unit_no .'and Area => '. $property->area .'assigned to '. $user->user_name;
+            $property = coldcallingModel::where("building",$propertyID)->first();
+            // dd($property);
+            $description = $property->Building .'assigned to '. $user->user_name;
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Building','description'=>$description]);
         }
+        
         return back()->with("msg","Coldcalling Assigned Successfully!");
     }
 
