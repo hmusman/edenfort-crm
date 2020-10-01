@@ -651,7 +651,7 @@
                                                   @endif
                                                   <td>{{$record->Area_Sqft}}</td>
                                                   <td>{{$record->Bedroom}}</td>
-                                                  <td>{{$record->Price}}</td>
+                                                  <td>{{$record->price}}</td>
                                                   @if(@$_GET['type']=='upcoming')
                                                   <td>{{$record->getUpcomingDate['date_time']}}</td>
                                                   @endif
@@ -864,9 +864,13 @@
                                                    <label class="control-label  col-md-3">Email</label>
                                                    <div class="col-md-9">
                                                       <?php $temp=explode(',', @$result[0]['email']); if(count($temp) > 1){ foreach ($temp as $value) {?>
-                                                      <input  type="email" class="form-control" name="email[]" value="{{$value}}" style="margin-bottom: 1%">
+                                                      <input  id="owneremail" type="email" class="form-control" name="email[]" value="{{$value}}" style="margin-bottom: 1%" autocomplete="off"><span class="spin"><img src="{{url('public/Green/assets/images/icons/3.gif')}}" alt=""></span>
+                                                      <ul id="suggesstion-box" class="list-unstyled emaillist form-control">
+                                                      </ul>
                                                       <?php } }else { ?>
-                                                      <input type="email" class="form-control" name="email[]" value="{{@$result[0]['email']}}">
+                                                      <input id="owneremail" type="email" class="form-control" name="email[]" value="{{@$result[0]['email']}}" autocomplete="off"><span class="spin"><img src="{{url('public/Green/assets/images/icons/3.gif')}}" alt=""></span>
+                                                      <ul id="suggesstion-box" class="list-unstyled emaillist form-control">
+                                                      </ul>
                                                       <?php  } ?>
                                                    </div>
                                                 </div>
@@ -880,7 +884,7 @@
                                                 <div class="form-group row">
                                                    <label class="control-label  col-md-3">LandLord</label>
                                                    <div class="col-md-9">
-                                                      <input  type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
+                                                      <input  id="ownername" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
                                                    </div>
                                                 </div>
                                              </div>
@@ -935,9 +939,9 @@
                                                    <label class="control-label  col-md-3">Phone Number</label>
                                                    <div class="col-md-9">
                                                       <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
-                                                      <input  type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
+                                                      <input  id="ownerphone" type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
                                                       <?php } }else { ?>
-                                                      <input  type="text"  class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
+                                                      <input  id="ownerphone" type="text"  class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
                                                       <?php  } ?>
                                                    </div>
                                                 </div>

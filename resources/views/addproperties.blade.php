@@ -172,6 +172,7 @@
    a[type="button"]{
           color: white;
    }
+  
 </style>
  <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -848,9 +849,17 @@
                                              <label class="control-label col-md-3 email">Email</label>
                                              <div class="col-md-9">
                                                 <?php $temp=explode(',', @$result[0]['email']); if(count($temp) > 1){ foreach ($temp as $value) {?>
-                                                <input  type="email" class="form-control" name="email[]" value="{{$value}}" style="margin-bottom: 1%">
+                                                <input  type="email" class="form-control" id="owneremail" name="email[]" value="{{$value}}" style="margin-bottom: 1%"  autocomplete="off"><span class="spin"><img src="{{url('public/Green/assets/images/icons/3.gif')}}" alt=""></span>
+                                                <!-- <div> -->
+                                                  <ul id="suggesstion-box" class="list-unstyled emaillist form-control">
+                                                  </ul>
+                                                <!-- </div> -->
                                                 <?php } }else { ?>
-                                                <input type="email" class="form-control" name="email[]" value="{{@$result[0]['email']}}">
+                                                <input type="email" class="form-control" id="owneremail" name="email[]" value="{{@$result[0]['email']}}"  autocomplete="off"><span class="spin"><img src="{{url('public/Green/assets/images/icons/3.gif')}}" alt=""></span>
+                                                <!-- <div> -->
+                                                  <ul id="suggesstion-box" class="list-unstyled emaillist form-control">
+                                                  </ul>
+                                                <!-- </div> -->
                                                 <?php  } ?>
                                              </div>
                                           </div>
@@ -863,7 +872,7 @@
                                           <div class="form-group row">
                                              <label class="control-label col-md-3 landlord">LandLord</label>
                                              <div class="col-md-9">
-                                                <input type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
+                                                <input id="ownername" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
                                              </div>
                                           </div>
                                        </div>
@@ -916,9 +925,9 @@
                                              <label class="control-label col-md-3 phone">Phone Number</label>
                                              <div class="col-md-9">
                                                 <?php $temp=explode(',', @$result[0]['contact_no']); if(count($temp) > 1){ foreach ($temp as $value) {?>
-                                                <input type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
+                                                <input id="ownerphone" type="text" class="form-control" name="contact_no[]" value="{{$value}}" style="margin-bottom: 1%">
                                                 <?php } }else { ?>
-                                                <input  type="text" class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
+                                                <input id="ownerphone" type="text" class="form-control" name="contact_no[]" value="{{@$result[0]['contact_no']}}">
                                                 <?php  } ?>
                                              </div>
                                           </div>
@@ -1148,7 +1157,7 @@
 
         <!-- Datatable init js -->
         <script src="{{url('public/Green/assets/js/pages/datatables.init.js')}}"></script>
-@ednsection
+@endsection
 <script>
   @if(session('msg'))
     alertify.success("{!! session('msg') !!}")
@@ -1573,6 +1582,9 @@
       document.getElementById("propertyForm").submit(); 
     };
   });
+
+
+
 </script>
 
 @if(ucfirst(session('role')) == (ucfirst('Admin')))

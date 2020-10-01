@@ -119,5 +119,60 @@
 
         <script src="{{url('public/Green/assets/js/app.js')}}"></script>
         <!-- <div class="alertify-notifier ajs-top ajs-right"></div> -->
+
+        <script>
+            $(document).ready(function(){
+              $("#owneremail").keyup(function(){
+                var searchkey = $(this).val();
+                // alert(searchkey);
+                if(!$(this).val()){
+                  $("#suggesstion-box").css('display','none');
+                  // alert('working');
+                }else{
+                  $.ajax({
+                    type: "POST",
+                    url: "{{url('/reademail')}}",
+                    data:{'_token':'{{ csrf_token() }}','keyword':searchkey},
+                    beforeSend: function(){
+                      $('.spin').css('display','block');
+                    },
+                    success: function(data){
+                      $("#suggesstion-box").css('display','block');
+                      $("#suggesstion-box").html(data);
+                      $('.spin').css('display','none');
+                    }
+                    });
+                }
+              });
+            });
+
+            function select(id){
+              var selected = $('#'+id).text();
+              $("#owneremail").val(selected);
+              $("#owneremail").html(selected);
+              $("#suggesstion-box").css('display','none');
+
+              $.ajax({
+                  type: "POST",
+                  url: "{{url('/readdata')}}",
+                  data:{'_token':'{{ csrf_token() }}','email':selected},
+                  beforeSend: function(){
+                    $('.spin').css('display','block');
+                  },
+                  success: function(data){
+                    // console.log(data);
+                    $('#ownername').val(data['LandLord']);
+                    $('#ownername').html(data['LandLord']);
+
+                    $('#ownerphone').val(data['contact_no']);
+                    $('#ownerphone').html(data['contact_no']);
+
+                    $('.spin').css('display','none');
+                  }
+              });
+
+
+            }
+        </script>
     </body>
 </html>

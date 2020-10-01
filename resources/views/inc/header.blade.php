@@ -150,6 +150,34 @@
               background: #47b38b !important;
               color: white !important;
           }
+          .emaillist{
+              position: absolute;
+              z-index: 1000;
+              background: #f3f7f8;
+              color: black;
+              line-height: 28px;
+              padding-left: 12px;
+              height: 400px;
+              overflow-y: auto;
+              width: 95%;
+         }
+         #suggesstion-box li{
+            cursor: pointer;
+         }
+
+         #suggesstion-box li:hover{
+            color: green;
+         }
+
+         #suggesstion-box{
+          display: none;
+         }
+         .spin{
+            position: absolute;
+            margin-top: -30px;
+            margin-left: 85%;
+            display: none;
+         }
         </style>
     </head>
 

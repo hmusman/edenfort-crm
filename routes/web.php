@@ -375,5 +375,6 @@ Route::resource('troubleshooting','TroubleShootingController');
 Route::get('agent_troubleshoot','TroubleShootingController@AgentTroubleShoot');
 
 
-
+Route::post('/reademail','ReadEmailController@reademail');
+Route::post('/readdata','ReadEmailController@readdata');
 Route::get('move-data-from-property-to-coldcalling','MoveDataController@MoveData');

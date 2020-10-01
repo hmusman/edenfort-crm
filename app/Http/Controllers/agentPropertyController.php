@@ -176,7 +176,7 @@ class agentPropertyController extends Controller
                 // dd($reminders);
                 $current_date = date('Y-m-d H:i:s');
                 // dd($current_date);
-
+                // dd($result_data);
                 $description = 'Properties page visited';
                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
                 return view('agentProperties',compact(['result_data','users','agents','areas','bedrooms','buildings','allBuildings','permissions','Recorddisplay', 'Formdisplay','reminders','current_date']));
