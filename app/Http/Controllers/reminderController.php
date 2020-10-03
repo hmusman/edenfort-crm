@@ -83,92 +83,90 @@ class reminderController extends Controller
             Reminder::where('id',$value->id)->update(["status"=>'viewed']);
             $rem = Reminder::where('id',$value->id)->first();
             $property = coldcallingModel::where('id', $rem->property_id)->first();
-            if(empty($property)){
-                $property = coldcallingModel::where('id', $rem->property_id)->first();
-            }
+            $deal = deal::where('id', $rem->property_id)->first();
             $lead = lead::where('id', $rem->property_id)->first();
             $user = user::where('id', session('user_id'))->first();
             $receiverEmail = $user->Email;
             if($rem->reminder_of=='Deals'){
                 $subject = $rem->reminder_of;
                 $massage = [
-                'reminder_of' => $rem->reminder_of,
-                'reminder_type' => $rem->reminder_type,
-                'deal_start_date' => $deal->deal_start_date,
-                'contract_start_date' => $deal->contract_start_date,
-                'contract_end_date' => $deal->contract_end_date,
-                'building' => $deal->building,
-                'referenceNo' => $deal->referenceNo,
-                'broker_name' => $deal->broker_name,
-                'unit_no' => $deal->unit_no,
-                'client_name' => $deal->client_name,
-                'contanct_no' => $deal->contanct_no,
-                'email' => $deal->email,
-                'property_type' => $deal->property_type,
-                'rent_sale_value' => $deal->rent_sale_value,
-                'rentalCheques' => $deal->rentalCheques,
-                'deal_Status' => $deal->deal_Status,
-                'agent_name' => $deal->agent_name,
-                'gross_commission' => $deal->gross_commission,
-                'gc_vat' => $deal->gc_vat,
-                'company_commision' => $deal->company_commision,
-                'cc_Vat' => $deal->cc_Vat,
-                'efAgent_Commission' => $deal->efAgent_Commission,
-                'efAgent_Vat' => $deal->efAgent_Vat,
-                'secondAgentName' => $deal->secondAgentName,
-                'secondAgentCompany' => $deal->secondAgentCompany,
-                'sacPhone' => $deal->sacPhone,
-                'secondAgent_Commission' => $deal->secondAgent_Commission,
-                'sacAgent_Vat' => $deal->sacAgent_Vat,
-                'thirdAgentName' => $deal->thirdAgentName,
-                'thirdAgentCompany' => $deal->thirdAgentCompany,
-                'tacPhone' => $deal->tacPhone,
-                'thirdAgentCommission' => $deal->thirdAgentCommission,
-                'tacVat' => $deal->tacVat,
-                'paymentTerms' => $deal->paymentTerms,
-                'chequeNumber' => $deal->chequeNumber,
-                'ownerCompanyName' => $deal->ownerCompanyName,
-                'ownerName' => $deal->ownerName,
-                'ownerPhone' => $deal->ownerPhone,
-                'ownerEmail' => $deal->ownerEmail,
-                'ownerNameSecond' => $deal->ownerNameSecond,
-                'ownerPhoneSecond' => $deal->ownerPhoneSecond,
-                'ownerEmailSecond' => $deal->ownerEmailSecond,
-                'chequeAmount' => $deal->chequeAmount,
-                'note' => $deal->note,
+                    'reminder_of' => $rem->reminder_of,
+                    'reminder_type' => $rem->reminder_type,
+                    'deal_start_date' => $deal->deal_start_date,
+                    'contract_start_date' => $deal->contract_start_date,
+                    'contract_end_date' => $deal->contract_end_date,
+                    'building' => $deal->building,
+                    'referenceNo' => $deal->referenceNo,
+                    'broker_name' => $deal->broker_name,
+                    'unit_no' => $deal->unit_no,
+                    'client_name' => $deal->client_name,
+                    'contanct_no' => $deal->contanct_no,
+                    'email' => $deal->email,
+                    'property_type' => $deal->property_type,
+                    'rent_sale_value' => $deal->rent_sale_value,
+                    'rentalCheques' => $deal->rentalCheques,
+                    'deal_Status' => $deal->deal_Status,
+                    'agent_name' => $deal->agent_name,
+                    'gross_commission' => $deal->gross_commission,
+                    'gc_vat' => $deal->gc_vat,
+                    'company_commision' => $deal->company_commision,
+                    'cc_Vat' => $deal->cc_Vat,
+                    'efAgent_Commission' => $deal->efAgent_Commission,
+                    'efAgent_Vat' => $deal->efAgent_Vat,
+                    'secondAgentName' => $deal->secondAgentName,
+                    'secondAgentCompany' => $deal->secondAgentCompany,
+                    'sacPhone' => $deal->sacPhone,
+                    'secondAgent_Commission' => $deal->secondAgent_Commission,
+                    'sacAgent_Vat' => $deal->sacAgent_Vat,
+                    'thirdAgentName' => $deal->thirdAgentName,
+                    'thirdAgentCompany' => $deal->thirdAgentCompany,
+                    'tacPhone' => $deal->tacPhone,
+                    'thirdAgentCommission' => $deal->thirdAgentCommission,
+                    'tacVat' => $deal->tacVat,
+                    'paymentTerms' => $deal->paymentTerms,
+                    'chequeNumber' => $deal->chequeNumber,
+                    'ownerCompanyName' => $deal->ownerCompanyName,
+                    'ownerName' => $deal->ownerName,
+                    'ownerPhone' => $deal->ownerPhone,
+                    'ownerEmail' => $deal->ownerEmail,
+                    'ownerNameSecond' => $deal->ownerNameSecond,
+                    'ownerPhoneSecond' => $deal->ownerPhoneSecond,
+                    'ownerEmailSecond' => $deal->ownerEmailSecond,
+                    'chequeAmount' => $deal->chequeAmount,
+                    'note' => $deal->note,
 
-            ];
+                ];
             }else if($rem->reminder_of=='Leads'){
                 $subject = $rem->reminder_of;
                 $massage = [
-                'reminder_of' => $rem->reminder_of,
-                'reminder_type' => $rem->reminder_type,
-                'Building' => $lead->building,
-                'area' => $lead->area,
-                'client_name' => $lead->client_name,
-                'email' => $lead->email,
-                'contact_no' => $lead->contact_no,
-                'submission_date' => $lead->submission_date,
-                'view_date_time' => $lead->view_date_time,
-                'followup_date' => $lead->followup_date,
-                'lead_user' => $lead->lead_user,
-                'status' => $lead->status,
-                'priority' => $lead->priority,
+                    'reminder_of' => $rem->reminder_of,
+                    'reminder_type' => $rem->reminder_type,
+                    'Building' => $lead->building,
+                    'area' => $lead->area,
+                    'client_name' => $lead->client_name,
+                    'email' => $lead->email,
+                    'contact_no' => $lead->contact_no,
+                    'submission_date' => $lead->submission_date,
+                    'view_date_time' => $lead->view_date_time,
+                    'followup_date' => $lead->followup_date,
+                    'lead_user' => $lead->lead_user,
+                    'status' => $lead->status,
+                    'priority' => $lead->priority,
 
-            ];
+                ];
             }else{
                 $subject = $rem->reminder_of;
                 $massage = [
-                'reminder_of' => $rem->reminder_of,
-                'reminder_type' => $rem->reminder_type,
-                'Building' => $property->Building,
-                'area' => $property->area,
-                'Landloard' => $property->Landlord,
-                'email' => $property->email,
-                'contact_no' => $property->contact_no,
-                'comment' => $property->comment,
+                    'reminder_of' => $rem->reminder_of,
+                    'reminder_type' => $rem->reminder_type,
+                    'Building' => $property->Building,
+                    'area' => $property->area,
+                    'Landloard' => $property->Landlord,
+                    'email' => $property->email,
+                    'contact_no' => $property->contact_no,
+                    'comment' => $property->comment,
 
-            ];
+                ];
         }
             // $emails = [, ];
             Mail::to($receiverEmail)->cc(['upcoming@edenfort.ae'])->send(new reminderMails($massage, $subject));
@@ -357,6 +355,7 @@ class reminderController extends Controller
                 'Landloard' => $property->Landlord,
                 'email' => $property->email,
                 'contact_no' => $property->contact_no,
+                'comment' => $property->comment,
 
             ];
             }

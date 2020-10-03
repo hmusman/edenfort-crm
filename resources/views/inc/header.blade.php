@@ -161,18 +161,18 @@
               overflow-y: auto;
               width: 95%;
          }
-         #suggesstion-box li{
+         #suggesstion-box li, #name-suggesstion-box li{
             cursor: pointer;
          }
 
-         #suggesstion-box li:hover{
+         #suggesstion-box li:hover,#name-suggesstion-box li:hover{
             color: green;
          }
 
-         #suggesstion-box{
+         #suggesstion-box, #name-suggesstion-box{
           display: none;
          }
-         .spin{
+         .spin, .spin1, .spin2{
             position: absolute;
             margin-top: -30px;
             margin-left: 85%;

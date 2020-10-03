@@ -32,4 +32,27 @@ class ReadEmailController extends Controller
 
     	return $result;
     }
+
+    public function readLandLord(Request $request)
+    {
+        // dd($request->all());
+        $search = $request->keyword;
+
+        $result = coldcallingModel::distinct('LandLord')->where('LandLord', 'like', $search.'%')->get();
+
+        
+        // dd($result);
+
+        foreach($result as $key => $value){
+            echo '<li id="pick_name'.$key.'" onClick="selectName(this.id)">'.$value->LandLord.'</li><hr>';
+        }
+    }
+
+    public function readnameData(Request $request){
+        // return $request->all();
+
+        $result = coldcallingModel::where('LandLord',$request->LandLord)->select('email','contact_no')->first();
+
+        return $result;
+    }
 }

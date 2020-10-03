@@ -374,7 +374,13 @@ Route::resource('troubleshooting','TroubleShootingController');
 
 Route::get('agent_troubleshoot','TroubleShootingController@AgentTroubleShoot');
 
-
+//READ DATA WITH EMAIL
 Route::post('/reademail','ReadEmailController@reademail');
 Route::post('/readdata','ReadEmailController@readdata');
+
+//READ DATA WITH LANDLORN NAME
+Route::post('/readname','ReadEmailController@readLandLord');
+Route::post('/readnameData','ReadEmailController@readnameData');
+
+
 Route::get('move-data-from-property-to-coldcalling','MoveDataController@MoveData');

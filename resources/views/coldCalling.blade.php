@@ -1305,7 +1305,9 @@
                                                  <div class="form-group row">
                                                     <label class="control-label  col-md-3 landlord">LandLord</label>
                                                     <div class="col-md-9">
-                                                       <input id="ownername" required="" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
+                                                       <input id="ownername" required="" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}"><span class="spin1"><img src="{{url('public/Green/assets/images/icons/3.gif')}}" alt=""></span>
+                                                        <ul id="name-suggesstion-box" class="list-unstyled emaillist form-control">
+                                                        </ul>
                                                     </div>
                                                  </div>
                                               </div>

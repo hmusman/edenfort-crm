@@ -1262,6 +1262,9 @@
                                                <label class="control-label text-right col-md-3">LandLord</label>
                                                <div class="col-md-9">
                                                   <input  id="ownername" type="text" style="font-size: 12px;" class="form-control" name="LandLord" value="{{@$result[0]['LandLord']}}">
+                                                  <span class="spin1"><img src="{{url('public/Green/assets/images/icons/3.gif')}}" alt=""></span>
+                                                  <ul id="name-suggesstion-box" class="list-unstyled emaillist form-control">
+                                                  </ul>
                                                </div>
                                             </div>
                                          </div>

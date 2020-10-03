@@ -174,5 +174,59 @@
 
             }
         </script>
+        <script>
+            $(document).ready(function(){
+              $("#ownername").keyup(function(){
+                var searchkey = $(this).val();
+                // alert(searchkey);
+                if(!$(this).val()){
+                  $("#name-suggesstion-box").css('display','none');
+                  // alert('working');
+                }else{
+                  $.ajax({
+                    type: "POST",
+                    url: "{{url('/readname')}}",
+                    data:{'_token':'{{ csrf_token() }}','keyword':searchkey},
+                    beforeSend: function(){
+                      $('.spin1').css('display','block');
+                    },
+                    success: function(data){
+                      $("#name-suggesstion-box").css('display','block');
+                      $("#name-suggesstion-box").html(data);
+                      $('.spin1').css('display','none');
+                    }
+                    });
+                }
+              });
+            });
+
+            function selectName(id){
+              var selected = $('#'+id).text();
+              $("#ownername").val(selected);
+              $("#ownername").html(selected);
+              $("#name-suggesstion-box").css('display','none');
+
+              $.ajax({
+                  type: "POST",
+                  url: "{{url('/readnameData')}}",
+                  data:{'_token':'{{ csrf_token() }}','LandLord':selected},
+                  beforeSend: function(){
+                    $('.spin1').css('display','block');
+                  },
+                  success: function(data){
+                    // console.log(data);
+                    $('#owneremail').val(data['email']);
+                    $('#owneremail').html(data['email']);
+
+                    $('#ownerphone').val(data['contact_no']);
+                    $('#ownerphone').html(data['contact_no']);
+
+                    $('.spin1').css('display','none');
+                  }
+              });
+
+
+            }
+        </script>
     </body>
 </html>
