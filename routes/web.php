@@ -104,6 +104,8 @@ Route::get('delete-template/{id}', 'emailTemplateController@deleteTemplate');
     Route::get('/propertydetail/{id}', 'adminPropertyController@propertydetail');
     Route::get('setReminderForProperty', 'adminPropertyController@setReminderForProperty');
     Route::get('bulkUpdateStatusProperty','adminPropertyController@bulkUpdateStatusProperty');
+    //update deals by row
+    Route::get('bulkUpdateDealsProperty','dealController@UpdateDealsProperty');
     Route::get('/Propertysearch','adminPropertyController@index')->name('Propertysearch');
     Route::post('Addproperty', 'adminPropertyController@Addproperty');
     Route::get('Addproperty', 'adminPropertyController@Addproperty');

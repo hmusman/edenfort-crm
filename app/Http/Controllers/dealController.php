@@ -95,7 +95,7 @@ class dealController extends Controller {
     public function insert(Request $r) {
         $buildings = Building::all();
         $agents = user::where(['role' => 3])->get();
-        $created = deal::create(['deal_start_date' => $r->deal_start_date,'contract_start_date' => $r->startDate, 'contract_end_date' => $r->endDate, 'unit_no' => $r->unitNo, 'referenceNo' => $r->referenceNo, 'broker_name' => $r->brokerName, 'client_name' => $r->clientName, 'contanct_no' => $r->contactNo, 'email' => $r->email, 'ownerName' => $r->owner_name, 'ownerPhone' => $r->owner_phone, 'ownerEmail' => $r->owner_email, 'ownerNameSecond' => $r->owner_name_second, 'ownerPhoneSecond' => $r->owner_phone_second, 'ownerEmailSecond' => $r->owner_email_second, 'property_type' => $r->propertyType, 'rent_sale_value' => $r->rentSale, 'rentalCheques' => $r->rentalCheques, 'building' => $r->building, 'dealStatus' => $r->dealStatus, 'agent_name' => $r->agentName, 'gross_commission' => $r->grossCommission, 'gc_vat' => $r->gcVat, 'company_commision' => $r->companyCommission, 'cc_vat' => $r->ccVat, 'efAgentCommission' => $r->efAgentCommission, 'efAgentVat' => $r->efAgentVat, 'secondAgentName' => $r->secondAgentName, 'secondAgentCompany' => $r->secondAgentCompany, 'sacPhone' => $r->sacPhone, 'secondAgentCommission' => $r->secondAgentCommission, 'sacAgentVat' => $r->sacAgentVat, 'thirdAgentName' => $r->thirdAgentName, 'thirdAgentCompany' => $r->thirdAgentCompany, 'tacPhone' => $r->tacPhone, 'thirdAgentCommission' => $r->thirdAgentCommission, 'tacVat' => $r->tacVat, 'paymentTerms' => $r->paymentTerms, 'chequeNumber' => $r->chequeNumber, 'ownerCompanyName' => $r->ownerCompanyName, 'chequeAmount' => $r->chequeAmount, 'note' => $r->note, 'user_id' => session('user_id') ]);
+        $created = deal::create(['deal_start_date' => $r->deal_start_date,'contract_start_date' => $r->startDate, 'contract_end_date' => $r->endDate, 'unit_no' => $r->unitNo, 'referenceNo' => $r->referenceNo, 'broker_name' => $r->brokerName, 'contanct_no' => $r->clientName, 'contanct_no' => $r->contactNo, 'email' => $r->email, 'ownerName' => $r->owner_name, 'ownerPhone' => $r->owner_phone, 'ownerEmail' => $r->owner_email, 'ownerNameSecond' => $r->owner_name_second, 'ownerPhoneSecond' => $r->owner_phone_second, 'ownerEmailSecond' => $r->owner_email_second, 'property_type' => $r->propertyType, 'rent_sale_value' => $r->rentSale, 'rentalCheques' => $r->rentalCheques, 'building' => $r->building, 'dealStatus' => $r->dealStatus, 'agent_name' => $r->agentName, 'gross_commission' => $r->grossCommission, 'gc_vat' => $r->gcVat, 'company_commision' => $r->companyCommission, 'cc_vat' => $r->ccVat, 'efAgentCommission' => $r->efAgentCommission, 'efAgentVat' => $r->efAgentVat, 'secondAgentName' => $r->secondAgentName, 'secondAgentCompany' => $r->secondAgentCompany, 'sacPhone' => $r->sacPhone, 'secondAgentCommission' => $r->secondAgentCommission, 'sacAgentVat' => $r->sacAgentVat, 'thirdAgentName' => $r->thirdAgentName, 'thirdAgentCompany' => $r->thirdAgentCompany, 'tacPhone' => $r->tacPhone, 'thirdAgentCommission' => $r->thirdAgentCommission, 'tacVat' => $r->tacVat, 'paymentTerms' => $r->paymentTerms, 'chequeNumber' => $r->chequeNumber, 'ownerCompanyName' => $r->ownerCompanyName, 'chequeAmount' => $r->chequeAmount, 'note' => $r->note, 'user_id' => session('user_id') ]);
 
         $description = 'New Deal is created';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Create Deals','description'=>$description]);
@@ -138,5 +138,34 @@ class dealController extends Controller {
         $description = 'Update salary in agent account.';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update salary','description'=>$description]);
         return back()->with('msg', 'Salaray Updated Successfully!');
+    }
+
+    public function UpdateDealsProperty(Request $request){
+        // dd($request->all());
+        $check_boxes=$request->check_boxes;
+        foreach($check_boxes as $key=>$value){
+            if(isset($check_boxes[$key])){
+                $data=array(
+                   'referenceNo' => $request->referenceNo[$key],
+                   'client_name' => $request->clientName[$key],
+                   'contanct_no' => $request->contanct_no[$key],
+                   'email' => $request->clientEmail[$key],
+                   'property_type' => $request->propertyType[$key],
+                   'rent_sale_value' => $request->rent_sale_value[$key],
+                   'rentalCheques' => $request->cheques[$key],
+                   'PaymentTerms' => $request->paymentTerms[$key],
+                   'note' => $request->note[$key],
+                );
+
+               deal::where("id",$check_boxes[$key])->update($data);
+
+               $row = deal::where("id",$check_boxes[$key])->first();
+               $description = 'Deal for building '. $row->building .' with Unit No => '. $row->unit_no .' is updated.';
+               Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Edit Property','description'=>$description]);
+              
+            }
+        }
+
+        return "true";
     }
 }

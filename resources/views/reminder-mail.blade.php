@@ -111,7 +111,7 @@
       <p><strong>Followup Date : </strong>{{$massage['followup_date']}}</p>
       <p><strong>Lead User : </strong>{{$massage['lead_user']}}</p>
       <p><strong>Status : </strong>{{$massage['status']}}</p>
-      <p><strong>Priority : </strong>{{$massage['priority']}}</p><br>
+      <p><strong>Feedback : </strong>{{$massage['feedback']}}</p><br>
       <p><strong>Edenfort Real Estate</strong></p>
     @else
       <p><strong>Reminder Of : </strong>{{$massage['reminder_of']}}</p>

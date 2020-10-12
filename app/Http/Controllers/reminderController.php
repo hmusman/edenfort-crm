@@ -152,6 +152,7 @@ class reminderController extends Controller
                     'lead_user' => $lead->lead_user,
                     'status' => $lead->status,
                     'priority' => $lead->priority,
+                    'feedback' => $lead->feedback,
 
                 ];
             }else{
@@ -343,6 +344,7 @@ class reminderController extends Controller
                 'lead_user' => $lead->lead_user,
                 'status' => $lead->status,
                 'priority' => $lead->priority,
+                'feedback' => $lead->feedback,
 
             ];
             }else{
