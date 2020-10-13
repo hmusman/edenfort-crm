@@ -94,6 +94,15 @@
     transition-delay: 0s;
     transform: rotate(90deg);
 }
+.close{
+  z-index: 1050; z-index: 1050; margin-top: -30px; margin-right: -7px;
+}
+.close_icon{
+  background-color: red; padding: 2px 7px 2px 7px; color: white; font-size: 15px;
+}
+.custome-file .custome-file-label{
+      font-size: 9px !important;
+}
 </style>
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -283,8 +292,11 @@
                                                        @endif
                                                        <td class="dealId" style="display:none;">{{$deal->id}}</td>
                                                        <td class="deal_start_date">{{date('d-m-Y',strtotime($deal->deal_start_date))}}</td>
-                                                       <td style="display: none;" class="contract_start_date">{{date('d-m-Y',strtotime($deal->contract_start_date))}}</td>
-                                                       <td style="display: none;" class="contract_end_date">{{date('d-m-Y',strtotime($deal->contract_end_date))}}</td>
+
+                                                       <td style="display: none;" class="deal_start_datee">{{date('m/d/Y',strtotime($deal->deal_start_date))}}</td>
+                                                       <td style="display: none;" class="contract_start_datee">{{date('m/d/Y', strtotime($deal->contract_start_date))}}</td>
+                                                       <td style="display: none;" class="contract_end_datee">{{date('m/d/Y', strtotime($deal->contract_end_date))}}</td>
+
                                                        <td class="building">{{$deal->building}}</td>
                                                        <td class="referenceNo">{{$deal->referenceNo}}</td>
                                                        <td class="broker_name">{{$deal->broker_name}}</td>
@@ -335,11 +347,11 @@
                                                        @if(@$permissions->dealEdit!=1)
                                                        <td>Not Allowed</td>
                                                        @else 
-                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
+                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="getdoxuments({{$deal->id}})"><i class="fa fa-edit"></i> Edit</label>
                                                        </td>
                                                        @endif
                                                        @else
-                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}"><i class="fa fa-edit"></i> Edit</label>
+                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="getdoxuments({{$deal->id}})"><i class="fa fa-edit"></i> Edit</label>
                                                        </td>
                                                     @endif
                                                     </tr>                   
@@ -426,7 +438,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
          </div>
          <div class="modal-body">
-            <form  action="{{route('dealForm')}}" class="form-horizontal" id="supervision" method="post">
+            <form  action="{{route('dealForm')}}" class="form-horizontal" id="supervision" method="post" enctype="multipart/form-data">
                @csrf
                <input type="hidden" name="supervision_id">
                <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -435,6 +447,9 @@
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" data-toggle="tab" href="#profile8" role="tab" id="2ndTab"><span><i class="mdi mdi-coin"></i></span><span class="tab-heading">Payment & Commission</span></a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#profile9" role="tab" id="3rdTab"><span><i class="mdi mdi-note"></i></span><span class="tab-heading">Documents</span></a>
                   </li>
                </ul><br>
                <div class="tab-content tabcontent-border mt-4">
@@ -674,7 +689,28 @@
                            <label>Note:</label>
                            <textarea class="form-control" rows="3" name="note"></textarea>
                         </div>
-                        <div class="form-group col-sm-3">
+                     </div>
+                  </div>
+                  <div class="tab-pane  p-20" id="profile9" role="tabpanel">
+                     <div class="row add_more_docments">
+                        <div class="form-group col-sm-4">
+                           <label>Attach Documents</label>
+                           <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]">
+                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-2">
+                          <a href="#" title="Add More" class="btn btn-success mb-3" id="add_more_docments">Add More</a>
+                        </div>
+                     </div>
+                     <div class="row">
+                       <div class="form-group col-sm-3">
                            <input type="submit" value="Submit" class="btn btn-block btn-lg btn-success deals_submit_btn" name="submitDeal"> 
                         </div>
                      </div>
@@ -695,7 +731,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
          </div>
          <div class="modal-body">
-            <form  action="{{route('editDeal')}}" class="form-horizontal" id="supervision" method="post">
+            <form  action="{{route('editDeal')}}" class="form-horizontal" id="supervision" method="post" enctype="multipart/form-data">
                @csrf
                <input type="hidden" name="supervision_id">
                <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -703,7 +739,10 @@
                      <a class="nav-link active" data-toggle="tab" href="#home9" role="tab"><span><i class="ti-home"></i></span><span class="tab-heading">Tanenet & Property</span></a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" data-toggle="tab" href="#profile9" role="tab" id="2ndTab"><span><i class="mdi mdi-coin"></i></span><span class="tab-heading">Payment & Commission</span></a>
+                     <a class="nav-link" data-toggle="tab" href="#profile19" role="tab" id="2ndTab"><span><i class="mdi mdi-coin"></i></span><span class="tab-heading">Payment & Commission</span></a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#profile10" role="tab" id="3rdTab"><span><i class="mdi mdi-note"></i></span><span class="tab-heading">Documents</span></a>
                   </li>
                </ul>
                <div class="tab-content tabcontent-border">
@@ -711,15 +750,15 @@
                      <div class="row">
                          <div class="form-group col-sm-3">
                            <label>Deal Start Date</label>
-                           <input type="date" class="form-control" placeholder="Deal Start Date" name="deal_start_date" id="deal_start_date" value="">
+                           <input type="date" class="form-control" placeholder="Deal Start Date" name="deal_start_date" id="deal_start_dateee" >
                         </div>
                         <div class="form-group col-sm-3">
                            <label>Contract Start Date</label>
-                           <input type="date" class="form-control" placeholder="Form Submission Date" name="startDate" id="contract_start_date" value="">
+                           <input type="date" class="form-control" placeholder="Form Submission Date" name="startDate" id="contract_start_dateee" >
                         </div>
                         <div class="form-group col-sm-3">
                            <label>Contract End Date<i class="fa fa-lg fa-clock-o " data-toggle="modal" data-target="#reminderModal" aria-hidden="true" style="margin-left:130px;"></i></label>
-                           <input type="date" class="form-control" placeholder="Form Submission Date" name="endDate" id="contract_end_date" value="">
+                           <input type="date" class="form-control" placeholder="Form Submission Date" name="endDate" id="contract_end_dateee" >
                         </div>
                         <div class="form-group col-sm-3">
                            <label>Unit No.</label>
@@ -811,7 +850,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="tab-pane  p-20" id="profile9" role="tabpanel">
+                  <div class="tab-pane  p-20" id="profile19" role="tabpanel">
                      <div class="row" >
                         <div class="form-group col-sm-3">
                            <label>Deal Status </label>
@@ -946,8 +985,42 @@
                            <label>DealId</label>
                            <input type="text" class="form-control" placeholder="id" name="dealId" id="dealId">
                         </div>
-                        <div class="form-group col-sm-3">
+                        <!-- <div class="form-group col-sm-3">
                            <input type="submit" value="Submit" class="btn btn-block btn-lg btn-success deals_submit_btn" name="updateDeal"> 
+                        </div> -->
+                     </div>
+                  </div>
+                  <div class="tab-pane  p-20" id="profile10" role="tabpanel">
+                     <div class="row">
+                      <div class="col-md-6 add_more_docments_edit" style="border-right: 1px solid lightgray;">
+                        <div class="">
+                           <label>Attach Documents</label>
+                           <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]">
+                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="">
+                          <label>Attached Documents</label>
+                          <div class="dealsdocumentsEdit">
+                            
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-2">
+                          <a href="#" title="Add More" class="btn btn-success mb-3" id="add_more_docments_edit">Add More</a>
+                        </div>
+                     </div>
+                     <div class="row">
+                       <div class="form-group col-sm-3">
+                           <input type="submit" value="Submit" class="btn btn-block btn-lg btn-success deals_submit_btn" name="submitDeal"> 
                         </div>
                      </div>
                   </div>
@@ -1182,10 +1255,12 @@ $("#name").on('input', function () {
       $(document).delegate('.editDealRow','click',function(){
           
          $row = $(this).closest("tr");    // Find the row
-         var $deal_start_date = $row.find(".deal_start_date").text(); 
-         console.log($deal_start_date);
-       var $contract_start_date = $row.find(".contract_start_date").text(); 
-       var $contract_end_date = $row.find(".contract_end_date").text(); 
+         var deal_start_date = $row.find(".deal_start_datee").text(); 
+         var $contract_start_date = $row.find(".contract_start_datee").text(); 
+         var $contract_end_date = $row.find(".contract_end_datee").text(); 
+        // console.log(deal_start_date);
+        // console.log($contract_start_date);
+        // console.log($contract_end_date);
        var $unit_no = $row.find(".unit_no").text();
    	var $referenceNo = $row.find(".referenceNo").text(); 
    	var $broker_name = $row.find(".broker_name").text(); 
@@ -1243,9 +1318,9 @@ $("#name").on('input', function () {
    	
    	
        
-       document.querySelector("#deal_start_date").value = $deal_start_date;
-       document.querySelector("#contract_start_date").value = $contract_start_date;
-       document.querySelector("#contract_end_date").value = $contract_end_date;
+       $("#deal_start_dateee").val( $deal_start_date);
+       $("#contract_start_dateee").val( $contract_start_date);
+       $("#contract_end_dateee").val( $contract_end_date);
 
 
           $("#unit_no").val($unit_no); 
@@ -1353,6 +1428,66 @@ $("#name").on('input', function () {
        })
        }
       })
+</script>
+<script>
+  var count = 2;
+  $('#add_more_docments').on('click',function(e){
+    e.preventDefault();
+    $('.add_more_docments').append('<div class="form-group col-sm-4"><label>Attach Documents'+count+'</label><div class="input-group"><div class="custom-file"><input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]"> <label class="custom-file-label" for="inputGroupFile01">Choose file</label><a href="#" title="close" class="close close_deal_document"><i class="fas fa-times close_icon"></i></a></div></div></div>');
+    count++;
+  })
+
+  $('#add_more_docments_edit').on('click',function(e){
+    e.preventDefault();
+    $('.add_more_docments_edit').append('<div class=""><label>Attach Documents'+count+'</label><div class="input-group"><div class="custom-file"><input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]"> <label class="custom-file-label" for="inputGroupFile01">Choose file</label><a href="#" title="close" class="close close_deal_document_edit"><i class="fas fa-times close_icon"></i></a></div></div></div>');
+    count++;
+  })
+
+
+  $('body').delegate(".close_deal_document", "click", function() {
+      $(this).parent().parent().parent().remove();
+      count--;
+  });
+
+  $('body').delegate(".close_deal_document_edit", "click", function() {
+      $(this).parent().parent().parent().remove();
+      count--;
+  });
+
+  $('body').delegate("#inputGroupFile01", "change", function(e) {
+    var name = e.target.files[0].name;
+      // alert(e.target.files[0].name);
+    $(this).siblings('.custom-file-label').html(name);
+  });
+
+function showname (file) {
+    var name = document.getElementById('fileInput'); 
+    alert('Selected file: ' + name.files.item(0).name);
+    alert('Selected file: ' + name.files.item(0).size);
+    alert('Selected file: ' + name.files.item(0).type);
+  };
+
+
+
+  function getdoxuments(id){
+    $.ajax({
+      url: '{{url("editDealDocuments")}}',
+      type: 'get',
+      dataType: "json",
+      data:{'id':id},
+      success:function(data){
+        // console.log(data);
+        for(var i = 0; i < data.length; i++){
+          var path = data[i]["file_path"];
+          console.log(path);
+          $('.dealsdocumentsEdit').append('<a href="'+path+'" title="" target="_blank">'+data[i]["file_name"]+'</a><br>')
+        }
+      },
+      error:function(e){
+
+      }
+    })
+  }
 </script>
 @if(ucfirst(session('role')) == (ucfirst('Admin')))
       @include('admin_SuperAgent_reminders')

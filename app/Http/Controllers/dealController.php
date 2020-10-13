@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\permission;
 use App\Models\Clicks;
+use App\Models\dealsdocuments;
 class dealController extends Controller {
     public function months() {
         $permissions = permission::where('user_id', session('user_id'))->first();
@@ -93,10 +94,32 @@ class dealController extends Controller {
         return view('dealsInformation', compact('getAgentName','deals', 'buildings', 'agents', 'upcomingDealId', 'permissions', 'date'));
     }
     public function insert(Request $r) {
+        
+        $files = $r->dealsdocuments;
+        // dd($files);
         $buildings = Building::all();
         $agents = user::where(['role' => 3])->get();
         $created = deal::create(['deal_start_date' => $r->deal_start_date,'contract_start_date' => $r->startDate, 'contract_end_date' => $r->endDate, 'unit_no' => $r->unitNo, 'referenceNo' => $r->referenceNo, 'broker_name' => $r->brokerName, 'contanct_no' => $r->clientName, 'contanct_no' => $r->contactNo, 'email' => $r->email, 'ownerName' => $r->owner_name, 'ownerPhone' => $r->owner_phone, 'ownerEmail' => $r->owner_email, 'ownerNameSecond' => $r->owner_name_second, 'ownerPhoneSecond' => $r->owner_phone_second, 'ownerEmailSecond' => $r->owner_email_second, 'property_type' => $r->propertyType, 'rent_sale_value' => $r->rentSale, 'rentalCheques' => $r->rentalCheques, 'building' => $r->building, 'dealStatus' => $r->dealStatus, 'agent_name' => $r->agentName, 'gross_commission' => $r->grossCommission, 'gc_vat' => $r->gcVat, 'company_commision' => $r->companyCommission, 'cc_vat' => $r->ccVat, 'efAgentCommission' => $r->efAgentCommission, 'efAgentVat' => $r->efAgentVat, 'secondAgentName' => $r->secondAgentName, 'secondAgentCompany' => $r->secondAgentCompany, 'sacPhone' => $r->sacPhone, 'secondAgentCommission' => $r->secondAgentCommission, 'sacAgentVat' => $r->sacAgentVat, 'thirdAgentName' => $r->thirdAgentName, 'thirdAgentCompany' => $r->thirdAgentCompany, 'tacPhone' => $r->tacPhone, 'thirdAgentCommission' => $r->thirdAgentCommission, 'tacVat' => $r->tacVat, 'paymentTerms' => $r->paymentTerms, 'chequeNumber' => $r->chequeNumber, 'ownerCompanyName' => $r->ownerCompanyName, 'chequeAmount' => $r->chequeAmount, 'note' => $r->note, 'user_id' => session('user_id') ]);
 
+        
+        $destinationPath ='public/deals/dealsdocuments/';
+        if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+        $dealId = $created->id;
+        if(count($r->dealsdocuments) > 0)
+        {
+            // dd('here');
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $fileName = md5(time()) .'.' . $extension;
+                // Uploading file to given path
+                $file->move($destinationPath, $fileName);
+
+                $filepath = $destinationPath.$fileName;
+                dealsdocuments::create(['deal_id'=>$dealId,'file_path'=>$filepath,'file_name'=>$fileName]);
+            }
+        }
         $description = 'New Deal is created';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Create Deals','description'=>$description]);
         //reminder insertion if some person add reminder on add Deal Popup Contract Date
@@ -115,9 +138,29 @@ class dealController extends Controller {
         return back()->with('msg','Deal Add Successfully!');
     }
     public function update(Request $r) {
+        $files = $r->dealsdocuments;
+
         $update = (['deal_start_date' => $r->deal_start_date,'contract_start_date' => $r->startDate, 'contract_end_date' => $r->endDate, 'unit_no' => $r->unitNo, 'referenceNo' => $r->referenceNo, 'broker_name' => $r->brokerName, 'client_name' => $r->clientName, 'contanct_no' => $r->contactNo, 'email' => $r->email, 'ownerName' => $r->owner_name, 'ownerPhone' => $r->owner_phone, 'ownerEmail' => $r->owner_email, 'ownerNameSecond' => $r->owner_name_second, 'ownerPhoneSecond' => $r->owner_phone_second, 'ownerEmailSecond' => $r->owner_email_second, 'property_type' => $r->propertyType, 'rent_sale_value' => $r->rentSale, 'rentalCheques' => $r->rentalCheques, 'building' => $r->building, 'dealStatus' => $r->dealStatus, 'agent_name' => $r->agentName, 'gross_commission' => $r->grossCommission, 'gc_vat' => $r->gcVat, 'company_commision' => $r->companyCommission, 'cc_vat' => $r->ccVat, 'efAgentCommission' => $r->efAgentCommission, 'efAgentVat' => $r->efAgentVat, 'secondAgentName' => $r->secondAgentName, 'secondAgentCompany' => $r->secondAgentCompany, 'sacPhone' => $r->sacPhone, 'secondAgentCommission' => $r->secondAgentCommission, 'sacAgentVat' => $r->sacAgentVat, 'thirdAgentName' => $r->thirdAgentName, 'thirdAgentCompany' => $r->thirdAgentCompany, 'tacPhone' => $r->tacPhone, 'thirdAgentCommission' => $r->thirdAgentCommission, 'tacVat' => $r->tacVat, 'paymentTerms' => $r->paymentTerms, 'chequeNumber' => $r->chequeNumber, 'ownerCompanyName' => $r->ownerCompanyName, 'chequeAmount' => $r->chequeAmount, 'note' => $r->note, 'user_id' => session('user_id') ]);
         deal::where(['id' => $r->dealId])->update($update);
+        
+        $destinationPath ='public/deals/dealsdocuments/';
+        if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+        $dealId = $r->dealId;
+        if(count($r->dealsdocuments) > 0)
+        {
+            // dd('here');
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $fileName = md5(time()) .'.' . $extension;
+                // Uploading file to given path
+                $file->move($destinationPath, $fileName);
 
+                $filepath = $destinationPath.$fileName;
+                dealsdocuments::create(['deal_id'=>$dealId,'file_path'=>$filepath,'file_name'=>$fileName]);
+            }
+        }
         $description = 'Deal with id => '.$r->dealId.' is updated.';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Update Deals','description'=>$description]);
         return back()->with('msg','Deal Updated Successfully!');
@@ -167,5 +210,13 @@ class dealController extends Controller {
         }
 
         return "true";
+    }
+
+    public function documents(Request $request){
+        $id = $request->id;
+        // dd($id);
+        $result = dealsdocuments::where('deal_id',$id)->get();
+
+        return json_encode($result,true);
     }
 }
