@@ -107,18 +107,20 @@ class dealController extends Controller {
                 mkdir($destinationPath, 0755, true);
             }
         $dealId = $created->id;
-        if(count($r->dealsdocuments) > 0)
-        {
-            // dd('here');
-            foreach ($files as $file) {
-                $extension = $file->getClientOriginalExtension();
-                $fileName = md5(time()) .'.' . $extension;
-                // Uploading file to given path
-                $file->move($destinationPath, $fileName);
+        if(!empty($files)){
+            if(count($r->dealsdocuments) > 0)
+            {
+                // dd('here');
+                foreach ($files as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = md5(time()) .'.' . $extension;
+                    // Uploading file to given path
+                    $file->move($destinationPath, $fileName);
 
-                $filepath = $destinationPath.$fileName;
-                dealsdocuments::create(['deal_id'=>$dealId,'file_path'=>$filepath,'file_name'=>$fileName]);
-            }
+                    $filepath = $destinationPath.$fileName;
+                    dealsdocuments::create(['deal_id'=>$dealId,'file_path'=>$filepath,'file_name'=>$fileName]);
+                }
+            }   
         }
         $description = 'New Deal is created';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Create Deals','description'=>$description]);
@@ -148,17 +150,19 @@ class dealController extends Controller {
                 mkdir($destinationPath, 0755, true);
             }
         $dealId = $r->dealId;
-        if(count($r->dealsdocuments) > 0)
-        {
-            // dd('here');
-            foreach ($files as $file) {
-                $extension = $file->getClientOriginalExtension();
-                $fileName = md5(time()) .'.' . $extension;
-                // Uploading file to given path
-                $file->move($destinationPath, $fileName);
+        if(!empty($files)){
+            if(count($r->dealsdocuments) > 0)
+            {
+                // dd('here');
+                foreach ($files as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = md5(time()) .'.' . $extension;
+                    // Uploading file to given path
+                    $file->move($destinationPath, $fileName);
 
-                $filepath = $destinationPath.$fileName;
-                dealsdocuments::create(['deal_id'=>$dealId,'file_path'=>$filepath,'file_name'=>$fileName]);
+                    $filepath = $destinationPath.$fileName;
+                    dealsdocuments::create(['deal_id'=>$dealId,'file_path'=>$filepath,'file_name'=>$fileName]);
+                }
             }
         }
         $description = 'Deal with id => '.$r->dealId.' is updated.';
