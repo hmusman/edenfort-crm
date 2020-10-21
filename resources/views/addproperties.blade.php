@@ -1,5 +1,10 @@
 @include('inc.header')
-
+@if(!session("user_id") && strtoupper(session('role'))!=(strtoupper('Admin') || strtoupper('SuperAgent') || strtoupper('SuperDuperAdmin')))
+<script type="text/javascript">
+   window.location='{{url("/")}}';
+</script>
+<?php redirect('/'); ?>
+@endif
 <link rel="stylesheet" type="text/css" href="{{url('public/assets/css/property_table.css')}}">
  <!-- ============================================================== -->
 <!-- Start right Content here -->
