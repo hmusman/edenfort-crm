@@ -247,8 +247,6 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Select</th>
-                                                    <!-- <th>Deal Start</th> -->
-                                                    <!-- <th>Contract Start</th> -->
                                                     <th>Contract End</th>
                                                     <th>Building Name</th>
                                                     <th>Reference Number</th>
