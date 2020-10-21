@@ -200,7 +200,7 @@ class adminPropertyController extends Controller
                 if($request->contact_no){
                     $query->where("contact_no", 'LIKE', '%' .$request->contact_no. '%');
                 }
-                $result_data = $query->orderBy('updated_at', 'DESC')->paginate(25);
+                $result_data = $query->orderBy('updated_at', 'DESC')->paginate(15);
                 // dd($result_data);
                 $reminders = Reminder::orderBy('date_time', 'DESC')->get();
                 // dd($reminders);
