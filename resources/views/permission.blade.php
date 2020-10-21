@@ -170,6 +170,7 @@
                                                                <td  class="dealView hide" >{{$user->permission['dealView']}}</td>
                                                                <td  class="dealAdd hide" >{{$user->permission['dealAdd']}}</td>
                                                                <td  class="dealEdit hide" >{{$user->permission['dealEdit']}}</td>
+                                                               <td  class="dealDelete hide" >{{$user->permission['deal_delete']}}</td>
                                                                <td  class="dealBulk hide" >{{$user->permission['dealBulk']}}</td>
                                                                <td  class="loanView hide" >{{$user->permission['loanView']}}</td>
                                                                <td  class="loanAdd hide" >{{$user->permission['loanAdd']}}</td>
@@ -519,6 +520,16 @@
                            </div>
                            <div class="row">
                               <div class="form-group col-sm-2">
+                                 <p class="h6" align="center">Delete</p>
+                              </div>
+                              <div class="form-group col-sm-1">
+                              </div>
+                              <div class="form-group col-sm-3">
+                                 <input type="checkbox" class="form-control"   name="dealDelete" id="dealDelete" value="1" >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="form-group col-sm-2">
                                  <p class="h6" align="center"> Bulk</p>
                               </div>
                               <div class="form-group col-sm-1">
@@ -635,6 +646,7 @@
        var dealView=$row.find(".dealView").text();
        var dealAdd=$row.find(".dealAdd").text();
        var dealEdit=$row.find(".dealEdit").text();
+       var dealDelete=$row.find(".dealDelete").text();
        var dealBulk=$row.find(".dealBulk").text();
       var deal_show_contact_info=$row.find(".deal_show_contact_info").text();
 
@@ -813,10 +825,16 @@
       $("#dealAdd").prop('checked', false);
     }
     
-      if( dealEdit=='1'){
+    if( dealEdit=='1'){
       $("#dealEdit").prop('checked', true);
     }else{
       $("#dealEdit").prop('checked', false);
+    }
+
+    if( dealDelete=='1'){
+      $("#dealDelete").prop('checked', true);
+    }else{
+      $("#dealDelete").prop('checked', false);
     }
 
     if( deal_show_contact_info=='1'){

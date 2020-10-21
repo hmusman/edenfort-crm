@@ -181,6 +181,7 @@ Route::post('/dealForm','dealController@insert')->name('dealForm');
 //edit Deal
 Route::get('/editDeal','dealController@update')->name('editDeal');
 Route::get('/editDealDocuments','dealController@documents')->name('editDealDocuments');
+Route::get('/deleteDeal','dealController@deleteDeal')->name('deleteDeal');
 Route::post('/editDeal','dealController@update')->name('editDeal');
 Route::get('add-reminder-by-ajaxDealReminder', 'reminderController@insertDealReminder');
 //leads

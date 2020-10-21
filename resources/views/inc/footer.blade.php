@@ -97,7 +97,7 @@
         <script src="{{url('public/Green/assets/libs/simplebar/simplebar.min.js')}}"></script>
         <script src="{{url('public/Green/assets/libs/node-waves/waves.min.js')}}"></script>
 
-        <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
+        <!-- <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script> -->
 
         <!-- datepicker -->
         <script src="{{url('public/Green/assets/libs/air-datepicker/js/datepicker.min.js')}}"></script>
@@ -121,112 +121,10 @@
         <!-- <div class="alertify-notifier ajs-top ajs-right"></div> -->
 
         <script>
-            $(document).ready(function(){
-              $("#owneremail").keyup(function(){
-                var searchkey = $(this).val();
-                // alert(searchkey);
-                if(!$(this).val()){
-                  $("#suggesstion-box").css('display','none');
-                  // alert('working');
-                }else{
-                  $.ajax({
-                    type: "POST",
-                    url: "{{url('/reademail')}}",
-                    data:{'_token':'{{ csrf_token() }}','keyword':searchkey},
-                    beforeSend: function(){
-                      $('.spin').css('display','block');
-                    },
-                    success: function(data){
-                      $("#suggesstion-box").css('display','block');
-                      $("#suggesstion-box").html(data);
-                      $('.spin').css('display','none');
-                    }
-                    });
-                }
-              });
-            });
-
-            function select(id){
-              var selected = $('#'+id).text();
-              $("#owneremail").val(selected);
-              $("#owneremail").html(selected);
-              $("#suggesstion-box").css('display','none');
-
-              $.ajax({
-                  type: "POST",
-                  url: "{{url('/readdata')}}",
-                  data:{'_token':'{{ csrf_token() }}','email':selected},
-                  beforeSend: function(){
-                    $('.spin').css('display','block');
-                  },
-                  success: function(data){
-                    // console.log(data);
-                    $('#ownername').val(data['LandLord']);
-                    $('#ownername').html(data['LandLord']);
-
-                    $('#ownerphone').val(data['contact_no']);
-                    $('#ownerphone').html(data['contact_no']);
-
-                    $('.spin').css('display','none');
-                  }
-              });
-
-
-            }
+            function select(n){var s=$("#"+n).text();$("#owneremail").val(s),$("#owneremail").html(s),$("#suggesstion-box").css("display","none"),$.ajax({type:"POST",url:"{{url('/readdata')}}",data:{_token:"{{ csrf_token() }}",email:s},beforeSend:function(){$(".spin").css("display","block")},success:function(n){$("#ownername").val(n.LandLord),$("#ownername").html(n.LandLord),$("#ownerphone").val(n.contact_no),$("#ownerphone").html(n.contact_no),$(".spin").css("display","none")}})}$(document).ready(function(){$("#owneremail").keyup(function(){var n=$(this).val();$(this).val()?$.ajax({type:"POST",url:"{{url('/reademail')}}",data:{_token:"{{ csrf_token() }}",keyword:n},beforeSend:function(){$(".spin").css("display","block")},success:function(n){$("#suggesstion-box").css("display","block"),$("#suggesstion-box").html(n),$(".spin").css("display","none")}}):$("#suggesstion-box").css("display","none")})});
         </script>
         <script>
-            $(document).ready(function(){
-              $("#ownername").keyup(function(){
-                var searchkey = $(this).val();
-                // alert(searchkey);
-                if(!$(this).val()){
-                  $("#name-suggesstion-box").css('display','none');
-                  // alert('working');
-                }else{
-                  $.ajax({
-                    type: "POST",
-                    url: "{{url('/readname')}}",
-                    data:{'_token':'{{ csrf_token() }}','keyword':searchkey},
-                    beforeSend: function(){
-                      $('.spin1').css('display','block');
-                    },
-                    success: function(data){
-                      $("#name-suggesstion-box").css('display','block');
-                      $("#name-suggesstion-box").html(data);
-                      $('.spin1').css('display','none');
-                    }
-                    });
-                }
-              });
-            });
-
-            function selectName(id){
-              var selected = $('#'+id).text();
-              $("#ownername").val(selected);
-              $("#ownername").html(selected);
-              $("#name-suggesstion-box").css('display','none');
-
-              $.ajax({
-                  type: "POST",
-                  url: "{{url('/readnameData')}}",
-                  data:{'_token':'{{ csrf_token() }}','LandLord':selected},
-                  beforeSend: function(){
-                    $('.spin1').css('display','block');
-                  },
-                  success: function(data){
-                    // console.log(data);
-                    $('#owneremail').val(data['email']);
-                    $('#owneremail').html(data['email']);
-
-                    $('#ownerphone').val(data['contact_no']);
-                    $('#ownerphone').html(data['contact_no']);
-
-                    $('.spin1').css('display','none');
-                  }
-              });
-
-
-            }
+           function selectName(n){var e=$("#"+n).text();$("#ownername").val(e),$("#ownername").html(e),$("#name-suggesstion-box").css("display","none"),$.ajax({type:"POST",url:"{{url('/readnameData')}}",data:{_token:"{{ csrf_token() }}",LandLord:e},beforeSend:function(){$(".spin1").css("display","block")},success:function(n){$("#owneremail").val(n.email),$("#owneremail").html(n.email),$("#ownerphone").val(n.contact_no),$("#ownerphone").html(n.contact_no),$(".spin1").css("display","none")}})}$(document).ready(function(){$("#ownername").keyup(function(){var n=$(this).val();$(this).val()?$.ajax({type:"POST",url:"{{url('/readname')}}",data:{_token:"{{ csrf_token() }}",keyword:n},beforeSend:function(){$(".spin1").css("display","block")},success:function(n){$("#name-suggesstion-box").css("display","block"),$("#name-suggesstion-box").html(n),$(".spin1").css("display","none")}}):$("#name-suggesstion-box").css("display","none")})});
         </script>
     </body>
 </html>

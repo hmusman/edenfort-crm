@@ -291,7 +291,7 @@
 
                                                        @endif
                                                        <td class="dealId" style="display:none;">{{$deal->id}}</td>
-                                                       <td class="deal_start_date">{{date('d-m-Y',strtotime($deal->deal_start_date))}}</td>
+                                                       <td class="contract_end_date">{{date('d-m-Y',strtotime($deal->contract_end_date))}}</td>
 
                                                        <td style="display: none;" class="deal_start_datee">{{date('m/d/Y',strtotime($deal->deal_start_date))}}</td>
                                                        <td style="display: none;" class="contract_start_datee">{{date('m/d/Y', strtotime($deal->contract_start_date))}}</td>
@@ -347,11 +347,17 @@
                                                        @if(@$permissions->dealEdit!=1)
                                                        <td>Not Allowed</td>
                                                        @else 
-                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="getdoxuments({{$deal->id}})"><i class="fa fa-edit"></i> Edit</label>
+                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="getdoxuments({{$deal->id}})"><i class="fa fa-edit"></i> Edit</label>&nbsp;
+                                                        @if(@$permissions->deal_delete == '1')
+                                                        <label style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="deleteDeal({{$deal->id}})"><i class="fa fa-edit"></i>Delete</label>
+                                                        @endif
                                                        </td>
                                                        @endif
                                                        @else
-                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="getdoxuments({{$deal->id}})"><i class="fa fa-edit"></i> Edit</label>
+                                                       <td><label data-toggle="modal" data-target="#editDealPopup" style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="getdoxuments({{$deal->id}})"><i class="fa fa-edit"></i> Edit</label>&nbsp;
+                                                        @if(@$permissions->deal_delete == '1')
+                                                        <label style="cursor: pointer;position: relative;right: 5px;display: table-cell;" class="editDealRow edit_supervision" name="{{$deal->id}}" onclick="deleteDeal({{$deal->id}})"><i class="fa fa-edit"></i>Delete</label>
+                                                        @endif
                                                        </td>
                                                     @endif
                                                     </tr>                   
@@ -693,20 +699,11 @@
                   </div>
                   <div class="tab-pane  p-20" id="profile9" role="tabpanel">
                      <div class="row add_more_docments">
-                        <div class="form-group col-sm-4">
-                           <label>Attach Documents</label>
-                           <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]">
-                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                            </div>
-                          </div>
-                        </div>
+                        
                      </div>
                      <div class="row">
                        <div class="col-md-2">
-                          <a href="#" title="Add More" class="btn btn-success mb-3" id="add_more_docments">Add More</a>
+                          <a href="#" title="Add More" class="btn btn-success mb-3" id="add_more_docments">Add Documents</a>
                         </div>
                      </div>
                      <div class="row">
@@ -992,17 +989,7 @@
                   </div>
                   <div class="tab-pane  p-20" id="profile10" role="tabpanel">
                      <div class="row">
-                      <div class="col-md-6 add_more_docments_edit" style="border-right: 1px solid lightgray;">
-                        <div class="">
-                           <label>Attach Documents</label>
-                           <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]">
-                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="col-md-6 add_more_docments_edit" id="more_docments_edit" style="border-right: 1px solid lightgray;">
                       </div>
                       <div class="col-md-6">
                         <div class="">
@@ -1015,7 +1002,7 @@
                      </div>
                      <div class="row">
                        <div class="col-md-2">
-                          <a href="#" title="Add More" class="btn btn-success mb-3" id="add_more_docments_edit">Add More</a>
+                          <a href="#" title="Add More" class="btn btn-success mb-3" id="add_more_docments_edit">Add Documents</a>
                         </div>
                      </div>
                      <div class="row">
@@ -1127,349 +1114,9 @@
 <!-- Init js -->
 <script src="{{url('public/Green/assets/js/pages/table-responsive.init.js')}}"></script>
 <!--start of popups-->
-
-<script>
-  // $('#tech-companies-1').DataTable();
-</script>
-<script>
-$("#name").on('input', function () {
-      var val = this.value;
-      if($('#allNames option').filter(function(){
-          if(this.value === val) {
-            var agentId = $(this).attr("data-value");
-            console.log(agentId+" if condition");
-            $("#agentId").val(agentId);
-          }      
-      }).length) {
-          //send ajax request
-          
-      }
-   });
-   //add popup reminder Contract date start
-      $('.reminderAddPopupContractDateSubmit').click(function(){
-       
-     $("#reminderAddPopupContractDateName").val($('.reminderAddPopupContractDateName').val());
-       $("#reminder_DateTimeAddPopupContractDate").val($('.reminder_DateTimeAddPopupContractDate').val());
-     $("#reminder_descriptionAddPopupContractDate").val($('.reminder_descriptionAddPopupContractDate').val());
-   $("#reminderAddPopupContractDate").hide();
-     
-       });
-   //end of add popup Contract Date reminder
-   
-   
-   //start of reminder on EditPopup ContractDate
-     $('.reminderBtn').click(function(){
-   	    var reminderDate=$('.reminder_DateTime').val();
-           var reminderDescription=$('.reminder_description').val();
-           
-         var reminderName="dealContractDate";
-   
-          var reminderDealId=$('.reminderDealId').val();
-          
-   	 // alert($('.reminder_DateTime').val());
-   	   
-   	      $.ajax({
-                  type : 'GET',
-                  url : "{{url('add-reminder-by-ajaxDealReminder')}}",
-       data : {'reminderDate' : reminderDate,'reminderDescription':reminderDescription,'reminderName':reminderName,'reminderDealId':reminderDealId},
-                  success:function(data){
-   				   
-                      if($.trim(data) == 'true'){
-               
-   			     $('.close-model').trigger('click');
-                      }else{
-   					   
-                          alert('something went wrong!');
-                      }
-                  }
-              })
-      });
-   
-   	 
-   //endof reminder on EditPopup ContractDate
-   
-   //add building using ajax
-     $(document).ready(function(){
-     $('.add-building-btn').click(function(){
-          var buildingName=$('.add-building-input').val();
-             
-              if(!$('.add-building-input').val()){
-                  alert('invalid Building Name');
-                  return;
-              }
-              $.ajax({
-                  type : 'GET',
-                  url : "{{url('add-building-by-ajax')}}",
-                  data : {'buldingName' : buildingName},
-                  success:function(data){
-                      if($.trim(data) == 'true'){
-               
-                          $('.insertBuilding').append('<option selected value='+buildingName+'>'+buildingName+'</option>');
-                          $('.close-model').trigger('click');
-                      }else{
-                          alert('something went wrong!');
-                      }
-                  }
-              })
-          })
-      })
-</script>
-<script>
-   // Owner Details Add Row
-   $('.add-owner-details').click(function(){
-       
-       $('<div class="row owner-extra-fields" style="width:100%;padding:0px;margin:0px;"><div class="form-group col-sm-3"><label>Owner Name</label> <input type="text" class="form-control " placeholder="Client Name" name="owner_name_second " > </div><div class="form-group col-sm-3"> <label>Owner Phone</label> <input type="number" class="form-control" placeholder="Owner Phone" name="owner_phone_second" > </div><div class="form-group col-sm-3"> <label style="width:100%;">Owner Email</label> <input type="email" style="width:90%;" class="form-control" placeholder="Owner Email" name="owner_email_second"> </div><div class="form-group col-sm-3"> <label style="width:100%;visibility:hidden"></label> <span style="cursor:pointer" class="remove-owner-details"><i class="fa fa-window-close" style="font-size:18px;position:unset !important;"></i><span class="add-more">Remove</span></span> </div></div>').insertAfter('.owner-extra-fields');
-     
-   
-       $(this).hide();
-   })
-   
-      $(document).ready(function(){
-          $(document).delegate('.remove-owner-details','click',function(){
-               $(this).parent().parent().remove();
-               $('.add-owner-details').show();
-               $(this).hide();
-           })
-      })
-      
-      //edit popup  add second owner show
-        $(document).ready(function(){
-          $(document).delegate('.hideBtn','click',function(){
-               
-               $('.owner-extra-fieldsSecondOwner').hide();
-               $(this).hide();
-               $('.add-owner-detailsShowBtn').show();
-           })
-      })
-      //edit popup  add second owner hide
-         $(document).ready(function(){
-          $(document).delegate('.add-owner-detailsShowBtn','click',function(){
-               
-               $('.owner-extra-fieldsSecondOwner').show();
-               $(this).hide();
-                $('.hideBtn').show();
-           })
-      })
-      // Owner Details Add Row for Edit popup
-     var $row;
-      $(document).delegate('.editDealRow','click',function(){
-          
-         $row = $(this).closest("tr");    // Find the row
-         var deal_start_date = $row.find(".deal_start_datee").text(); 
-         var $contract_start_date = $row.find(".contract_start_datee").text(); 
-         var $contract_end_date = $row.find(".contract_end_datee").text(); 
-        // console.log(deal_start_date);
-        // console.log($contract_start_date);
-        // console.log($contract_end_date);
-       var $unit_no = $row.find(".unit_no").text();
-   	var $referenceNo = $row.find(".referenceNo").text(); 
-   	var $broker_name = $row.find(".broker_name").text(); 
-   	var $client_name = $row.find(".client_name").text(); 
-   	var $contanct_no = $row.find(".contanct_no").text(); 
-   	var $email = $row.find(".email").text(); 
-   	var $property_type = $row.find(".property_type").text(); 
-   	var $rent_sale_value = $row.find(".rent_sale_value").text(); 
-   	var $rentalCheques = $row.find(".rentalCheques").text(); 
-   	var $building = $row.find(".building").text(); 
-   	var $deal_Status = $row.find(".deal_Status").text(); 
-   	var $unit_no = $row.find(".unit_no").text();
-   	 var $agent_name = $row.find(".agent_name").text(); 
-   	var $gross_commission = $row.find(".gross_commission").text(); 
-   	var $gc_vat = $row.find(".gc_vat").text(); 
-   	var $company_commision = $row.find(".company_commision").text(); 
-   	var $cc_Vat = $row.find(".cc_Vat").text(); 
-   	var $efAgent_Commission = $row.find(".efAgent_Commission").text(); 
-   	var $efAgent_Vat = $row.find(".efAgent_Vat").text(); 
-   	var $secondAgentName = $row.find(".secondAgentName").text(); 
-   	var $secondAgentCompany = $row.find(".secondAgentCompany").text(); 
-   	var $sacPhone = $row.find(".sacPhone").text(); 
-   	var $secondAgent_Commission = $row.find(".secondAgent_Commission").text(); 
-   	var $sacAgent_Vat = $row.find(".sacAgent_Vat").text(); 
-   	var $thirdAgentName = $row.find(".thirdAgentName").text(); 
-   	var $thirdAgentCompany = $row.find(".thirdAgentCompany").text(); 
-   	var $tacPhone = $row.find(".tacPhone").text(); 
-   	var $thirdAgentCommission = $row.find(".thirdAgentCommission").text(); 
-   	var $tacVat = $row.find(".tacVat").text(); 
-   	var $paymentTerms = $row.find(".paymentTerms").text(); 
-   	
-   	var $chequeNumber = $row.find(".chequeNumber").text(); 
-   	var $ownerCompanyName = $row.find(".ownerCompanyName").text(); 
-   	var $ownerName = $row.find(".ownerName").text(); 
-   	var $ownerPhone = $row.find(".ownerPhone").text(); 
-   	var $ownerEmail = $row.find(".ownerEmail").text(); 
-   	
-   	var $ownerNameSecond = $row.find(".ownerNameSecond").text(); 
-   	var $ownerPhoneSecond = $row.find(".ownerPhoneSecond").text(); 
-   	var $ownerEmailSecond = $row.find(".ownerEmailSecond").text(); 
-        if ($ownerNameSecond) {
-           
-           $(".owner-extra-fieldsSecondOwner").show();
-           $(".add-owner-detailsShowBtn").hide();
-           $(".hideBtn").show();
-        }else{
-             $(".owner-extra-fieldsSecondOwner").hide();
-              $(".add-owner-detailsShowBtn").show();
-        }
-        
-        
-   	var $chequeAmount = $row.find(".chequeAmount").text(); 
-   	var $note = $row.find(".note").text(); 
-   	var $dealId = $row.find(".dealId").text(); 
-   	
-   	
-       
-       $("#deal_start_dateee").val( $deal_start_date);
-       $("#contract_start_dateee").val( $contract_start_date);
-       $("#contract_end_dateee").val( $contract_end_date);
-
-
-          $("#unit_no").val($unit_no); 
-   	   $("#referenceNo").val($referenceNo); 
-          $("#broker_name").val($broker_name); 
-   	   $("#client_name").val($client_name); 
-          $("#contanct_no").val($contanct_no); 
-   	   $("#email").val($email); 
-          $("#property_type").val($property_type); 
-   	   $("#rent_sale_value").val($rent_sale_value); 
-          $("#rentalCheques").val($rentalCheques);
-   	    $(".insertBuilding").val($building); 
-          $("#deal_Status").val($deal_Status); 
-   	   $("#agent_name").val($agent_name); 
-          $("#gross_commission").val($gross_commission); 
-   	   $("#gc_vat").val($gc_vat); 
-          $("#company_commision").val($company_commision);
-   	    $("#cc_Vat").val($cc_Vat); 
-          $("#efAgent_Commission").val($efAgent_Commission); 
-   	   $("#efAgent_Vat").val($efAgent_Vat); 
-          $("#secondAgentName").val($secondAgentName); 
-   	   $("#secondAgentCompany").val($secondAgentCompany); 
-          $("#sacPhone").val($sacPhone); 
-   	   $("#secondAgent_Commission").val($secondAgent_Commission); 
-          $("#sacAgent_Vat").val($sacAgent_Vat);
-   	    $("#thirdAgentName").val($thirdAgentName); 
-          $("#thirdAgentCompany").val($thirdAgentCompany);
-   	    $("#tacPhone").val($tacPhone); 
-          $("#thirdAgentCommission").val($thirdAgentCommission);
-   	    $("#tacVat").val($tacVat); 
-          $("#paymentTerms").val($paymentTerms);
-   	    $("#chequeNumber").val($chequeNumber); 
-          $("#unit_no").val($unit_no);
-   	    $("#ownerCompanyName").val($ownerCompanyName); 
-          $("#ownerName").val($ownerName);
-   	    $("#ownerPhone").val($ownerPhone); 
-          $("#unit_no").val($unit_no);
-   	    $("#ownerEmail").val($ownerEmail); 
-   	    
-   	  
-   	    $("#ownerNameSecond").val($ownerNameSecond);
-   	    $("#ownerPhoneSecond").val($ownerPhoneSecond);
-   	    $("#ownerEmailSecond").val($ownerEmailSecond);
-   	    
-   	    
-          $("#chequeAmount").val($chequeAmount);
-   	    $("#note").val($note);
-   		$("#dealId").val($dealId);
-   	 $(".reminderDealId").val($dealId); 
-   })
-</script>
-<script type="text/javascript" src="{{url('public/assets/js/additional.js')}}">
-   jQuery('#datepicker-autoclose').datepicker({
-       autoclose: true,
-       todayHighlight: true
-   });
-</script>
+<script src="{{url('public/assets/js/deals_extra.js')}}"></script>
 <script type="text/javascript">
-   $('#add-new-owne-link').click(function(){
-       $('.owner_information_link_deals').slideToggle();
-   });
-
-   $('.present_row .drop_arrow_icon').click(function(){
-    $(this).parents('.present_row').next('.toggleable_row').toggleClass('tgl_row');
-    $(this).toggleClass('rotate_icon');
-  });
-</script>
-<?php  if(isset($_GET['action'])) { ?>
-<script type="text/javascript">
-   $("#assigned_user option").each(function(){
-       if($(this).val()=="{{@$result[0]['assigned_user']}}"){
-           $(this).attr("Selected",true);
-       }
-   })
-   $("#building option").each(function(){
-       if($(this).val()=="{{@$result[0]['Building']}}"){
-           $(this).attr("Selected",true);
-       }
-   })
-</script>
-<?php }  ?>
-<script>
-
-      $('.update_record').on('click', function(e){
-        // alert('here');
-        e.preventDefault();
-         if(!$('.ind_chk_box:checkbox:checked').val()){
-            alertify.error("please select Rows!");
-           return;
-       }else{
-        $.ajax({
-           url:'<?php echo url('bulkUpdateDealsProperty');  ?>',
-           type:'get',
-           data : $("#bulkForm").serialize(),
-           success:function(data){
-               console.log(data);
-               if(data=="true"){
-                   alertify.success("Deal updated successfully!");
-                   // location.reload();
-               }else{
-                   // alert('something went wrong');
-                   alertify.error("something went wrong");
-               }
-           }
-       })
-       }
-      })
-</script>
-<script>
-  var count = 2;
-  $('#add_more_docments').on('click',function(e){
-    e.preventDefault();
-    $('.add_more_docments').append('<div class="form-group col-sm-4"><label>Attach Documents'+count+'</label><div class="input-group"><div class="custom-file"><input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]"> <label class="custom-file-label" for="inputGroupFile01">Choose file</label><a href="#" title="close" class="close close_deal_document"><i class="fas fa-times close_icon"></i></a></div></div></div>');
-    count++;
-  })
-
-  $('#add_more_docments_edit').on('click',function(e){
-    e.preventDefault();
-    $('.add_more_docments_edit').append('<div class=""><label>Attach Documents'+count+'</label><div class="input-group"><div class="custom-file"><input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="dealsdocuments[]"> <label class="custom-file-label" for="inputGroupFile01">Choose file</label><a href="#" title="close" class="close close_deal_document_edit"><i class="fas fa-times close_icon"></i></a></div></div></div>');
-    count++;
-  })
-
-
-  $('body').delegate(".close_deal_document", "click", function() {
-      $(this).parent().parent().parent().remove();
-      count--;
-  });
-
-  $('body').delegate(".close_deal_document_edit", "click", function() {
-      $(this).parent().parent().parent().remove();
-      count--;
-  });
-
-  $('body').delegate("#inputGroupFile01", "change", function(e) {
-    var name = e.target.files[0].name;
-      // alert(e.target.files[0].name);
-    $(this).siblings('.custom-file-label').html(name);
-  });
-
-function showname (file) {
-    var name = document.getElementById('fileInput'); 
-    alert('Selected file: ' + name.files.item(0).name);
-    alert('Selected file: ' + name.files.item(0).size);
-    alert('Selected file: ' + name.files.item(0).type);
-  };
-
-
-
-  function getdoxuments(id){
+   function getdoxuments(id){
     $.ajax({
       url: '{{url("editDealDocuments")}}',
       type: 'get',
@@ -1488,7 +1135,60 @@ function showname (file) {
       }
     })
   }
+
+  function deleteDeal(id){
+    $.confirm({
+        title: 'Confirm Deletation!',
+        content: 'Are you sure you want to delete this deal!',
+        type: 'red',
+        buttons: {
+            confirm:{
+              text: 'Confirm',
+              btnClass: 'btn-red',
+              action: function(){
+                $.ajax({
+                  url: '{{url("deleteDeal")}}',
+                  type: 'get',
+                  dataType: "json",
+                  data:{'id':id},
+                  success:function(data){
+                    alertify.success("Deal deleted successfully");
+                    window.location.reload();
+                  },
+                  error:function(e){
+                     alertify.error("Something wents wrong");
+                  }
+                })
+              }
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+    
+  }
 </script>
+<script>
+   $('#reset_docments').on('click',function(event){
+    event.preventDefault();
+    $('#more_docments_edit').innerHTML = "";
+  });
+</script>
+<?php  if(isset($_GET['action'])) { ?>
+<script type="text/javascript">
+   $("#assigned_user option").each(function(){
+       if($(this).val()=="{{@$result[0]['assigned_user']}}"){
+           $(this).attr("Selected",true);
+       }
+   })
+   $("#building option").each(function(){
+       if($(this).val()=="{{@$result[0]['Building']}}"){
+           $(this).attr("Selected",true);
+       }
+   })
+</script>
+<?php }  ?>
 @if(ucfirst(session('role')) == (ucfirst('Admin')))
       @include('admin_SuperAgent_reminders')
     @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))

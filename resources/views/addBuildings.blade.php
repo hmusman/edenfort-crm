@@ -331,12 +331,12 @@
   }
 </script>
 @if(ucfirst(session('role')) == (ucfirst('Admin')))
-      @include('admin_SuperAgent_reminders')
-    @elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
-      @include('admin_SuperAgent_reminders')
-    @elseif(ucfirst(session('role')) == ucfirst('Agent'))
-      @include('reminder')
-     @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
-      @include('admin_SuperAgent_reminders')
-    @endif
+  @include('admin_SuperAgent_reminders')
+@elseif(ucfirst(session('role')) == (ucfirst('SuperAgent')))
+  @include('admin_SuperAgent_reminders')
+@elseif(ucfirst(session('role')) == ucfirst('Agent'))
+  @include('reminder')
+ @elseif(ucfirst(session('role')) == ucfirst('SuperDuperAdmin'))
+  @include('admin_SuperAgent_reminders')
+@endif
 

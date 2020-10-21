@@ -223,4 +223,17 @@ class dealController extends Controller {
 
         return json_encode($result,true);
     }
+
+    public function deleteDeal(Request $request){
+         $id = $request->id;
+        // dd($id);
+        $result = deal::where('id',$id)->delete();
+
+        if($result){
+            return "true";
+        }else{
+            return "false";
+        }
+        
+    }
 }

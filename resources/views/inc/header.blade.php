@@ -8,7 +8,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{url('public/logo.png')}}">
+        <link rel="shortcut icon" href="{{url('public/favicon.png')}}">
 
         <!-- datepicker -->
         <link href="{{url('public/Green/assets/libs/air-datepicker/css/datepicker.min.css')}}" rel="stylesheet" type="text/css" />
