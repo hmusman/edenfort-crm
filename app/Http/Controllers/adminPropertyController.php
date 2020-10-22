@@ -24,19 +24,23 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class adminPropertyController extends Controller
 {
     public function singlePersonProperty(Request $request){
+        // dd($request->all());
 
         $properties = $request->check_boxes;
         $agents = $request->agents_ids;
+        // dd($agents);
         $agents = array_values($agents);
-        $properties = array_values($properties);
+        // $properties = array_values($properties);
         // dd($properties);
+        $user = user::where('id',$agents)->first();
+        $user_name = $user->user_name;
         foreach($properties as $key => $propertyID){
-            $user = user::where('id',@$agents[$key])->first();
             // dd($user);
-            coldcallingModel::where("id",$propertyID)->update(["user_id"=>@$agents[$key],'update_from'=>'property']);
+
+            coldcallingModel::where("id",$propertyID)->update(["user_id"=>$user->id,'update_from'=>'property']);
 
             $property = coldcallingModel::where("id",$propertyID)->first();
-            $description = $property->Building .' with Unit No => '. $property->unit_no .'and Area => '. $property->area .'assigned to '. $user->user_name;
+            $description = $property->Building .' with Unit No => '. $property->unit_no .'and Area => '. $property->area .'assigned to '. $user_name;
             // dd($user->user_name);
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Property','description'=>$description]);
         }
@@ -44,14 +48,16 @@ class adminPropertyController extends Controller
     }
 
     public function singlePersonBuilding(Request $request){
+        // dd($request->all());
+        
         $properties = $request->check_boxes;
         $agents = $request->agents_ids;
         $agents = array_values($agents);
-        $properties = array_values($properties);
+        // $properties = array_values($properties);
         // dd(@$agents[0]);
-        $user = user::where('id',@$agents[0])->first();
+        $user = user::where('id',$agents)->first();
         foreach($properties as $key => $propertyID){
-            coldcallingModel::where('building',$propertyID)->update(["user_id"=>@$agents[0],'update_from'=>'coldcalling']);
+            coldcallingModel::where('building',$propertyID)->update(["user_id"=>$user->id,'update_from'=>'coldcalling']);
 
             $property = coldcallingModel::where("building",$propertyID)->first();
             // dd($property);

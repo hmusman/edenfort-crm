@@ -18,7 +18,7 @@ class coldcallingModel extends Model
     }
     public function getAddBy()
     {
-        return $this->hasOne('App\Models\user','id','add_by');
+        return $this->hasOne('App\Models\user','id','user_id');
     }
 
     public function Agent(){
