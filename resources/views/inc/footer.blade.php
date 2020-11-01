@@ -121,10 +121,24 @@
         <!-- <div class="alertify-notifier ajs-top ajs-right"></div> -->
 
         <script>
-            function select(n){var s=$("#"+n).text();$("#owneremail").val(s),$("#owneremail").html(s),$("#suggesstion-box").css("display","none"),$.ajax({type:"POST",url:"{{url('/readdata')}}",data:{_token:"{{ csrf_token() }}",email:s},beforeSend:function(){$(".spin").css("display","block")},success:function(n){$("#ownername").val(n.LandLord),$("#ownername").html(n.LandLord),$("#ownerphone").val(n.contact_no),$("#ownerphone").html(n.contact_no),$(".spin").css("display","none")}})}$(document).ready(function(){$("#owneremail").keyup(function(){var n=$(this).val();$(this).val()?$.ajax({type:"POST",url:"{{url('/reademail')}}",data:{_token:"{{ csrf_token() }}",keyword:n},beforeSend:function(){$(".spin").css("display","block")},success:function(n){$("#suggesstion-box").css("display","block"),$("#suggesstion-box").html(n),$(".spin").css("display","none")}}):$("#suggesstion-box").css("display","none")})});
+            function select(n){var e=$("#"+n).text();$("#owneremail").val(e),$("#owneremail").html(e),$("#suggesstion-box").css("display","none"),$.ajax({type:"POST",url:"{{url('/readdata')}}",data:{_token:"{{ csrf_token() }}",email:e},beforeSend:function(){$(".spin").css("display","block")},success:function(n){$("#ownername").val(n.LandLord),$("#ownername").html(n.LandLord),$("#ownerphone").val(n.contact_no),$("#ownerphone").html(n.contact_no),$(".spin").css("display","none")}})}$(document).ready(function(){$("#owneremail").keyup(function(){var n=$(this).val();$(this).val()?$.ajax({type:"POST",url:"{{url('/reademail')}}",data:{_token:"{{ csrf_token() }}",keyword:n},beforeSend:function(){$(".spin").css("display","block")},success:function(n){n.length>0&&($("#suggesstion-box").css("display","block"),$("#suggesstion-box").html(n)),$(".spin").css("display","none")}}):$("#suggesstion-box").css("display","none")})});
         </script>
         <script>
            function selectName(n){var e=$("#"+n).text();$("#ownername").val(e),$("#ownername").html(e),$("#name-suggesstion-box").css("display","none"),$.ajax({type:"POST",url:"{{url('/readnameData')}}",data:{_token:"{{ csrf_token() }}",LandLord:e},beforeSend:function(){$(".spin1").css("display","block")},success:function(n){$("#owneremail").val(n.email),$("#owneremail").html(n.email),$("#ownerphone").val(n.contact_no),$("#ownerphone").html(n.contact_no),$(".spin1").css("display","none")}})}$(document).ready(function(){$("#ownername").keyup(function(){var n=$(this).val();$(this).val()?$.ajax({type:"POST",url:"{{url('/readname')}}",data:{_token:"{{ csrf_token() }}",keyword:n},beforeSend:function(){$(".spin1").css("display","block")},success:function(n){$("#name-suggesstion-box").css("display","block"),$("#name-suggesstion-box").html(n),$(".spin1").css("display","none")}}):$("#name-suggesstion-box").css("display","none")})});
+        </script>
+        <script>
+          $(document).on("click", function(event){
+              var $trigger = $("#suggesstion-box");
+              if($trigger !== event.target && !$trigger.has(event.target).length){
+                  $("#suggesstion-box").slideUp("fast");
+              }            
+          });
+          $(document).on("click", function(event){
+              var $trigger = $("#name-suggesstion-box");
+              if($trigger !== event.target && !$trigger.has(event.target).length){
+                  $("#name-suggesstion-box").slideUp("fast");
+              }            
+          });
         </script>
     </body>
 </html>
