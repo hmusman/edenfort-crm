@@ -1543,6 +1543,9 @@
 <!-- add building using ajax-->
 <script>
    $(document).ready(function(){
+
+
+
        $('.add-building-btn').click(function(){
            var buildingName=$('.add-building-input').val();
            if(!$('.add-building-input').val()){
@@ -1569,7 +1572,7 @@
                }
            })
        })
-   })
+   });
 </script>
 <script>
   $('#add-new-owne-link').on('click',function(){
@@ -1994,6 +1997,7 @@
   });
 </script>
 <script type="text/javascript">
+
    $("#LandLord option").each(function(){
        if($(this).val()=="{{@$result[0]['LandLord']}}"){
            $(this).attr("Selected",true);
@@ -2024,6 +2028,14 @@
         
    //     }
    // });
+
+   $('#ownername').keydown(function(e){
+      if(e.keyCode==13)
+      {
+        $('#name-suggesstion-box').css('display','none');
+      }
+
+  });
 </script>
 
 <!--REMINDER AJAX REQUEST CODE START FROM HERE-->
