@@ -1848,12 +1848,12 @@
 <script>
    $(document).ready(function(){
    //SET REMINDER FOR EACH ROW CDOE START FROM HERE
-       $(document).delegate('.update-status-row','click',function(){
-           $('.reminder').hide();
-           $('.update-status-by-row').show();
-           $('.update-status-by-row').attr('property_id',$(this).attr('id'));
-           $('.update-status-by-row').attr('access',$(this).attr('value'));
-       })
+       // $(document).delegate('.update-status-row','click',function(){
+       //     $('.reminder').hide();
+       //     $('.update-status-by-row').show();
+       //     $('.update-status-by-row').attr('property_id',$(this).attr('id'));
+       //     $('.update-status-by-row').attr('access',$(this).attr('value'));
+       // });
        
        $('.update-status-by-row').click(function(){
            $('.date_time_error,.reminder_description-error').text("");

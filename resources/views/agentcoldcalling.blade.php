@@ -465,7 +465,7 @@
                                                     </div>
                                                     <div class="col-sm-12" style="text-align: end">
                                                         <div class="form-group" style="padding-top: 6%;">
-                                                            <input type="button" value="OK" class="reminder btn btn-success" >
+                                                            <input type="button" value="Ok" class="reminder btn btn-success">
                                                             <input type="button" value="OK" class="btn btn-success update-status-by-row" style="display:none" >
                                                         </div>
                                                     </div>
@@ -1741,8 +1741,8 @@ $(document).delegate('.show_content','click',function(){
                     $('.reminder_description-error').html(data);
                 }
             }
-        })
-     })
+        });
+     });
      
 //SET REMINDER BUTTON CLICK CODE END HERE 
 
@@ -1768,7 +1768,7 @@ $('body').delegate('.add_phone','click',function(){
             $('.update-status-by-row').show();
             $('.update-status-by-row').attr('property_id',$(this).attr('id'));
             $('.update-status-by-row').attr('access',$(this).attr('value'));
-        })
+        });
         
         $('.update-status-by-row').click(function(){
             $('.date_time_error,.reminder_description-error').text("");
@@ -1780,13 +1780,11 @@ $('body').delegate('.add_phone','click',function(){
                 $('.reminder_description-error').text('This field is required!');
                return; 
             }
-            var time_date=$('.datepicker-here').val();
+            // var time_date=$('.datepicker-here').val();
+            var time_date=$('.date-time').val();
             var property_id=$(this).attr('property_id');
             var access=$(this).attr('access');
             var description=$('.reminder_description').val();
-            alert(time_date);
-            alert(property_id);
-            alert(access);
             $.ajax({
                 url:'<?php echo url('agentSetReminderByRow');  ?>',
                 type:'get',

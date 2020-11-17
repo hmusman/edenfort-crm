@@ -163,7 +163,7 @@ class agentColdCallingController extends Controller
                       }
                    coldCallingModel::where("id",$check_boxes[$key])->update($data);
                    $row = coldCallingModel::where('id',$check_boxes[$key])->first();
-                   $row = json_decode(json_encode($row),true);
+                   // $row = json_decode(json_encode($row),true);
                    unset($row['updated_at']);
                    unset($row['id']);
                    unset($row['access']);
@@ -203,9 +203,11 @@ class agentColdCallingController extends Controller
          $reminder->add_by="AGENT";
          $reminder->user_id=session('user_id');
          $reminder->save();
+         
          coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access')),'update_from'=>'coldcalling']);
          $row = coldCallingModel::where('id',input::get('property_id'))->first();
-         $row = json_decode(json_encode($row),true);
+         // $row = json_decode(json_encode($row),true);
+         // dd($row);
          unset($row['updated_at']);
          unset($row['id']);
          unset($row['access']);
@@ -220,7 +222,7 @@ class agentColdCallingController extends Controller
     public function updateColdCallingRow(){
          coldCallingModel::where("id",input::get('property_id'))->update(["access" => strip_tags(input::get('access')),'update_from'=>'coldcalling']);
          $row = coldCallingModel::where('id',input::get('property_id'))->first();
-         $row = json_decode(json_encode($row),true);
+         // $row = json_decode(json_encode($row),true);
          unset($row['updated_at']);
          unset($row['id']);
          unset($row['access']);
@@ -285,7 +287,7 @@ class agentColdCallingController extends Controller
                       }
                coldCallingModel::where("id",$check_boxes[$key])->update($data);
                $row = coldCallingModel::where('id',$check_boxes[$key])->first();
-               $row = json_decode(json_encode($row),true);
+               // $row = json_decode(json_encode($row),true);
                unset($row['updated_at']);
                unset($row['id']);
                unset($row['access']);
