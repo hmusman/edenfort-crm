@@ -147,6 +147,7 @@ class SupervisionController extends Controller
         return view('supervision',compact(['result_data','users','buildings','permissions','Recorddisplay','Formdisplay']));
     }
     public function AddSupervison(Request $request){
+
     	if(isset($_POST['add_supervison'])){
             $result=Supervision::where('unit_no',input::get("unit_no"))->get();
                 if(count($result) > 0){
@@ -192,27 +193,54 @@ class SupervisionController extends Controller
     		$supervison->save();
             $description = 'New supervision is added';
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Add Supervision','description'=>$description]);
-    		$supervision_id=DB::getPdo()->lastInsertId();
+    		// $supervision_id=DB::getPdo()->lastInsertId();
+            $supervision_id = $supervison->id;
             $documents_files=array();
-            $documents=input::file('documents');
-            $documentsNames=input::get('document_name');
-            if(count($documents) > 0){
-                $documents=array_values($documents);
-                foreach($documents as $key => $tmp_name){
-                    $file_tmp =$_FILES['documents']['tmp_name'][$key];
-                    $img=$_FILES['documents']['name'][$key];
-                    $file_name = $key.$_FILES['documents']['name'][$key];
-                    $full_name=mt_rand(111111111,999999999).'_'.$file_name;
-                    move_uploaded_file($file_tmp,public_path()."/user_attachments/".$full_name);
-                    $documents_files[]=[
-                        'supervision_id' => $supervision_id,
-                        'file_type' => $documentsNames[$key],
-                        'file_name' => $full_name,
-                        'document_type' => 'TENANT',
-                        ];
+            // $documents=input::file('documents');
+
+            // $documentsNames=input::get('document_name');
+            // if(count($documents) > 0){
+            //     $documents=array_values($documents);
+            //     foreach($documents as $key => $tmp_name){
+            //         $file_tmp =$_FILES['documents']['tmp_name'][$key];
+            //         $img=$_FILES['documents']['name'][$key];
+            //         $file_name = $key.$_FILES['documents']['name'][$key];
+            //         $full_name=mt_rand(111111111,999999999).'_'.$file_name;
+            //         move_uploaded_file($file_tmp,public_path()."/user_attachments/".$full_name);
+            //         $documents_files[]=[
+            //             'supervision_id' => $supervision_id,
+            //             'file_type' => $documentsNames[$key],
+            //             'file_name' => $full_name,
+            //             'document_type' => 'TENANT',
+            //             ];
+            //     }
+            //     DB::table('user_files')->insert($documents_files);
+            // }
+
+            // my code that has been added
+            if($request->has('documents')){
+                $documents=$request->documents;
+                $documents=$request->documents;
+                $documentsNames=input::get('document_name');
+                if(count($documents) > 0){
+                    $documents=array_values($documents);
+                    foreach($documents as $key => $tmp_name){
+                        $file_tmp =$_FILES['documents']['tmp_name'][$key];
+                        $img=$_FILES['documents']['name'][$key];
+                        $file_name = $key.$_FILES['documents']['name'][$key];
+                        $full_name=mt_rand(111111111,999999999).'_'.$file_name;
+                        move_uploaded_file($file_tmp,public_path()."/user_attachments/".$full_name);
+                        $documents_files[]=[
+                            'supervision_id' => $supervision_id,
+                            'file_type' => $documentsNames[$key],
+                            'file_name' => $full_name,
+                            'document_type' => 'TENANT',
+                            ];
+                    }
+                    DB::table('user_files')->insert($documents_files);
                 }
-                DB::table('user_files')->insert($documents_files);
             }
+            
     		$cheque_attach_file=array();
     		if(Input::hasFile('Cheque_attach_file')){
     			foreach($_FILES['Cheque_attach_file']['tmp_name'] as $key => $tmp_name){
@@ -318,7 +346,7 @@ class SupervisionController extends Controller
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Edit Supervision','description'=>$description]);
         return view("supervision",["buildings"=>$buildings,"result"=>$result,"maintenanceRecord"=>$maintenanceRecord,"complainRecord"=>$complainRecord,"cheaqueRecord"=>$cheaqueRecord,"Formdisplay"=>"block","Recorddisplay"=>"none","total"=>$total,'users'=>$owners,'documents' => $documents,"permissions"=>$permissions]);
     }
-    public function UpdateSupervision(){
+    public function UpdateSupervision(Request $request){
         if(isset($_POST['add_supervison'])){
             $data=array(
                 "unit_no"=>input::get("unit_no"),
@@ -341,23 +369,48 @@ class SupervisionController extends Controller
             $documents_files=array();
             $documents=input::file('documents');
             $documentsNames=input::get('document_name');
-            if(count($documents) > 0){
-                $documents=array_values($documents);
-                foreach($documents as $key => $tmp_name){
-                    $file_tmp =$_FILES['documents']['tmp_name'][$key];
-                    $img=$_FILES['documents']['name'][$key];
-                    $file_name = $key.$_FILES['documents']['name'][$key];
-                    $full_name=mt_rand(111111111,999999999).'_'.$file_name;
-                    move_uploaded_file($file_tmp,public_path()."/user_attachments/".$full_name);
-                    $documents_files[]=[
-                        'supervision_id' => $supervision_id,
-                        'file_type' => $documentsNames[$key],
-                        'file_name' => $full_name,
-                        'document_type' => 'TENANT',
-                        ];
+            // old code
+            // if(count($documents) > 0){
+            //     $documents=array_values($documents);
+            //     foreach($documents as $key => $tmp_name){
+            //         $file_tmp =$_FILES['documents']['tmp_name'][$key];
+            //         $img=$_FILES['documents']['name'][$key];
+            //         $file_name = $key.$_FILES['documents']['name'][$key];
+            //         $full_name=mt_rand(111111111,999999999).'_'.$file_name;
+            //         move_uploaded_file($file_tmp,public_path()."/user_attachments/".$full_name);
+            //         $documents_files[]=[
+            //             'supervision_id' => $supervision_id,
+            //             'file_type' => $documentsNames[$key],
+            //             'file_name' => $full_name,
+            //             'document_type' => 'TENANT',
+            //             ];
+            //     }
+            //     DB::table('user_files')->insert($documents_files);
+            // }
+
+            // my code which add
+            if($request->has('documents'))
+            {
+                if(count($documents) > 0){
+                    $documents=array_values($documents);
+                    foreach($documents as $key => $tmp_name){
+                        $file_tmp =$_FILES['documents']['tmp_name'][$key];
+                        $img=$_FILES['documents']['name'][$key];
+                        $file_name = $key.$_FILES['documents']['name'][$key];
+                        $full_name=mt_rand(111111111,999999999).'_'.$file_name;
+                        move_uploaded_file($file_tmp,public_path()."/user_attachments/".$full_name);
+                        $documents_files[]=[
+                            'supervision_id' => $supervision_id,
+                            'file_type' => $documentsNames[$key],
+                            'file_name' => $full_name,
+                            'document_type' => 'TENANT',
+                            ];
+                    }
+                    DB::table('user_files')->insert($documents_files);
                 }
-                DB::table('user_files')->insert($documents_files);
             }
+
+
             if(input::get("Cheque_number")){
                 $cheque_attach_file=array();
                 if(Input::hasFile('Cheque_attach_file')){
