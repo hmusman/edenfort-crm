@@ -177,10 +177,10 @@ class SupervisionController extends Controller
             $supervison->Conditions=input::get("Conditions");
             $supervison->security_deposit_amount=input::get("security_deposit_amount");
     		$supervison->LandLord_account=input::get("landlord_account");
-    		$supervison->contract_start_date=input::get("contract_start_date");
-    		$supervison->contract_end_date=input::get("contract_end_date");
-    		$supervison->supervision_contract_start_date=input::get("supervision_contract_start_date");
-    		$supervison->supervision_contract_end_date=input::get("supervision_contract_end_date");
+    		$supervison->contract_start_date=date('Y-m-d',strtotime(input::get("contract_start_date")));
+    		$supervison->contract_end_date=date('Y-m-d',strtotime(input::get("contract_end_date")));
+    		$supervison->supervision_contract_start_date=date('Y-m-d',strtotime(input::get("supervision_contract_start_date")));
+    		$supervison->supervision_contract_end_date=date('Y-m-d',strtotime(input::get("supervision_contract_end_date")));
             $supervison->LandLord_phone_number=input::get("landlord_phone_number");
             $supervison->LandLord_email=input::get("landlord_email");
             $supervison->maintenance_amount=input::get("maintenance_amount");
@@ -263,8 +263,8 @@ class SupervisionController extends Controller
     			$cheque_Array[]=[
     				"supervision_id"=>$supervision_id,
     				"cheque_number"=>$cheque_number[$key],
-    				"cheque_date"=>$cheque_date[$key],
-    				"cheque_deposit_date"=>$cheque_deposit_date[$key],
+    				"cheque_date"=>date('Y-m-d',strtotime($cheque_date[$key])),
+    				"cheque_deposit_date"=>date('Y-m-d',strtotime($cheque_deposit_date[$key])),
     				"cheque_attach_file"=>$cheque_attach_file[$key],
                     "Cheque_amount"=>$Cheque_amount[$key],
     			];
@@ -280,6 +280,7 @@ class SupervisionController extends Controller
 				    $maintenance_attach_file[]=$full_name;
 				}
     		}
+
     		$maintenance_date=input::get("maintenance_date");
     		$maintenance_description=input::get("maintenance_description");
     		$maintenance_AED=input::get("maintenance_AED");
@@ -289,7 +290,7 @@ class SupervisionController extends Controller
     			}
     			$maintenance_Array[]=[
     				"supervision_id"=>$supervision_id,
-    				"maintenance_date"=>$maintenance_date[$key],
+    				"maintenance_date"=>date('Y-m-d',strtotime($maintenance_date[$key])),
     				"maintenance_description"=>$maintenance_description[$key],
     				"maintenance_AED"=>$maintenance_AED[$key],"maintenance_attach_file"=>$maintenance_attach_file[$key],
     			];
