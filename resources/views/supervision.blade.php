@@ -372,7 +372,7 @@
                                              </td>-->
                                              @if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent')) 
                        
-                                              @if($permissions->supervisionEdit!=1)<td>Not Allowed</td>  @else 
+                                              @if(@$permissions->supervisionEdit!=1)<td>Not Allowed</td>  @else 
                                              <td>
                                                 <a href="{{url('EditSupervision')}}?record_id={{$record->id}}&action=edit" class="edit_supervision"><i class="fa fa-edit"></i> Edit</a>
                                              </td>
