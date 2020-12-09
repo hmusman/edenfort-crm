@@ -308,7 +308,7 @@
                                     <div class="d-flex row">
                                        <div class="col-md-8">
                                           @if(ucfirst(session('role'))==ucfirst('Agent') || ucfirst('SuperAgent')) 
-                                          @if($permissions->supervisionAdd==1) 
+                                          @if(@$permissions->supervisionAdd==1) 
                                           <a class="btn btn-success btn-rounded waves-effect waves-light" id="add-new-owne-link" style="cursor: pointer;"><span><i class="fa fa-plus"></i></span></a>
                                           @endif
                                           @else
