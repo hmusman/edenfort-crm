@@ -182,12 +182,17 @@ class agentLeadController extends Controller
         $lead=lead::all();
         $rem=Reminder::all();
         $lists = [];
-        foreach($rem as $l){
-            if($l->lead['id']){
-                $lists[]=$l->lead['id'];
+        if(count($rem)>0){
+            foreach($rem as $l){
+                
+                if($l->id){
+                    $lists[]=$l->id;
+                }
             }
         }
+       
         // QUERY START FROM HERE
+        // DB::enableQueryLog();
         $query = lead::query();
         if($request->type){
             $type=$request->type;
@@ -211,10 +216,13 @@ class agentLeadController extends Controller
             $query->where('contact_no', 'LIKE', "%{$request->contact}%");
         }
         $agent = strtolower(str_replace(" ","%",$name));
-        $query->where("lead_user",'LIKE',"%{$agent}%");
+        // $query->where("lead_user",'LIKE',"%{$agent}%");
+        $query->where("lead_user",$name);
         $leads = $query->orderBy('created_at','DESC')->paginate(25);
 
         $description = 'Leads page visited.';
+        
+        // dd(DB::getQueryLog());
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Leads','description'=>$description]);
         return view('leads',['leads'=>$leads,'buildings'=>$buildings,'agents'=>$agents,'sources'=>$sources,'upcomingLeadId'=>$upcomingLeadId,'permissions'=>$permissions]);
 //     if(isset($_GET['type']))
