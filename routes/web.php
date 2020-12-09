@@ -164,6 +164,7 @@ Route::get('/owners', 'userController@owners');
 Route::get('/agents', 'userController@agents');
 Route::get('/admins', 'userController@admins');
 Route::get('/supervision','SupervisionController@Supervision');
+Route::post('owneradd','SupervisionController@owneradd')->name('supervision.owneradd');
 Route::post('/AddSupervison','SupervisionController@AddSupervison');
 Route::get('/AddSupervison','SupervisionController@AddSupervison');
 Route::get('/SupervisionBulkActions','SupervisionController@SupervisionBulkActions');

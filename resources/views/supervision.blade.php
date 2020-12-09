@@ -67,170 +67,170 @@
 <!-- modals -->
 <!--add user mode-->
 <div class="modal fade" id="exampleModal_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" style="max-width:800px;" role="document">
-   <div class="modal-content">
-      <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel">Contact Details</h5>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-         <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      <form id="addOwnerForm" class="form-horizontal" enctype="multipart/form-data">
-         @csrf
-         <div class="modal-body">
-            <div class="form-body">
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">UserName</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control" placeholder="userName" name="user_name" required="" id="user_name">
-                        </div>
-                     </div>
-                  </div>
-                  <!--/span-->
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">First Name</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control" placeholder="First Name" name="First_name" required="">
-                        </div>
-                     </div>
-                  </div>
-                  <!--/span-->
-               </div>
-               <!--/row-->
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group has-danger row">
-                        <label class="control-label  col-md-3">Last Name</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control form-control-danger" placeholder="Last Name" name="Last_Name" value="">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Gender</label>
-                        <div class="col-md-9">
-                           <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="Gender" style="font-size: 12px;">
-                              <option value="">Select Gender</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                           </select>
-                        </div>
-                     </div>
-                  </div>
-                  <!--/span-->
-               </div>
-               <!--/row-->
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">DOB</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control datepicker-here" data-language="en" placeholder="dd/mm/yyyy" name="birth_date" value="">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Email</label>
-                        <div class="col-md-9">
-                           <input type="email" class="form-control" name="Email" placeholder="Email" required="" value="">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!--/row-->
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Password</label>
-                        <div class="col-md-9">
-                           <input type="password" class="form-control" name="Password" placeholder="Password" required="">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Status</label>
-                        <div class="col-md-9">
-                           <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="status" style="font-size: 12px;" required="" id="status">
-                              <option value="">Select Status</option>
-                              <option  value="1">Activate</option>
-                              <option  value="0">Deactivate</option>
-                           </select>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Account Number</label>
-                        <div class="col-md-9">
-                           <input type="number" class="form-control" name="account_number" placeholder="Account Number">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Bank Name</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control" name="bank_name" placeholder="Bank Name">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">IBAN</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control" name="IBAN" placeholder="IBAN">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Swift Code</label>
-                        <div class="col-md-9">
-                           <input type="text" class="form-control" name="swift_code" placeholder="Swift Code">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3">Phone</label>
-                        <div class="col-md-9">
-                           <input type="number" class="form-control" name="Phone" placeholder="Phone">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row others_documents" style="display:none"></div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group row">
-                        <label class="control-label  col-md-3"></label>
-                        <div class="col-md-9">
-                           <button type="button" class="btn btn-success add-more-docs">Add more</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary close-owner-btn" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary add-owner-btn">Add</button>
-         </div>
-      </form>
-   </div>
-</div>
+  <div class="modal-dialog" style="max-width:800px;" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Contact Details</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <form id="addOwnerForm" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+           @csrf
+           <div class="modal-body">
+              <div class="form-body">
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">UserName</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control" placeholder="userName" name="user_name" required=""  id="user_name">
+                          </div>
+                       </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">First Name</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control" placeholder="First Name" name="first_name" required="">
+                          </div>
+                       </div>
+                    </div>
+                    <!--/span-->
+                 </div>
+                 <!--/row-->
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group has-danger row">
+                          <label class="control-label  col-md-3">Last Name</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control form-control-danger" placeholder="Last Name" name="last_name" value="">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Gender</label>
+                          <div class="col-md-9">
+                             <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="gender" style="font-size: 12px;">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                             </select>
+                          </div>
+                       </div>
+                    </div>
+                    <!--/span-->
+                 </div>
+                 <!--/row-->
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">DOB</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control datepicker-here" data-language="en" placeholder="dd/mm/yyyy" name="birth_date" value="">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Email</label>
+                          <div class="col-md-9">
+                             <input type="email" class="form-control" name="email" placeholder="Email" required="" value="">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <!--/row-->
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Password</label>
+                          <div class="col-md-9">
+                             <input type="password" class="form-control" name="password" placeholder="Password" required="">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Status</label>
+                          <div class="col-md-9">
+                             <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" name="status" style="font-size: 12px;" required="" id="status">
+                                <option value="">Select Status</option>
+                                <option  value="1">Activate</option>
+                                <option  value="0">Deactivate</option>
+                             </select>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Account Number</label>
+                          <div class="col-md-9">
+                             <input type="number" class="form-control" name="account_number" placeholder="Account Number">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Bank Name</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control" name="bank_name" placeholder="Bank Name">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">IBAN</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control" name="iban" placeholder="IBAN">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Swift Code</label>
+                          <div class="col-md-9">
+                             <input type="text" class="form-control" name="swift_code" placeholder="Swift Code">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3">Phone</label>
+                          <div class="col-md-9">
+                             <input type="number" class="form-control" name="phone" placeholder="Phone">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row others_documents" style="display:none"></div>
+                 {{-- <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group row">
+                          <label class="control-label  col-md-3"></label>
+                          <div class="col-md-9">
+                             <button type="button" class="btn btn-success add-more-docs">Add more</button>
+                          </div>
+                       </div>
+                    </div>
+                 </div> --}}
+              </div>
+           </div>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary close-owner-btn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary add-owner-btn">Add</button>
+           </div>
+        </form>
+     </div>
+  </div>
 </div>
 <!--End-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -252,7 +252,7 @@
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-secondary close-model" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary add-building-btn">Add Building</button>
+            <button type="submit" class="btn btn-primary add-building-btn">Add Building</button>
          </div>
       </div>
    </div>
@@ -429,7 +429,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 unit_no">Unit No</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
+                                                   <input  type="text" class="form-control" name="unit_no" value="{{@$result[0]['unit_no']}}">
                                                    <!-- <small class="form-control-feedback"> This is inline help </small>  -->
                                                 </div>
                                              </div>
@@ -439,7 +439,7 @@
                                              <div class="form-group has-danger row">
                                                 <label class="control-label  col-md-3 building">Building</label>
                                                 <div class="col-md-8" style="padding-left: 15px;">
-                                                   <select class="form-control" required="" style="font-size: 12px;" name="building" id="building">
+                                                   <select class="form-control"  style="font-size: 12px;" name="building" id="building">
                                                       <option value="">Select option</option>
                                                       @foreach($buildings as $building)
                                                       <option value="{{$building->building_name}}">{{$building->building_name}}</option>
@@ -458,7 +458,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 location">Location</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
+                                                   <input  type="text" name="area" class="form-control" value="{{@$result[0]['area']}}">
                                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
                                                 </div>
                                              </div>
@@ -467,7 +467,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 bedroom">Bedroom</label>
                                                 <div class="col-md-9">
-                                                   <select required="" style="font-size: 12px;" name="Bedroom" class="form-control">
+                                                   <select  style="font-size: 12px;" name="Bedroom" class="form-control">
                                                       <option value="{{@$result[0]['Bedroom']}}">{{@$result[0]['Bedroom']}}</option>
                                                       <option value="studio">studio</option>
                                                       <option value="1">1</option>
@@ -494,7 +494,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 condition">Conditions</label>
                                                 <div class="col-md-9">
-                                                   <select required="" style="font-size: 12px;" name="Conditions" class="form-control" required="">
+                                                   <select  style="font-size: 12px;" name="Conditions" class="form-control" >
                                                       <option value="{{@$result[0]['area']}}">{{@$result[0]['Conditions']}}</option>
                                                       <option value="furnished">furnished</option>
                                                       <option value="full furnished">full furnished</option>
@@ -532,7 +532,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 owner">Owner</label>
                                                 <div class="col-md-8" style="padding-left: 15px;">
-                                                   <select class="form-control" required="" style="font-size: 12px;" name="assigned_user" id="assigned_user">
+                                                   <select class="form-control"  style="font-size: 12px;" name="assigned_user" id="assigned_user">
                                                       <option value="">Select option</option>
                                                       @foreach($users as $user)
                                                       <option value="{{$user->user_name}}">{{$user->user_name}}</option>
@@ -548,7 +548,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 maintenence-amount">Maintenance amount</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="number" name="maintenance_amount" class="form-control" value="{{@$result[0]['maintenance_amount']}}" <?php if(isset($_GET["action"])){echo "disabled";} ?>>
+                                                   <input  type="number" name="maintenance_amount" class="form-control" value="{{@$result[0]['maintenance_amount']}}" <?php if(isset($_GET["action"])){echo "disabled";} ?>>
                                                    <!-- <small class="form-control-feedback"> Select your gender. </small>  -->
                                                 </div>
                                              </div>
@@ -561,7 +561,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 access">Access</label>
                                                 <div class="col-md-9">
-                                                   <select class="form-control" name="access" style="font-size: 13px;" required="">
+                                                   <select class="form-control" name="access" style="font-size: 13px;" >
                                                       <option value="">Select option</option>
                                                       <option value="For Rent" <?php if(@$result[0]["access"]=="For Rent"){echo "selected";} ?>>For Rent</option>
                                                       <option <?php if(strtoupper(@$result[0]["access"])==strtoupper("For Sale")){echo "selected";} ?> value="For Sale">For Sale</option>
@@ -575,7 +575,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 dep_amount">Security Deposit Amount</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="number" name="security_deposit_amount" class="form-control" value="{{@$result[0]['security_deposit_amount']}}" <?php if(isset($_GET["action"])){echo "disabled";} ?>>
+                                                   <input  type="number" name="security_deposit_amount" class="form-control" value="{{@$result[0]['security_deposit_amount']}}" <?php if(isset($_GET["action"])){echo "disabled";} ?>>
                                                 </div>
                                              </div>
                                           </div>
@@ -592,7 +592,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 name">Name</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" class="form-control" name="tenant_name" value="{{@$result[0]['tenant_name']}}">
+                                                   <input  type="text" class="form-control" name="tenant_name" value="{{@$result[0]['tenant_name']}}">
                                                 </div>
                                              </div>
                                           </div>
@@ -600,7 +600,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 number">Number</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="number" class="form-control" name="tenant_number" value="{{@$result[0]['tenant_number']}}">
+                                                   <input  type="number" class="form-control" name="tenant_number" value="{{@$result[0]['tenant_number']}}">
                                                 </div>
                                              </div>
                                           </div>
@@ -608,7 +608,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 email">Email</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="email" class="form-control" name="tenant_email" value="{{@$result[0]['tenant_email']}}">
+                                                   <input  type="email" class="form-control" name="tenant_email" value="{{@$result[0]['tenant_email']}}">
                                                 </div>
                                              </div>
                                           </div>
@@ -619,7 +619,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 s_date">Start Date</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="contract_start_date" value="{{@$result[0]['contract_start_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
+                                                   <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="contract_start_date" value="{{@$result[0]['contract_start_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                                 </div>
                                              </div>
                                           </div>
@@ -627,7 +627,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 e_date">End Date</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="contract_end_date" value="{{@$result[0]['contract_end_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
+                                                   <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="contract_end_date" value="{{@$result[0]['contract_end_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                                 </div>
                                              </div>
                                           </div>
@@ -636,7 +636,7 @@
                                                 <label class="control-label  col-md-3 contract">Contract Attchment</label>
                                                 <div class="col-md-6">
                                                    <?php if(!isset($_GET['action'])){ ?>
-                                                   <input required="" type="file" class="file" name="contract_attachment">
+                                                   <input  type="file" class="file" name="contract_attachment">
                                                    <?php }else{ ?>
                                                    <a href="{{URL::to('public/contract_attachments/'.@$result[0]['contract_attachment'])}}" target="_blank" class="attachments">Download</a> <?php } ?>
                                                 </div>
@@ -675,7 +675,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 s_date">Start Date</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="supervision_contract_start_date" value="{{@$result[0]['supervision_contract_start_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
+                                                   <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="supervision_contract_start_date" value="{{@$result[0]['supervision_contract_start_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                                 </div>
                                              </div>
                                           </div>
@@ -683,7 +683,7 @@
                                              <div class="form-group row">
                                                 <label class="control-label  col-md-3 e_date">End Date</label>
                                                 <div class="col-md-9">
-                                                   <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="supervision_contract_end_date" value="{{@$result[0]['supervision_contract_end_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
+                                                   <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="supervision_contract_end_date" value="{{@$result[0]['supervision_contract_end_date']}}" <?php if(isset($_GET['action'])){ echo "disabled"; }?>>
                                                 </div>
                                              </div>
                                           </div>
@@ -692,7 +692,7 @@
                                                 <label class="control-label  col-md-5 contract">Contract Attchment</label>
                                                 <div class="col-md-7">
                                                    <?php if(!isset($_GET['action'])){ ?>
-                                                   <input required="" type="file" class="file" name="supervision_contract_attachment">
+                                                   <input  type="file" class="file" name="supervision_contract_attachment">
                                                    <?php }else{ ?>
                                                    <a href="{{URL::to('public/contract_attachments/'.@$result[0]['supervision_contract_attachment'])}}" target="_blank" class="attachments">Download</a> <?php } ?>
                                                 </div>
@@ -726,22 +726,22 @@
                                                       @foreach($cheaqueRecord as $record)
                                                       <tr>
                                                          <td>
-                                                            <input required="" type="number" class="form-control" value="{{$record->cheque_number}}" disabled>
+                                                            <input  type="number" class="form-control" value="{{$record->cheque_number}}" disabled>
                                                          </td>
                                                          <td>
-                                                            <input required="" type="number" value="{{$record->Cheque_amount}}" class="form-control" disabled>
+                                                            <input  type="number" value="{{$record->Cheque_amount}}" class="form-control" disabled>
                                                          </td>
                                                          <td>
-                                                            <input required="" type="Date" value="{{$record->cheque_date}}" class="form-control" disabled>
+                                                            <input  type="Date" value="{{$record->cheque_date}}" class="form-control" disabled>
                                                          </td>
                                                          <td>
-                                                            <input required="" type="Date" value="{{$record->cheque_deposit_date}}" class="form-control" disabled>
+                                                            <input  type="Date" value="{{$record->cheque_deposit_date}}" class="form-control" disabled>
                                                          </td>
                                                          <td>
                                                             <a href="{{URL::to('public/Cheque_attachment_files/'.$record->cheque_attach_file)}}" target="_blank" class="attachments">Download</a>
                                                          </td>
                                                          <td style="text-align: center;">
-                                                            <input required="" type="button" value="Add" class="btn btn-primary apply" id="add_cheque" style="width: 100%;"> 
+                                                            <input  type="button" value="Add" class="btn btn-primary apply" id="add_cheque" style="width: 100%;"> 
                                                          </td>
                                                       </tr>
                                                       @endforeach
@@ -749,22 +749,22 @@
                                                       @else
                                                       <tr>
                                                          <td>
-                                                            <input required="" type="number" name="Cheque_number[]" class="form-control">
+                                                            <input  type="number" name="Cheque_number[]" class="form-control">
                                                          </td>
                                                          <td>
-                                                            <input required="" type="number" name="Cheque_amount[]" class="form-control">
+                                                            <input  type="number" name="Cheque_amount[]" class="form-control">
                                                          </td>
                                                          <td>
-                                                            <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="Cheque_date[]" class="form-control">
+                                                            <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="Cheque_date[]" class="form-control">
                                                          </td>
                                                          <td>
-                                                            <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="Cheque_deposit_date[]" class="form-control">
+                                                            <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="Cheque_deposit_date[]" class="form-control">
                                                          </td>
                                                          <td>
-                                                            <input required="" type="file" class="file" name="Cheque_attach_file[]">
+                                                            <input  type="file" class="file" name="Cheque_attach_file[]">
                                                          </td>
                                                          <td style="text-align: center;">
-                                                            <input required="" type="button" value="Add" class="btn btn-primary apply" id="add_cheque" style="width: 100%;"> 
+                                                            <input  type="button" value="Add" class="btn btn-primary apply" id="add_cheque" style="width: 100%;"> 
                                                          </td>
                                                       </tr>
                                                       @endif
@@ -802,22 +802,22 @@
                                                       @foreach($maintenanceRecord as $record)
                                                       <tr>
                                                          <td>
-                                                            <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" value="{{$record->maintenance_date}}" disabled class="form-control">
+                                                            <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" value="{{$record->maintenance_date}}" disabled class="form-control">
                                                          </td>
                                                          <td width="300px">
-                                                            <textarea required="" class="form-control" value="" disabled cols="5" rows="5">{{$record->maintenance_description}}</textarea>
+                                                            <textarea  class="form-control" value="" disabled cols="5" rows="5">{{$record->maintenance_description}}</textarea>
                                                          </td>
                                                          <td width="250px">
-                                                            <input required="" type="number" value="{{$record->maintenance_AED}}" disabled class="form-control">
+                                                            <input  type="number" value="{{$record->maintenance_AED}}" disabled class="form-control">
                                                          </td>
                                                          <td width="250px">
-                                                            <input required="" type="text" value="{{$record->maintenance_type}}" disabled class="form-control">
+                                                            <input  type="text" value="{{$record->maintenance_type}}" disabled class="form-control">
                                                          </td>
                                                          <td style="width: 1px">
                                                             <a href="{{URL::to('public/maintenance_attach_files/'.$record->maintenance_attach_file)}}" target="_blank" class="attachments">Download</a>
                                                          </td>
                                                          <td style="text-align: center;">
-                                                            <input required="" type="button" value="Add" class="btn btn-primary apply" id="add_maintenance" style="width: 100%;">
+                                                            <input  type="button" value="Add" class="btn btn-primary apply" id="add_maintenance" style="width: 100%;">
                                                          </td>
                                                       </tr>
                                                       @endforeach
@@ -825,22 +825,22 @@
                                                       @else
                                                       <tr>
                                                          <td>
-                                                            <input required="" type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="maintenance_date[]" class="form-control">
+                                                            <input  type="text" class="form-control datepicker-here" data-language="en" placeholder="mm/dd/yyyy" name="maintenance_date[]" class="form-control">
                                                          </td>
                                                          <td width="300px">
-                                                            <textarea required="" class="form-control" name="maintenance_description[]" cols="5" rows="5"></textarea>
+                                                            <textarea  class="form-control" name="maintenance_description[]" cols="5" rows="5"></textarea>
                                                          </td>
                                                          <td width="250px">
-                                                            <input required="" type="number" name="maintenance_AED[]" class="form-control">
+                                                            <input  type="number" name="maintenance_AED[]" class="form-control">
                                                          </td>
                                                          <td width="250px">
-                                                            <input required="" type="text" class="form-control" name="maintenance_type[]">
+                                                            <input  type="text" class="form-control" name="maintenance_type[]">
                                                          </td>
                                                          <td style="width: 1px">
-                                                            <input required="" type="file" class="file" name="maintenance_attach_file[]" style="width: 172px;">
+                                                            <input  type="file" class="file" name="maintenance_attach_file[]" style="width: 172px;">
                                                          </td>
                                                          <td style="text-align: center;">
-                                                            <input required="" type="button" value="Add" class="btn btn-primary apply" id="add_maintenance" style="width: 100%;"> 
+                                                            <input  type="button" value="Add" class="btn btn-primary apply" id="add_maintenance" style="width: 100%;"> 
                                                          </td>
                                                       </tr>
                                                       @endif                 
@@ -946,24 +946,20 @@
    })
 </script>
 <script>
-   $(document).ready(function(){
-       $('#addOwnerForm').validate({
-           rules : {
-                 password:{
-                   minlength : 6,
-               },
-       },
-       submitHandler:function(form){
-           $('.add-owner-btn').text('wait...');
-           $.ajax({
+  $(document).ready(function(){
+    $('.add-owner-btn').click(function(e){
+        e.preventDefault();
+        $.ajax({
                type : 'POST',
-               url : "{{url('add-owner-by-ajax')}}",
+               url : "{{ route('supervision.owneradd') }}",
                data : new FormData($('#addOwnerForm')[0]),
                contentType: false,
                cache: false,
                processData: false,
                success:function(data){
+    
                    if($.trim(data) == 'true'){
+                      alertify.success("Owner has been added successfully");
                        var ownerName=$('#user_name').val();
                        $('#assigned_user').append('<option selected value='+ownerName+'>'+ownerName+'</option>');
                        $('.close-owner-btn').trigger('click');
@@ -972,15 +968,13 @@
                        $('.others_documents').hide();
                        $('.add-owner-btn').text('Add');
                    }else{
-                       alert(data);
-                       $('.add-owner-btn').text('Add');
+                       alertify.error("Something is wrong");
                    }
                }
-           })
-       }
-   });
+           });
+    });
 
-   })
+   });
 </script>
 <script>
    $(document).delegate('.btn-add-contract','click',function(){

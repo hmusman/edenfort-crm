@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Supervision;
 use App\Models\SupervisionCheaque;
 use App\Models\SupervisionMaintenance;
@@ -329,6 +330,43 @@ class SupervisionController extends Controller
              return redirect('supervision');
         }
     }
+
+    public function owneradd(Request $request)
+    {
+        $validations = Validator::make($request->all(),[
+            'user_name'=>'required',
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+            'status'=>'required'
+        ]);
+        if($validations->fails())
+            { return "false"; }
+
+        $user = new user();
+        $user->user_name = $request->user_name;
+        $user->role = 2;
+        $user->First_name = $request->first_name;
+        $user->Last_name = $request->last_name;
+        $user->status = $request->status;
+        $user->Email = $request->email;
+        $user->Phone = $request->phone;
+        $user->Password = md5($request->password);
+        $user->Gender = $request->gender;
+        $user->birth_date = $request->birth_date;
+        $user->IBAN = $request->iban;
+        $user->account_number = $request->account_number;
+        $user->swift_code = $request->swift_code;
+        if($user->save())
+        {
+            return "true";
+        }else
+        {
+            return "false";
+        }
+    }
+
     public function EditSupervision(){
         $recordID=input::get("record_id");
         $action=input::get("action");
