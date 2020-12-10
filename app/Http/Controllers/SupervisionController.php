@@ -148,7 +148,6 @@ class SupervisionController extends Controller
         return view('supervision',compact(['result_data','users','buildings','permissions','Recorddisplay','Formdisplay']));
     }
     public function AddSupervison(Request $request){
-
     	if(isset($_POST['add_supervison'])){
             $result=Supervision::where('unit_no',input::get("unit_no"))->get();
                 if(count($result) > 0){
