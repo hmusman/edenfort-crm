@@ -133,7 +133,7 @@ class agentPropertyController extends Controller
 
     $description = 'Dashboard page visited.';
     Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
-	return view('agentDashboard',compact(['properties','leads',
+    return view('agentDashboard',compact(['properties','leads',
                 'firstDay','secondDay','thirdDay','fourDay','fiveDay','sixDay','currentDay','firstCold','secondCold','thirdCold','fourCold','fiveCold','sixCold','currentCold','coldCallings','permissions',"reminders","latestProperties","latestLeads","firstDayName","secondDayName","thirdDayName","fourDayName","fiveDayName","sixDayName","currentDayName","properties_rent","properties_sale"]));
     }
     public function allAddedProperties(Request $request){
@@ -143,8 +143,8 @@ class agentPropertyController extends Controller
           //end permission
          $areas=coldcallingModel::where('user_id',session('user_id'))->distinct('area')->pluck('area');
          $bedrooms=coldcallingModel::distinct('Bedroom')->pluck('Bedroom');
-    	 $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-    	 $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
+         $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
+         $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
          $buildings=coldcallingModel::where('user_id',session('user_id'))->distinct('Building')->pluck('Building');
          $allBuildings=Building::select("building_name")->orderBy("building_name","ASC")->get();
          $query = coldcallingModel::query();
@@ -260,13 +260,19 @@ class agentPropertyController extends Controller
             $comment = $r->comment;
             foreach($check_boxes as $key=>$value){
                 $data = coldcallingModel::where("id",$check_boxes[$key])->first();
+                
                 if(isset($check_boxes[$key])){
                   $data=array(
+                        'unit_no' => $data->unit_no,
+                        'building' => $data->Building,
+                        'area' => $data->area,
                         'access' => input::get('status'),
                         'comment' => $comment[$key],
                         'update_from' => 'property',
 
                     );
+                    
+                  
                    coldcallingModel::where("id",$check_boxes[$key])->update($data);
                    $reminder= new Reminder();
                    $reminder->property_id=$check_boxes[$key];
@@ -278,11 +284,16 @@ class agentPropertyController extends Controller
                    $reminder->user_id=session('user_id');
                    $reminder->save();
                 }
-                $description = 'Set remidner for property => '.$data->Building. ', Unit No => '.$data->unit_no. ', Area => '.$data->area;
+              
+                $description = 'Set remidner for property => '.$data['building']. ', Unit No => '.$data['unit_no']. ', Area => '.$data['area'];
+                
                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
+                
+               
             }
                 return "true";
-            }catch(\Exception $e){
+            }
+            catch(\Exception $e){
                 return '<div class="alert alert-danger" style="font-size: 11px;
         margin-top: 2%;">something went wrong</div>';
             }
@@ -306,61 +317,61 @@ class agentPropertyController extends Controller
                 $rented_price=input::get('rented_price'); 
             }
         }
-    	if(isset($_POST['add_property'])){
-    	    $email=array_filter(input::get("email"));
+        if(isset($_POST['add_property'])){
+            $email=array_filter(input::get("email"));
             $contact_no=array_filter(input::get("contact_no"));
-	    	$property=new coldcallingModel();
-			$property->unit_no=input::get("unit_no");
+            $property=new coldcallingModel();
+            $property->unit_no=input::get("unit_no");
             $property->dewa_no=input::get("dewa_no");
-	        $property->LandLord=input::get("LandLord");
-			$property->Building=input::get("building");
-	        $property->area=input::get("area");
-	        $property->Bedroom=input::get("Bedroom");
+            $property->LandLord=input::get("LandLord");
+            $property->Building=input::get("building");
+            $property->area=input::get("area");
+            $property->Bedroom=input::get("Bedroom");
             $property->Washroom=input::get("Washroom");
             $property->Conditions=input::get("Conditions");
-	        $property->email=implode(",",$email);
-	        $property->contact_no=implode(",",$contact_no);
-	        $property->access=strtoupper(input::get("access"));
-	        $property->Price=input::get("Price");
-	        $property->Area_Sqft=input::get("Area_Sqft");
-	        $property->property_type=input::get("property_type");
-	        $property->comment=input::get("comment");
-	        $property->add_by=session('user_id');
-	        $property->user_id=session('user_id');
-	        $property->sale_status=$sale_status;
-	        $property->rented_date=$rented_date;
+            $property->email=implode(",",$email);
+            $property->contact_no=implode(",",$contact_no);
+            $property->access=strtoupper(input::get("access"));
+            $property->Price=input::get("Price");
+            $property->Area_Sqft=input::get("Area_Sqft");
+            $property->property_type=input::get("property_type");
+            $property->comment=input::get("comment");
+            $property->add_by=session('user_id');
+            $property->user_id=session('user_id');
+            $property->sale_status=$sale_status;
+            $property->rented_date=$rented_date;
             $property->rented_price=$rented_price;
-	        $property->update_from='property';
-	        $property->save();
+            $property->update_from='property';
+            $property->save();
             
             $description = 'New property => '.input::get("building").',Unit No => '.input::get("unit_no").', Area => '.input::get("area").' is added.';
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
-	        $id = DB::getPdo()->lastInsertId();
-	        if(input::get('add_property_date_time')){
-	            $data=array(
-	                'property_id' => $id,
-	                'reminder_type'=>input::get('add_property_reminder_type'),
-	                'date_time'=>date('Y-m-d H:i:s', strtotime(input::get('add_property_date_time'))),
-	                'description'=>input::get('add_property_reminder_description'),
-	                'add_by'=>'AGENT',
-	                'reminder_of' => "PROPERTY",
-	                'user_id' => session('user_id'),
-	           );
-	           DB::table('reminders')->insert($data);
+            $id = DB::getPdo()->lastInsertId();
+            if(input::get('add_property_date_time')){
+                $data=array(
+                    'property_id' => $id,
+                    'reminder_type'=>input::get('add_property_reminder_type'),
+                    'date_time'=>date('Y-m-d H:i:s', strtotime(input::get('add_property_date_time'))),
+                    'description'=>input::get('add_property_reminder_description'),
+                    'add_by'=>'AGENT',
+                    'reminder_of' => "PROPERTY",
+                    'user_id' => session('user_id'),
+               );
+               DB::table('reminders')->insert($data);
                $description = 'Reminder added for '.input::get("building").',Unit No => '.input::get("unit_no").', Area => '.input::get("area");
                Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Properties','description'=>$description]);
-	        }
-	        return redirect("allAddedProperties")->with('msg','Property Added Successfully!');
-	    }else{
-	    	return redirect("allAddedProperties")->with('error','something went wrong');
-	    }
+            }
+            return redirect("allAddedProperties")->with('msg','Property Added Successfully!');
+        }else{
+            return redirect("allAddedProperties")->with('error','something went wrong');
+        }
     }
        public function agentBuildings(){
            //permission 
           $permissions = permission::where('user_id', session('user_id'))->first();
           
           //end permission
-    	$result_data=Building::where('assigned_agent',session('user_name'))->get();
+        $result_data=Building::where('assigned_agent',session('user_name'))->get();
         $building=Building::where('user_id',session('user_id'))->get();
 
          $description = 'Building page visited.';
@@ -368,7 +379,7 @@ class agentPropertyController extends Controller
         return view('agentBuildings',['result_data'=>$result_data,'building'=>$building,'permissions'=>$permissions]);
     }
      public function viewAgentProperties(){
-    	$result_data=coldcallingModel::where('Building',Input::get('name'))->get();
+        $result_data=coldcallingModel::where('Building',Input::get('name'))->get();
         
         return view('agentBuildings',['result_data'=>$result_data,'heading'=>'Properties']);
 
@@ -408,10 +419,10 @@ class agentPropertyController extends Controller
     }
     
     public function insert_agentBuilding(){
-	    	$building=new Building();
-	    	$building->building_name=input::get('building_name');
+            $building=new Building();
+            $building->building_name=input::get('building_name');
             $name=input::get('building_name');
-	    	$building->user_id=session('user_id');
+            $building->user_id=session('user_id');
             $building_name=DB::select("select building_name from buildings where building_name='$name'");
              if(count($building_name) > 0)
              {
@@ -427,24 +438,24 @@ class agentPropertyController extends Controller
      }
      
      public function deleteBuilding(){
-    	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
-	    	Building::where('id',input::get('id'))->delete();
+        if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
+            Building::where('id',input::get('id'))->delete();
             $description = 'Building deleted.';
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
-	    	return redirect("agent-buildings")->with('msg','Building Deleted Successfully!');
-	    }else{
-	    	return redirect("agent-buildings")->with('error','Something went wrong!');
-	    }
+            return redirect("agent-buildings")->with('msg','Building Deleted Successfully!');
+        }else{
+            return redirect("agent-buildings")->with('error','Something went wrong!');
+        }
     }
     
     public function editBuilding($id){
-    	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
-			$record=Building::where('id',$id)->first();
+        $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
+            $record=Building::where('id',$id)->first();
 
             $description = 'Building => '.$record->building_name.' is edited.';
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
-			return view("editagentBuildings",["record"=>$record]);
-	   
+            return view("editagentBuildings",["record"=>$record]);
+       
     }
     public function assignAgent(Request $request){
     $permissions = permission::where('user_id', session('user_id'))->first();
@@ -469,89 +480,89 @@ class agentPropertyController extends Controller
         $description = 'Assign coldcalling page is visited.';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Coldcalling','description'=>$description]);
         
-    	return view('assignAgent',compact(['value','agents','building','permissions']));
+        return view('assignAgent',compact(['value','agents','building','permissions']));
     }
     
     public function insertbuildingAssign(){
       
-    	try{
-	    	$building=new Building();
-	    	$building->building_name=input::get('building_name');
-	    	$building->assigned_agent=input::get('assigned_agent');
-	    	$building->Save();
+        try{
+            $building=new Building();
+            $building->building_name=input::get('building_name');
+            $building->assigned_agent=input::get('assigned_agent');
+            $building->Save();
             $description = 'new building name => '.input::get('building_name').', assigned agent => '.input::get('assigned_agent').' added.';
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
-	    	return redirect("assignAgent")->with('msg','Building Successfully added!');
-    	}catch(\Exception $e){
-			return redirect("assignAgent")->with('error','Building already exist!');
-		}
+            return redirect("assignAgent")->with('msg','Building Successfully added!');
+        }catch(\Exception $e){
+            return redirect("assignAgent")->with('error','Building already exist!');
+        }
     }
     public function updateBuilding($id){
-		$data=array(
-    		'building_name'=>input::get('building_name'),
-		);
-		Building::where('id',$id)->update($data);
+        $data=array(
+            'building_name'=>input::get('building_name'),
+        );
+        Building::where('id',$id)->update($data);
 
         $description = 'Building => '.input::get('building_name').' is updated.';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Buildings','description'=>$description]);
-		return redirect("agent-buildings")->with('msg','Building Updated Successfully!');
-	}
+        return redirect("agent-buildings")->with('msg','Building Updated Successfully!');
+    }
     
     public function deleteBuildingAssign(){
-    	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
-	    	coldcallingModel::where('Building',input::get('id'))->delete();
+        if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
+            coldcallingModel::where('Building',input::get('id'))->delete();
 
             $description = 'Building Deleted.';
             Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Agent','description'=>$description]);
-	    	return redirect("assignAgent")->with('msg','Building Deleted Successfully!');
-	    }else{
-	    	return redirect("assignAgent")->with('error','Something went wrong!');
-	    }
+            return redirect("assignAgent")->with('msg','Building Deleted Successfully!');
+        }else{
+            return redirect("assignAgent")->with('error','Something went wrong!');
+        }
     }
     
     public function editBuildingAssign(){
-    // 	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
-    	//$agents=users::all()->user()->where(['role'=>'3'])->get();
+    //  $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
+        //$agents=users::all()->user()->where(['role'=>'3'])->get();
     $agents=user::all();
-    	/*/foreach($agents as $agent){
-    	dd($agent->user->id);
-    	}*/
-    	if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
-		/*	$record=Building::where('id',input::get('id'))->first();*/
-			 $record=coldcallingModel::where('id',input::get('id'))->first();
+        /*/foreach($agents as $agent){
+        dd($agent->user->id);
+        }*/
+        if(isset($_GET['action'])=='delete' && isset($_GET['id'])){
+        /*  $record=Building::where('id',input::get('id'))->first();*/
+             $record=coldcallingModel::where('id',input::get('id'))->first();
 
              $description = 'Building name => '.$record->Building.' is edited.';
              Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Agent','description'=>$description]);
-			return view("assignAgent",["record"=>$record,"Formdisplay"=>"block","Recorddisplay"=>"none",'agents'=>$agents]);
-	    }else{
-	    	return redirect("assignAgent")->with('error','Something went wrong!!');
-	    }
+            return view("assignAgent",["record"=>$record,"Formdisplay"=>"block","Recorddisplay"=>"none",'agents'=>$agents]);
+        }else{
+            return redirect("assignAgent")->with('error','Something went wrong!!');
+        }
     }
     
     public function updateBuildingAssign(){
-	    if(isset($_GET['name'])){
-	    		$date=array(
-		    	//	'building_name'=>input::get('building_name'),
-		    		'user_id'=>input::get('assigned_agent'),
+        if(isset($_GET['name'])){
+                $date=array(
+                //  'building_name'=>input::get('building_name'),
+                    'user_id'=>input::get('assigned_agent'),
                     'update_from' => 'property'
-	    		);
-	   // 		Building::where('id',input::get('id'))->update($date);
-	    		coldcallingModel::where('Building',input::get('name'))->update($date);
-			//	$building=new Building();
-			//	 $data=array(
+                );
+       //       Building::where('id',input::get('id'))->update($date);
+                coldcallingModel::where('Building',input::get('name'))->update($date);
+            //  $building=new Building();
+            //   $data=array(
               //  "property_status"=>"coldCalling"
              // );
-              //	coldcallingModel::where('Building',$date['building_name'])->update($data);
+              //    coldcallingModel::where('Building',$date['building_name'])->update($data);
                 $description = 'Building name => '.input::get('name').' is updated.';
                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Assign Agent','description'=>$description]);
-	    		return redirect("assignAgent")->with('msg','Building Updated Successfully!');
-			
-	    }else{
-	    	return redirect("assignAgent")->with('error','Something went wrong!!');
-	    }
-	}
-	
-	public function agentSidePropertyFilters(){
+                return redirect("assignAgent")->with('msg','Building Updated Successfully!');
+            
+        }else{
+            return redirect("assignAgent")->with('error','Something went wrong!!');
+        }
+    }
+    
+    public function agentSidePropertyFilters(){
         if(isset($_GET['filters'])){
             $buildings=Building::all();
                 $properties=Building::where('assigned_agent',session('user_name'))->pluck('building_name');
@@ -772,18 +783,18 @@ class agentPropertyController extends Controller
     }
     
      public function EditProperty(){
-    	$recordID=input::get("record_id");
+        $recordID=input::get("record_id");
         $action=input::get("action");
         $result=coldcallingModel::where("id",$recordID)->get();
         $result=json_decode(json_encode($result),true);
         $users=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='owner'");
-    	$agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
-    	$buildings=Building::all();
+        $agents=DB::select("SELECT a.*,b.Rule_type from users a,roles b where a.role=b.Rule_id AND b.Rule_type='agent'");
+        $buildings=Building::all();
         $allBuildings=Building::all();
-    	$areas=coldcallingModel::distinct('area')->orderBy('updated_at', 'DESC')->get();
-    	$bedrooms=coldcallingModel::distinct('Bedroom')->orderBy('updated_at', 'DESC')->get();
-    	$permissions = permission::where('user_id', session('user_id'))->first();
-    	$reminders=Reminder::where('property_id',$result[0]['id'])->first();
+        $areas=coldcallingModel::distinct('area')->orderBy('updated_at', 'DESC')->get();
+        $bedrooms=coldcallingModel::distinct('Bedroom')->orderBy('updated_at', 'DESC')->get();
+        $permissions = permission::where('user_id', session('user_id'))->first();
+        $reminders=Reminder::where('property_id',$result[0]['id'])->first();
 
         $description = 'Property => '.$result[0]['Building'].', unit_no => '.$result[0]['unit_no'].', area => '.$result[0]['area'].' is edited.';
         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
@@ -865,24 +876,24 @@ class agentPropertyController extends Controller
                 $email=array_filter(input::get("email"));
                 $contact_no=array_filter(input::get("contact_no"));
                 $data=array(
-    				'unit_no'=>input::get("unit_no"),
+                    'unit_no'=>input::get("unit_no"),
                     'dewa_no'=>input::get("dewa_no"),
-    		        'LandLord'=>input::get("LandLord"),
-    				'Building'=>input::get("building"),
-    		        'area'=>input::get("area"),
-    		        'Bedroom'=>input::get("Bedroom"),
+                    'LandLord'=>input::get("LandLord"),
+                    'Building'=>input::get("building"),
+                    'area'=>input::get("area"),
+                    'Bedroom'=>input::get("Bedroom"),
                     'Washroom'=>input::get("Washroom"),
                     'Conditions'=>input::get("Conditions"),
-    		        'email'=>implode(",",$email),
-    		        'contact_no'=>implode(",",$contact_no),
-    		        'access'=>input::get("access"),
-    		        'Price'=>input::get("Price"),
-    		        'Area_Sqft'=>input::get("Area_Sqft"),
-    		        'comment'=>input::get("comment"),
-    		         'sale_status'=>$sale_status,
-        	        'rented_date'=>$rented_date,
-        	        'property_type'=>input::get("property_type"),
-        	        'rented_price'=>$rented_price,
+                    'email'=>implode(",",$email),
+                    'contact_no'=>implode(",",$contact_no),
+                    'access'=>input::get("access"),
+                    'Price'=>input::get("Price"),
+                    'Area_Sqft'=>input::get("Area_Sqft"),
+                    'comment'=>input::get("comment"),
+                     'sale_status'=>$sale_status,
+                    'rented_date'=>$rented_date,
+                    'property_type'=>input::get("property_type"),
+                    'rented_price'=>$rented_price,
                     'update_from' => 'property',
                 );
                 $property_id=input::get("property_id");
@@ -891,19 +902,19 @@ class agentPropertyController extends Controller
                 Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
                 Reminder::where('property_id',input::get('id'))->delete();
                 if(input::get('add_property_date_time')){
-        	            $data=array(
-        	                'property_id' => $property_id,
-        	                'reminder_type'=>input::get('add_property_reminder_type'),
-        	                'date_time'=>input::get('add_property_date_time'),
-        	                'reminder_of'=>'PROPERTY',
-        	                'add_by'=>'AGENT',
-        	                'user_id' => session('user_id'),
-        	                'description'=>input::get('add_property_reminder_description'),
-        	           );
-        	           DB::table('reminders')->insert($data);
+                        $data=array(
+                            'property_id' => $property_id,
+                            'reminder_type'=>input::get('add_property_reminder_type'),
+                            'date_time'=>input::get('add_property_date_time'),
+                            'reminder_of'=>'PROPERTY',
+                            'add_by'=>'AGENT',
+                            'user_id' => session('user_id'),
+                            'description'=>input::get('add_property_reminder_description'),
+                       );
+                       DB::table('reminders')->insert($data);
                         $description = 'Reminder set for property with unit_no => '.input::get("unit_no").', building => '.input::get("building").', area => '.input::get("area").' is updated.';
                         Clicks::create(['user_id'=>session('user_id'),'user_name'=>session('user_name'),'page_name'=>'Agent Property','description'=>$description]);
-        	        }
+                    }
                return redirect("allAddedProperties")->with('msg','Record updated Successfully');
             }catch (\Exception $e) {
                 return redirect("allAddedProperties")->with('error',$e->getMessage());
